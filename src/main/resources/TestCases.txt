@@ -1,0 +1,6 @@
+- Verify popup text display
+- Verify menu display
+- Verify search bar display
+- Verify login/register header display
+- Verify store locations display
+- Verify cart display
