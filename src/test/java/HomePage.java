@@ -1,17 +1,13 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import javax.swing.*;
 import java.time.Duration;
-import java.util.Set;
 
 public class HomePage {
     Actions actions;
@@ -55,5 +51,13 @@ public class HomePage {
         actions.click(driver.findElement(By.xpath("//div[@class='col_hover_submenu ']//a[text()='Tẩy Trang Mặt']")))
                 .perform();
 
+        driver.findElement(By.xpath("//h1[contains(text(),'Tẩy Trang Mặt')]/parent::div//following-sibling::div[@class='ProductGrid__grid width_common']//div[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']")).click();
+        webDriverWait.until(ExpectedConditions.elementToBeClickable( driver.findElement(By.xpath("//div[text()='Giỏ hàng']")))).click();
+//        driver.findElement(By.xpath("//div[text()='Giỏ hàng']")).click();
+
+
+        Assert.assertTrue(driver.findElement(By.xpath("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']")).isDisplayed());
+        Thread.sleep(2000);
+        Assert.assertEquals(driver.findElement(By.xpath("//span[text()='Cart Icon']/following-sibling::span")).getText(),"1");
     }
 }
