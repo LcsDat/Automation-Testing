@@ -1,6 +1,22 @@
-- Verify popup text display
-- Verify menu display
-- Verify search bar display
-- Verify login/register header display
-- Verify store locations display
-- Verify cart display
+* Navigate Homepage
+    - Verify popup text display
+    - Verify menu display
+    - Verify search bar display
+    - Verify login/register header display
+    - Verify store locations display
+    - Verify cart display
+* Buy product (Login required)
+    - Hover menu
+    - Choose a category (cham soc da mat)
+    - Choose type (tay trang mat)
+    - Choose a product (Cocoon)
+        -> This product is only allow to order with quantity 1
+        -> If more, a warning message will display
+        -> Verify this
+    - Click on + Gio hang
+        -> Message inform product is added to cart
+        -> The product number is changed -> verify
+    - Navigate to Cart to check product
+        -> Verify product name
+        -> Verify price
+        -> Verify quantity
