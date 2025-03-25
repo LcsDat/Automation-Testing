@@ -22,7 +22,7 @@ public class HomePage {
 //        driver = DriverFactory.init(Browser.CHROME);
 //        actions = new Actions(driver, Duration.ofSeconds(10));
 
-        websiteDriver = new WebsiteDriver(Browser.CHROME);
+        websiteDriver = WebsiteDriver.init(Browser.CHROME);
 
 //        driver.get("https://hasaki.vn/");
 

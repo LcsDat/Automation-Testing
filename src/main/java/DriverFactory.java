@@ -6,6 +6,7 @@ import java.time.Duration;
 
 public class DriverFactory {
 
+
     public static WebDriver init(Browser browser){
         WebDriver driver = null;
 
@@ -19,4 +20,5 @@ public class DriverFactory {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         return driver;
     }
+
 }

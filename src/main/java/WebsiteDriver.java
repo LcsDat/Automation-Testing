@@ -14,6 +14,10 @@ public class WebsiteDriver {
         this.actions = new Actions(driver, Duration.ofSeconds(10));
     }
 
+    public static WebsiteDriver init(Browser browser){
+        return new WebsiteDriver(browser);
+    }
+
     public void navigate(String applicationURL){
         driver.get(applicationURL);
     }
