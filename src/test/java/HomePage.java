@@ -12,23 +12,36 @@ import org.testng.annotations.Test;
 import java.time.Duration;
 
 public class HomePage {
+    WebsiteDriver websiteDriver;
     WebDriver driver;
     Actions actions;
     WebDriverWait webDriverWait;
 
     @Test
     void test() {
-        driver = DriverFactory.init(Browser.CHROME);
-        actions = new Actions(driver, Duration.ofSeconds(10));
+//        driver = DriverFactory.init(Browser.CHROME);
+//        actions = new Actions(driver, Duration.ofSeconds(10));
 
-        driver.get("https://hasaki.vn/");
+        websiteDriver = new WebsiteDriver(Browser.CHROME);
 
-        actions.moveToElement(driver.findElement(By.className("item_login"))).perform();
-        driver.findElement(By.xpath("//a[text()='Đăng nhập' and @id='hskLoginButton']")).click();
-        driver.findElement(By.cssSelector("#username")).sendKeys("0345864246");
-        driver.findElement(By.cssSelector("#password")).sendKeys("#Onimusha00");
-        driver.findElement(By.xpath("//button[text()='Đăng nhập']")).click();
+//        driver.get("https://hasaki.vn/");
+
+        websiteDriver.navigate("https://hasaki.vn/");
+
+        websiteDriver.findElement("//*[@id='onesignal-slidedown-cancel-button']").click();
+        websiteDriver.findElement("//*[@id='rejectCookies']").click();
+        websiteDriver.moveToElement("//*[@class='item_header item_login ']");
+        websiteDriver.findElement("//a[text()='Đăng nhập' and @id='hskLoginButton']").click();
+
+
+//        actions.moveToElement(driver.findElement(By.className("item_login"))).perform();
+//        driver.findElement(By.xpath("//a[text()='Đăng nhập' and @id='hskLoginButton']")).click();
+//        driver.findElement(By.cssSelector("#username")).sendKeys("0345864246");
+//        driver.findElement(By.cssSelector("#password")).sendKeys("#Onimusha00");
+//        driver.findElement(By.xpath("//button[text()='Đăng nhập']")).click();
     }
+
+
 //    @Test
 //    void testHomePage() throws InterruptedException {
 //        WebDriver driver = new ChromeDriver();
