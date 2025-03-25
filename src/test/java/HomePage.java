@@ -1,10 +1,12 @@
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -52,12 +54,36 @@ public class HomePage {
                 .perform();
 
         driver.findElement(By.xpath("//h1[contains(text(),'Tẩy Trang Mặt')]/parent::div//following-sibling::div[@class='ProductGrid__grid width_common']//div[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']")).click();
-        webDriverWait.until(ExpectedConditions.elementToBeClickable( driver.findElement(By.xpath("//div[text()='Giỏ hàng']")))).click();
-//        driver.findElement(By.xpath("//div[text()='Giỏ hàng']")).click();
+        driver.findElement(By.cssSelector("button[aria-label='Increase btn']")).click();
 
+        Assert.assertEquals(driver.findElement(By.cssSelector("input[name='qty']")).getDomAttribute("value"),"2");
+
+        webDriverWait.until(ExpectedConditions.elementToBeClickable( driver.findElement(By.xpath("//div[text()='Giỏ hàng']")))).click();
+        Assert.assertTrue(driver.findElement(By.xpath("//div[text()='Sản phẩm chỉ được mua tối đa là 1']")).isDisplayed());
+
+        driver.findElement(By.cssSelector("button[aria-label='Descrease btn']")).click();
+        webDriverWait.until(ExpectedConditions.elementToBeClickable( driver.findElement(By.xpath("//div[text()='Giỏ hàng']")))).click();
 
         Assert.assertTrue(driver.findElement(By.xpath("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']")).isDisplayed());
         Thread.sleep(2000);
-        Assert.assertEquals(driver.findElement(By.xpath("//span[text()='Cart Icon']/following-sibling::span")).getText(),"1");
+
+        String productQuantity = driver.findElement(By.xpath("//span[text()='Cart Icon']/following-sibling::span")).getText();
+        String productName = driver.findElement(By.xpath("//h1")).getText();
+        String productPrice = driver.findElement(By.cssSelector("span.text-orange.text-lg.font-bold")).getText().replaceAll("[^0-9]","");
+
+        Assert.assertEquals(productQuantity,"1");
+
+        driver.findElement(By.xpath("//span[text()='Cart Icon']//ancestor::button")).click();
+
+        Assert.assertEquals(driver.findElement(By.xpath("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']")).getText(), productName);
+
+        Integer calculatedPrice = (Integer.parseInt(productQuantity)*Integer.parseInt(productPrice));
+
+        Thread.sleep(2000);
+        String totalPriceeAt = driver.findElement(By.xpath("//tbody//tr[1]/td[4]/div")).getText().replaceAll("[^0-9]","");
+
+        Integer totalPrice = Integer.parseInt(totalPriceeAt);
+
+        Assert.assertEquals(calculatedPrice, totalPrice);
     }
 }
