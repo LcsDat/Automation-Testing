@@ -1,44 +1,70 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 public class HomePage {
-    WebsiteDriver websiteDriver;
+    WebsiteDriver webDriver;
     WebDriver driver;
     Actions actions;
     WebDriverWait webDriverWait;
 
     @Test
-    void test() {
-//        driver = DriverFactory.init(Browser.CHROME);
-//        actions = new Actions(driver, Duration.ofSeconds(10));
+    void test() throws InterruptedException {
+        webDriver = WebsiteDriver.init(Browser.CHROME);
 
-        websiteDriver = new WebsiteDriver(Browser.CHROME);
+        webDriver.navigate("https://hasaki.vn/");
 
-//        driver.get("https://hasaki.vn/");
+        //Handle popup and cookies
+        webDriver.findByID("onesignal-slidedown-cancel-button").click();
+        webDriver.findByID("rejectCookies").click();
 
-        websiteDriver.navigate("https://hasaki.vn/");
+        //Login
+        webDriver.moveToElementByXpath("//*[@class='item_header item_login ']");
+        webDriver.findByXpath("//a[text()='Đăng nhập' and @id='hskLoginButton']").click();
+        webDriver.findByCss("#username").sendKeys("0345864246");
+        webDriver.findByCss("#password").sendKeys("#Onimusha00");
+        webDriver.findByXpath("//button[text()='Đăng nhập']").click();
 
-        websiteDriver.findElement("//*[@id='onesignal-slidedown-cancel-button']").click();
-        websiteDriver.findElement("//*[@id='rejectCookies']").click();
-        websiteDriver.moveToElement("//*[@class='item_header item_login ']");
-        websiteDriver.findElement("//a[text()='Đăng nhập' and @id='hskLoginButton']").click();
+        //Choose product
+        webDriver.moveToElementByID("hamber_menu");
+        webDriver.moveToElementByXpath("//a[@class='parent_menu' and contains(text(),'Chăm Sóc Da Mặt')]");
+        webDriver.clickByXpath("//div[@class='col_hover_submenu ']//a[text()='Tẩy Trang Mặt']");
+        webDriver.findByXpath("//h1[contains(text(),'Tẩy Trang Mặt')]" +
+                "/parent::div//following-sibling::div[@class='ProductGrid__grid width_common']" +
+                "//div[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']").click();
 
+        webDriver.findByCss("button[aria-label='Increase btn']").click();
+        Assert.assertEquals(webDriver.findByCss("input[name='qty']").getDomAttribute("value"), "2");
 
-//        actions.moveToElement(driver.findElement(By.className("item_login"))).perform();
-//        driver.findElement(By.xpath("//a[text()='Đăng nhập' and @id='hskLoginButton']")).click();
-//        driver.findElement(By.cssSelector("#username")).sendKeys("0345864246");
-//        driver.findElement(By.cssSelector("#password")).sendKeys("#Onimusha00");
-//        driver.findElement(By.xpath("//button[text()='Đăng nhập']")).click();
+        webDriver.waitToBeClickableByXpath("//div[text()='Giỏ hàng']").click();
+        Assert.assertTrue(webDriver.findByXpath("//div[text()='Sản phẩm chỉ được mua tối đa là 1']").isDisplayed());
+
+        webDriver.findByCss("button[aria-label='Descrease btn']").click();
+        webDriver.waitToBeClickableByXpath("//div[text()='Giỏ hàng']").click();
+        Assert.assertTrue(webDriver.findByXpath("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']").isDisplayed());
+
+        Thread.sleep(2000);
+
+        String productQuantity = webDriver.findByXpath("//span[text()='Cart Icon']/following-sibling::span").getText();
+        String productName = webDriver.findByXpath("//h1").getText();
+        String productPrice = webDriver.findByCss("span.text-orange.text-lg.font-bold").getText().replaceAll("[^0-9]", "");
+
+        Assert.assertEquals(productQuantity, "1");
+
+        webDriver.findByXpath("//span[text()='Cart Icon']//ancestor::button").click();
+        Assert.assertEquals(webDriver.findByXpath("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']").getText(), productName);
+
+        Integer calculatedPrice = (Integer.parseInt(productQuantity) * Integer.parseInt(productPrice));
+        Thread.sleep(2000);
+        String totalPriceeAt = webDriver.findByXpath("//tbody//tr[1]/td[4]/div").getText().replaceAll("[^0-9]", "");
+        Integer totalPrice = Integer.parseInt(totalPriceeAt);
+
+        Assert.assertEquals(calculatedPrice, totalPrice);
     }
 
 
