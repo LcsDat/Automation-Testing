@@ -32,6 +32,12 @@ public class Homepage {
         driver.clickByXpath(Homepage.PRODUCT_TYPE, productType);
     }
 
+    public void chooseProductType(String categoryName, String productType){
+        moveToCategoryMenu();
+        moveToCategoryItem(categoryName);
+        clickToProductType(productType);
+    }
+
     public void moveToHeaderLoginItem() {
         driver.moveToElementByCss(Homepage.HEADER_LOGIN_ITEM);
     }
