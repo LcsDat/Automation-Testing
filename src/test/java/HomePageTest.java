@@ -1,36 +1,25 @@
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import cores.Browser;
+import cores.WebsiteDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+import pages.Homepage;
 
-import java.time.Duration;
-import java.util.Iterator;
-import java.util.List;
-
-public class HomePage {
+public class HomePageTest {
     WebsiteDriver webDriver;
+    Homepage homepage;
 
     @BeforeTest
     void setup() {
         webDriver = WebsiteDriver.init(Browser.CHROME);
+        homepage = new Homepage(webDriver);
 
         webDriver.navigate("https://hasaki.vn/");
 
-        //Handle popup and cookies
-        webDriver.findByID("onesignal-slidedown-cancel-button").click();
-        webDriver.findByID("rejectCookies").click();
-
-        //Login
-        webDriver.moveToElementByCss("div.item_header.item_login ");
-        webDriver.findByXpath("//a[text()='Đăng nhập' and @id='hskLoginButton']").click();
-        webDriver.findByCss("#username").sendKeys("0345864246");
-        webDriver.findByCss("#password").sendKeys("#Onimusha00");
-        webDriver.findByXpath("//button[text()='Đăng nhập']").click();
+        homepage.cancelPopup();
+        homepage.cancelCookie();
+        homepage.login("0345864246","#Onimusha00");
     }
 
     @AfterTest
