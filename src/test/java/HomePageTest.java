@@ -29,7 +29,6 @@ public class HomePageTest {
 
             while (true) {
                 Integer size = webDriver.findAllByXpath("//tbody/tr").size();
-                System.out.println(size);
                 if (size != 0) {
                     webDriver.waitToBeClickableByXpath("//tbody/tr//button[text()='Xóa']").click();
                     webDriver.waitToBeInvisibleByCss("div.animate-spin");
@@ -45,9 +44,13 @@ public class HomePageTest {
     void test() throws InterruptedException {
 
         //Choose product
-        webDriver.moveToElementByID("hamber_menu");
-        webDriver.moveToElementByXpath("//a[@class='parent_menu' and contains(text(),'Chăm Sóc Da Mặt')]");
-        webDriver.clickByXpath("//div[@class='col_hover_submenu ']//a[text()='Tẩy Trang Mặt']");
+        homepage.moveToCategoryMenu();
+        homepage.moveToCategoryItem("Chăm Sóc Da Mặt");
+        homepage.clickToProductType("Tẩy Trang Mặt");
+//        webDriver.moveToElementByID("hamber_menu");
+//        webDriver.moveToElementByXpath("//a[@class='parent_menu' and contains(text(),'Chăm Sóc Da Mặt')]");
+//        webDriver.clickByXpath("//div[@class='col_hover_submenu ']//a[text()='Tẩy Trang Mặt']");
+
         webDriver.findByXpath("//h1[contains(text(),'Tẩy Trang Mặt')]" +
                 "/parent::div//following-sibling::div[@class='ProductGrid__grid width_common']" +
                 "//div[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']").click();

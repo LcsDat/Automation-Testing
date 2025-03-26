@@ -97,6 +97,10 @@ public class WebsiteDriver {
         actions.click(findByXpath(locator)).perform();
     }
 
+    public void clickByXpath(String locator, String varargs) {
+        actions.click(findByXpath(locator, varargs)).perform();
+    }
+
     public void clickByCss(String locator) {
         actions.click(findByCss(locator)).perform();
     }
@@ -117,6 +121,10 @@ public class WebsiteDriver {
         actions.moveToElement(findByXpath(locator)).perform();
     }
 
+    public void moveToElementByXpath(String locator, String... varargs) {
+        actions.moveToElement(findByXpath(locator, varargs)).perform();
+    }
+
     public void moveToElementByCss(String locator) {
         actions.moveToElement(findByCss(locator)).perform();
     }
@@ -135,6 +143,10 @@ public class WebsiteDriver {
 
     public WebElement findByXpath(String locator) {
         return driver.findElement(By.xpath(locator));
+    }
+
+    public WebElement findByXpath(String locator, String... varargs) {
+        return driver.findElement(By.xpath(String.format(locator, varargs)));
     }
 
     public WebElement findByCss(String locator) {
