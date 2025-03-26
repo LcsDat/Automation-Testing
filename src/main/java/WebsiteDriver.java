@@ -6,6 +6,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class WebsiteDriver {
     private WebDriver driver;
@@ -42,6 +43,26 @@ public class WebsiteDriver {
         return webDriverWait.until(ExpectedConditions.visibilityOf(findByName(locator)));
     }
 
+    public Boolean waitToBeInvisibleByXpath(String locator) {
+        return webDriverWait.until(ExpectedConditions.invisibilityOf(findByXpath(locator)));
+    }
+
+    public Boolean waitToBeInvisibleByCss(String locator) {
+        return webDriverWait.until(ExpectedConditions.invisibilityOf(findByCss(locator)));
+    }
+
+    public Boolean waitToBeInvisibleByClass(String locator) {
+        return webDriverWait.until(ExpectedConditions.invisibilityOf(findByClass(locator)));
+    }
+
+    public Boolean waitToBeInvisibleByID(String locator) {
+        return webDriverWait.until(ExpectedConditions.invisibilityOf(findByID(locator)));
+    }
+
+    public Boolean waitToBeInvisibleByName(String locator) {
+        return webDriverWait.until(ExpectedConditions.invisibilityOf(findByName(locator)));
+    }
+
     public WebElement waitToBeClickableByXpath(String locator) {
         return webDriverWait.until(ExpectedConditions.elementToBeClickable(findByXpath(locator)));
     }
@@ -64,6 +85,10 @@ public class WebsiteDriver {
 
     public void navigate(String applicationURL) {
         driver.get(applicationURL);
+    }
+
+    public void quit() {
+        driver.quit();
     }
 
     public void clickByXpath(String locator) {
@@ -124,5 +149,25 @@ public class WebsiteDriver {
 
     public WebElement findByName(String locator) {
         return driver.findElement(By.name(locator));
+    }
+
+    public List<WebElement> findAllByXpath(String locator) {
+        return driver.findElements(By.xpath(locator));
+    }
+
+    public List<WebElement> findAllByCss(String locator) {
+        return driver.findElements(By.cssSelector(locator));
+    }
+
+    public List<WebElement> findAllByID(String locator) {
+        return driver.findElements(By.id(locator));
+    }
+
+    public List<WebElement> findAllByName(String locator) {
+        return driver.findElements(By.name(locator));
+    }
+
+    public List<WebElement> findAllByClass(String locator) {
+        return driver.findElements(By.className(locator));
     }
 }
