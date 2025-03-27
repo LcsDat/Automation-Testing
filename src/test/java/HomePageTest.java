@@ -5,15 +5,21 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.Homepage;
+import pages.ProductDetailsPage;
+import pages.ProductPage;
 
 public class HomePageTest {
     WebsiteDriver webDriver;
     Homepage homepage;
+    ProductPage productPage;
+    ProductDetailsPage productDetailsPage;
 
     @BeforeTest
     void setup() {
         webDriver = WebsiteDriver.init(Browser.CHROME);
         homepage = new Homepage(webDriver);
+        productPage = new ProductPage(webDriver);
+        productDetailsPage = new ProductDetailsPage(webDriver);
 
         webDriver.navigate("https://hasaki.vn/");
 
@@ -46,18 +52,18 @@ public class HomePageTest {
         //Choose product
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
 
-        webDriver.findByXpath("//h1[contains(text(),'Tẩy Trang Mặt')]" +
-                "/parent::div//following-sibling::div[@class='ProductGrid__grid width_common']" +
-                "//div[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']").click();
+        productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
 
-        webDriver.findByCss("button[aria-label='Increase btn']").click();
+        productDetailsPage.increaseProductQty();
         Assert.assertEquals(webDriver.findByCss("input[name='qty']").getDomAttribute("value"), "2");
 
-        webDriver.waitToBeClickableByXpath("//div[text()='Giỏ hàng']").click();
+        productDetailsPage.addProductToCart();
         Assert.assertTrue(webDriver.findByXpath("//div[text()='Sản phẩm chỉ được mua tối đa là 1']").isDisplayed());
+        webDriver.waitToBeInvisibleByXpath("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
 
-        webDriver.findByCss("button[aria-label='Descrease btn']").click();
-        webDriver.waitToBeClickableByXpath("//div[text()='Giỏ hàng']").click();
+//        Thread.sleep(3000);
+        productDetailsPage.decreaseProductQty();
+        productDetailsPage.addProductToCart();
         Assert.assertTrue(webDriver.findByXpath("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']").isDisplayed());
 
         Thread.sleep(2000);
@@ -68,7 +74,7 @@ public class HomePageTest {
 
         Assert.assertEquals(productQuantity, "1");
 
-        webDriver.findByXpath("//span[text()='Cart Icon']//ancestor::button").click();
+        productDetailsPage.clickToCart();
         Assert.assertEquals(webDriver.findByXpath("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']").getText(), productName);
 
         Integer calculatedPrice = (Integer.parseInt(productQuantity) * Integer.parseInt(productPrice));
