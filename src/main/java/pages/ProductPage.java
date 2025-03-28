@@ -14,6 +14,6 @@ public class ProductPage {
             "//div[text()='%s']";
 
     public void chooseProduct(String productName){
-        driver.findByXpath(ProductPage.PRODUCT_NAME, productName).click();
+        driver.click(ProductPage.PRODUCT_NAME, productName);
     }
 }

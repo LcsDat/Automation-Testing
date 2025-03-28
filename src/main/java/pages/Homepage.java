@@ -21,15 +21,15 @@ public class Homepage {
     private static final String PRODUCT_TYPE = "//div[@class='col_hover_submenu ']//a[text()='%s']";
 
     public void moveToCategoryMenu(){
-        driver.moveToElementByID(Homepage.CATEGORY_HAMBER_MENU);
+        driver.moveToElement(Homepage.CATEGORY_HAMBER_MENU);
     }
 
     public void moveToCategoryItem(String categoryName){
-        driver.moveToElementByXpath(Homepage.LIST_CATEGORY_ITEM, categoryName);
+        driver.moveToElement(Homepage.LIST_CATEGORY_ITEM, categoryName);
     }
 
     public void clickToProductType(String productType){
-        driver.clickByXpath(Homepage.PRODUCT_TYPE, productType);
+        driver.click(Homepage.PRODUCT_TYPE, productType);
     }
 
     public void chooseProductType(String categoryName, String productType){
@@ -39,27 +39,30 @@ public class Homepage {
     }
 
     public void moveToHeaderLoginItem() {
-        driver.moveToElementByCss(Homepage.HEADER_LOGIN_ITEM);
+        driver.moveToElement(Homepage.HEADER_LOGIN_ITEM);
     }
 
     public void clickToLoginLink() {
-        driver.findByXpath(Homepage.LOGIN_LINK).click();
+        driver.click(Homepage.LOGIN_LINK);
     }
 
     public void clickToLoginButton() {
-        driver.findByXpath(Homepage.LOGIN_BUTTON).click();
+        driver.click(Homepage.LOGIN_BUTTON);
     }
 
     public void setTextToUsernameInput(String value) {
-        driver.findByCss(Homepage.USERNAME_INPUT).sendKeys(value);
+        driver.setText(Homepage.USERNAME_INPUT, value);
     }
 
     public void setTextToPasswordInput(String value) {
-        driver.findByCss(Homepage.PASSWORD_INPUT).sendKeys(value);
+        driver.setText(Homepage.PASSWORD_INPUT, value);
     }
 
     public void login(String username, String password) {
+//        driver.waitToBeClickable(HEADER_LOGIN_ITEM);
         moveToHeaderLoginItem();
+
+//        driver.click(HEADER_LOGIN_ITEM);
         clickToLoginLink();
         setTextToUsernameInput(username);
         setTextToPasswordInput(password);
@@ -67,10 +70,10 @@ public class Homepage {
     }
 
     public void cancelPopup() {
-        driver.findByID(Homepage.POPUP_CANCEL_BUTTON).click();
+        driver.click(Homepage.POPUP_CANCEL_BUTTON);
     }
 
     public void cancelCookie() {
-        driver.findByID(Homepage.COOKIES_CANCEL_BUTTON).click();
+        driver.click(Homepage.COOKIES_CANCEL_BUTTON);
     }
 }

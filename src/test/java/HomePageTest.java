@@ -15,7 +15,7 @@ public class HomePageTest {
     ProductDetailsPage productDetailsPage;
 
     @BeforeTest
-    void setup() {
+    void setup() throws InterruptedException {
         webDriver = WebsiteDriver.init(Browser.CHROME);
         homepage = new Homepage(webDriver);
         productPage = new ProductPage(webDriver);
@@ -25,6 +25,7 @@ public class HomePageTest {
 
         homepage.cancelPopup();
         homepage.cancelCookie();
+        Thread.sleep(2000);
         homepage.login("0345864246","#Onimusha00");
 
 
@@ -36,23 +37,23 @@ public class HomePageTest {
 //        webDriver.findByXpath("search").sendKeys("aa");
     }
 
-    @AfterTest
-    void teardown() {
-        if (!webDriver.findByCss("nav[aria-label='Main'] button.p-0 a span:nth-child(3)").getText().equals("0")) {
-            webDriver.findByCss("nav[aria-label='Main'] button.p-0").click();
-
-            while (true) {
-                Integer size = webDriver.findAllByXpath("//tbody/tr").size();
-                if (size != 0) {
-                    webDriver.waitToBeClickableByXpath("//tbody/tr//button[text()='Xóa']").click();
-                    webDriver.waitToBeInvisibleByCss("div.animate-spin");
-                } else break;
-            }
-        }
-        webDriver.moveToElementByXpath("//nav[@aria-label='Main']//li[1]");
-        webDriver.findByXpath("//span[text()='Thoát']").click();
-        webDriver.quit();
-    }
+//    @AfterTest
+//    void teardown() {
+//        if (!webDriver.findByCss("nav[aria-label='Main'] button.p-0 a span:nth-child(3)").getText().equals("0")) {
+//            webDriver.findByCss("nav[aria-label='Main'] button.p-0").click();
+//
+//            while (true) {
+//                Integer size = webDriver.findAllByXpath("//tbody/tr").size();
+//                if (size != 0) {
+//                    webDriver.waitToBeClickableByXpath("//tbody/tr//button[text()='Xóa']").click();
+//                    webDriver.waitToBeInvisibleByCss("div.animate-spin");
+//                } else break;
+//            }
+//        }
+//        webDriver.moveToElementByXpath("//nav[@aria-label='Main']//li[1]");
+//        webDriver.findByXpath("//span[text()='Thoát']").click();
+//        webDriver.quit();
+//    }
 
 //    @Test
 //    void test() throws InterruptedException {

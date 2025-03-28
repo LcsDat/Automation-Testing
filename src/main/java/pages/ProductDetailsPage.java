@@ -18,20 +18,20 @@ public class ProductDetailsPage {
      * Hard method to increase qty one by one.
      */
     public void increaseProductQty(){
-        driver.findByCss(ProductDetailsPage.INCREASE_QTY_BUTTON).click();
+        driver.click(ProductDetailsPage.INCREASE_QTY_BUTTON);
     }
 
     /**
      * Hard method to decrease qty one by one.
      */
     public void decreaseProductQty(){
-        driver.findByCss(ProductDetailsPage.DECREASE_QTY_BUTTON).click();
+        driver.click(ProductDetailsPage.DECREASE_QTY_BUTTON);
     }
 
     public void addProductToCart(){
-        driver.waitToBeClickableByXpath(ProductDetailsPage.ADD_TO_CART_BUTTON).click();
+        driver.click(ProductDetailsPage.ADD_TO_CART_BUTTON);
     }
     public void clickToCart(){
-        driver.findByXpath(ProductDetailsPage.CART_BUTTON).click();
+        driver.click(ProductDetailsPage.CART_BUTTON);
     }
 }

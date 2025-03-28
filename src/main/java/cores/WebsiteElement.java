@@ -7,6 +7,11 @@ import java.util.Arrays;
 import java.util.List;
 
 public class WebsiteElement {
+
+    public WebElement getElement() {
+        return element;
+    }
+
     private WebElement element;
 
     public WebsiteElement(WebDriver driver, String locator) {
@@ -15,11 +20,11 @@ public class WebsiteElement {
             element = driver.findElement(list.get(0));
         } else {
             if (locator.startsWith("#") || locator.startsWith(".")) {
-                element = driver.findElement(list.get(0));
+                element = driver.findElement(list.get(1));
             } else {
                 for (int i = 1; i < list.size() - 1; i++) {
                     try {
-                        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds((long) 1.5));
+                        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
                         element = driver.findElement(list.get(i));
                         if (element != null) {
                             break;
@@ -35,6 +40,9 @@ public class WebsiteElement {
 
     }
 
+    public WebsiteElement(WebDriver driver, String locator, String... varargs){
+        element = driver.findElement(By.xpath(String.format(locator, varargs)));
+    }
 
     public void click() {
         element.click();
@@ -43,4 +51,5 @@ public class WebsiteElement {
     public void setText(String value) {
         element.sendKeys(value);
     }
+
 }
