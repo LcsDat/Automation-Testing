@@ -20,3 +20,7 @@
         -> Verify product name
         -> Verify price
         -> Verify quantity
+
+
+        27/3/2025
+        - try to use enum to decrease when find element (idea: LocatorStrategy.XPATH("locator"))

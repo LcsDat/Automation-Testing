@@ -25,6 +25,10 @@ public class WebsiteDriver {
         return new WebsiteDriver(browser);
     }
 
+    public WebsiteElement findElement(String locator){
+        return new WebsiteElement(driver, locator);
+    }
+
     public WebElement waitToBeVisibleByXpath(String locator) {
         return webDriverWait.until(ExpectedConditions.visibilityOf(findByXpath(locator)));
     }
