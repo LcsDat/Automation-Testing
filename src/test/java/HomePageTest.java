@@ -25,7 +25,7 @@ public class HomePageTest {
 
         homepage.cancelPopup();
         homepage.cancelCookie();
-        Thread.sleep(2000);
+//        Thread.sleep(2000);
         homepage.login("0345864246","#Onimusha00");
 
 

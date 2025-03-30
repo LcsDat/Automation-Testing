@@ -15,10 +15,12 @@ public class WebsiteElement {
     private WebElement element;
 
     public WebsiteElement(WebDriver driver, String locator) {
-        List<By> list = Arrays.asList(By.xpath(locator), By.cssSelector(locator), By.className(locator), By.id(locator), By.name(locator));
+        List<By> list = Arrays.asList(By.xpath(locator), By.cssSelector(locator), By.className(locator.replace(" ","")), By.id(locator), By.name(locator));
         if (locator.startsWith("/")) {
             element = driver.findElement(list.get(0));
-        } else {
+        }
+        else {
+
             if (locator.startsWith("#") || locator.startsWith(".")) {
                 element = driver.findElement(list.get(1));
             } else {
@@ -29,7 +31,7 @@ public class WebsiteElement {
                         if (element != null) {
                             break;
                         }
-                    } catch (NoSuchElementException e) {
+                    } catch ( NoSuchElementException e) {
                     }
                 }
                 if (element == null) {
