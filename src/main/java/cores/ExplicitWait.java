@@ -8,8 +8,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class ExplicitWait {
+
     private WebDriverWait wait;
     private WebDriver driver;
+
+    public WebDriverWait getWait() {
+        return wait;
+    }
 
     public ExplicitWait(WebDriver driver) {
         this.driver = driver;

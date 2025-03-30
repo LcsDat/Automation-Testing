@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class WebsiteDriver {
@@ -36,10 +37,32 @@ public class WebsiteDriver {
         return new WebsiteElement(driver, locator, varargs);
     }
 
-//    public void waitForPageLoad(){
-////        return jsExecutor.executeScript("return document.readyState").equals("complete");
-//        webDriverWait.until( d -> jsExecutor.executeScript("return document.readyState").equals("complete"));
-//    }
+    public List<WebsiteElement> findElements(String locator){
+        List<WebElement> oriEles;
+        List<WebsiteElement> newEles = new ArrayList<>();
+
+        if (locator.startsWith("/")) oriEles = driver.findElements(By.xpath(locator));
+        else oriEles = driver.findElements(By.cssSelector(locator));
+
+        for(WebElement element : oriEles) {
+            newEles.add(new WebsiteElement(driver, locator));
+        }
+
+        return newEles;
+    }
+
+    public void waitForPageLoad(){
+//        return jsExecutor.executeScript("return document.readyState").equals("complete");
+        webDriverWait.getWait().until(d -> jsExecutor.executeScript("return document.readyState").equals("complete"));
+    }
+
+    public String getText(String locator) {
+        return findElement(locator).getText();
+    }
+
+    public String getText(String locator, String...varargs) {
+        return findElement(locator, varargs).getText();
+    }
 
     public void moveToElement(String locator){
         actions.moveToElement(locator);

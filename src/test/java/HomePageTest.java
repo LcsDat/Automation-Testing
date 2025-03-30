@@ -25,22 +25,21 @@ public class HomePageTest {
 
         homepage.cancelPopup();
         homepage.cancelCookie();
-//        Thread.sleep(2000);
         homepage.login("0345864246","#Onimusha00");
 
 
     }
 
     @Test
-    public void demo(){
-        webDriver.findElement("search").setText("hello world");
-//        webDriver.findByXpath("search").sendKeys("aa");
+    void test(){
+        System.out.println(webDriver.findElements("span.icon_lam_category_top"));
+        System.out.println(webDriver.findElements("span.icon_lam_category_to"));
     }
 
 //    @AfterTest
 //    void teardown() {
-//        if (!webDriver.findByCss("nav[aria-label='Main'] button.p-0 a span:nth-child(3)").getText().equals("0")) {
-//            webDriver.findByCss("nav[aria-label='Main'] button.p-0").click();
+//        if (!webDriver.getText("nav[aria-label='Main'] button.p-0 a span:nth-child(3)").equals("0")) {
+//            webDriver.click("nav[aria-label='Main'] button.p-0");
 //
 //            while (true) {
 //                Integer size = webDriver.findAllByXpath("//tbody/tr").size();
@@ -93,6 +92,4 @@ public class HomePageTest {
 //
 //        Assert.assertEquals(calculatedPrice, totalPrice);
 //    }
-
-
 }

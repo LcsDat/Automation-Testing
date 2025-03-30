@@ -8,18 +8,18 @@ import java.util.List;
 
 public class WebsiteElement {
 
-    public WebElement getElement() {
-        return element;
-    }
-
     private WebElement element;
 
     public WebsiteElement(WebDriver driver, String locator) {
-        List<By> list = Arrays.asList(By.xpath(locator), By.cssSelector(locator), By.className(locator.replace(" ","")), By.id(locator), By.name(locator));
+        List<By> list = Arrays.asList(
+                By.xpath(locator),
+                By.cssSelector(locator),
+                By.className(locator.replace(" ", "")),
+                By.id(locator),
+                By.name(locator));
         if (locator.startsWith("/")) {
             element = driver.findElement(list.get(0));
-        }
-        else {
+        } else {
 
             if (locator.startsWith("#") || locator.startsWith(".")) {
                 element = driver.findElement(list.get(1));
@@ -31,7 +31,7 @@ public class WebsiteElement {
                         if (element != null) {
                             break;
                         }
-                    } catch ( NoSuchElementException e) {
+                    } catch (NoSuchElementException e) {
                     }
                 }
                 if (element == null) {
@@ -39,11 +39,14 @@ public class WebsiteElement {
                 }
             }
         }
-
     }
 
-    public WebsiteElement(WebDriver driver, String locator, String... varargs){
+    public WebsiteElement(WebDriver driver, String locator, String... varargs) {
         element = driver.findElement(By.xpath(String.format(locator, varargs)));
+    }
+
+    public WebElement getElement() {
+        return element;
     }
 
     public void click() {
@@ -54,4 +57,7 @@ public class WebsiteElement {
         element.sendKeys(value);
     }
 
+    public String getText() {
+        return element.getText();
+    }
 }
