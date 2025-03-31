@@ -1,9 +1,6 @@
 package cores;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 
 import java.io.IOException;
 import java.time.Duration;
@@ -67,15 +64,22 @@ public class WebsiteDriver {
         return new WebsiteElement(driver, locator, varargs);
     }
 
+    /**
+     * Find all elements using same locator
+     * @param locator The locator <b>MUST</b> be Xpath syntax
+     * @return A list of elements
+     */
     public List<WebsiteElement> findElements(String locator) {
         List<WebElement> oriEles;
         List<WebsiteElement> newEles = new ArrayList<>();
 
         if (locator.startsWith("/")) oriEles = driver.findElements(By.xpath(locator));
-        else oriEles = driver.findElements(By.cssSelector(locator));
+        else throw new InvalidSelectorException("Invalid Xpath locator.");
 
+        int i=1;
         for (WebElement element : oriEles) {
-            newEles.add(new WebsiteElement(driver, locator));
+            newEles.add(new WebsiteElement(driver, locator+"["+i+"]"));
+            i++;
         }
 
         return newEles;

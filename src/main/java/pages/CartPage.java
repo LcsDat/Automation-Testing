@@ -37,6 +37,13 @@ public class CartPage extends BasePage {
         driver.click(CartPage.CART_BUTTON);
     }
 
+    /**
+     * - This method is checking the cart quantity <b style='color:yellow'>BEFORE</b> log out, for test tear down
+     * <p>
+     * - The <b style='color:yellow'>CURRENT</b> user position is not in Homepage
+     * <p>
+     * - If the quantity is bigger than 0, remove all products in the cart
+     */
     public void checkCartQuantity(){
         if (!(driver.getText(CART_QUANTITY).equals("0"))) {
             driver.click(CART_BUTTON);

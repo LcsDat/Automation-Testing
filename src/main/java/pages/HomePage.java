@@ -29,7 +29,7 @@ public class HomePage extends BasePage {
      * <p>
      * - The <b style='color:yellow'>CURRENT</b> user position is in HomePage
      * <p>
-     * - If the quantity is bigger than 0, delete all products in the cart
+     * - If the quantity is bigger than 0, remove all products in the cart
      */
     public void checkCartQuantity() {
         if (!getCurrentCartQuantity().equals("0")) {
