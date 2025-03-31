@@ -4,9 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.ArrayList;
@@ -19,7 +16,7 @@ public class WebsiteDriver {
     private JavascriptExecutor jsExecutor;
 
     public WebsiteDriver(Browser browser) {
-        this.driver = DriverFactory.init(browser);
+        this.driver = DriverFactory.initWebdriver(browser);
         this.actions = new WebsiteActions(driver, Duration.ofSeconds(10));
         this.webDriverWait = new ExplicitWait(driver, Duration.ofSeconds(10));
         this.jsExecutor = (JavascriptExecutor) driver;

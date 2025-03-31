@@ -34,6 +34,9 @@ public class WebsiteElement {
                     } catch (NoSuchElementException e) {
                     }
                 }
+
+                driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
                 if (element == null) {
                     throw new InvalidSelectorException("Invalid locator");
                 }
@@ -59,5 +62,13 @@ public class WebsiteElement {
 
     public String getText() {
         return element.getText();
+    }
+
+    public String getDomAttribute(String value){
+        return element.getDomAttribute(value);
+    }
+
+    public boolean isDisplayed() {
+        return element.isDisplayed();
     }
 }

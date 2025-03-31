@@ -8,7 +8,7 @@ import java.time.Duration;
 
 public class DriverFactory {
 
-    public static WebDriver init(Browser browser){
+    public static WebDriver initWebdriver(Browser browser){
         WebDriver driver = null;
 
         switch (browser){
@@ -20,5 +20,9 @@ public class DriverFactory {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         return driver;
+    }
+
+    public static WebsiteDriver initWebsiteDriver(Browser browser){
+        return new WebsiteDriver(browser);
     }
 }
