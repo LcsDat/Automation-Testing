@@ -73,12 +73,12 @@ public class WebsiteDriver {
         List<WebElement> oriEles;
         List<WebsiteElement> newEles = new ArrayList<>();
 
-        if (locator.startsWith("/")) oriEles = driver.findElements(By.xpath(locator));
+        if (locator.startsWith("/") || locator.startsWith("(")) oriEles = driver.findElements(By.xpath(locator));
         else throw new InvalidSelectorException("Invalid Xpath locator.");
 
         int i=1;
         for (WebElement element : oriEles) {
-            newEles.add(new WebsiteElement(driver, locator+"["+i+"]"));
+            newEles.add(new WebsiteElement(driver,"(" + locator + ")" + "[" + i + "]"));
             i++;
         }
 

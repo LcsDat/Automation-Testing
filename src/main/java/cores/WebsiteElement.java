@@ -17,7 +17,7 @@ public class WebsiteElement {
                 By.className(locator.replace(" ", "")),
                 By.id(locator),
                 By.name(locator));
-        if (locator.startsWith("/")) {
+        if (locator.startsWith("/") || locator.startsWith("(")) {
             element = driver.findElement(list.get(0));
         } else {
 
