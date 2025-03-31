@@ -5,6 +5,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,33 +23,65 @@ public class WebsiteDriver {
         this.jsExecutor = (JavascriptExecutor) driver;
     }
 
-    public static WebsiteDriver init(Browser browser) {
-        return new WebsiteDriver(browser);
+    protected String getBrowserDriverName() {
+        String driverName = driver.toString().toLowerCase();
+        String browserDriverName = null;
+        if (driverName.contains("chrome")) browserDriverName = "chromedriver";
+        else if (driverName.contains("firefox")) browserDriverName = "geckodriver";
+        else if (driverName.contains("edge")) browserDriverName = "msedgedriver";
+
+        return browserDriverName;
     }
 
-    public WebsiteElement findElement(String locator){
+    public void killDriverProcess() {
+        String cmd = null;
+        try {
+            String osName = System.getProperty("os.name").toLowerCase();
+            String browserDriverName = getBrowserDriverName();
+
+            if (osName.contains("window")) {
+                cmd = "taskkill /F /FI \"IMAGENAME eq " + browserDriverName + "*\"";
+            } else {
+                cmd = "pkill " + browserDriverName;
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                Process process = Runtime.getRuntime().exec(cmd);
+                process.waitFor();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public WebsiteElement findElement(String locator) {
         return new WebsiteElement(driver, locator);
     }
 
-    public WebsiteElement findElement(String locator, String... varargs){
+    public WebsiteElement findElement(String locator, String... varargs) {
         return new WebsiteElement(driver, locator, varargs);
     }
 
-    public List<WebsiteElement> findElements(String locator){
+    public List<WebsiteElement> findElements(String locator) {
         List<WebElement> oriEles;
         List<WebsiteElement> newEles = new ArrayList<>();
 
         if (locator.startsWith("/")) oriEles = driver.findElements(By.xpath(locator));
         else oriEles = driver.findElements(By.cssSelector(locator));
 
-        for(WebElement element : oriEles) {
+        for (WebElement element : oriEles) {
             newEles.add(new WebsiteElement(driver, locator));
         }
 
         return newEles;
     }
 
-    public void waitForPageLoad(){
+    public void waitForPageLoad() {
 //        return jsExecutor.executeScript("return document.readyState").equals("complete");
         webDriverWait.getWait().until(d -> jsExecutor.executeScript("return document.readyState").equals("complete"));
     }
@@ -57,27 +90,27 @@ public class WebsiteDriver {
         return findElement(locator).getText();
     }
 
-    public String getText(String locator, String...varargs) {
+    public String getText(String locator, String... varargs) {
         return findElement(locator, varargs).getText();
     }
 
-    public void moveToElement(String locator){
+    public void moveToElement(String locator) {
         actions.moveToElement(locator);
     }
 
-    public void moveToElement(String locator, String... varargs){
+    public void moveToElement(String locator, String... varargs) {
         actions.moveToElement(locator, varargs);
     }
 
-    public void click(String locator){
+    public void click(String locator) {
         findElement(locator).click();
     }
 
-    public void click(String locator, String... varargs){
+    public void click(String locator, String... varargs) {
         findElement(locator, varargs).click();
     }
 
-    public void setText(String locator, String value){
+    public void setText(String locator, String value) {
         findElement(locator).setText(value);
     }
 
@@ -158,7 +191,10 @@ public class WebsiteDriver {
     }
 
     public void quit() {
-        driver.quit();
+        if (driver != null) {
+            driver.manage().deleteAllCookies();
+            driver.quit();
+        }
     }
 
     public void clickByActions(String locator) {

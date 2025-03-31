@@ -1,7 +1,9 @@
 import cores.Browser;
 import cores.DriverFactory;
+import cores.PageFactory;
 import cores.WebsiteDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -18,15 +20,15 @@ public class HomePageTest {
     @BeforeTest
     void setup() throws InterruptedException {
         webDriver = DriverFactory.initWebsiteDriver(Browser.CHROME);
-        homepage = new HomePage(webDriver);
-        productPage = new ProductPage(webDriver);
-        cartPage = new CartPage(webDriver);
+        homepage = PageFactory.generateHomepage(webDriver);
+        productPage = PageFactory.generateProductpage(webDriver);
+        cartPage = PageFactory.generateCartpage(webDriver);
 
         webDriver.navigate("https://hasaki.vn/");
 
         homepage.cancelPopup();
         homepage.cancelCookie();
-        homepage.login("0345864246","#Onimusha00");
+        homepage.login("0345864246", "#Onimusha00");
         homepage.checkCartQuantity();
 
     }
@@ -37,11 +39,16 @@ public class HomePageTest {
 //    }
 
     @AfterTest
-    void teardown() {
+    void afterTest(){
         cartPage.checkCartQuantity();
         webDriver.moveToElement("//nav[@aria-label='Main']//li[1]");
         webDriver.findElement("//span[text()='Thoát']").click();
         webDriver.quit();
+    }
+
+    @AfterClass(alwaysRun = true)
+    void afterClass() {
+        webDriver.killDriverProcess();
     }
 
     @Test(priority = 2)

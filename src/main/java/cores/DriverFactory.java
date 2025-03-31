@@ -12,9 +12,9 @@ public class DriverFactory {
         WebDriver driver = null;
 
         switch (browser){
-            case FIREFOX -> driver = new FirefoxDriver();
+            case FIREFOX -> driver = browser.initFirefoxDriver();
 
-            case CHROME -> driver = new ChromeDriver();
+            case CHROME -> driver = browser.initChromeDriver();
         }
 
         driver.manage().window().maximize();

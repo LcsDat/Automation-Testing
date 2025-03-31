@@ -1,12 +1,13 @@
 package pages;
 
+import cores.BasePage;
+import cores.Browser;
 import cores.WebsiteDriver;
 
-public class HomePage {
-    private WebsiteDriver driver;
+public class HomePage extends BasePage {
 
     public HomePage(WebsiteDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     private static final String HEADER_LOGIN_ITEM = "div.item_header.item_login";

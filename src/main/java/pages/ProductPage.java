@@ -1,12 +1,13 @@
 package pages;
 
+import cores.BasePage;
+import cores.Browser;
 import cores.WebsiteDriver;
 
-public class ProductPage {
-    private WebsiteDriver driver;
+public class ProductPage extends BasePage {
 
     public ProductPage(WebsiteDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     private static final String PRODUCT_NAME = "//h1[contains(text(),'Tẩy Trang Mặt')]" +

@@ -1,12 +1,13 @@
 package pages;
 
+import cores.BasePage;
+import cores.Browser;
 import cores.WebsiteDriver;
 
-public class CartPage {
-    private WebsiteDriver driver;
+public class CartPage extends BasePage {
 
     public CartPage(WebsiteDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
     private static final String INCREASE_QTY_BUTTON = "button[aria-label='Increase btn']";
