@@ -20,7 +20,7 @@ public class CartPage extends BasePage {
      * Hard method to increase qty one by one.
      */
     public void increaseProductQty(){
-        driver.click(CartPage.INCREASE_QTY_BUTTON);
+        driver.waitToBeClickable(CartPage.INCREASE_QTY_BUTTON).click();
     }
 
     /**
