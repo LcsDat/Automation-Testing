@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Suite1" verbose="1">
+    <test name="Hasaki">
+        <classes>
+            <class name="orderTestSuite.NegativeScenarios"/>
+            <class name="orderTestSuite.PositiveScenarios"/>
+        </classes>
+    </test>
+</suite>

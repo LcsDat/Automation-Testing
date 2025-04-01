@@ -24,6 +24,7 @@ public class WebsiteDriver {
         return driver.getTitle();
     }
 
+
     protected String getBrowserDriverName() {
         String driverName = driver.toString().toLowerCase();
         String browserDriverName = null;
@@ -58,6 +59,20 @@ public class WebsiteDriver {
                 e.printStackTrace();
             }
         }
+    }
+
+    public boolean isUnDisplayed(String locator) {
+        boolean flag = false;
+        try {
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+            findElement(locator);
+        } catch (NoSuchElementException e){
+            flag = true;
+        }
+
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
+        return flag;
     }
 
     public WebsiteElement findElement(String locator) {

@@ -1,7 +1,6 @@
 package pages;
 
 import cores.BasePage;
-import cores.Browser;
 import cores.WebsiteDriver;
 
 public class CartPage extends BasePage {
