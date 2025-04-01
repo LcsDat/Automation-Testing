@@ -1,9 +1,6 @@
 import cores.*;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import pages.HomePage;
 import pages.CartPage;
 import pages.ProductPage;
@@ -31,24 +28,59 @@ public class HomePageTest {
     }
 
     @Test(priority = 1)
-    void tc01(){
+    void tc01() {
         webDriver.setText("input_search", "Sữa Rửa Mặt CeraVe");
-        webDriver.findElements("//div[@id='suggestion_products']//h2").size();
+        webDriver.findElements("//div[@id='suggestion_products']//h2")
+                .stream()
+                .filter(e -> e.getText().equals("Sữa Rửa Mặt CeraVe Sạch Sâu Cho Da Thường Đến Da Dầu 88ml"))
+                .findFirst().get().click();
+        webDriver.click("//div[text()='Giỏ hàng']");
+
+        Assert.assertTrue(webDriver.waitToBeVisible("div[role='dialog']").isDisplayed());
+        Assert.assertEquals(
+                webDriver.findElement("input[name='username']").getDomAttribute("placeholder"),
+                "Nhập email hoặc số điện thoại");
+        Assert.assertEquals(
+                webDriver.findElement("input[name='password']").getDomAttribute("placeholder"),
+                "Nhập password");
+
+        webDriver.click("button[aria-label='Close notify form']");
+        webDriver.click("//div[text()='Mua ngay NowFree 2H ']");
+
+        Assert.assertTrue(webDriver.findElement("div[role='dialog']").isDisplayed());
+        Assert.assertEquals(
+                webDriver.findElement("input[name='username']").getDomAttribute("placeholder"),
+                "Nhập email hoặc số điện thoại");
+        Assert.assertEquals(
+                webDriver.findElement("input[name='password']").getDomAttribute("placeholder"),
+                "Nhập password");
+
+        webDriver.click("button[aria-label='Close notify form']");
     }
 
-//    @AfterTest
-//    void afterTest(){
-//        cartPage.checkCartQuantity();
-//        webDriver.moveToElement("//nav[@aria-label='Main']//li[1]");
-//        webDriver.findElement("//span[text()='Thoát']").click();
-//        webDriver.quit();
-//    }
+    @Test(priority = 2)
+    void tc02() {
+
+    }
+
+    @AfterMethod
+    void afterMethod(){
+        if(webDriver.getPageTitle().startsWith("Hasaki.vn")) webDriver.click("div.logo_site");
+        else webDriver.click("a[aria-label='Homepage']");
+    }
 
     @AfterClass(alwaysRun = true)
     void afterClass() {
-        webDriver.killDriverProcess();
+        cartPage.checkCartQuantity();
+        webDriver.moveToElement("//nav[@aria-label='Main']//li[1]");
+        webDriver.findElement("//span[text()='Thoát']").click();
+        webDriver.quit();
     }
 
+    @AfterTest
+    void afterTest(){
+        webDriver.killDriverProcess();
+    }
 //    @Test(priority = 2)
 //    void test() throws InterruptedException {
 //

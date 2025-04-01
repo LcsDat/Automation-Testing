@@ -20,6 +20,10 @@ public class WebsiteDriver {
         this.jsExecutor = (JavascriptExecutor) driver;
     }
 
+    public String getPageTitle(){
+        return driver.getTitle();
+    }
+
     protected String getBrowserDriverName() {
         String driverName = driver.toString().toLowerCase();
         String browserDriverName = null;

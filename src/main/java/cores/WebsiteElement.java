@@ -71,4 +71,8 @@ public class WebsiteElement {
     public boolean isDisplayed() {
         return element.isDisplayed();
     }
+
+    public String getCssValue(String value){
+        return element.getCssValue(value);
+    }
 }
