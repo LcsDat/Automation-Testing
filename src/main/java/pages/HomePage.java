@@ -3,6 +3,11 @@ package pages;
 import cores.BasePage;
 import cores.Browser;
 import cores.WebsiteDriver;
+import cores.WebsiteElement;
+import org.openqa.selenium.NoSuchElementException;
+
+import javax.swing.plaf.PanelUI;
+import java.util.List;
 
 public class HomePage extends BasePage {
 
@@ -23,6 +28,31 @@ public class HomePage extends BasePage {
     private static final String IN_CART_QUANTITY = "span.counter_number";
     private static final String CART_BUTTON = "span.counter_number";
     private static final String HOMEPAGE_LINK = "//a[@aria-label='Homepage']";
+    private static final String SEARCH_BAR = "input_search";
+    private static final String SEARCH_DROPDOWN_ITEMS = "//div[@id='suggestion_products']//h2";
+
+
+    public void setTextToSearch(String value) {
+        driver.setText(SEARCH_BAR, value);
+    }
+
+    public void clickProductFromSearchDropdown(String productName) {
+        List<WebsiteElement> list = driver.findElements(SEARCH_DROPDOWN_ITEMS);
+        if (list.isEmpty()) throw new NoSuchElementException("Unable to find the element");
+        else {
+            if (productName.length() != list.get(0).getText().length()) list.get(0).click();
+            else list
+                    .stream()
+                    .filter(e -> e.getText().equals(productName))
+                    .findFirst()
+                    .get().click();
+        }
+    }
+
+    public void chooseProductFromSearchDropdown(String productName) {
+        setTextToSearch(productName);
+        clickProductFromSearchDropdown(productName);
+    }
 
     /**
      * - This method is checking the cart quantity <b style='color:yellow'>AFTER</b> log in to the page, for refresh test setup

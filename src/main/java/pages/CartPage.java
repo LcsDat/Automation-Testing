@@ -15,6 +15,11 @@ public class CartPage extends BasePage {
     private static final String ADD_TO_CART_BUTTON = "//div[text()='Giỏ hàng']";
     private static final String CART_BUTTON = "nav[aria-label='Main'] button.p-0";
     private static final String CART_QUANTITY = "nav[aria-label='Main'] button.p-0 a span:nth-child(3)";
+    private static final String SHIP_2H_EXPRESS_BUTTON = "//div[text()='Mua ngay NowFree 2H ']";
+
+    public void shipExpress2h(){
+        driver.click(SHIP_2H_EXPRESS_BUTTON);
+    }
 
     /**
      * Hard method to increase qty one by one.
