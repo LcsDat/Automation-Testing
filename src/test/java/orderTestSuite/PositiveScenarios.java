@@ -14,7 +14,7 @@ public class PositiveScenarios extends BaseTest{
 //
 //    }
 
-    @BeforeClass
+    @BeforeTest
     void beforeClass(){
         webDriver = DriverFactory.initWebsiteDriver(Browser.CHROME);
         homepage = PageFactory.generateHomepage(webDriver);

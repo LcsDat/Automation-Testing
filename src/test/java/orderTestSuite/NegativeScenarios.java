@@ -10,7 +10,7 @@ import org.testng.annotations.*;
 public class NegativeScenarios extends BaseTest {
 
 
-    @BeforeClass
+    @BeforeTest
     void beforeClass(){
         webDriver = DriverFactory.initWebsiteDriver(Browser.CHROME);
         homepage = PageFactory.generateHomepage(webDriver);
