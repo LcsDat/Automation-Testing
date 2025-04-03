@@ -12,8 +12,10 @@ public class CartPage extends BasePage {
     private static final String INCREASE_QTY_BUTTON = "button[aria-label='Increase btn']";
     private static final String DECREASE_QTY_BUTTON = "button[aria-label='Descrease btn']";
     private static final String ADD_TO_CART_BUTTON = "//div[text()='Giỏ hàng']";
-    private static final String CART_BUTTON = "nav[aria-label='Main'] button.p-0";
-    private static final String CART_QUANTITY = "nav[aria-label='Main'] button.p-0 a span:nth-child(3)";
+    private static final String CART_BUTTON = "div.item_header.item_header_giohang.minicart-wrapper";
+//            "nav[aria-label='Main'] button.p-0";
+    private static final String CART_QUANTITY = "span.counter_number.counter.qty";
+//            "nav[aria-label='Main'] button.p-0 a span:nth-child(3)";
     private static final String SHIP_2H_EXPRESS_BUTTON = "//div[text()='Mua ngay NowFree 2H ']";
 
     public void shipExpress2h(){

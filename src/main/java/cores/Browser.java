@@ -12,6 +12,6 @@ public enum Browser {
     }
 
     public WebDriver initFirefoxDriver(){
-        return  new ChromeDriver();
+        return  new FirefoxDriver();
     }
 }

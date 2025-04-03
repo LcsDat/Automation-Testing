@@ -4,19 +4,16 @@ import core.BaseTest;
 import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
+import cores.WebsiteDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class PositiveScenarios extends BaseTest{
+public class PositiveScenarios extends BaseTest {
 
-//    @BeforeTest
-//    void beforeTest(){
-//
-//    }
-
-    @BeforeTest
-    void beforeClass(){
-        webDriver = DriverFactory.initWebsiteDriver(Browser.CHROME);
+    @Parameters("chrome")
+    @BeforeClass
+    void beforeClass(Browser browser) {
+        webDriver = DriverFactory.initWebsiteDriver(browser);
         homepage = PageFactory.generateHomepage(webDriver);
         productPage = PageFactory.generateProductpage(webDriver);
         cartPage = PageFactory.generateCartpage(webDriver);
@@ -35,9 +32,9 @@ public class PositiveScenarios extends BaseTest{
     }
 
     @AfterClass
-    void afterClass(){
+    void afterClass() {
         cartPage.checkCartQuantity();
-        if (webDriver.isUnDisplayed("#btn-login")){
+        if (webDriver.isUnDisplayed("#btn-login")) {
             webDriver.moveToElement("//nav[@aria-label='Main']//li[1]");
             webDriver.findElement("//span[text()='Thoát']").click();
         }
@@ -52,7 +49,7 @@ public class PositiveScenarios extends BaseTest{
     @Test()
     void tc03() throws InterruptedException {
 
-        //Choose product
+//        Choose product
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
 
         productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");

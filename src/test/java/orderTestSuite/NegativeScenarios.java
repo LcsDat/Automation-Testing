@@ -4,18 +4,20 @@ import core.BaseTest;
 import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
+import cores.WebsiteDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class NegativeScenarios extends BaseTest {
 
-
-    @BeforeTest
-    void beforeClass(){
-        webDriver = DriverFactory.initWebsiteDriver(Browser.CHROME);
+    @Parameters("chrome")
+    @BeforeClass
+    void beforeClass(Browser browser) {
+        webDriver = DriverFactory.initWebsiteDriver(browser);
         homepage = PageFactory.generateHomepage(webDriver);
         productPage = PageFactory.generateProductpage(webDriver);
         cartPage = PageFactory.generateCartpage(webDriver);
+
         webDriver.navigate("https://hasaki.vn/");
 
         homepage.cancelPopup();
@@ -29,9 +31,9 @@ public class NegativeScenarios extends BaseTest {
     }
 
     @AfterClass
-    void afterClass(){
+    void afterClass() {
         homepage.checkCartQuantity();
-        if (webDriver.isUnDisplayed("#btn-login")){
+        if (webDriver.isUnDisplayed("#btn-login")) {
             webDriver.moveToElement("//nav[@aria-label='Main']//li[1]");
             webDriver.findElement("//span[text()='Thoát']").click();
         }
