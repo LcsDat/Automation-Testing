@@ -33,6 +33,8 @@
                 -> Verify price
                 -> Verify quantity
 
+TC04: Navigate to store locations (new tab is opened)
+
 
         27/3/2025
         - try to use enum to decrease when find element (idea: LocatorStrategy.XPATH("locator"))
