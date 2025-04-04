@@ -4,69 +4,69 @@ import core.BaseTest;
 import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
-import cores.WebsiteDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class PositiveScenarios extends BaseTest {
 
-    @Parameters("chrome")
+//    @BeforeTest
+//    void beforeTest() {
+//    }
+
+    @Parameters({"chrome", "url"})
     @BeforeClass
-    void beforeClass(Browser browser) {
+    void beforeClass(Browser browser, String url) {
         webDriver = DriverFactory.initWebsiteDriver(browser);
-        homepage = PageFactory.generateHomepage(webDriver);
-        productPage = PageFactory.generateProductpage(webDriver);
-        cartPage = PageFactory.generateCartpage(webDriver);
-        webDriver.navigate("https://hasaki.vn/");
+        homepage = PageFactory.generateHomePage(webDriver);
+        productPage = PageFactory.generateProductsPage(webDriver);
+        productDetailsPage = PageFactory.generateProductDetailsPage(webDriver);
+        cartPage = PageFactory.generateCartPage(webDriver);
+
+        webDriver.navigate(url);
 
         homepage.cancelPopup();
         homepage.cancelCookie();
         homepage.login("0345864246", "#Onimusha00");
-        homepage.checkCartQuantity();
+        homepage.removeProductFromCart();
     }
 
     @AfterMethod
     void afterMethod() {
-        if (webDriver.getPageTitle().startsWith("Hasaki.vn")) webDriver.click("div.logo_site");
-        else webDriver.click("a[aria-label='Homepage']");
+        navigateToHomePage();
     }
 
     @AfterClass
     void afterClass() {
-        cartPage.checkCartQuantity();
-        if (webDriver.isUnDisplayed("#btn-login")) {
-            webDriver.moveToElement("//nav[@aria-label='Main']//li[1]");
-            webDriver.findElement("//span[text()='Thoát']").click();
-        }
-        webDriver.quit();
+        logout();
+        quitBrowser();
     }
 
     @AfterTest
     void afterTest() {
-        webDriver.killDriverProcess();
+        cleanDriverProcess();
     }
 
     @Test()
-    void tc03() throws InterruptedException {
+    void tc03() {
 
 //        Choose product
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
 
         productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
 
-        cartPage.increaseProductQty();
+        productDetailsPage.increaseProductQty();
         Assert.assertEquals(webDriver.findElement("input[name='qty']").getDomAttribute("value"), "2");
 
-        cartPage.addProductToCart();
+        productDetailsPage.addProductToCart();
         Assert.assertTrue(webDriver.findElement("//div[text()='Sản phẩm chỉ được mua tối đa là 1']").isDisplayed());
         webDriver.waitToBeInvisibleBy("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
 
-        cartPage.decreaseProductQty();
-        cartPage.addProductToCart();
+        productDetailsPage.decreaseProductQty();
+        productDetailsPage.addProductToCart();
         Assert.assertTrue(webDriver.findElement("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']").isDisplayed());
         webDriver.waitToBeInvisibleBy("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']");
 
-        BaseTest.sleepInSecond(2);
+        sleepInSecond(2);
 
         String productQuantity = webDriver.findElement("//span[text()='Cart Icon']/following-sibling::span").getText();
         String productName = webDriver.findElement("//h1").getText();
@@ -74,11 +74,13 @@ public class PositiveScenarios extends BaseTest {
 
         Assert.assertEquals(productQuantity, "1");
 
-        cartPage.clickToCart();
+        productDetailsPage.clickToCart();
         Assert.assertEquals(webDriver.findElement("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']").getText(), productName);
 
         Integer calculatedPrice = (Integer.parseInt(productQuantity) * Integer.parseInt(productPrice));
-        Thread.sleep(2000);
+
+        sleepInSecond(2);
+
         String totalPriceeAt = webDriver.findElement("//tbody//tr[1]/td[4]/div").getText().replaceAll("[^0-9]", "");
         Integer totalPrice = Integer.parseInt(totalPriceeAt);
 

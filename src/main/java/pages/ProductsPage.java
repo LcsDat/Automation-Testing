@@ -1,12 +1,11 @@
 package pages;
 
 import cores.BasePage;
-import cores.Browser;
 import cores.WebsiteDriver;
 
-public class ProductPage extends BasePage {
+public class ProductsPage extends BasePage {
 
-    public ProductPage(WebsiteDriver driver) {
+    public ProductsPage(WebsiteDriver driver) {
         super(driver);
     }
 
@@ -15,6 +14,6 @@ public class ProductPage extends BasePage {
             "//div[text()='%s']";
 
     public void chooseProduct(String productName){
-        driver.click(ProductPage.PRODUCT_NAME, productName);
+        driver.click(ProductsPage.PRODUCT_NAME, productName);
     }
 }

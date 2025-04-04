@@ -1,12 +1,10 @@
 package pages;
 
 import cores.BasePage;
-import cores.Browser;
 import cores.WebsiteDriver;
 import cores.WebsiteElement;
 import org.openqa.selenium.NoSuchElementException;
 
-import javax.swing.plaf.PanelUI;
 import java.util.List;
 
 public class HomePage extends BasePage {
@@ -63,8 +61,8 @@ public class HomePage extends BasePage {
      * <p>
      * - If the quantity is bigger than 0, remove all products in the cart
      */
-    public void checkCartQuantity() {
-        if (!getCurrentCartQuantity().equals("0")) {
+    public void removeProductFromCart() {
+        if (!getCartQuantity().equals("0")) {
             clickToCart();
             while (true) {
                 Integer size = driver.findElements("//tbody/tr").size();
@@ -82,7 +80,7 @@ public class HomePage extends BasePage {
         driver.click(HOMEPAGE_LINK);
     }
 
-    public String getCurrentCartQuantity() {
+    public String getCartQuantity() {
         return driver.getText(IN_CART_QUANTITY);
     }
 

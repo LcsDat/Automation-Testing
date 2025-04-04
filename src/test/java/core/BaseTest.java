@@ -1,19 +1,17 @@
 package core;
 
-import cores.Browser;
-import cores.DriverFactory;
-import cores.PageFactory;
 import cores.WebsiteDriver;
-import org.testng.annotations.*;
 import pages.CartPage;
 import pages.HomePage;
-import pages.ProductPage;
+import pages.ProductDetailsPage;
+import pages.ProductsPage;
 
 public class BaseTest {
-    protected static WebsiteDriver webDriver;
-    protected static HomePage homepage;
-    protected static ProductPage productPage;
-    protected static CartPage cartPage;
+    protected WebsiteDriver webDriver;
+    protected HomePage homepage;
+    protected ProductsPage productPage;
+    protected ProductDetailsPage productDetailsPage;
+    protected CartPage cartPage;
 
     protected static void sleepInSecond(long time){
         try {
@@ -23,4 +21,26 @@ public class BaseTest {
         }
     }
 
+    protected void navigateToHomePage(){
+        if (webDriver.getPageTitle().startsWith("Hasaki.vn")) webDriver.click("div.logo_site");
+        else webDriver.click("a[aria-label='Homepage']");
+    }
+
+    /**
+     * Default, User is navigated back in Homepage before log out.
+     */
+    protected void logout(){
+        if (webDriver.isUnDisplayed("#btn-login")) {
+            webDriver.moveToElement("div.item_header.item_login.user_login");
+            webDriver.findElement("//a[contains(text(),'Thoát')]").click();
+        }
+    }
+
+    protected void quitBrowser(){
+        webDriver.quit();
+    }
+
+    protected void cleanDriverProcess(){
+        webDriver.killDriverProcess();
+    }
 }

@@ -4,51 +4,53 @@ import core.BaseTest;
 import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
-import cores.WebsiteDriver;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class NegativeScenarios extends BaseTest {
 
-    @Parameters("chrome")
-    @BeforeClass
-    void beforeClass(Browser browser) {
-        webDriver = DriverFactory.initWebsiteDriver(browser);
-        homepage = PageFactory.generateHomepage(webDriver);
-        productPage = PageFactory.generateProductpage(webDriver);
-        cartPage = PageFactory.generateCartpage(webDriver);
 
-        webDriver.navigate("https://hasaki.vn/");
+//    @BeforeTest
+//    void beforeTest() {
+//
+//    }
+
+    @Parameters({"chrome", "url"})
+    @BeforeClass
+    void beforeClass(Browser browser, String url) {
+        webDriver = DriverFactory.initWebsiteDriver(browser);
+        homepage = PageFactory.generateHomePage(webDriver);
+        productPage = PageFactory.generateProductsPage(webDriver);
+        productDetailsPage = PageFactory.generateProductDetailsPage(webDriver);
+        cartPage = PageFactory.generateCartPage(webDriver);
+
+        webDriver.navigate(url);
 
         homepage.cancelPopup();
         homepage.cancelCookie();
+        homepage.removeProductFromCart();
     }
 
     @AfterMethod
     void afterMethod() {
-        if (webDriver.getPageTitle().startsWith("Hasaki.vn")) webDriver.click("div.logo_site");
-        else webDriver.click("a[aria-label='Homepage']");
+        navigateToHomePage();
     }
 
     @AfterClass
     void afterClass() {
-        homepage.checkCartQuantity();
-        if (webDriver.isUnDisplayed("#btn-login")) {
-            webDriver.moveToElement("//nav[@aria-label='Main']//li[1]");
-            webDriver.findElement("//span[text()='Thoát']").click();
-        }
-        webDriver.quit();
+        logout();
+        quitBrowser();
     }
 
     @AfterTest
     void afterTest() {
-        webDriver.killDriverProcess();
+        cleanDriverProcess();
     }
 
     @Test()
     void tc01() {
         homepage.chooseProductFromSearchDropdown("Cerave");
-        cartPage.addProductToCart();
+        productDetailsPage.addProductToCart();
 
         Assert.assertTrue(webDriver.waitToBeVisible("div[role='dialog']").isDisplayed());
         Assert.assertEquals(
@@ -76,7 +78,7 @@ public class NegativeScenarios extends BaseTest {
     void tc02() {
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
         productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
-        cartPage.addProductToCart();
+        productDetailsPage.addProductToCart();
 
         Assert.assertTrue(webDriver.waitToBeVisible("div[role='dialog']").isDisplayed());
         Assert.assertEquals(
