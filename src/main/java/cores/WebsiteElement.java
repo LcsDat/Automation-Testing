@@ -11,6 +11,10 @@ public class WebsiteElement {
 
     private WebElement element;
 
+    private void parseLocator(String locator){
+
+    }
+
     public WebsiteElement(WebDriver driver, String locator) {
         List<By> list = Arrays.asList(
                 By.xpath(locator),

@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 public class WebsiteDriver {
     private WebDriver driver;
@@ -20,10 +22,21 @@ public class WebsiteDriver {
         this.jsExecutor = (JavascriptExecutor) driver;
     }
 
-    public String getPageTitle(){
+    public String getPageTitle() {
         return driver.getTitle();
     }
 
+    public void setImplicitWait(Duration duration){
+        driver.manage().timeouts().implicitlyWait(duration);
+    }
+    public void switchWindow(String titleContains) {
+
+        driver.getWindowHandles().stream()
+                .anyMatch(handle -> {
+                    driver.switchTo().window(handle);
+                    return driver.getTitle().contains(titleContains);
+                });
+    }
 
     protected String getBrowserDriverName() {
         String driverName = driver.toString().toLowerCase();
@@ -66,7 +79,7 @@ public class WebsiteDriver {
         try {
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
             findElement(locator);
-        } catch (NoSuchElementException e){
+        } catch (NoSuchElementException e) {
             flag = true;
         }
 
@@ -85,6 +98,7 @@ public class WebsiteDriver {
 
     /**
      * Find all elements using same locator
+     *
      * @param locator The locator <b>MUST</b> be Xpath syntax
      * @return A list of elements
      */
@@ -95,9 +109,9 @@ public class WebsiteDriver {
         if (locator.startsWith("/") || locator.startsWith("(")) oriEles = driver.findElements(By.xpath(locator));
         else throw new InvalidSelectorException("Invalid Xpath locator.");
 
-        int i=1;
+        int i = 1;
         for (WebElement element : oriEles) {
-            newEles.add(new WebsiteElement(driver,"(" + locator + ")" + "[" + i + "]"));
+            newEles.add(new WebsiteElement(driver, "(" + locator + ")" + "[" + i + "]"));
             i++;
         }
 

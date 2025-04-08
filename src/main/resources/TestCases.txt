@@ -7,6 +7,11 @@
         * Navigate URL
         * Access to Category list to find product
         * Verify cannot add to cart
+    ** TC03
+        * Navigate to URL
+        * Click on stores location
+        * New tab is opened
+        * Verify stores location page is opened
 
 *** E2E TCs
     ** TC01: User successfully order the product
@@ -33,7 +38,17 @@
                 -> Verify price
                 -> Verify quantity
 
-TC04: Navigate to store locations (new tab is opened)
+*** FAQ Page TCs
+    ** TC01: Navigate to FAQ Page (new tab is opened)
+        * Verify the page slogan
+    ** TC02:
+        * Click on stores location
+        * Stores location (page) is opened
+        * Verify breadcrumb show text "Stores system..."
+        * Verify there is a widget, show total stores
+        * Inside the widget, verify every row show detail address for each store.
+        When expand each row, working hour will display, booking function (belong to Hasaki spa, not cosmetic) and show address in map
+
 
 
         27/3/2025

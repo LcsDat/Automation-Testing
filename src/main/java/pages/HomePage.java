@@ -29,6 +29,7 @@ public class HomePage extends BasePage {
     private static final String SEARCH_BAR = "input_search";
     private static final String SEARCH_DROPDOWN_ITEMS = "//div[@id='suggestion_products']//h2";
     private static final String SIGNIN_LABEL = "#btn-login";
+    private static final String FAQ_LINK = "//div[@class='item_header']";
 
 
 
