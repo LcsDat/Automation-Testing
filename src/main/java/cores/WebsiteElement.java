@@ -1,6 +1,7 @@
 package cores;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -11,10 +12,6 @@ public class WebsiteElement {
 
     private WebElement element;
 
-    private void parseLocator(String locator){
-
-    }
-
     public WebsiteElement(WebDriver driver, String locator) {
         List<By> list = Arrays.asList(
                 By.xpath(locator),
@@ -22,6 +19,7 @@ public class WebsiteElement {
                 By.className(locator.replace(" ", "")),
                 By.id(locator),
                 By.name(locator));
+
         if (locator.startsWith("/") || locator.startsWith("(")) {
             element = driver.findElement(list.get(0));
         } else {
@@ -37,13 +35,14 @@ public class WebsiteElement {
                             break;
                         }
                     } catch (NoSuchElementException e) {
+                        System.out.println("No element found using " + list.get(i) + " " + locator);
                     }
                 }
 
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 
                 if (element == null) {
-                    throw new InvalidSelectorException("Invalid locator");
+                    throw new InvalidSelectorException("No strategy can be used with " + locator);
                 }
             }
         }

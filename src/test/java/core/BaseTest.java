@@ -1,10 +1,7 @@
 package core;
 
 import cores.WebsiteDriver;
-import pages.CartPage;
-import pages.HomePage;
-import pages.ProductDetailsPage;
-import pages.ProductsPage;
+import pages.*;
 
 public class BaseTest {
     protected WebsiteDriver webDriver;
@@ -12,6 +9,7 @@ public class BaseTest {
     protected ProductsPage productPage;
     protected ProductDetailsPage productDetailsPage;
     protected CartPage cartPage;
+    protected StoresLocationPage storesLocationPage;
 
     protected static void sleepInSecond(long time){
         try {
@@ -42,5 +40,9 @@ public class BaseTest {
 
     protected void cleanDriverProcess(){
         webDriver.killDriverProcess();
+    }
+
+    protected void switchToMainWebsite(){
+        webDriver.switchWindow("Hasaki.vn | Mỹ Phẩm & Clinic");
     }
 }

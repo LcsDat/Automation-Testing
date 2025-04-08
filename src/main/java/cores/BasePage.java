@@ -9,7 +9,11 @@ public class BasePage {
 
     private static final String LOGIN_DIALOG_CLOSE_BUTTON = "button[aria-label='Close notify form']";
 
-    public void closeLoginDialog(){
+    public void closeLoginDialog() {
         driver.click(LOGIN_DIALOG_CLOSE_BUTTON);
+    }
+
+    public void switchWindow(String titleContains) {
+        driver.switchWindow(titleContains);
     }
 }

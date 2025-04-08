@@ -30,9 +30,12 @@ public class HomePage extends BasePage {
     private static final String SEARCH_DROPDOWN_ITEMS = "//div[@id='suggestion_products']//h2";
     private static final String SIGNIN_LABEL = "#btn-login";
     private static final String FAQ_LINK = "//div[@class='item_header']";
+    private static final String STORES_LOCATION_LINK = "div.item_header.item_header_hethong";
 
 
-
+    public void navigateToStoresLocationPage() {
+        driver.click(STORES_LOCATION_LINK);
+    }
     public void setTextToSearch(String value) {
         driver.setText(SEARCH_BAR, value);
     }

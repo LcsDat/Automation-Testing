@@ -7,7 +7,7 @@ import cores.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class NegativeScenarios extends BaseTest {
+public class HomePageTCs extends BaseTest {
 
 
 //    @BeforeTest
@@ -23,6 +23,7 @@ public class NegativeScenarios extends BaseTest {
         productPage = PageFactory.generateProductsPage(webDriver);
         productDetailsPage = PageFactory.generateProductDetailsPage(webDriver);
         cartPage = PageFactory.generateCartPage(webDriver);
+        storesLocationPage = PageFactory.generateStoresLocationPage(webDriver);
 
         webDriver.navigate(url);
 
@@ -33,6 +34,7 @@ public class NegativeScenarios extends BaseTest {
 
     @AfterMethod
     void afterMethod() {
+        switchToMainWebsite();
         navigateToHomePage();
     }
 
@@ -47,7 +49,7 @@ public class NegativeScenarios extends BaseTest {
         cleanDriverProcess();
     }
 
-    @Test()
+    @Test(groups = "Negative Test Cases")
     void tc01() {
         homepage.chooseProductFromSearchDropdown("Cerave");
         productDetailsPage.addProductToCart();
@@ -74,7 +76,7 @@ public class NegativeScenarios extends BaseTest {
         cartPage.closeLoginDialog();
     }
 
-    @Test()
+    @Test(groups = "Negative Test Cases")
     void tc02() {
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
         productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
@@ -102,5 +104,13 @@ public class NegativeScenarios extends BaseTest {
         cartPage.closeLoginDialog();
     }
 
+    @Test
+    void tc03() {
+        homepage.navigateToStoresLocationPage();
+        homepage.switchWindow("Hệ Thống Cửa Hàng");
 
+        Assert.assertEquals(storesLocationPage.getBreadcrumbText(), "Hệ Thống Cửa Hàng Hasaki Trên Toàn Quốc | Hasaki.vn");
+        Assert.assertTrue(storesLocationPage.isStoresDisplayed());
+        Assert.assertEquals(storesLocationPage.getTotalStores(), "Có 254 cửa hàng Hasaki trên toàn quốc");
+    }
 }

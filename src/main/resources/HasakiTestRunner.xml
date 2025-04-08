@@ -7,8 +7,8 @@
 
     <test name="Hasaki" parallel="none">
         <classes>
-            <class name="orderTestSuite.NegativeScenarios"/>
-            <class name="orderTestSuite.PositiveScenarios"/>
+            <class name="orderTestSuite.HomePageTCs"/>
+<!--            <class name="orderTestSuite.PositiveScenarios"/>-->
         </classes>
     </test>
 </suite>

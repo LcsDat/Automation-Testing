@@ -32,6 +32,7 @@ public class PositiveScenarios extends BaseTest {
 
     @AfterMethod
     void afterMethod() {
+        switchToMainWebsite();
         navigateToHomePage();
     }
 
@@ -41,7 +42,7 @@ public class PositiveScenarios extends BaseTest {
         quitBrowser();
     }
 
-    @AfterTest
+    @AfterTest(alwaysRun = true)
     void afterTest() {
         cleanDriverProcess();
     }

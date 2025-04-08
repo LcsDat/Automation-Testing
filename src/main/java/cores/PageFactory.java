@@ -1,9 +1,6 @@
 package cores;
 
-import pages.CartPage;
-import pages.HomePage;
-import pages.ProductDetailsPage;
-import pages.ProductsPage;
+import pages.*;
 
 public class PageFactory {
 
@@ -21,5 +18,9 @@ public class PageFactory {
 
     public static ProductDetailsPage generateProductDetailsPage(WebsiteDriver  driver){
         return new ProductDetailsPage(driver);
+    }
+
+    public static StoresLocationPage generateStoresLocationPage(WebsiteDriver  driver){
+        return new StoresLocationPage(driver);
     }
 }

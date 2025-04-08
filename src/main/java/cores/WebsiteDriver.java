@@ -88,6 +88,10 @@ public class WebsiteDriver {
         return flag;
     }
 
+    public boolean isDisplayed(String locator) {
+        return  findElement(locator).isDisplayed();
+    }
+
     public WebsiteElement findElement(String locator) {
         return new WebsiteElement(driver, locator);
     }
