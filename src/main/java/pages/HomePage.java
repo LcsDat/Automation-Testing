@@ -19,9 +19,8 @@ public class HomePage extends ProductDetailAccessiblePages {
 
     private static final String POPUP_CANCEL_BUTTON = "onesignal-slidedown-cancel-button";
     private static final String COOKIES_CANCEL_BUTTON = "rejectCookies";
-    private static final String CATEGORY_HAMBER_MENU = "hamber_menu";
-    private static final String LIST_CATEGORY_ITEM = "//a[@class='parent_menu' and contains(text(),'%s')]";
-    private static final String PRODUCT_TYPE = "//div[@class='col_hover_submenu ']//a[text()='%s']";
+
+
     private static final String IN_CART_QUANTITY = "span.counter_number";
     private static final String CART_BUTTON = "span.counter_number";
     private static final String HOMEPAGE_LINK = "//a[@aria-label='Homepage']";
@@ -96,31 +95,9 @@ public class HomePage extends ProductDetailAccessiblePages {
         driver.click(CART_BUTTON);
     }
 
-    public void moveToCategoryMenu() {
-        driver.moveToElement(CATEGORY_HAMBER_MENU);
-    }
-
-    public void moveToCategoryItem(String categoryName) {
-        driver.moveToElement(LIST_CATEGORY_ITEM, categoryName);
-    }
-
-    public void clickToProductType(String productType) {
-        driver.click(PRODUCT_TYPE, productType);
-    }
-
-    public void chooseProductType(String categoryName, String productType) {
-        moveToCategoryMenu();
-        moveToCategoryItem(categoryName);
-        clickToProductType(productType);
-    }
-
-
-
     public void clickToLoginLink() {
         driver.click(LOGIN_LINK);
     }
-
-
 
     public void cancelPopup() {
         driver.click(POPUP_CANCEL_BUTTON);
