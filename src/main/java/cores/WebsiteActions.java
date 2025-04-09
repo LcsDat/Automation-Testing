@@ -44,4 +44,11 @@ public class WebsiteActions {
         actions.click(getWebsiteElement(locator,varargs).getElement()).perform();
     }
 
+    public void doubleClick(String locator){
+        actions.doubleClick(getWebsiteElement(locator).getElement()).perform();
+    }
+
+    public void doubleClick(String locator, String... varargs){
+        actions.doubleClick(getWebsiteElement(locator, varargs).getElement()).perform();
+    }
 }

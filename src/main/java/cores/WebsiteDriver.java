@@ -26,9 +26,10 @@ public class WebsiteDriver {
         return driver.getTitle();
     }
 
-    public void setImplicitWait(Duration duration){
+    public void setImplicitWait(Duration duration) {
         driver.manage().timeouts().implicitlyWait(duration);
     }
+
     public void switchWindow(String titleContains) {
 
         driver.getWindowHandles().stream()
@@ -89,7 +90,7 @@ public class WebsiteDriver {
     }
 
     public boolean isDisplayed(String locator) {
-        return  findElement(locator).isDisplayed();
+        return findElement(locator).isDisplayed();
     }
 
     public WebsiteElement findElement(String locator) {
@@ -98,6 +99,14 @@ public class WebsiteDriver {
 
     public WebsiteElement findElement(String locator, String... varargs) {
         return new WebsiteElement(driver, locator, varargs);
+    }
+
+    public void doubleClick(String locator) {
+        actions.doubleClick(locator);
+    }
+
+    public void doubleClick(String locator, String... varargs) {
+        actions.doubleClick(locator, varargs);
     }
 
     /**
@@ -121,6 +130,7 @@ public class WebsiteDriver {
 
         return newEles;
     }
+
     /**
      * Find all elements using same locator
      *
@@ -131,7 +141,8 @@ public class WebsiteDriver {
         List<WebElement> oriEles;
         List<WebsiteElement> newEles = new ArrayList<>();
 
-        if (locator.startsWith("/") || locator.startsWith("(")) oriEles = driver.findElements(By.xpath(String.format(locator,varargs)));
+        if (locator.startsWith("/") || locator.startsWith("("))
+            oriEles = driver.findElements(By.xpath(String.format(locator, varargs)));
         else throw new InvalidSelectorException("Invalid Xpath locator.");
 
         int i = 1;

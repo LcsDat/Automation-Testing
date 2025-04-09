@@ -4,12 +4,24 @@ import org.testng.annotations.Test;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.annotation.Documented;
 import java.time.Duration;
 import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
 
 public class Demo {
 
+    @Documented
+    @interface Infor {
+        String author();
+
+        String date();
+
+        int[] member();
+    }
+
+
+    @Infor(author = "Dat", date = "2004", member = {1,2})
     @Test
     public void test() throws InterruptedException {
         WebsiteDriver driver = new WebsiteDriver(Browser.CHROME);

@@ -48,7 +48,7 @@ public class Scenario01 extends BaseTest {
     }
 
     @Test()
-    void tc03() {
+    void tc01() {
 
 //        Choose product
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");

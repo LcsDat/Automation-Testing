@@ -7,7 +7,7 @@
 
     <test name="hasaki" parallel="none">
         <classes>
-            <class name="hasaki.FAQPage.FAQPageTCs"/>
+            <class name="hasaki.OrderFlow.Scenario01"/>
 <!--            <class name="hasaki.OrderFlow.Scenario01"/>-->
         </classes>
     </test>

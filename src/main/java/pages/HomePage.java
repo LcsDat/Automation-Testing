@@ -7,17 +7,16 @@ import org.openqa.selenium.NoSuchElementException;
 
 import java.util.List;
 
-public class HomePage extends BasePage {
+public class HomePage extends ProductDetailAccessiblePages {
 
     public HomePage(WebsiteDriver driver) {
         super(driver);
     }
 
-    private static final String HEADER_LOGIN_ITEM = "div.item_header.item_login";
+
     private static final String LOGIN_LINK = "//a[text()='Đăng nhập' and @id='hskLoginButton']";
-    private static final String USERNAME_INPUT = "#username";
-    private static final String PASSWORD_INPUT = "#password";
-    private static final String LOGIN_BUTTON = "//button[text()='Đăng nhập']";
+
+
     private static final String POPUP_CANCEL_BUTTON = "onesignal-slidedown-cancel-button";
     private static final String COOKIES_CANCEL_BUTTON = "rejectCookies";
     private static final String CATEGORY_HAMBER_MENU = "hamber_menu";
@@ -115,33 +114,13 @@ public class HomePage extends BasePage {
         clickToProductType(productType);
     }
 
-    public void moveToHeaderLoginItem() {
-        driver.moveToElement(HEADER_LOGIN_ITEM);
-    }
+
 
     public void clickToLoginLink() {
         driver.click(LOGIN_LINK);
     }
 
-    public void clickToLoginButton() {
-        driver.click(LOGIN_BUTTON);
-    }
 
-    public void setTextToUsernameInput(String value) {
-        driver.setText(USERNAME_INPUT, value);
-    }
-
-    public void setTextToPasswordInput(String value) {
-        driver.setText(PASSWORD_INPUT, value);
-    }
-
-    public void login(String username, String password) {
-        moveToHeaderLoginItem();
-        clickToLoginLink();
-        setTextToUsernameInput(username);
-        setTextToPasswordInput(password);
-        clickToLoginButton();
-    }
 
     public void cancelPopup() {
         driver.click(POPUP_CANCEL_BUTTON);
