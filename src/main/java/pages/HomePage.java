@@ -33,9 +33,14 @@ public class HomePage extends BasePage {
     private static final String STORES_LOCATION_LINK = "div.item_header.item_header_hethong";
 
 
+    public void navigateFAQPage() {
+        driver.click(FAQ_LINK);
+    }
+
     public void navigateToStoresLocationPage() {
         driver.click(STORES_LOCATION_LINK);
     }
+
     public void setTextToSearch(String value) {
         driver.setText(SEARCH_BAR, value);
     }

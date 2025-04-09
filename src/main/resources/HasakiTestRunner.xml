@@ -5,10 +5,10 @@
     <parameter name="firefox" value="FIREFOX"></parameter>
     <parameter name="url" value="https://hasaki.vn/"></parameter>
 
-    <test name="Hasaki" parallel="none">
+    <test name="hasaki" parallel="none">
         <classes>
-            <class name="orderTestSuite.HomePageTCs"/>
-<!--            <class name="orderTestSuite.PositiveScenarios"/>-->
+            <class name="hasaki.FAQPage.FAQPageTCs"/>
+<!--            <class name="hasaki.OrderFlow.Scenario01"/>-->
         </classes>
     </test>
 </suite>

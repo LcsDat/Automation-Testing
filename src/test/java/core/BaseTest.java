@@ -10,6 +10,7 @@ public class BaseTest {
     protected ProductDetailsPage productDetailsPage;
     protected CartPage cartPage;
     protected StoresLocationPage storesLocationPage;
+    protected FAQPage faqPage;
 
     protected static void sleepInSecond(long time){
         try {

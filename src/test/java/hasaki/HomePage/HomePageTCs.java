@@ -1,4 +1,4 @@
-package orderTestSuite;
+package hasaki.HomePage;
 
 import core.BaseTest;
 import cores.Browser;

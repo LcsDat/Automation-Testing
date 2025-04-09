@@ -1,4 +1,4 @@
-package orderTestSuite;
+package hasaki.OrderFlow;
 
 import core.BaseTest;
 import cores.Browser;
@@ -7,7 +7,7 @@ import cores.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-public class PositiveScenarios extends BaseTest {
+public class Scenario01 extends BaseTest {
 
 //    @BeforeTest
 //    void beforeTest() {

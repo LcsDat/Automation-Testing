@@ -46,8 +46,8 @@
         * Stores location (page) is opened
         * Verify breadcrumb show text "Stores system..."
         * Verify there is a widget, show total stores
-        * Inside the widget, verify every row show detail address for each store.
-        When expand each row, working hour will display, booking function (belong to Hasaki spa, not cosmetic) and show address in map
+        * Inside the widget, verify every row show detail address for each store. If have spa service, there will be working hour for each spa and shop
+        When expand each row, working hour will display, booking function (belong to hasaki spa, not cosmetic) and show address in map
 
 
 

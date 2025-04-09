@@ -121,6 +121,27 @@ public class WebsiteDriver {
 
         return newEles;
     }
+    /**
+     * Find all elements using same locator
+     *
+     * @param locator The locator <b>MUST</b> be Xpath syntax
+     * @return A list of elements
+     */
+    public List<WebsiteElement> findElements(String locator, String... varargs) {
+        List<WebElement> oriEles;
+        List<WebsiteElement> newEles = new ArrayList<>();
+
+        if (locator.startsWith("/") || locator.startsWith("(")) oriEles = driver.findElements(By.xpath(String.format(locator,varargs)));
+        else throw new InvalidSelectorException("Invalid Xpath locator.");
+
+        int i = 1;
+        for (WebElement element : oriEles) {
+            newEles.add(new WebsiteElement(driver, "(" + locator + ")" + "[" + i + "]", varargs));
+            i++;
+        }
+
+        return newEles;
+    }
 
     public void waitForPageLoad() {
 //        return jsExecutor.executeScript("return document.readyState").equals("complete");
