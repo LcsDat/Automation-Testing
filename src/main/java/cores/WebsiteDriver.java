@@ -163,6 +163,9 @@ public class WebsiteDriver {
         return findElement(locator).getText();
     }
 
+    public String getDomAttribute(String locator, String attributeValue){
+        return findElement(locator).getDomAttribute(attributeValue);
+    }
     public String getText(String locator, String... varargs) {
         return findElement(locator, varargs).getText();
     }

@@ -68,8 +68,8 @@ public class WebsiteElement {
         return element.getText();
     }
 
-    public String getDomAttribute(String value){
-        return element.getDomAttribute(value);
+    public String getDomAttribute(String attributeValue){
+        return element.getDomAttribute(attributeValue);
     }
 
     public boolean isDisplayed() {

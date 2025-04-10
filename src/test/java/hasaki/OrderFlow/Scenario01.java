@@ -56,7 +56,7 @@ public class Scenario01 extends BaseTest {
         productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
 
         productDetailsPage.increaseProductQty();
-        Assert.assertEquals(webDriver.findElement("input[name='qty']").getDomAttribute("value"), "2");
+        Assert.assertEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2");
 
         productDetailsPage.addProductToCart();
         Assert.assertTrue(webDriver.findElement("//div[text()='Sản phẩm chỉ được mua tối đa là 1']").isDisplayed());
@@ -64,25 +64,25 @@ public class Scenario01 extends BaseTest {
 
         productDetailsPage.decreaseProductQty();
         productDetailsPage.addProductToCart();
-        Assert.assertTrue(webDriver.findElement("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']").isDisplayed());
+        Assert.assertTrue(webDriver.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"));
         webDriver.waitToBeInvisibleBy("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']");
 
         sleepInSecond(2);
 
-        String productQuantity = webDriver.findElement("//span[text()='Cart Icon']/following-sibling::span").getText();
-        String productName = webDriver.findElement("//h1").getText();
-        String productPrice = webDriver.findElement("span.text-orange.text-lg.font-bold").getText().replaceAll("[^0-9]", "");
+        String productQuantity = webDriver.getText("//span[text()='Cart Icon']/following-sibling::span");
+        String productName = webDriver.getText("//h1");
+        String productPrice = webDriver.getText("span.text-orange.text-lg.font-bold").replaceAll("[^0-9]", "");
 
         Assert.assertEquals(productQuantity, "1");
 
         productDetailsPage.clickToCart();
-        Assert.assertEquals(webDriver.findElement("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']").getText(), productName);
+        Assert.assertEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName);
 
         Integer calculatedPrice = (Integer.parseInt(productQuantity) * Integer.parseInt(productPrice));
 
         sleepInSecond(2);
 
-        String totalPriceeAt = webDriver.findElement("//tbody//tr[1]/td[4]/div").getText().replaceAll("[^0-9]", "");
+        String totalPriceeAt = webDriver.getText("//tbody//tr[1]/td[4]/div").replaceAll("[^0-9]", "");
         Integer totalPrice = Integer.parseInt(totalPriceeAt);
 
         Assert.assertEquals(calculatedPrice, totalPrice);

@@ -57,9 +57,23 @@ public class ProductDetailAccessiblePages extends BasePage {
         driver.click(PRODUCT_TYPE, productType);
     }
 
+    /**
+     * Method to find a specific product type
+     * @param categoryName option in Category (parent) menu
+     * @param productType option in sub-menu
+     */
     public void chooseProductType(String categoryName, String productType) {
         moveToCategoryMenu();
         moveToCategoryItem(categoryName);
         clickToProductType(productType);
+    }
+
+    /**
+     * Method to navigate a specific category, which will show product types of a category
+     * @param categoryName option in Category (parent) menu
+     */
+    public void chooseCategory(String categoryName) {
+        moveToCategoryMenu();
+        driver.click(categoryName);
     }
 }
