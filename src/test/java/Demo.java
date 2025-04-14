@@ -25,7 +25,7 @@ public class Demo {
     @Test
     public void test() throws InterruptedException {
         WebsiteDriver driver = new WebsiteDriver(Browser.CHROME);
-        driver.setImplicitWait(Duration.ofSeconds(10));
+//        driver.setImplicitWait(Duration.ofSeconds(10));
         driver.navigate("https://hasaki.vn");
         driver.click("onesignal-slidedown-cancel-button");
         driver.click("rejectCookies");

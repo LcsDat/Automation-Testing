@@ -8,16 +8,16 @@ import java.time.Duration;
 
 public class WebsiteActions {
     private Actions actions;
-    private WebDriver driver;
+    private WebsiteDriver driver;
 
-    public WebsiteActions(WebDriver driver) {
+    public WebsiteActions(WebsiteDriver driver) {
         this.driver = driver;
-        this.actions = new Actions(driver, Duration.ofSeconds(10));
+        this.actions = new Actions(driver.getDriver(), Duration.ofSeconds(10));
     }
 
-    public WebsiteActions(WebDriver driver, Duration timeout) {
+    public WebsiteActions(WebsiteDriver driver, Duration timeout) {
         this.driver = driver;
-        this.actions = new Actions(driver, timeout);
+        this.actions = new Actions(driver.getDriver(), timeout);
     }
 
     private WebsiteElement getWebsiteElement(String locator){

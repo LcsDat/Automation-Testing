@@ -71,6 +71,7 @@ public class HomePage extends ProductDetailAccessiblePages {
     public void removeProductFromCart() {
         if (!getCartQuantity().equals("0")) {
             clickToCart();
+            driver.waitForPageLoad();
             while (true) {
                 Integer size = driver.findElements("//tbody/tr").size();
                 if (size != 0) {

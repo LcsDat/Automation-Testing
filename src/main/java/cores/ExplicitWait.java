@@ -10,20 +10,20 @@ import java.time.Duration;
 public class ExplicitWait {
 
     private WebDriverWait wait;
-    private WebDriver driver;
+    private WebsiteDriver driver;
 
     public WebDriverWait getWait() {
         return wait;
     }
 
-    public ExplicitWait(WebDriver driver) {
+    public ExplicitWait(WebsiteDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver.getDriver(), Duration.ofSeconds(10));
     }
 
-    public ExplicitWait(WebDriver driver, Duration timeout) {
+    public ExplicitWait(WebsiteDriver driver, Duration timeout) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, timeout);
+        wait = new WebDriverWait(driver.getDriver(), timeout);
     }
 
     private WebsiteElement getWebsiteElement(String locator){

@@ -5,28 +5,121 @@ import org.openqa.selenium.*;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
-import java.util.Set;
 
 public class WebsiteDriver {
+
     private WebDriver driver;
     private WebsiteActions actions;
     private ExplicitWait webDriverWait;
     private JavascriptExecutor jsExecutor;
 
+    private Duration defaultTimeout = Duration.ofSeconds(10);
+
     public WebsiteDriver(Browser browser) {
         this.driver = DriverFactory.initWebdriver(browser);
-        this.actions = new WebsiteActions(driver, Duration.ofSeconds(10));
-        this.webDriverWait = new ExplicitWait(driver, Duration.ofSeconds(10));
+        this.actions = new WebsiteActions(this, defaultTimeout);
+        this.webDriverWait = new ExplicitWait(this, defaultTimeout);
         this.jsExecutor = (JavascriptExecutor) driver;
+    }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public Duration getDefaultTimeout() {
+        return defaultTimeout;
+    }
+
+
+    /**
+     * <b> ONLY</b>  use for Xpath
+     *
+     * @param locator Xpath locator
+     * @param varargs variables can be flexible edited in the locator
+     * @return Default WebElement
+     * @throws NoSuchElementException Timeout to find the elemtn
+     */
+    public WebElement findDefaultWebElement(String locator, String... varargs) {
+        return driver.findElement(By.xpath(String.format(locator, varargs)));
+    }
+
+    /**
+     * <b> ONLY</b>  use for Xpath
+     *
+     * @param locator Xpath locator
+     * @return List of WebElement
+     */
+    public List<WebElement> findDefaultWebElements(String locator) {
+        return driver.findElements(By.xpath(locator));
+    }
+
+    /**
+     * <b> ONLY</b>  use for Xpath
+     *
+     * @param locator Xpath locator
+     * @return List of WebElement
+     */
+    public List<WebElement> findDefaultWebElements(String locator, String... varargs) {
+        return driver.findElements(By.xpath(String.format(locator, varargs)));
+    }
+
+    /**
+     * This method is auto-detect the appropriate locator strategy to find web element
+     *
+     * @param locator To interact with the web element
+     * @return Web element
+     * @throws InvalidSelectorException The locator is invalid
+     */
+    public WebElement findDefaultWebElement(String locator) {
+        WebElement element = null;
+
+        List<By> list = Arrays.asList(
+                By.xpath(locator),
+                By.cssSelector(locator),
+                By.className(locator.replace(" ", "")),
+                By.id(locator),
+                By.name(locator));
+
+        //Idenify Xpath locator
+        if (locator.startsWith("/") || locator.startsWith("(")) {
+            element = driver.findElement(By.xpath(locator));
+        }
+
+        //Identify css selector
+        else if (locator.startsWith("#") || locator.startsWith(".")) element = driver.findElement(list.get(1));
+        else {
+            for (int i = 1; i < list.size() - 1; i++) {
+                try {
+                    //Set short timeout to find appropriate strategy
+                    setImplicitWait(Duration.ofMillis(800));
+                    element = driver.findElement(list.get(i));
+                    if (element != null) {
+                        System.out.println("Found element using: " + list.get(i));
+                        break;
+                    }
+                } catch (NoSuchElementException e) {
+
+                } finally {
+                    //Re-set default timeout
+                    setImplicitWait(defaultTimeout);
+                }
+            }
+
+            if (element == null) {
+                throw new InvalidSelectorException("No strategy can be used with " + locator);
+            }
+        }
+
+        return element;
     }
 
     public String getPageTitle() {
         return driver.getTitle();
     }
 
-    public void setImplicitWait(Duration duration) {
+    private void setImplicitWait(Duration duration) {
         driver.manage().timeouts().implicitlyWait(duration);
     }
 
@@ -94,11 +187,11 @@ public class WebsiteDriver {
     }
 
     public WebsiteElement findElement(String locator) {
-        return new WebsiteElement(driver, locator);
+        return new WebsiteElement(this, locator);
     }
 
     public WebsiteElement findElement(String locator, String... varargs) {
-        return new WebsiteElement(driver, locator, varargs);
+        return new WebsiteElement(this, locator, varargs);
     }
 
     public void doubleClick(String locator) {
@@ -119,12 +212,11 @@ public class WebsiteDriver {
         List<WebElement> oriEles;
         List<WebsiteElement> newEles = new ArrayList<>();
 
-        if (locator.startsWith("/") || locator.startsWith("(")) oriEles = driver.findElements(By.xpath(locator));
-        else throw new InvalidSelectorException("Invalid Xpath locator.");
+        oriEles = findDefaultWebElements(locator);
 
         int i = 1;
         for (WebElement element : oriEles) {
-            newEles.add(new WebsiteElement(driver, "(" + locator + ")" + "[" + i + "]"));
+            newEles.add(new WebsiteElement(this, "(" + locator + ")" + "[" + i + "]"));
             i++;
         }
 
@@ -142,12 +234,12 @@ public class WebsiteDriver {
         List<WebsiteElement> newEles = new ArrayList<>();
 
         if (locator.startsWith("/") || locator.startsWith("("))
-            oriEles = driver.findElements(By.xpath(String.format(locator, varargs)));
+            oriEles = findDefaultWebElements(locator, varargs);
         else throw new InvalidSelectorException("Invalid Xpath locator.");
 
         int i = 1;
         for (WebElement element : oriEles) {
-            newEles.add(new WebsiteElement(driver, "(" + locator + ")" + "[" + i + "]", varargs));
+            newEles.add(new WebsiteElement(this, "(" + locator + ")" + "[" + i + "]", varargs));
             i++;
         }
 
@@ -163,9 +255,10 @@ public class WebsiteDriver {
         return findElement(locator).getText();
     }
 
-    public String getDomAttribute(String locator, String attributeValue){
+    public String getDomAttribute(String locator, String attributeValue) {
         return findElement(locator).getDomAttribute(attributeValue);
     }
+
     public String getText(String locator, String... varargs) {
         return findElement(locator, varargs).getText();
     }
