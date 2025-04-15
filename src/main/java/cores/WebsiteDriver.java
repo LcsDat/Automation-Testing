@@ -96,7 +96,7 @@ public class WebsiteDriver {
                     setImplicitWait(Duration.ofMillis(800));
                     element = driver.findElement(list.get(i));
                     if (element != null) {
-                        System.out.println("Found element using: " + list.get(i));
+//                        System.out.println("Found element using: " + list.get(i));
                         break;
                     }
                 } catch (NoSuchElementException e) {

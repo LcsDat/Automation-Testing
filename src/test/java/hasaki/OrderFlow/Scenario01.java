@@ -2,6 +2,7 @@ package hasaki.OrderFlow;
 
 import core.BaseTest;
 import cores.Browser;
+import cores.CustomAssert;
 import cores.DriverFactory;
 import cores.PageFactory;
 import org.testng.Assert;
@@ -59,7 +60,9 @@ public class Scenario01 extends BaseTest {
         productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
 
         productDetailsPage.increaseProductQty();
-        Assert.assertEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "3");
+        verifyEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "3");
+        verifyEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2");
+//        Assert.assertEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2");
 
         productDetailsPage.addProductToCart();
         Assert.assertTrue(webDriver.findElement("//div[text()='Sản phẩm chỉ được mua tối đa là 1']").isDisplayed());
@@ -67,6 +70,7 @@ public class Scenario01 extends BaseTest {
 
         productDetailsPage.decreaseProductQty();
         productDetailsPage.addProductToCart();
+        verifyFalse(webDriver.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"));
         Assert.assertTrue(webDriver.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"));
         webDriver.waitToBeInvisibleBy("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']");
 
@@ -75,7 +79,6 @@ public class Scenario01 extends BaseTest {
         String productQuantity = webDriver.getText("//span[text()='Cart Icon']/following-sibling::span");
         String productName = webDriver.getText("//h1");
         String productPrice = webDriver.getText("span.text-orange.text-lg.font-bold").replaceAll("[^0-9]", "");
-
         Assert.assertEquals(productQuantity, "1");
 
         productDetailsPage.clickToCart();

@@ -1,5 +1,6 @@
 package core;
 
+import cores.CustomAssert;
 import cores.WebsiteDriver;
 import pages.*;
 
@@ -45,5 +46,17 @@ public class BaseTest {
 
     protected void switchToMainWebsite(){
         webDriver.switchWindow("Hasaki.vn | Mỹ Phẩm & Clinic");
+    }
+
+    protected boolean verifyTrue(boolean condition){
+        return new CustomAssert().verifyTrue(condition);
+    }
+
+    protected boolean verifyFalse(boolean condition){
+        return new CustomAssert().verifyFalse(condition);
+    }
+
+    protected void verifyEquals(Object actual, Object expected){
+        new CustomAssert().verifyEquals(actual, expected);
     }
 }

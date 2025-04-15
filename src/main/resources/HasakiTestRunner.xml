@@ -1,6 +1,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Suite1" parallel="none" verbose="10">
+<suite name="Suite1" parallel="none" verbose="0">
+<!--    <listeners>-->
+<!--        <listener class-name="cores.TestNGListener"/>-->
+<!--    </listeners>-->
     <parameter name="chrome" value="CHROME"></parameter>
     <parameter name="firefox" value="FIREFOX"></parameter>
     <parameter name="url" value="https://hasaki.vn/"></parameter>

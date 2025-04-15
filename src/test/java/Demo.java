@@ -43,27 +43,11 @@ public class Demo {
 
     @Test
     void test01 () throws NoSuchMethodException {
-        Map<String, AssertionError> fails = new ConcurrentHashMap<>();
-        try {
-            Assert.assertEquals(2,3);
-        } catch (Throwable e){
-            String methodName = Thread.currentThread().getStackTrace()[1].toString();
-            System.out.println(Arrays.toString(e.getStackTrace()));
-            System.out.println(methodName);
-        }
-        System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
-        System.out.println(fails);
+        Assert.assertEquals(1,2);
     }
 
     public static void main(String[] args) {
-        Properties properties = new Properties();
-        try (FileInputStream fis = new FileInputStream("D:\\Work\\Automation\\IntelliJ\\Automation-Testing\\src\\main\\resources\\config.properties")) {
-            properties.load(fis);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        System.out.println(properties.getProperty("base.url"));
-        System.out.println(properties.getProperty("browser"));
+        System.out.println(Thread.currentThread().getId());
     }
 
 }
