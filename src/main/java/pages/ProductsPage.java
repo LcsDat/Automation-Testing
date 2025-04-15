@@ -14,4 +14,5 @@ public class ProductsPage extends ProductDetailAccessiblePages {
     public void chooseProduct(String productName){
         driver.click(ProductsPage.PRODUCT_NAME, productName);
     }
+
 }

@@ -6,9 +6,11 @@ import cores.DriverFactory;
 import cores.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import org.testng.asserts.SoftAssert;
 
 public class Scenario01 extends BaseTest {
 
+    SoftAssert softAssert;
 //    @BeforeTest
 //    void beforeTest() {
 //    }
@@ -16,6 +18,7 @@ public class Scenario01 extends BaseTest {
     @Parameters({"chrome", "url"})
     @BeforeClass
     void beforeClass(Browser browser, String url) {
+        softAssert = new SoftAssert();
         webDriver = DriverFactory.initWebsiteDriver(browser);
         homepage = PageFactory.generateHomePage(webDriver);
         productPage = PageFactory.generateProductsPage(webDriver);
@@ -56,7 +59,7 @@ public class Scenario01 extends BaseTest {
         productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
 
         productDetailsPage.increaseProductQty();
-        Assert.assertEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2");
+        Assert.assertEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "3");
 
         productDetailsPage.addProductToCart();
         Assert.assertTrue(webDriver.findElement("//div[text()='Sản phẩm chỉ được mua tối đa là 1']").isDisplayed());

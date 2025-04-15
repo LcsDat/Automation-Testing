@@ -1,13 +1,19 @@
 import cores.Browser;
 import cores.WebsiteDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.lang.annotation.Documented;
+import java.lang.reflect.Method;
 import java.time.Duration;
+import java.util.Arrays;
+import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Demo {
 
@@ -33,6 +39,20 @@ public class Demo {
         Thread.sleep(2000);
         driver.switchWindow("Hỗ trợ khách hàng");
         driver.click("//div[text()='Tài khoản']/following-sibling::a");
+    }
+
+    @Test
+    void test01 () throws NoSuchMethodException {
+        Map<String, AssertionError> fails = new ConcurrentHashMap<>();
+        try {
+            Assert.assertEquals(2,3);
+        } catch (Throwable e){
+            String methodName = Thread.currentThread().getStackTrace()[1].toString();
+            System.out.println(Arrays.toString(e.getStackTrace()));
+            System.out.println(methodName);
+        }
+        System.out.println(Arrays.toString(Thread.currentThread().getStackTrace()));
+        System.out.println(fails);
     }
 
     public static void main(String[] args) {
