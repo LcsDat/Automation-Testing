@@ -2,7 +2,6 @@ package hasaki.OrderFlow;
 
 import core.BaseTest;
 import cores.Browser;
-import cores.CustomAssert;
 import cores.DriverFactory;
 import cores.PageFactory;
 import org.testng.Assert;
@@ -71,6 +70,7 @@ public class Scenario01 extends BaseTest {
         productDetailsPage.decreaseProductQty();
         productDetailsPage.addProductToCart();
         verifyFalse(webDriver.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"));
+        verifyTrue(webDriver.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"), "A label display product is added to cart.");
         Assert.assertTrue(webDriver.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"));
         webDriver.waitToBeInvisibleBy("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']");
 
@@ -82,6 +82,7 @@ public class Scenario01 extends BaseTest {
         Assert.assertEquals(productQuantity, "1");
 
         productDetailsPage.clickToCart();
+        verifyEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName);
         Assert.assertEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName);
 
         Integer calculatedPrice = (Integer.parseInt(productQuantity) * Integer.parseInt(productPrice));
