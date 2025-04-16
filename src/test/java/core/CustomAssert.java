@@ -8,18 +8,18 @@ public class CustomAssert extends Assert {
 
     private String ansiReset = "\u001B[0m";
     private String ansiCyan = "\u001B[36m";
-    private String defaultTrue =  ansiCyan+"[Verification True]" +ansiReset;
-    private String defaultFalse = ansiCyan+"[Verification False]"+ansiReset;
-    private String defaultEqual = ansiCyan+"[Verification Equal]"+ansiReset;
-    private String pass = " PASS ";
-    private String fail = " FAIL ";
+    private String ansiGreen = "\u001B[32m";
+    private String ansiRed = "\u001B[31m";
+    private String wordOrange = "\033[38:5:208m";
+    private String wordReset = "\033[m";
 
-    private StringBuilder tPass = new StringBuilder(defaultTrue).append(pass);
-    private StringBuilder fPass = new StringBuilder(defaultFalse).append(pass);
-    private StringBuilder ePass = new StringBuilder(defaultEqual).append(pass);
-    private StringBuilder tFail = new StringBuilder(defaultTrue).append(fail);
-    private StringBuilder fFail = new StringBuilder(defaultFalse).append(fail);
-    private StringBuilder eFail = new StringBuilder(defaultEqual).append(fail);
+    private String defaultTrue = "[Verification True ]";
+    private String defaultFalse = "[Verification False]";
+    private String defaultEqual = "[Verification Equal]";
+    private String pass = "PASS";
+    private String fail = "FAIL";
+    private String failFormat = "%s%S%5s" + "%s%s%7s" + "%s " + "%s " + "%s%S%s at .(%s:%d) %n";
+    private String passFormat = "%s%S%5s" + "%s%S%s%n";
 
     public CustomAssert(String keyword) {
         this.keyword = keyword;
@@ -56,21 +56,12 @@ public class CustomAssert extends Assert {
         boolean result = true;
         try {
             assertTrue(condition);
-            System.out.println(tPass);
+            System.out.printf(passFormat, ansiCyan, defaultTrue, ansiReset, ansiGreen, pass, ansiReset);
         } catch (Throwable e) {
             result = false;
 
-            System.out.println(tFail
-                    .append(getClassName(e))
-                    .append(" ")
-                    .append(getMethodName(e))
-                    .append(" ")
-                    .append(e.getMessage())
-                    .append(" at .(")
-                    .append(getTargetStackElement(e).getFileName())
-                    .append(":")
-                    .append(getLineNumber(e))
-                    .append(")"));
+            System.out.printf(failFormat, ansiCyan, defaultTrue, ansiReset, ansiRed, fail, ansiReset
+                    , getClassName(e), getMethodName(e), e.getMessage(), getTargetStackElement(e).getFileName(), getLineNumber(e));
         }
         return result;
     }
@@ -79,21 +70,11 @@ public class CustomAssert extends Assert {
         boolean result = true;
         try {
             assertTrue(condition);
-            System.out.println(tPass + message);
+            System.out.printf(passFormat, ansiCyan, defaultTrue, ansiReset, ansiGreen, pass, ansiReset);
         } catch (Throwable e) {
             result = false;
-
-            System.out.println(tFail
-                    .append(getClassName(e))
-                    .append(" ")
-                    .append(getMethodName(e))
-                    .append(" ")
-                    .append(e.getMessage())
-                    .append(" at .(")
-                    .append(getTargetStackElement(e).getFileName())
-                    .append(":")
-                    .append(getLineNumber(e))
-                    .append(")"));
+            System.out.printf(failFormat
+                    , ansiCyan, defaultTrue, ansiReset, ansiRed, fail, ansiReset, getClassName(e), getMethodName(e), wordOrange, e.getMessage(), wordReset, getTargetStackElement(e).getFileName(), getLineNumber(e));
         }
         return result;
     }
@@ -102,20 +83,11 @@ public class CustomAssert extends Assert {
         boolean result = false;
         try {
             assertFalse(condition);
-            System.out.println(fPass);
+            System.out.printf(passFormat, ansiCyan, defaultFalse, ansiReset, ansiGreen, pass, ansiReset);
         } catch (Throwable e) {
             result = true;
-            System.out.println(fFail
-                    .append(getClassName(e))
-                    .append(" ")
-                    .append(getMethodName(e))
-                    .append(" ")
-                    .append(e.getMessage())
-                    .append(" at .(")
-                    .append(getTargetStackElement(e).getFileName())
-                    .append(":")
-                    .append(getLineNumber(e))
-                    .append(")"));
+            System.out.printf(failFormat
+                    , ansiCyan, defaultFalse, ansiReset, ansiRed, fail, ansiReset, getClassName(e), getMethodName(e), wordOrange, e.getMessage(), wordReset, getTargetStackElement(e).getFileName(), getLineNumber(e));
         }
         return result;
     }
@@ -124,20 +96,11 @@ public class CustomAssert extends Assert {
         boolean result = false;
         try {
             assertFalse(condition);
-            System.out.println(fPass + message);
+            System.out.printf(passFormat, ansiCyan, defaultFalse, ansiReset, ansiGreen, pass, ansiReset);
         } catch (Throwable e) {
             result = true;
-            System.out.println(fFail
-                    .append(getClassName(e))
-                    .append(" ")
-                    .append(getMethodName(e))
-                    .append(" ")
-                    .append(e.getMessage())
-                    .append(" at .(")
-                    .append(getTargetStackElement(e).getFileName())
-                    .append(":")
-                    .append(getLineNumber(e))
-                    .append(")"));
+            System.out.printf(failFormat
+                    , ansiCyan, defaultFalse, ansiReset, ansiRed, fail, ansiReset, getClassName(e), getMethodName(e), wordOrange, e.getMessage(), wordReset, getTargetStackElement(e).getFileName(), getLineNumber(e));
         }
         return result;
     }
@@ -146,19 +109,10 @@ public class CustomAssert extends Assert {
 
         try {
             assertEquals(actual, expected);
-            System.out.println(ePass);
+            System.out.printf(passFormat, ansiCyan, defaultEqual, ansiReset, ansiGreen, pass, ansiReset);
         } catch (AssertionError e) {
-            System.out.println(eFail
-                    .append(getClassName(e))
-                    .append(" ")
-                    .append(getMethodName(e))
-                    .append(" ")
-                    .append(e.getMessage())
-                    .append(" at .(")
-                    .append(getTargetStackElement(e).getFileName())
-                    .append(":")
-                    .append(getLineNumber(e))
-                    .append(")"));
+            System.out.printf(failFormat,
+                    ansiCyan, defaultEqual, ansiReset, ansiRed, fail, ansiReset, getClassName(e), getMethodName(e), wordOrange, e.getMessage(), wordReset, getTargetStackElement(e).getFileName(), getLineNumber(e));
         }
     }
 
@@ -166,19 +120,10 @@ public class CustomAssert extends Assert {
 
         try {
             assertEquals(actual, expected);
-            System.out.println(ePass + message);
+            System.out.printf(passFormat, ansiCyan, defaultEqual, ansiReset, ansiGreen, pass, ansiReset);
         } catch (AssertionError e) {
-            System.out.println(eFail
-                    .append(getClassName(e))
-                    .append(" ")
-                    .append(getMethodName(e))
-                    .append(" ")
-                    .append(e.getMessage())
-                    .append(" at .(")
-                    .append(getTargetStackElement(e).getFileName())
-                    .append(":")
-                    .append(getLineNumber(e))
-                    .append(")"));
+            System.out.printf(failFormat,
+                    ansiCyan, defaultEqual, ansiReset, ansiRed, fail, ansiReset, getClassName(e), getMethodName(e), wordOrange, e.getMessage(), wordReset, getTargetStackElement(e).getFileName(), getLineNumber(e));
         }
     }
 

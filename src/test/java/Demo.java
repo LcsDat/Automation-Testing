@@ -44,20 +44,23 @@ public class Demo {
     @Test
     void test01() throws NoSuchMethodException, ClassNotFoundException {
 
-        try {
             Assert.assertEquals(1, 2);
-        } catch (AssertionError e) {
-            for (StackTraceElement element : e.getStackTrace()) System.out.println(element);
-        }
 
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
-        String ANSI_RESET = "\u001B[0m";
-        String ANSI_RED = "\u001B[36m";
-        System.out.println(ANSI_RED + "This text is red!" + ANSI_RESET);
-        System.out.println("original");
+        String ansiReset = "\u001B[0m";
+        String ansiCyan = "\u001B[36m";
+        String ansiGreen = "\u001B[32m";
+        String ansiRed = "\u001B[31m";
+        String wordOrange = "\033[38:5:208m";
+        String defaultTrue = ansiCyan + "[Verification True ]" + ansiReset;
+        String defaultFalse = ansiCyan + "[Verification False]" + ansiReset;
+        String defaultEqual = ansiCyan + "[Verification Equal]" + ansiReset;
+        String pass = " " + ansiGreen + "PASS" + ansiReset + " ";
+        String fail = " " + ansiRed + "FAIL" + ansiReset + " ";
 
+        System.out.printf("\033[38:5:208m%s\033[m\n","Hello world");
     }
 
     public Set<Class> findAllClassesUsingClassLoader(String packageName) {
