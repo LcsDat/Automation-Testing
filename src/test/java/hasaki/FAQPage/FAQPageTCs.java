@@ -48,7 +48,7 @@ public class FAQPageTCs extends BaseTest {
         homepage.navigateFAQPage();
         homepage.switchWindow("Hỗ trợ khách hàng");
 
-        Assert.assertEquals(faqPage.getSloganHeader(), "Xin chào! Chúng tôi có thể giúp gì cho bạn?");
+        verifyEquals(faqPage.getSloganHeader(), "Xin chào! Chúng tôi có thể giúp gì cho bạn?");
 
     }
 
@@ -57,13 +57,13 @@ public class FAQPageTCs extends BaseTest {
         homepage.switchWindow("Hỗ trợ khách hàng");
         faqPage.navigateStoresLocationPage();
 
-        Assert.assertEquals(storesLocationPage.getBreadcrumbText(), "Hệ Thống Cửa Hàng Hasaki Trên Toàn Quốc | Hasaki.vn");
-        Assert.assertTrue(storesLocationPage.isStoresDisplayed());
-        Assert.assertEquals(storesLocationPage.getTotalStores(), "Có 254 cửa hàng Hasaki trên toàn quốc");
+        verifyEquals(storesLocationPage.getBreadcrumbText(), "Hệ Thống Cửa Hàng Hasaki Trên Toàn Quốc | Hasaki.vn");
+        verifyTrue(storesLocationPage.isStoresDisplayed());
+        verifyEquals(storesLocationPage.getTotalStores(), "Có 254 cửa hàng Hasaki trên toàn quốc");
 
         faqPage.clickStore("1");
 
-        Assert.assertEquals(faqPage.getFullAddress("1").trim(),"Địa chỉ: 71 Hoàng Hoa Thám, Phường 13, Quận Tân Bình, Hồ Chí Minh");
-        Assert.assertEquals(faqPage.getClockQuantity("1"),2);
+        verifyEquals(faqPage.getFullAddress("1").trim(),"Địa chỉ: 71 Hoàng Hoa Thám, Phường 13, Quận Tân Bình, Hồ Chí Minh");
+        verifyEquals(faqPage.getClockQuantity("1"),2);
     }
 }

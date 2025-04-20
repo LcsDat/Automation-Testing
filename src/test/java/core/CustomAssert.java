@@ -18,8 +18,8 @@ public class CustomAssert extends Assert {
     private String defaultEqual = "[Verification Equal]";
     private String pass = "PASS";
     private String fail = "FAIL";
-    private String failFormat = "%s%S%5s" + "%s%s%7s" + "%s " + "%s " + "%s%S%s at .(%s:%d) %n";
-    private String passFormat = "%s%S%5s" + "%s%S%s%n";
+    private String failFormat = "%s%S%5s" + "%s%s%7s" + "%s " + "%s " + "%s%s%s at .(%s:%d) %n";
+    private String passFormat = "%s%S%5s" + "%s%S%7s";
 
     public CustomAssert(String keyword) {
         this.keyword = keyword;
@@ -56,12 +56,12 @@ public class CustomAssert extends Assert {
         boolean result = true;
         try {
             assertTrue(condition);
-            System.out.printf(passFormat, ansiCyan, defaultTrue, ansiReset, ansiGreen, pass, ansiReset);
+            System.out.printf(passFormat + "%n", ansiCyan, defaultTrue, ansiReset, ansiGreen, pass, ansiReset);
         } catch (Throwable e) {
             result = false;
 
-            System.out.printf(failFormat, ansiCyan, defaultTrue, ansiReset, ansiRed, fail, ansiReset
-                    , getClassName(e), getMethodName(e), e.getMessage(), getTargetStackElement(e).getFileName(), getLineNumber(e));
+            System.out.printf(failFormat
+                    , ansiCyan, defaultTrue, ansiReset, ansiRed, fail, ansiReset, getClassName(e), getMethodName(e), wordOrange, e.getMessage(), wordReset, getTargetStackElement(e).getFileName(), getLineNumber(e));
         }
         return result;
     }
@@ -70,7 +70,7 @@ public class CustomAssert extends Assert {
         boolean result = true;
         try {
             assertTrue(condition);
-            System.out.printf(passFormat, ansiCyan, defaultTrue, ansiReset, ansiGreen, pass, ansiReset);
+            System.out.printf(passFormat + message + "%n", ansiCyan, defaultTrue, ansiReset, ansiGreen, pass, ansiReset);
         } catch (Throwable e) {
             result = false;
             System.out.printf(failFormat
@@ -83,7 +83,7 @@ public class CustomAssert extends Assert {
         boolean result = false;
         try {
             assertFalse(condition);
-            System.out.printf(passFormat, ansiCyan, defaultFalse, ansiReset, ansiGreen, pass, ansiReset);
+            System.out.printf(passFormat + "%n", ansiCyan, defaultFalse, ansiReset, ansiGreen, pass, ansiReset);
         } catch (Throwable e) {
             result = true;
             System.out.printf(failFormat
@@ -96,7 +96,7 @@ public class CustomAssert extends Assert {
         boolean result = false;
         try {
             assertFalse(condition);
-            System.out.printf(passFormat, ansiCyan, defaultFalse, ansiReset, ansiGreen, pass, ansiReset);
+            System.out.printf(passFormat + message + "%n", ansiCyan, defaultFalse, ansiReset, ansiGreen, pass, ansiReset);
         } catch (Throwable e) {
             result = true;
             System.out.printf(failFormat
@@ -109,7 +109,7 @@ public class CustomAssert extends Assert {
 
         try {
             assertEquals(actual, expected);
-            System.out.printf(passFormat, ansiCyan, defaultEqual, ansiReset, ansiGreen, pass, ansiReset);
+            System.out.printf(passFormat + "%n", ansiCyan, defaultEqual, ansiReset, ansiGreen, pass, ansiReset);
         } catch (AssertionError e) {
             System.out.printf(failFormat,
                     ansiCyan, defaultEqual, ansiReset, ansiRed, fail, ansiReset, getClassName(e), getMethodName(e), wordOrange, e.getMessage(), wordReset, getTargetStackElement(e).getFileName(), getLineNumber(e));
@@ -120,7 +120,7 @@ public class CustomAssert extends Assert {
 
         try {
             assertEquals(actual, expected);
-            System.out.printf(passFormat, ansiCyan, defaultEqual, ansiReset, ansiGreen, pass, ansiReset);
+            System.out.printf(passFormat + message + "%n", ansiCyan, defaultEqual, ansiReset, ansiGreen, pass, ansiReset);
         } catch (AssertionError e) {
             System.out.printf(failFormat,
                     ansiCyan, defaultEqual, ansiReset, ansiRed, fail, ansiReset, getClassName(e), getMethodName(e), wordOrange, e.getMessage(), wordReset, getTargetStackElement(e).getFileName(), getLineNumber(e));

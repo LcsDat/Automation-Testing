@@ -14,7 +14,8 @@
         * Verify stores location page is opened
 
 *** E2E TCs
-    ** TC01: User successfully order the product
+    # Only one product
+    ** TC01 (Modified): User successfully order the product --> User choose local ATM for payment
         * Navigate Homepage
             - Verify popup text display
             - Verify menu display
@@ -37,7 +38,54 @@
                 -> Verify product name
                 -> Verify price
                 -> Verify quantity
-
+        * Click Proceed To Cart
+                -> Verify user will navigate to Napas api
+                - Click to cancel
+                -> Payment page is loaded, allow user to re-proceed or cancel the order
+                -> Verify Payment page title
+                - Click to delete the order
+                -> Verify a popup is display
+                - After choosing delete, user is navigate to Home page
+    ** TC02: User successfully order the product --> User choose Vietcombank for payment:
+        Same process with tc01 but choose Vietcombank as payment method
+    ** TC03: User successfully order the product --> User choose Payoo for payment
+        Same process with tc01 but choose Payoo as payment method
+    # Various products
+    ** TC01 (Modified): User successfully order the product --> User choose local ATM for payment
+            * Navigate Homepage
+                - Verify popup text display
+                - Verify menu display
+                - Verify search bar display
+                - Verify login/register header display
+                - Verify store locations display
+                - Verify cart display
+            * Buy product (Login required)
+                - Hover menu
+                - Choose a category (cham soc da mat)
+                - Choose type (tay trang mat)
+                - Choose a product (Cocoon)
+                    -> This product is only allow to order with quantity 1
+                    -> If more, a warning message will display
+                    -> Verify this
+                - Click on + Gio hang
+                    -> Message inform product is added to cart
+                    -> The product number is changed -> verify
+                - Navigate to Cart to check product
+                    -> Verify product name
+                    -> Verify price
+                    -> Verify quantity
+            * Click Proceed To Cart
+                    -> Verify user will navigate to Napas api
+                    - Click to cancel
+                    -> Payment page is loaded, allow user to re-proceed or cancel the order
+                    -> Verify Payment page title
+                    - Click to delete the order
+                    -> Verify a popup is display
+                    - After choosing delete, user is navigate to Home page
+        ** TC02: User successfully order the product --> User choose Vietcombank for payment:
+            Same process with tc01 but choose Vietcombank as payment method
+        ** TC03: User successfully order the product --> User choose Payoo for payment
+            Same process with tc01 but choose Payoo as payment method
 *** FAQ Page TCs
     ** TC01: Navigate to FAQ Page (new tab is opened)
         * Verify the page slogan

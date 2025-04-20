@@ -10,11 +10,6 @@ import org.testng.annotations.*;
 public class HomePageTCs extends BaseTest {
 
 
-//    @BeforeTest
-//    void beforeTest() {
-//
-//    }
-
     @Parameters({"chrome", "url"})
     @BeforeClass
     void beforeClass(Browser browser, String url) {
@@ -54,22 +49,22 @@ public class HomePageTCs extends BaseTest {
         homepage.chooseProductFromSearchDropdown("Cerave");
         productDetailsPage.addProductToCart();
 
-        Assert.assertTrue(webDriver.waitToBeVisible("div[role='dialog']").isDisplayed());
-        Assert.assertEquals(
+        verifyTrue(webDriver.waitToBeVisible("div[role='dialog']").isDisplayed());
+        verifyEquals(
                 webDriver.findElement("input[name='username']").getDomAttribute("placeholder"),
                 "Nhập email hoặc số điện thoại");
-        Assert.assertEquals(
+        verifyEquals(
                 webDriver.findElement("input[name='password']").getDomAttribute("placeholder"),
                 "Nhập password");
 
         cartPage.closeLoginDialog();
         cartPage.shipExpress2h();
 
-        Assert.assertTrue(webDriver.findElement("div[role='dialog']").isDisplayed());
-        Assert.assertEquals(
+        verifyTrue(webDriver.findElement("div[role='dialog']").isDisplayed());
+        verifyEquals(
                 webDriver.findElement("input[name='username']").getDomAttribute("placeholder"),
                 "Nhập email hoặc số điện thoại");
-        Assert.assertEquals(
+        verifyEquals(
                 webDriver.findElement("input[name='password']").getDomAttribute("placeholder"),
                 "Nhập password");
 
@@ -82,22 +77,22 @@ public class HomePageTCs extends BaseTest {
         productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
         productDetailsPage.addProductToCart();
 
-        Assert.assertTrue(webDriver.waitToBeVisible("div[role='dialog']").isDisplayed());
-        Assert.assertEquals(
+        verifyTrue(webDriver.waitToBeVisible("div[role='dialog']").isDisplayed());
+        verifyEquals(
                 webDriver.findElement("input[name='username']").getDomAttribute("placeholder"),
                 "Nhập email hoặc số điện thoại");
-        Assert.assertEquals(
+        verifyEquals(
                 webDriver.findElement("input[name='password']").getDomAttribute("placeholder"),
                 "Nhập password");
 
         cartPage.closeLoginDialog();
         cartPage.shipExpress2h();
 
-        Assert.assertTrue(webDriver.findElement("div[role='dialog']").isDisplayed());
-        Assert.assertEquals(
+        verifyTrue(webDriver.findElement("div[role='dialog']").isDisplayed());
+        verifyEquals(
                 webDriver.findElement("input[name='username']").getDomAttribute("placeholder"),
                 "Nhập email hoặc số điện thoại");
-        Assert.assertEquals(
+        verifyEquals(
                 webDriver.findElement("input[name='password']").getDomAttribute("placeholder"),
                 "Nhập password");
 
@@ -109,8 +104,8 @@ public class HomePageTCs extends BaseTest {
         homepage.navigateToStoresLocationPage();
         homepage.switchWindow("Hệ Thống Cửa Hàng");
 
-        Assert.assertEquals(storesLocationPage.getBreadcrumbText(), "Hệ Thống Cửa Hàng Hasaki Trên Toàn Quốc | Hasaki.vn");
-        Assert.assertTrue(storesLocationPage.isStoresDisplayed());
-        Assert.assertEquals(storesLocationPage.getTotalStores(), "Có 254 cửa hàng Hasaki trên toàn quốc");
+        verifyEquals(storesLocationPage.getBreadcrumbText(), "Hệ Thống Cửa Hàng Hasaki Trên Toàn Quốc | Hasaki.vn");
+        verifyTrue(storesLocationPage.isStoresDisplayed());
+        verifyEquals(storesLocationPage.getTotalStores(), "Có 254 cửa hàng Hasaki trên toàn quốc");
     }
 }
