@@ -3,6 +3,8 @@ package core;
 import cores.WebsiteDriver;
 import pages.*;
 
+import java.util.Random;
+
 public class BaseTest {
     protected WebsiteDriver webDriver;
     protected HomePage homepage;
@@ -21,6 +23,18 @@ public class BaseTest {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    protected String randomAlphabetic(int targetLength) {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+
+        Random random = new Random();
+
+        return random.ints(leftLimit, rightLimit + 1)
+                .limit(targetLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
     }
 
     protected void navigateToHomePage() {

@@ -7,6 +7,8 @@ import cores.PageFactory;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
+import java.util.Random;
+
 public class User_Order_One_Product extends BaseTest {
 
     @Parameters({"chrome", "url"})
@@ -111,7 +113,7 @@ public class User_Order_One_Product extends BaseTest {
         verifyEquals(webDriver.getText("//input[@placeholder='Số nhà + Tên đường']/following-sibling::p"), "Vui lòng điền địa chỉ");
 
         String phoneNo = "0345864246";
-        String userName = "Dat Le Mot";
+        String userName = "Dat Le Mot" + randomAlphabetic(4);
         String cityName = "Quận Tân Bình";
         String wardName = "Phường 10";
         String streetNumberName = "687 Lạc Long Quân";
@@ -138,14 +140,20 @@ public class User_Order_One_Product extends BaseTest {
         String newStreetNo = paymentPage.getStreetNumberInputValue("value");
 
         paymentPage.clickContinueStreetNumberButton();
-        paymentPage.clickContinue();
+        paymentPage.clickContinue("Thêm địa chỉ mới");
         webDriver.waitToBeInvisibleBy("//div[text()='Cập nhật địa chỉ thành công']");
-        String newUserInfo = webDriver.getText("//p[contains(string(),'Dat Le Mot')]/ancestor::label");
-        String newUserInfos = newUserInfo.replaceAll("\n", "#");
-        String[] newUserInfosArr = newUserInfos.split("#");
+
+        String[] newUserInfosArr = webDriver.getText("//p[contains(string(),'Dat Le Mot')]/ancestor::label")
+                .replaceAll("\n", "#")
+                .split("#");
 
         verifyEquals(newUserInfosArr[0], userName + " - " + phoneNo);
         verifyEquals(newUserInfosArr[3], newStreetNo + ", "
                 + wardName + ", " + cityName + ", " + "Hồ Chí Minh");
+
+        paymentPage.clickContinue("Địa chỉ nhận hàng");
+        webDriver.waitToBeInvisibleBy("//div[text()='Cập nhật địa chỉ thành công']");
+        paymentPage.chooseEdit("Hình thức thanh toán", "Thay dổi");
+
     }
 }

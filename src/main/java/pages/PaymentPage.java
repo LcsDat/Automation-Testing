@@ -16,7 +16,8 @@ public class PaymentPage extends BasePage {
     private static final String COMMON_ADD_NEW_ADDRESS_DROPDOWN = "//button[text()='%s']";
     private static final String COMMON_VALIDATION_MESSAGE_DROPDOWN = COMMON_ADD_NEW_ADDRESS_DROPDOWN + "/following-sibling::p";
     private static final String CHANGE_ADDRESS_BUTTON = "//span[text()='Thêm địa chỉ mới']";
-    private static final String CONTINUE_BUTTON = "//h2[text()='Thêm địa chỉ mới']/following-sibling::form//button[text()='Tiếp tục']";
+    private static final String CONTINUE_BUTTON = "//h2[text()='%s']/following-sibling::form//button[text()='Tiếp tục']";
+    private static final String PAYMENT_METHOD_RADIO_OPTION = "//h2[text()='Hình thức thanh toán']/following-sibling::form//p[text()='%s']";
     private static final String DROPDOWN_SEARCH_INPUT = "//input[contains(@placeholder, 'Tìm kiếm')]";
     private static final String DROPDOWN_SEARCH_INPUT_OPTION = "//div[contains(text(), '%s')]";
     private static final String STREET_NUMBER_INPUT = "button[name='address']";
@@ -35,8 +36,8 @@ public class PaymentPage extends BasePage {
         driver.setText(COMMON_ADD_NEW_ADDRESS_INPUT, value, fieldName);
     }
 
-    public void clickContinue() {
-        driver.click(CONTINUE_BUTTON);
+    public void clickContinue(String popupName) {
+        driver.click(CONTINUE_BUTTON, popupName);
     }
 
     public String getCommonValidationMessageInput(String inputName) {
