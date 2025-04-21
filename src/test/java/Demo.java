@@ -1,8 +1,5 @@
-import core.BaseTest;
 import cores.Browser;
 import cores.WebsiteDriver;
-import hasaki.HomePage.HomePageTCs;
-import hasaki.OrderFlow.Scenario01;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -10,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.annotation.Documented;
-import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 

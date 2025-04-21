@@ -49,4 +49,12 @@ public class WebsiteElement {
     public String getCssValue(String value) {
         return element.getCssValue(value);
     }
+
+    public boolean isEnabled(){
+        return element.isEnabled();
+    }
+
+    public void clear(){
+        element.clear();
+    }
 }

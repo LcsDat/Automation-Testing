@@ -26,4 +26,8 @@ public class PageFactory {
     public static FAQPage generateFAQPage(WebsiteDriver  driver){
         return new FAQPage(driver);
     }
+
+    public static PaymentPage generatePaymentPage(WebsiteDriver driver) {
+        return new PaymentPage(driver);
+    }
 }

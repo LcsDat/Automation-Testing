@@ -10,9 +10,9 @@
 
     <test name="hasaki" parallel="none">
         <classes>
-            <class name="hasaki.OrderFlow.Scenario01"/>
-            <class name="hasaki.HomePage.HomePageTCs"/>
-            <class name="hasaki.FAQPage.FAQPageTCs"/>
+            <class name="hasaki.OrderFlow.User_Order_One_Product"/>
+<!--            <class name="hasaki.HomePage.HomePageTCs"/>-->
+<!--            <class name="hasaki.FAQPage.FAQPageTCs"/>-->
         </classes>
     </test>
 </suite>

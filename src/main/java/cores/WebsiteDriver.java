@@ -259,6 +259,10 @@ public class WebsiteDriver {
         return findElement(locator).getDomAttribute(attributeValue);
     }
 
+    public String getDomAttribute(String locator, String attributeValue, String... varargs) {
+        return findElement(locator, varargs).getDomAttribute(attributeValue);
+    }
+
     public String getText(String locator, String... varargs) {
         return findElement(locator, varargs).getText();
     }
@@ -281,6 +285,17 @@ public class WebsiteDriver {
 
     public void setText(String locator, String value) {
         findElement(locator).setText(value);
+    }
+    public void setText(String locator, String value, String... varargs) {
+        findElement(locator, varargs).setText(value);
+    }
+
+    public void clear(String locator){
+        findElement(locator).clear();
+    }
+
+    public void clear(String locator, String... varargs){
+        findElement(locator, varargs).clear();
     }
 
     public Boolean waitToBeInvisibleBy(String locator) {
@@ -372,6 +387,17 @@ public class WebsiteDriver {
 
     public void clickByActions(String locator, String varargs) {
         actions.click(locator, varargs);
+    }
+
+    public void sendKeys(String locator, Keys keys) {
+        findDefaultWebElement(locator).sendKeys(keys);
+    }
+    public void sendKeys(String locator, Keys keys, String... varargs) {
+        findDefaultWebElement(locator, varargs).sendKeys(keys);
+    }
+
+    public boolean isEnabled(String locator){
+        return findElement(locator).isEnabled();
     }
 
 //    public void clickByCss(String locator) {

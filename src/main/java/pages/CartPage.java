@@ -10,23 +10,19 @@ public class CartPage extends BasePage {
     }
 
 
-
-
-
-//            "nav[aria-label='Main'] button.p-0";
+    //            "nav[aria-label='Main'] button.p-0";
     private static final String CART_QUANTITY = "span.counter_number.counter.qty";
-//            "nav[aria-label='Main'] button.p-0 a span:nth-child(3)";
+    //            "nav[aria-label='Main'] button.p-0 a span:nth-child(3)";
     private static final String SHIP_2H_EXPRESS_BUTTON = "//div[text()='Mua ngay NowFree 2H ']";
+    private static final String PROCEED_TO_CART_BUTTON = "//div[text()='Hóa đơn của bạn']/following-sibling::div/button";
 
-    public void shipExpress2h(){
+    public void shipExpress2h() {
         driver.click(SHIP_2H_EXPRESS_BUTTON);
     }
 
-
-
-
-
-
+    public void clickProceedToCart() {
+        driver.click(PROCEED_TO_CART_BUTTON);
+    }
 
 
     /**

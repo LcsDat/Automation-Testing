@@ -11,6 +11,7 @@ public class BaseTest {
     protected CartPage cartPage;
     protected StoresLocationPage storesLocationPage;
     protected FAQPage faqPage;
+    protected PaymentPage paymentPage;
 
     private final static String HASAKI_KEYWORD = "hasaki";
 
