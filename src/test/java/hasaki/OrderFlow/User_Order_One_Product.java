@@ -104,7 +104,7 @@ public class User_Order_One_Product extends BaseTest {
 
         paymentPage.chooseEdit("Địa chỉ nhận hàng", "Thay đổi");
         paymentPage.clickAddNewAddress();
-        paymentPage.clickContinue();
+        paymentPage.clickContinue("Thêm địa chỉ mới");
 
         verifyEquals(paymentPage.getCommonValidationMessageInput("Số điện thoại"), "Vui lòng điền số điện thoại");
         verifyEquals(webDriver.getText("//input[@placeholder='Họ và tên']/following-sibling::p"), "Vui lòng điền Họ và Tên");
@@ -153,7 +153,7 @@ public class User_Order_One_Product extends BaseTest {
 
         paymentPage.clickContinue("Địa chỉ nhận hàng");
         webDriver.waitToBeInvisibleBy("//div[text()='Cập nhật địa chỉ thành công']");
-        paymentPage.chooseEdit("Hình thức thanh toán", "Thay dổi");
+        paymentPage.chooseEdit("Hình thức thanh toán", "Thay đổi");
 
     }
 }
