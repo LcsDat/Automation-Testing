@@ -298,16 +298,24 @@ public class WebsiteDriver {
         findElement(locator, varargs).clear();
     }
 
-    public Boolean waitToBeInvisibleBy(String locator) {
-        return webDriverWait.waitToBeInvisibleBy(locator);
+    public Boolean waitToBeInvisible(String locator, String... varargs) {
+        return webDriverWait.waitToBeInvisibleBy(locator, varargs);
     }
 
     public WebsiteElement waitToBeClickable(String locator) {
         return webDriverWait.waitToBeClickable(locator);
     }
 
+    public WebsiteElement waitToBeClickable(String locator, String... varargs) {
+        return webDriverWait.waitToBeClickable(locator, varargs);
+    }
+
     public WebsiteElement waitToBeVisible(String locator) {
         return webDriverWait.waitToBeVisible(locator);
+    }
+
+    public WebsiteElement waitToBeVisible(String locator, String... varargs) {
+        return webDriverWait.waitToBeVisible(locator, varargs);
     }
 
 //    public WebElement waitToBeVisibleByXpath(String locator) {

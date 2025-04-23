@@ -4,14 +4,11 @@ import core.BaseTest;
 import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.util.Random;
+public class User_Order_One_Product_FireFox extends BaseTest {
 
-public class User_Order_One_Product extends BaseTest {
-
-    @Parameters({"chrome", "url"})
+    @Parameters({"firefox", "url"})
     @BeforeClass
     void beforeClass(Browser browser, String url) {
         webDriver = DriverFactory.initWebsiteDriver(browser);
@@ -58,22 +55,24 @@ public class User_Order_One_Product extends BaseTest {
         verifyEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2");
 
         productDetailsPage.addProductToCart();
-        verifyTrue(webDriver.findElement("//div[text()='Sản phẩm chỉ được mua tối đa là 1']").isDisplayed());
-        webDriver.waitToBeInvisibleBy("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
+        verifyTrue(webDriver.isDisplayed("//div[text()='Sản phẩm chỉ được mua tối đa là 1']"));
+        webDriver.waitToBeInvisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
 
         productDetailsPage.decreaseProductQty();
         productDetailsPage.addProductToCart();
         verifyTrue(webDriver.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"), "A label display product is added to cart.");
-        webDriver.waitToBeInvisibleBy("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']");
+        productDetailsPage.waitToBeInvisible("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']");
 
         sleepInSecond(2);
 
         String productQuantity = webDriver.getText("//span[text()='Cart Icon']/following-sibling::span");
         String productName = webDriver.getText("//h1");
         String productPrice = webDriver.getText("span.text-orange.text-lg.font-bold").replaceAll("[^0-9]", "");
+
         verifyEquals(productQuantity, "1");
 
         productDetailsPage.clickToCart();
+
         verifyEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName);
 
         Integer calculatedPrice = (Integer.parseInt(productQuantity) * Integer.parseInt(productPrice));
@@ -88,6 +87,7 @@ public class User_Order_One_Product extends BaseTest {
         cartPage.clickProceedToCart();
 
         sleepInSecond(2);
+
         verifyTrue(webDriver.getPageTitle().contains("Thanh toán"));
 
         //Temp verification of user delivery address
@@ -141,7 +141,7 @@ public class User_Order_One_Product extends BaseTest {
 
         paymentPage.clickContinueStreetNumberButton();
         paymentPage.clickContinue("Thêm địa chỉ mới");
-        webDriver.waitToBeInvisibleBy("//div[text()='Cập nhật địa chỉ thành công']");
+        paymentPage.waitForMessageInvisible("Cập nhật địa chỉ thành công");
 
         String[] newUserInfosArr = webDriver.getText("//p[contains(string(),'Dat Le Mot')]/ancestor::label")
                 .replaceAll("\n", "#")
@@ -151,9 +151,36 @@ public class User_Order_One_Product extends BaseTest {
         verifyEquals(newUserInfosArr[3], newStreetNo + ", "
                 + wardName + ", " + cityName + ", " + "Hồ Chí Minh");
 
+
+        paymentPage.deleteAddress(newUserInfosArr[0]);
+        paymentPage.waitForMessageInvisible("Thông tin địa chỉ nhận hàng đã được xóa.");
+
+        //Only Firefox, need to duplicate click
         paymentPage.clickContinue("Địa chỉ nhận hàng");
-        webDriver.waitToBeInvisibleBy("//div[text()='Cập nhật địa chỉ thành công']");
+        paymentPage.clickContinue("Địa chỉ nhận hàng");
+        paymentPage.waitForMessageInvisible("Cập nhật địa chỉ thành công");
+
         paymentPage.chooseEdit("Hình thức thanh toán", "Thay đổi");
 
+        //Choose by name
+        paymentPage.choosePaymentMethod("Thanh toán trực tuyến VNPAY");
+        paymentPage.clickContinue("Hình thức thanh toán");
+        paymentPage.waitForMessageInvisible("Cập nhật hình thức thanh toán thành công");
+
+        paymentPage.chooseEdit("Phiếu mua hàng", "Chọn phiếu mua hàng");
+
+        verifyTrue(webDriver.isDisplayed("//h2[text()='Bạn có phiếu mua hàng']"));
+
+        paymentPage.closePopup();
+
+        paymentPage.chooseEdit("Mã giảm giá", "Nhập mã giảm giá");
+
+        verifyTrue(webDriver.isDisplayed("//h2[text()='Bạn có mã giảm giá']"));
+
+        paymentPage.closePopup();
+
+        paymentPage.changeProduct();
+
+        verifyTrue(paymentPage.getPageTitle().contains("Giỏ hàng"));
     }
 }

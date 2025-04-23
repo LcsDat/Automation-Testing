@@ -1,9 +1,9 @@
 package pages;
 
 import cores.BasePage;
-import cores.PageFactory;
 import cores.WebsiteDriver;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoSuchElementException;
 
 public class PaymentPage extends BasePage {
     public PaymentPage(WebsiteDriver driver) {
@@ -22,7 +22,31 @@ public class PaymentPage extends BasePage {
     private static final String DROPDOWN_SEARCH_INPUT_OPTION = "//div[contains(text(), '%s')]";
     private static final String STREET_NUMBER_INPUT = "button[name='address']";
     private static final String STREET_NUMBER_CONTINUE_BUTTON = "//span[text()='Sửa vị trí trên bản đồ']/parent::div//following-sibling::div//button[text()='Tiếp tục']";
+    private static final String PAYMENT_OPTION_BY_NUMBER = "payment-option-%s";
+    private static final String PAYMENT_OPTION_BY_NAME = "//h2[text()='Hình thức thanh toán']/following-sibling::form//p[text()='%s']";
+    private static final String ADDRESS_OPTION = "//h2[text()='Địa chỉ nhận hàng']/following-sibling::form//p[normalize-space()='%s']";
+    private static final String DELETE_ADDRESS_BUTTON = "(" + ADDRESS_OPTION + "/following-sibling::div/child::button)[1]";
+    private static final String DELETE_ADDRESS_CONFIRM_BUTTON = "//button[text()='Xác nhận']";
+    private static final String SUCCESS_MESSAGE = "//div[text()='%s']";
+    private static final String CLOSE_POPUP_BUTTON = "//span[text()='Close']/parent::button";
+    private static final String CHANGE_PRODUCT_LINK = "//a[text()='Thay đổi']";
 
+    public void changeProduct(){
+        driver.click(CHANGE_PRODUCT_LINK);
+    }
+
+    public Boolean waitForMessageInvisible(String message){
+        return waitToBeInvisible(SUCCESS_MESSAGE, message);
+    }
+    /**
+     * Delete a delivery address
+     * @param addressInfo Include name + phone number
+     */
+    public void deleteAddress(String addressInfo){
+        driver.click(ADDRESS_OPTION, addressInfo);
+        driver.click(DELETE_ADDRESS_BUTTON, addressInfo);
+        driver.click(DELETE_ADDRESS_CONFIRM_BUTTON);
+    }
     public void chooseEdit(String section, String buttonName) {
         driver.click(COMMON_BUTTON, section, buttonName);
     }
@@ -37,7 +61,7 @@ public class PaymentPage extends BasePage {
     }
 
     public void clickContinue(String popupName) {
-        driver.click(CONTINUE_BUTTON, popupName);
+        driver.waitToBeClickable(CONTINUE_BUTTON, popupName).click();
     }
 
     public String getCommonValidationMessageInput(String inputName) {
@@ -84,5 +108,30 @@ public class PaymentPage extends BasePage {
 
     public String getStreetNumberInputValue(String value){
         return driver.getDomAttribute(COMMON_ADD_NEW_ADDRESS_INPUT, value, "Nhập vị trí của bạn");
+    }
+
+    /**
+     * Choose option by number
+     * @param options From 0 to 4
+     */
+    public void choosePaymentMethod(int options){
+        try {
+            driver.click(PAYMENT_OPTION_BY_NUMBER, String.valueOf(options));
+        } catch (NoSuchElementException e) {
+            System.out.println("Out range of options");
+        }
+
+    }
+
+    /**
+     * Choose option by name
+     * @param paymentName Name of the payment
+     */
+    public void choosePaymentMethod(String paymentName){
+        driver.click(PAYMENT_OPTION_BY_NAME, paymentName);
+    }
+
+    public void closePopup(){
+        driver.click(CLOSE_POPUP_BUTTON);
     }
 }

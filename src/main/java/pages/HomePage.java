@@ -1,6 +1,5 @@
 package pages;
 
-import cores.BasePage;
 import cores.WebsiteDriver;
 import cores.WebsiteElement;
 import org.openqa.selenium.NoSuchElementException;
@@ -72,12 +71,17 @@ public class HomePage extends ProductDetailAccessiblePages {
         if (!getCartQuantity().equals("0")) {
             clickToCart();
             driver.waitForPageLoad();
-            while (true) {
-                Integer size = driver.findElements("//tbody/tr").size();
-                if (size != 0) {
-                    driver.waitToBeClickable("//tbody/tr//button[text()='Xóa']").click();
-                    driver.waitToBeInvisibleBy("div.animate-spin");
-                } else break;
+            driver.waitToBeVisible("//div[contains(text(),'Giỏ hàng')]");
+            int size = driver.findElements("//tbody/tr").size();
+            int i = 1;
+            if (size != 0) {
+                while (i < size) {
+
+                    driver.waitToBeClickable("(//tbody/tr//button[text()='Xóa'])[1]").click();
+                    sleepInSecond(1);
+//                    driver.waitToBeInvisible("div.animate-spin");
+                    i++;
+                }
             }
             navigateToHomepage();
         }

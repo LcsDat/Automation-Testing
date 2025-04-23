@@ -38,14 +38,30 @@ public class ExplicitWait {
         return wait.until(ExpectedConditions.invisibilityOf(getWebsiteElement(locator).getElement()));
     }
 
+    public Boolean waitToBeInvisibleBy(String locator, String... varargs) {
+        return wait.until(ExpectedConditions.invisibilityOf(getWebsiteElement(locator, varargs).getElement()));
+    }
+
     public WebsiteElement waitToBeClickable(String locator) {
         WebsiteElement element = getWebsiteElement(locator);
         wait.until(ExpectedConditions.elementToBeClickable(element.getElement()));
         return element;
     }
 
+    public WebsiteElement waitToBeClickable(String locator, String... varargs) {
+        WebsiteElement element = getWebsiteElement(locator, varargs);
+        wait.until(ExpectedConditions.elementToBeClickable(element.getElement()));
+        return element;
+    }
+
     public WebsiteElement waitToBeVisible(String locator) {
         WebsiteElement element = getWebsiteElement(locator);
+        wait.until(ExpectedConditions.visibilityOf(element.getElement()));
+        return element;
+    }
+
+    public WebsiteElement waitToBeVisible(String locator, String... varargs) {
+        WebsiteElement element = getWebsiteElement(locator, varargs);
         wait.until(ExpectedConditions.visibilityOf(element.getElement()));
         return element;
     }

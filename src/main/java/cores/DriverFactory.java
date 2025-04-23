@@ -14,7 +14,9 @@ public class DriverFactory {
         switch (browser){
             case FIREFOX -> driver = browser.initFirefoxDriver();
 
-            case CHROME -> driver = browser.initChromeDriver();
+            case CHROME  -> driver = browser.initChromeDriver();
+
+            case EDGE    -> driver = browser.initEdgeDriver();
         }
 
         driver.manage().window().maximize();
