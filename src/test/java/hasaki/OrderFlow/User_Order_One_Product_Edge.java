@@ -1,6 +1,6 @@
 package hasaki.OrderFlow;
 
-import core.BaseTest;
+import cores.BaseTest;
 import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;

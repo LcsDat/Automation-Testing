@@ -1,10 +1,9 @@
 package hasaki.FAQPage;
 
-import core.BaseTest;
+import cores.BaseTest;
 import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
-import org.testng.Assert;
 import org.testng.annotations.*;
 
 public class FAQPageTCs extends BaseTest {

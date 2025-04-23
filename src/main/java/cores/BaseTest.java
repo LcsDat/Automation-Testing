@@ -1,11 +1,15 @@
-package core;
+package cores;
 
-import cores.WebsiteDriver;
 import pages.*;
 
 import java.util.Random;
 
 public class BaseTest {
+
+    public WebsiteDriver getWebDriver() {
+        return webDriver;
+    }
+
     protected WebsiteDriver webDriver;
     protected HomePage homepage;
     protected ProductsPage productPage;

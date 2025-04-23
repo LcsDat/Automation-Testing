@@ -40,7 +40,8 @@ public class Demo {
     @Test
     void test01() throws NoSuchMethodException, ClassNotFoundException {
 
-            Assert.assertEquals(1, 2);
+        System.out.println(System.getProperty("user.dir"));
+        System.out.println(System.getProperty("system.dir"));
 
     }
 
