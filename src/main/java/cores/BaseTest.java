@@ -1,14 +1,16 @@
 package cores;
 
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import com.aventstack.extentreports.markuputils.Markup;
+import com.aventstack.extentreports.markuputils.MarkupHelper;
 import pages.*;
 
 import java.util.Random;
 
 public class BaseTest {
 
-    public WebsiteDriver getWebDriver() {
-        return webDriver;
-    }
 
     protected WebsiteDriver webDriver;
     protected HomePage homepage;
@@ -18,8 +20,17 @@ public class BaseTest {
     protected StoresLocationPage storesLocationPage;
     protected FAQPage faqPage;
     protected PaymentPage paymentPage;
-
+    protected ExtentTest extentTest;
     private final static String HASAKI_KEYWORD = "hasaki";
+
+
+    public WebsiteDriver getWebDriver() {
+        return webDriver;
+    }
+
+    protected void logInfo(String description) {
+        extentTest.log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.GREY));
+    }
 
     protected static void sleepInSecond(long time) {
         try {

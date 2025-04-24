@@ -4,16 +4,26 @@
     <listeners>
         <listener class-name="reportConfig.ExtentTestListener"/>
     </listeners>
-    <parameter name="chrome" value="CHROME"></parameter>
-    <parameter name="firefox" value="FIREFOX"></parameter>
-    <parameter name="edge" value="EDGE"></parameter>
     <parameter name="url" value="https://hasaki.vn/"></parameter>
 
-    <test name="hasaki" parallel="none">
+    <test name="hasaki on Chrome" parallel="none">
+        <parameter name="browser" value="CHROME"></parameter>
         <classes>
-            <class name="hasaki.OrderFlow.User_Order_One_Product_Chrome"/>
-<!--            <class name="hasaki.OrderFlow.User_Order_One_Product_FireFox"/>-->
-<!--            <class name="hasaki.OrderFlow.User_Order_One_Product_Edge"/>-->
+            <class name="hasaki.OrderFlow.User_Order_One_Product"/>
         </classes>
     </test>
+
+<!--    <test name="hasaki one Edge" parallel="none">-->
+<!--        <parameter name="browser" value="EDGE"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="hasaki.OrderFlow.User_Order_One_Product"/>-->
+<!--        </classes>-->
+<!--    </test>-->
+
+<!--    <test name="hasaki on Firefox" parallel="none">-->
+<!--        <parameter name="browser" value="FIREFOX"></parameter>-->
+<!--        <classes>-->
+<!--            <class name="hasaki.OrderFlow.User_Order_One_Product_FireFox"/>-->
+<!--        </classes>-->
+<!--    </test>-->
 </suite>

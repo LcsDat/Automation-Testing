@@ -8,7 +8,7 @@ import org.testng.annotations.*;
 
 public class User_Order_One_Product_FireFox extends BaseTest {
 
-    @Parameters({"firefox", "url"})
+    @Parameters({"browser", "url"})
     @BeforeClass
     void beforeClass(Browser browser, String url) {
         webDriver = DriverFactory.initWebsiteDriver(browser);

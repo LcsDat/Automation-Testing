@@ -3,6 +3,7 @@ import cores.WebsiteDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -39,10 +40,11 @@ public class Demo {
 
     @Test
     void test01() throws NoSuchMethodException, ClassNotFoundException {
-
-        System.out.println(System.getProperty("user.dir"));
-        System.out.println(System.getProperty("system.dir"));
-
+        ImageIcon imageIcon = new ImageIcon();
+        System.out.println("\u001B[36m"+(char) 10004 +"\u001B[0m");
+        char character = 'A';
+        int asciiValue = (int) character;
+        System.out.println("The ASCII value of " + character + " is: " + asciiValue);
     }
 
     public static void main(String[] args) throws ClassNotFoundException {

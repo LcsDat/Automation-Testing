@@ -16,7 +16,6 @@ import static reportConfig.ExtentTestManager.getTest;
 public class ExtentTestListener implements ITestListener {
     @Override
     public void onStart(ITestContext iTestContext) {
-
     }
 
     @Override
@@ -26,12 +25,12 @@ public class ExtentTestListener implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-
+        getTest().log(Status.INFO, MarkupHelper.createLabel("EXECUTION START " + iTestResult.getName().toUpperCase(), ExtentColor.ORANGE));
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        getTest().log(Status.PASS, MarkupHelper.createLabel(iTestResult.getName() + " - Passed", ExtentColor.GREEN));
+        getTest().log(Status.PASS, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + " - Passed", ExtentColor.GREEN));
     }
 
     @Override
@@ -41,12 +40,12 @@ public class ExtentTestListener implements ITestListener {
 
         String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
         getTest().log(Status.FAIL, "Screenshot and Exception", iTestResult.getThrowable(), getTest().addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
-        getTest().log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName() + " - Failed", ExtentColor.RED));
+        getTest().log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + " - Failed", ExtentColor.RED));
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        getTest().log(Status.SKIP, MarkupHelper.createLabel(iTestResult.getName() + " - Skipped", ExtentColor.ORANGE));
+        getTest().log(Status.SKIP, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + " - Skipped", ExtentColor.ORANGE));
     }
 
     @Override
