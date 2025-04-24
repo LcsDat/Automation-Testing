@@ -1,5 +1,7 @@
 import cores.Browser;
 import cores.WebsiteDriver;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -40,11 +42,10 @@ public class Demo {
 
     @Test
     void test01() throws NoSuchMethodException, ClassNotFoundException {
-        ImageIcon imageIcon = new ImageIcon();
-        System.out.println("\u001B[36m"+(char) 10004 +"\u001B[0m");
-        char character = 'A';
-        int asciiValue = (int) character;
-        System.out.println("The ASCII value of " + character + " is: " + asciiValue);
+        Logger logger = LogManager.getLogger(Demo.class);
+        logger.debug("Debug log message");
+        logger.info("Info log message");
+        logger.error("Error log message");
     }
 
     public static void main(String[] args) throws ClassNotFoundException {

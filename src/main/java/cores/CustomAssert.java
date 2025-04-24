@@ -20,9 +20,9 @@ public class CustomAssert extends Assert {
     private String wordOrange = "\033[38:5:208m";
     private String wordReset = "\033[m";
 
-    private String defaultTrue = "[" + (char) 10004 + " True ]";
-    private String defaultFalse = "[" + (char) 10004 + " False]";
-    private String defaultEqual = "[" + (char) 10004 + " Equal]";
+    private String defaultTrue = "[" + checkIcon + " True ]";
+    private String defaultFalse = "[" + checkIcon + " False]";
+    private String defaultEqual = "[" + checkIcon + " Equal]";
     private String pass = "PASS";
     private String fail = "FAIL";
     private String failFormat = "%c%12s%8s%S%5s" + "%s%s%7s" + "%s " + "%s " + "%s%s%s at .(%s:%d) %n";
