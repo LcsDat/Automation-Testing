@@ -15,17 +15,5 @@
         </classes>
     </test>
 
-    <test name="hasaki one Edge" parallel="none">
-        <parameter name="browser" value="EDGE"/>
-        <classes>
-            <class name="hasaki.OrderFlow.User_Order_One_Product"/>
-        </classes>
-    </test>
-
-    <test name="hasaki on Firefox" parallel="none">
-        <parameter name="browser" value="FIREFOX"/>
-        <classes>
-            <class name="hasaki.OrderFlow.User_Order_One_Product_FireFox"/>
-        </classes>
-    </test>
+<!--    <test name="h -->
 </suite>

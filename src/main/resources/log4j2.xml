@@ -1,23 +1,17 @@
-<Configuration status="info" name="baeldung">
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Properties>
+        <!-- ANSI color codes -->
+        <Property name="CONSOLE_LOG_PATTERN">⏱️ %style{%d{HH:mm:ss a}}{bright,cyan} [%t] %highlight{%level{FATAL=☠️, ERROR=❌, WARN=⚠️, INFO=ℹ️, DEBUG=🔍, TRACE=📋}} %logger{36} - %style{%msg%n}{yellow} </Property>
+    </Properties>
     <Appenders>
-        <Console name="stdout" target="SYSTEM_OUT">
-            <JsonTemplateLayout charset="UTF-8"
-                                eventTemplateUri="classpath:layout.json"
-                                locationInfoEnable="true"/>
-            <!--            <PatternLayout disableAnsi = 'false'-->
-            <!--                           pattern="%highlight{%d{HH:mm:ss.SSS} %-5level %logger{36}.%M() @%L - %msg%n}{FATAL=red blink, ERROR=red, WARN=yellow bold, INFO=cyan, DEBUG=green bold, TRACE=blue}"/>-->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}" disableAnsi="false"/>
         </Console>
-        <!--        <File name="fout" fileName="logs/baeldung.log" append="true">-->
-        <!--            <JsonTemplateLayout charset = "UTF-8"-->
-        <!--                                eventTemplateUri="classpath:layout.json"/>-->
-        <!--&lt;!&ndash;            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss} %p %m%n"/>&ndash;&gt;-->
-        <!--        </File>-->
     </Appenders>
-
     <Loggers>
-        <Root level="info">
-            <AppenderRef ref="stdout"/>
-            <AppenderRef ref="fout"/>
+        <Root level="debug">
+            <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
 </Configuration>

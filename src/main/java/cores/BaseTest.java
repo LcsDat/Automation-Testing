@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
+import org.apache.logging.log4j.Logger;
 import pages.*;
 
 import java.util.Random;
@@ -20,6 +21,8 @@ public class BaseTest {
     protected FAQPage faqPage;
     protected PaymentPage paymentPage;
     protected ExtentTest extentTest;
+    protected static Logger logger;
+
     private final static String HASAKI_KEYWORD = "hasaki";
 
 
@@ -27,8 +30,9 @@ public class BaseTest {
         return webDriver;
     }
 
-    protected void logInfoExtent(String description) {
+    protected void logInfo(String description) {
         extentTest.log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.GREY));
+        logger.info(description);
     }
 
     protected static void sleepInSecond(long time) {

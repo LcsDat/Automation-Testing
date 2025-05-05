@@ -16,8 +16,8 @@ public class User_Order_One_Product_FireFox extends BaseTest {
                 "User order a product on the website.");
         extentTest = ExtentTestManager.getTest();
 
-        logInfoExtent("------ Setup steps include ------");
-        logInfoExtent("- Initialize relevant pages");
+        logInfo("------ Setup steps include ------");
+        logInfo("- Initialize relevant pages");
         webDriver = DriverFactory.initWebsiteDriver(browser);
         homepage = PageFactory.generateHomePage(webDriver);
         productPage = PageFactory.generateProductsPage(webDriver);
@@ -25,44 +25,44 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         cartPage = PageFactory.generateCartPage(webDriver);
         paymentPage = PageFactory.generatePaymentPage(webDriver);
 
-        logInfoExtent("- Navigate to " + url);
+        logInfo("- Navigate to " + url);
         webDriver.navigate(url);
 
-        logInfoExtent("- Close popup");
+        logInfo("- Close popup");
         homepage.cancelPopup();
 
-        logInfoExtent("- Reject cookie");
+        logInfo("- Reject cookie");
         homepage.cancelCookie();
 
-        logInfoExtent("- Login with Username: " + username + " Password: " + password);
+        logInfo("- Login with Username: " + username + " Password: " + password);
         homepage.login(username, password);
 
-        logInfoExtent("- Remove products in Cart if they exist");
+        logInfo("- Remove products in Cart if they exist");
         homepage.removeProductFromCart();
     }
 
     @AfterMethod
     void afterMethod() {
-        logInfoExtent("Switch back to main tab after each test case");
+        logInfo("Switch back to main tab after each test case");
         switchToMainWebsite();
 
-        logInfoExtent("Navigate back to Home page after each test case");
+        logInfo("Navigate back to Home page after each test case");
         navigateToHomePage();
     }
 
     @AfterClass
     void afterClass() {
-        logInfoExtent("------ Tear down steps include ------");
-        logInfoExtent("- Log out");
+        logInfo("------ Tear down steps include ------");
+        logInfo("- Log out");
         logout();
 
-        logInfoExtent("- Close the browser");
+        logInfo("- Close the browser");
         quitBrowser();
     }
 
     @AfterTest(alwaysRun = true)
     void afterTest() {
-        logInfoExtent("- Clean background process (driver)");
+        logInfo("- Clean background process (driver)");
         cleanDriverProcess();
     }
 
@@ -70,34 +70,34 @@ public class User_Order_One_Product_FireFox extends BaseTest {
     void tc01() {
 
 //        Choose product
-        logInfoExtent("Choose 'Skin Care' in Category Menu, then choose Cleansing product type");
+        logInfo("Choose 'Skin Care' in Category Menu, then choose Cleansing product type");
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
 
-        logInfoExtent("Choose a specific product");
+        logInfo("Choose a specific product");
         productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
 
-        logInfoExtent("Increase product quantity by 1");
+        logInfo("Increase product quantity by 1");
         productDetailsPage.increaseProductQty();
 
         verifyEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2");
 
-        logInfoExtent("Click add product to Cart");
+        logInfo("Click add product to Cart");
         productDetailsPage.addProductToCart();
 
         verifyTrue(webDriver.isDisplayed("//div[text()='Sản phẩm chỉ được mua tối đa là 1']"));
 
-        logInfoExtent("Wait for warning message invisible: 'Maximum quantity is 1'");
+        logInfo("Wait for warning message invisible: 'Maximum quantity is 1'");
         webDriver.waitToBeInvisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
 
-        logInfoExtent("Decrease product quantity by 1");
+        logInfo("Decrease product quantity by 1");
         productDetailsPage.decreaseProductQty();
 
-        logInfoExtent("Click add product to cart");
+        logInfo("Click add product to cart");
         productDetailsPage.addProductToCart();
 
         verifyTrue(webDriver.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"), "A label display product is added to cart.");
 
-        logInfoExtent("Wait for success message invisible: 'Successfully add product to the cart'");
+        logInfo("Wait for success message invisible: 'Successfully add product to the cart'");
         productDetailsPage.waitToBeInvisible("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']");
 
         sleepInSecond(2);
@@ -108,7 +108,7 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
         verifyEquals(productQuantity, "1");
 
-        logInfoExtent("Click to view Cart info");
+        logInfo("Click to view Cart info");
         productDetailsPage.clickToCart();
 
         verifyEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName);
@@ -122,7 +122,7 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
         verifyEquals(calculatedPrice, totalPrice);
 
-        logInfoExtent("Click proceed to Cart");
+        logInfo("Click proceed to Cart");
         cartPage.clickProceedToCart();
 
         sleepInSecond(2);
@@ -141,13 +141,13 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         verifyEquals(userNameAndPhone, "Le Dat - 0345864246");
         verifyEquals(userAddress, "687/5 Lạc Long Quân, Phường 10, Quận Tân Bình, Hồ Chí Minh");
 
-        logInfoExtent("Click to edit Delivery address");
+        logInfo("Click to edit Delivery address");
         paymentPage.chooseEdit("Địa chỉ nhận hàng", "Thay đổi");
 
-        logInfoExtent("Click to add a new address");
+        logInfo("Click to add a new address");
         paymentPage.clickAddNewAddress();
 
-        logInfoExtent("Click Continue to create a new address");
+        logInfo("Click Continue to create a new address");
         paymentPage.clickContinue("Thêm địa chỉ mới");
 
         verifyEquals(paymentPage.getCommonValidationMessageInput("Số điện thoại"), "Vui lòng điền số điện thoại");
@@ -162,32 +162,32 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         String wardName = "Phường 10";
         String streetNumberName = "687 Lạc Long Quân";
 
-        logInfoExtent("Input phone number for new address");
+        logInfo("Input phone number for new address");
         paymentPage.setTextToNewAddressFields("Số điện thoại", phoneNo);
 
-        logInfoExtent("Input Name contact for new address");
+        logInfo("Input Name contact for new address");
         paymentPage.setTextToNewAddressFields("Họ và tên", userName);
 
-        logInfoExtent("Input City for new address");
+        logInfo("Input City for new address");
         paymentPage.chooseCity(cityName);
 
-        logInfoExtent("Input Ward for new address");
+        logInfo("Input Ward for new address");
         paymentPage.chooseWard(wardName);
 
-        logInfoExtent("Click to Street field");
+        logInfo("Click to Street field");
         paymentPage.clickStreetField();
 
         //Continue button is disable if user doesn't input street number
         verifyFalse(webDriver.isEnabled("//span[text()='Sửa vị trí trên bản đồ']/parent::div//following-sibling::div//button[text()='Tiếp tục']"));
 
-        logInfoExtent("Input street for new address, which does not meet minimum length of characters");
+        logInfo("Input street for new address, which does not meet minimum length of characters");
         paymentPage.setTextStreetField("687");
 
         sleepInSecond(3);
 
         verifyEquals(webDriver.getText("(//input[@placeholder='Nhập vị trí của bạn']/following-sibling::span)[1]"), "Địa chỉ phải trên 5 ký tự");
 
-        logInfoExtent("Input street for new address, which is a valid length");
+        logInfo("Input street for new address, which is a valid length");
         paymentPage.setTextStreetField(streetNumberName);
 
         //Continue input is enable
@@ -195,13 +195,13 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
         String newStreetNo = paymentPage.getStreetNumberInputValue("value");
 
-        logInfoExtent("Click to create a new street address");
+        logInfo("Click to create a new street address");
         paymentPage.clickContinueStreetNumberButton();
 
-        logInfoExtent("Click to create a new address");
+        logInfo("Click to create a new address");
         paymentPage.clickContinue("Thêm địa chỉ mới");
 
-        logInfoExtent("Wait for success message invisible: 'Successfully update a new delivery address'");
+        logInfo("Wait for success message invisible: 'Successfully update a new delivery address'");
         paymentPage.waitForMessageInvisible("Cập nhật địa chỉ thành công");
 
         String[] newUserInfosArr = webDriver.getText("//p[contains(string(),'Dat Le Mot')]/ancestor::label")
@@ -212,49 +212,49 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         verifyEquals(newUserInfosArr[3], newStreetNo + ", "
                 + wardName + ", " + cityName + ", " + "Hồ Chí Minh");
 
-        logInfoExtent("Click to delete an address");
+        logInfo("Click to delete an address");
         paymentPage.deleteAddress(newUserInfosArr[0]);
 
-        logInfoExtent("Wait for success message invisible: 'Successfully delete the address'");
+        logInfo("Wait for success message invisible: 'Successfully delete the address'");
         paymentPage.waitForMessageInvisible("Thông tin địa chỉ nhận hàng đã được xóa.");
 
         //Only Firefox, need to duplicate click
-        logInfoExtent("Click to continue cart process");
+        logInfo("Click to continue cart process");
         paymentPage.clickContinue("Địa chỉ nhận hàng");
 
-        logInfoExtent("Click to continue cart process again");
+        logInfo("Click to continue cart process again");
         paymentPage.clickContinue("Địa chỉ nhận hàng");
 
-        logInfoExtent("Wait for success message invisible: 'Successfully update delivery address'");
+        logInfo("Wait for success message invisible: 'Successfully update delivery address'");
         paymentPage.waitForMessageInvisible("Cập nhật địa chỉ thành công");
 
-        logInfoExtent("Click to Edit the payment method");
+        logInfo("Click to Edit the payment method");
         paymentPage.chooseEdit("Hình thức thanh toán", "Thay đổi");
 
         //Choose by name
-        logInfoExtent("Change payment method to VNPAY");
+        logInfo("Change payment method to VNPAY");
         paymentPage.choosePaymentMethod("Thanh toán trực tuyến VNPAY");
 
-        logInfoExtent("Click to continue cart process");
+        logInfo("Click to continue cart process");
         paymentPage.clickContinue("Hình thức thanh toán");
 
-        logInfoExtent("Wait for success message invisible: 'Successfully update payment method'");
+        logInfo("Wait for success message invisible: 'Successfully update payment method'");
         paymentPage.waitForMessageInvisible("Cập nhật hình thức thanh toán thành công");
 
-        logInfoExtent("Click to edit coupons");
+        logInfo("Click to edit coupons");
         paymentPage.chooseEdit("Phiếu mua hàng", "Chọn phiếu mua hàng");
 
         verifyTrue(webDriver.isDisplayed("//h2[text()='Bạn có phiếu mua hàng']"));
 
-        logInfoExtent("Close Coupon popup");
+        logInfo("Close Coupon popup");
         paymentPage.closePopup();
 
-        logInfoExtent("Click to edit vouchers");
+        logInfo("Click to edit vouchers");
         paymentPage.chooseEdit("Mã giảm giá", "Nhập mã giảm giá");
 
         verifyTrue(webDriver.isDisplayed("//h2[text()='Bạn có mã giảm giá']"));
 
-        logInfoExtent("Close Voucher popup");
+        logInfo("Close Voucher popup");
         paymentPage.closePopup();
 
         paymentPage.changeProduct();
