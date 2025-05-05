@@ -3,7 +3,6 @@ package cores;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
-import com.aventstack.extentreports.markuputils.Markup;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import pages.*;
 
@@ -28,7 +27,7 @@ public class BaseTest {
         return webDriver;
     }
 
-    protected void logInfo(String description) {
+    protected void logInfoExtent(String description) {
         extentTest.log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.GREY));
     }
 

@@ -4,26 +4,28 @@
     <listeners>
         <listener class-name="reportConfig.ExtentTestListener"/>
     </listeners>
-    <parameter name="url" value="https://hasaki.vn/"></parameter>
+    <parameter name="url" value="https://hasaki.vn/"/>
+    <parameter name="username" value="0345864246"/>
+    <parameter name="password" value="#Onimusha00"/>
 
     <test name="hasaki on Chrome" parallel="none">
-        <parameter name="browser" value="CHROME"></parameter>
+        <parameter name="browser" value="CHROME"/>
         <classes>
             <class name="hasaki.OrderFlow.User_Order_One_Product"/>
         </classes>
     </test>
 
-<!--    <test name="hasaki one Edge" parallel="none">-->
-<!--        <parameter name="browser" value="EDGE"></parameter>-->
-<!--        <classes>-->
-<!--            <class name="hasaki.OrderFlow.User_Order_One_Product"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="hasaki one Edge" parallel="none">
+        <parameter name="browser" value="EDGE"/>
+        <classes>
+            <class name="hasaki.OrderFlow.User_Order_One_Product"/>
+        </classes>
+    </test>
 
-<!--    <test name="hasaki on Firefox" parallel="none">-->
-<!--        <parameter name="browser" value="FIREFOX"></parameter>-->
-<!--        <classes>-->
-<!--            <class name="hasaki.OrderFlow.User_Order_One_Product_FireFox"/>-->
-<!--        </classes>-->
-<!--    </test>-->
+    <test name="hasaki on Firefox" parallel="none">
+        <parameter name="browser" value="FIREFOX"/>
+        <classes>
+            <class name="hasaki.OrderFlow.User_Order_One_Product_FireFox"/>
+        </classes>
+    </test>
 </suite>

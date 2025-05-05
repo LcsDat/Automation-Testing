@@ -2,6 +2,10 @@ import cores.Browser;
 import cores.WebsiteDriver;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -10,7 +14,13 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.annotation.Documented;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class Demo {
@@ -25,27 +35,75 @@ public class Demo {
         int[] member();
     }
 
+    static boolean checkBalance(String input) {
+        boolean flag = false;
+        HashMap<Character, Character> brackets = new HashMap<>();
+        brackets.put('[', ']');
+        brackets.put('{', '}');
+        brackets.put('(', ')');
+        //Check null or odd length
+        if (input == null || input.length() % 2 != 0) {
+            flag = false;
+        } else {
+
+            char[] array = input.toCharArray();
+            int limit = array.length / 2;
+            for (int i = 0; i < limit; i++) {
+                try {
+                    if (brackets.get(array[i]) == array[array.length - i - 1]) flag = true;
+                } catch (NullPointerException e) {
+                }
+
+            }
+        }
+        return flag;
+    }
 
     @Infor(author = "Dat", date = "2004", member = {1, 2})
     @Test
     public void test() throws InterruptedException {
-        WebsiteDriver driver = new WebsiteDriver(Browser.CHROME);
-//        driver.setImplicitWait(Duration.ofSeconds(10));
-        driver.navigate("https://hasaki.vn");
-        driver.click("onesignal-slidedown-cancel-button");
-        driver.click("rejectCookies");
-        driver.click("//div[@class='item_header']");
-        Thread.sleep(2000);
-        driver.switchWindow("Hỗ trợ khách hàng");
-        driver.click("//div[text()='Tài khoản']/following-sibling::a");
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.get("https://vm-070d3e77-ab31-410b-8533-ec0b3d9ea92d-8000.in-vmprovider.projects.hrcdn.net/loanPage.html");
+
+        driver.findElement(By.id("fname")).clear();
+        driver.findElement(By.id("fname")).sendKeys("aaaa");
+
+        driver.findElement(By.id("lname")).clear();
+        driver.findElement(By.id("lname")).sendKeys("bbbb");
+
+        driver.findElement(By.id("email")).clear();
+        driver.findElement(By.id("email")).sendKeys("a@1234");
+
+        Select loanTypes = new Select(driver.findElement(
+                By.cssSelector("select[id='loanType']")));
+        loanTypes.selectByVisibleText("Commercial");
+
+        driver.findElement(By.id("loanDuration")).sendKeys("6");
+
+        driver.findElement(By.cssSelector("bubtton[type='submit']")).click();
+
+
+        String secretCode = driver.findElement(By.xpath("//body")).getText();
+        System.out.println(secretCode);
     }
 
     @Test
     void test01() throws NoSuchMethodException, ClassNotFoundException {
-        Logger logger = LogManager.getLogger(Demo.class);
-        logger.debug("Debug log message");
-        logger.info("Info log message");
-        logger.error("Error log message");
+        String a = "<h1><h1>Sanjay has no watch</h1></h1><par>So wait for a while<par>";
+        String[] b = a.split(">");
+        System.out.println(Arrays.toString(b));
+        System.out.println(Arrays.toString(a.split("[?<]")));
+        System.out.println(Arrays.toString(a.split("[?>]")));
+
+//        System.out.println(Arrays.toString(a.split(">")));
+//        Arrays.stream(b).forEach(s -> System.out.println(s.replaceAll("<","")));
+//        System.out.println(Arrays.toString(b));
+        for (String line : b) {
+            if(!line.startsWith("</") && line.contains("/")) System.out.println(line.split("<")[0]);
+        }
     }
 
     public static void main(String[] args) throws ClassNotFoundException {
@@ -59,8 +117,13 @@ public class Demo {
         String defaultEqual = ansiCyan + "[Verification Equal]" + ansiReset;
         String pass = " " + ansiGreen + "PASS" + ansiReset + " ";
         String fail = " " + ansiRed + "FAIL" + ansiReset + " ";
+        HashMap<Character, Character> brackets = new HashMap<>();
+        brackets.put('[', ']');
+        brackets.put('{', '}');
+        brackets.put('(', ')');
+        System.out.println(checkBalance("[{]()"));
+//        System.out.println(brackets.get('"'));
 
-        System.out.printf("\033[38:5:208m%s\033[m\n","Hello world");
     }
 
     public Set<Class> findAllClassesUsingClassLoader(String packageName) {
