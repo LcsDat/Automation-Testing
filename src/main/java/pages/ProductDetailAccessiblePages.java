@@ -22,8 +22,9 @@ public class ProductDetailAccessiblePages extends BasePage {
     }
 
     public void clickToHeaderItem(@NotNull String headerName) {
-        if (headerName.equals("Hệ thống cửa hàng")) headerName = "Hệ thốngcửa hàng";
-        driver.click(COMMON_ITEM_HEADER, headerName);
+        if (headerName.equals("Hệ thống cửa hàng")) headerName = "Hệ thống cửa hàng";
+        driver.waitToBeClickable(COMMON_ITEM_HEADER, headerName).click();
+//        driver.click(COMMON_ITEM_HEADER, headerName);
     }
 
     public void setTextToUsernameInput(String value) {
@@ -39,7 +40,9 @@ public class ProductDetailAccessiblePages extends BasePage {
     }
 
     public void login(String username, String password) {
-        clickToHeaderItem("Đăng nhập");
+//        clickToHeaderItem("Đăng nhập");
+        driver.waitToBeClickable("a#btn-login").click();
+//        driver.click("a#btn-login");
         setTextToUsernameInput(username);
         setTextToPasswordInput(password);
         clickToLoginButton();

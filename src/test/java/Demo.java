@@ -1,5 +1,6 @@
 import cores.Browser;
 import cores.WebsiteDriver;
+import hasaki.OrderFlow.User_Order_One_Product;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
@@ -92,18 +93,7 @@ public class Demo {
 
     @Test
     void test01() throws NoSuchMethodException, ClassNotFoundException {
-        String a = "<h1><h1>Sanjay has no watch</h1></h1><par>So wait for a while<par>";
-        String[] b = a.split(">");
-        System.out.println(Arrays.toString(b));
-        System.out.println(Arrays.toString(a.split("[?<]")));
-        System.out.println(Arrays.toString(a.split("[?>]")));
-
-//        System.out.println(Arrays.toString(a.split(">")));
-//        Arrays.stream(b).forEach(s -> System.out.println(s.replaceAll("<","")));
-//        System.out.println(Arrays.toString(b));
-        for (String line : b) {
-            if(!line.startsWith("</") && line.contains("/")) System.out.println(line.split("<")[0]);
-        }
+        System.out.printf("\033[31;1mHello\033[0m");
     }
 
     public static void main(String[] args) throws ClassNotFoundException {

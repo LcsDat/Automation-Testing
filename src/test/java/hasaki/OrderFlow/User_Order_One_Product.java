@@ -6,21 +6,22 @@ import cores.DriverFactory;
 import cores.PageFactory;
 import org.apache.logging.log4j.LogManager;
 import org.testng.annotations.*;
-import reportConfig.ExtentTestManager;
 
 public class User_Order_One_Product extends BaseTest {
 
+
+    @BeforeSuite
+    void beforeSuite() {
+        startTestLog(User_Order_One_Product.class,"User order a product on the website.");
+        extentTest = getExtentTest();
+        logger = LogManager.getLogger(User_Order_One_Product.class);
+    }
+
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
-    void beforeClass(Browser browser, String url, String username, String password) {
-        ExtentTestManager.startTest(User_Order_One_Product.class.getName().split("\\.")[2].replace("_", " ") + " " + browser + " Test Suite",
-                "User order a product on the website.");
-        extentTest = ExtentTestManager.getTest();
-        logger = LogManager.getLogger(User_Order_One_Product.class);
-
+    void beforeClass(Browser browser, String url, String username, String password){
         logInfo("------ Setup steps include ------");
         logInfo("- Initialize relevant pages");
-//        logger.info("This is an INFO message");
         webDriver = DriverFactory.initWebsiteDriver(browser);
         homepage = PageFactory.generateHomePage(webDriver);
         productPage = PageFactory.generateProductsPage(webDriver);
@@ -43,7 +44,6 @@ public class User_Order_One_Product extends BaseTest {
 
         logInfo("- Remove products in Cart if they exist");
         homepage.removeProductFromCart();
-
     }
 
     @AfterMethod

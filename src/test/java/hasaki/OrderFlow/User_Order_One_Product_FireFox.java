@@ -4,17 +4,24 @@ import cores.BaseTest;
 import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
+import org.apache.logging.log4j.LogManager;
 import org.testng.annotations.*;
 import reportConfig.ExtentTestManager;
 
 public class User_Order_One_Product_FireFox extends BaseTest {
+    @BeforeSuite
+    void beforeSuite() {
+        startTestLog(User_Order_One_Product.class,"User order a product on the website.");
+        extentTest = getExtentTest();
+        logger = LogManager.getLogger(User_Order_One_Product.class);
+    }
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
-        ExtentTestManager.startTest(User_Order_One_Product.class.getName().split("\\.")[2].replace("_", " ") + " " + browser + " Test Suite",
-                "User order a product on the website.");
-        extentTest = ExtentTestManager.getTest();
+//        ExtentTestManager.startTest(User_Order_One_Product.class.getName().split("\\.")[2].replace("_", " ") + " " + browser + " Test Suite",
+//                "User order a product on the website.");
+//        extentTest = ExtentTestManager.getTest();
 
         logInfo("------ Setup steps include ------");
         logInfo("- Initialize relevant pages");
