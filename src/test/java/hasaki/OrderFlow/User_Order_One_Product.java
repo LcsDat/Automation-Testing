@@ -1,14 +1,12 @@
 package hasaki.OrderFlow;
 
-import cores.BaseTest;
-import cores.Browser;
-import cores.DriverFactory;
-import cores.PageFactory;
+import cores.*;
 import org.apache.logging.log4j.LogManager;
 import org.testng.annotations.*;
 
 public class User_Order_One_Product extends BaseTest {
 
+//    WebsiteDriver webDriver;
 
     @BeforeSuite
     void beforeSuite() {
@@ -28,6 +26,8 @@ public class User_Order_One_Product extends BaseTest {
         productDetailsPage = PageFactory.generateProductDetailsPage(webDriver);
         cartPage = PageFactory.generateCartPage(webDriver);
         paymentPage = PageFactory.generatePaymentPage(webDriver);
+
+        System.out.println("Current thread: " + Thread.currentThread().getId());
 
         logInfo("- Navigate to " + url);
 //        logger.info("- Navigate to " + url);

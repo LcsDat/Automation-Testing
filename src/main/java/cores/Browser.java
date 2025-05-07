@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.firefox.FirefoxBinary;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
@@ -31,8 +32,10 @@ public enum Browser {
 
     public WebDriver initHeadlessFirefoxDriver() {
         FirefoxOptions options = new FirefoxOptions();
-
-        options.addArguments("--headless","--start-maximized", "--window-size=1920x1080");
+        options.addArguments("--headless",
+//                "--start-maximized",
+                "--width=1920",
+                "--height=1080");
         return new FirefoxDriver(options);
     }
 

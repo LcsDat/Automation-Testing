@@ -9,8 +9,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExtentTestManager {
-    static Map<Integer, ExtentTest> extentTestMap = new HashMap<Integer, ExtentTest>();
-    static ExtentReports extent = ExtentManager.init();
+
+    static  Map<Integer, ExtentTest> extentTestMap = new HashMap<Integer, ExtentTest>();
+     static ExtentReports extent = ExtentManager.init();
 
     public static synchronized ExtentTest getTest() {
         return extentTestMap.get((int) Thread.currentThread().getId());
@@ -19,6 +20,7 @@ public class ExtentTestManager {
     public static synchronized ExtentTest startTest(String testName, String desc) {
         ExtentTest test = extent.createTest(testName, desc);
         extentTestMap.put((int) Thread.currentThread().getId(), test);
+        System.out.println(Thread.currentThread().getId());
         return test;
     }
 }

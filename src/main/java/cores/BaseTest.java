@@ -5,6 +5,8 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import pages.*;
 import reportConfig.ExtentTestManager;
 
@@ -13,7 +15,7 @@ import java.util.Random;
 public class BaseTest {
 
 
-    protected WebsiteDriver webDriver;
+    protected static WebsiteDriver webDriver;
     protected HomePage homepage;
     protected ProductsPage productPage;
     protected ProductDetailsPage productDetailsPage;
@@ -26,7 +28,12 @@ public class BaseTest {
 
 
 
-    public WebsiteDriver getWebDriver() {
+    public synchronized String takeScreenshot(){
+        var driver = getWebDriver().getDriver();
+        return  ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+    }
+
+    public synchronized WebsiteDriver getWebDriver() {
         return webDriver;
     }
 
@@ -40,8 +47,8 @@ public class BaseTest {
      * @param testClass Test Class that attach to the Test Suite name
      * @param desc Description of the test suite
      */
-    protected static void startTestLog(Class<?> testClass, String desc){
-        ExtentTestManager.startTest(testClass.getName().split("\\.")[2].replace("_", " ") + " Test Suite",
+    protected synchronized static void startTestLog(Class<?> testClass, String desc){
+        new ExtentTestManager().startTest(testClass.getName().split("\\.")[2].replace("_", " ") + " Test Suite",
                 desc);
     }
 
@@ -51,12 +58,12 @@ public class BaseTest {
      * @param desc Description of the test suite
      */
     protected static void startTestLog(String testSuiteName, String desc){
-        ExtentTestManager.startTest(testSuiteName,
+        new ExtentTestManager().startTest(testSuiteName,
                 desc);
     }
 
     protected static synchronized ExtentTest getExtentTest(){
-        return ExtentTestManager.getTest();
+        return new ExtentTestManager().getTest();
     }
 
     protected static void sleepInSecond(long time) {

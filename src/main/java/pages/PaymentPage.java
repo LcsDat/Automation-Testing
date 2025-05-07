@@ -84,6 +84,7 @@ public class PaymentPage extends BasePage {
         clickDropdown("Chọn Tỉnh/ TP, Quận/ Huyện");
         setTextDropdownSearchField(cityName);
         driver.click(DROPDOWN_SEARCH_INPUT_OPTION, cityName);
+//        driver.click(DROPDOWN_SEARCH_INPUT_OPTION, cityName);
     }
 
     public void chooseWard(String wardName) {
@@ -93,7 +94,7 @@ public class PaymentPage extends BasePage {
     }
 
     public void clickStreetField() {
-        driver.click(STREET_NUMBER_INPUT);
+        driver.waitToBeClickable(STREET_NUMBER_INPUT).click();
     }
 
     public void setTextStreetField(String value) {
