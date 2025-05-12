@@ -16,7 +16,7 @@
     <!--        </classes>-->
     <!--    </test>-->
 
-    <test name="Hasaki on Headless" parallel="classes" thread-count="1">
+    <test name="Hasaki on Headless" parallel="classes" thread-count="2">
         <classes>
             <class name="hasaki.OrderFlow.User_Order_One_Product" >
                 <parameter name="browser" value="HEADLESSCHROME"/>

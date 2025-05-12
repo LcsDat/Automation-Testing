@@ -1,39 +1,35 @@
-import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import cores.Browser;
-import cores.DriverFactory;
-import cores.PageFactory;
-import cores.WebsiteDriver;
+import cores.*;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import reportConfig.ExtentManager;
 import reportConfig.ExtentTestManager;
 
-public class Demo2 {
+public class Demo2 extends DemoParent {
     WebsiteDriver driver;
     HomePage homePage;
-    protected  static ExtentTest extentTest;
-    protected static Logger logger;
+    static ExtentTest extentTest;
+
+    static {
+        extentTest = extentTest = ExtentTestManager.startTest(Demo2.class + " Test Suite",
+                "hello 2");
+    }
 
     @BeforeClass
     void beforeTest() {
-        extentTest = ExtentTestManager.startTest(Demo2.class.getName().split("\\.")[0].replace("_", " "), "demo 2");
-        System.out.println(extentTest);
-        logger = LogManager.getLogger(Demo1.class);
+        System.out.println("extent variable: " + extentTest.toString());
+        logger = LogManager.getLogger(Demo2.class);
 
         System.out.println("Current Thread: " + Thread.currentThread().getId());
 
         extentTest.log(Status.INFO, MarkupHelper.createLabel("demo1 extent log", ExtentColor.GREY));
-        logger.info("demo1 extent log4j2 log");
+        logger.info("demo2 extent log4j2 log");
         driver = DriverFactory.initWebsiteDriver(Browser.HEADLESSEDGE);
         driver.navigate("https://hasaki.vn/");
         homePage = PageFactory.generateHomePage(driver);

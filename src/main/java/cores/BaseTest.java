@@ -4,9 +4,12 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import pages.*;
 import reportConfig.ExtentTestManager;
 
@@ -26,11 +29,20 @@ public class BaseTest {
     protected static ExtentTest extentTest;
     protected static Logger logger;
 
+    @BeforeSuite
+    void beforeSuite(Class className) {
+        startTestLog(className, "User order a product on the website on Thread: " + (int) Thread.currentThread().getId(), (int) Thread.currentThread().getId());
+    }
 
+    @AfterSuite(alwaysRun = true)
+    void afterSuite() {
+        logInfo("- Clean background process (driver)");
+        cleanDriverProcess();
+    }
 
-    public synchronized String takeScreenshot(){
+    public synchronized String takeScreenshot() {
         var driver = getWebDriver().getDriver();
-        return  ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
     }
 
     public synchronized WebsiteDriver getWebDriver() {
@@ -42,28 +54,50 @@ public class BaseTest {
         logger.info(description);
     }
 
+    protected static void logInfo(String description, ExtentColor color) {
+        extentTest.log(Status.INFO, MarkupHelper.createLabel(description, color));
+        logger.info(description);
+    }
+
     /**
      * Writing log for Extent Report
+     *
      * @param testClass Test Class that attach to the Test Suite name
-     * @param desc Description of the test suite
+     * @param desc      Description of the test suite
      */
-    protected synchronized static void startTestLog(Class<?> testClass, String desc){
-        new ExtentTestManager().startTest(testClass.getName().split("\\.")[2].replace("_", " ") + " Test Suite",
+    protected synchronized static void startTestLog(Class<?> testClass, String desc) {
+        extentTest = ExtentTestManager.startTest(testClass.getName().split("\\.")[2].replace("_", " ") + " Test Suite",
                 desc);
+        logger = LogManager.getLogger(testClass);
+        System.out.println("Current thread and current class: " + Thread.currentThread().getId() + " " + testClass.getName());
+    }
+
+    protected synchronized static void startTestLog(Class<?> testClass, String desc, int currentThread) {
+        extentTest = ExtentTestManager.startTest(testClass.getName().split("\\.")[2].replace("_", " ") + " Test Suite",
+                desc, currentThread);
+        logger = LogManager.getLogger(testClass);
+    }
+
+    protected void attachScreenshot(){
+        String base64Screenshot = takeScreenshot();
+        extentTest.addScreenCaptureFromBase64String(base64Screenshot);
     }
 
     /**
      * Writing log for Extent Report
+     *
      * @param testSuiteName Test Suite name
-     * @param desc Description of the test suite
+     * @param desc          Description of the test suite
      */
-    protected static void startTestLog(String testSuiteName, String desc){
-        new ExtentTestManager().startTest(testSuiteName,
+    protected static void startTestLog(String testSuiteName, String desc) {
+        extentTest = ExtentTestManager.startTest(testSuiteName,
                 desc);
     }
 
-    protected static synchronized ExtentTest getExtentTest(){
-        return new ExtentTestManager().getTest();
+    protected static int getCurrentThread() {
+        var currentThread = (int) Thread.currentThread().getId();
+        System.out.println("Current thread of base test: " + currentThread);
+        return currentThread;
     }
 
     protected static void sleepInSecond(long time) {

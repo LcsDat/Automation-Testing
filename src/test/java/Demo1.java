@@ -7,26 +7,26 @@ import cores.DriverFactory;
 import cores.PageFactory;
 import cores.WebsiteDriver;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import pages.HomePage;
-import reportConfig.ExtentManager;
 import reportConfig.ExtentTestManager;
 
-public class Demo1 {
+public class Demo1 extends DemoParent {
     WebsiteDriver driver;
     HomePage homePage;
-    protected  static ExtentTest extentTest;
-    protected static Logger logger;
+    static ExtentTest extentTest;
+
+    static {
+        extentTest = extentTest = ExtentTestManager.startTest(Demo1.class + " Test Suite",
+                "hello 1");
+    }
+
     @BeforeClass
     void beforeTest() {
-        extentTest = ExtentTestManager.startTest(Demo1.class.getName().split("\\.")[0].replace("_", " "), "demo 1");
-        System.out.println(extentTest);
+        System.out.println("extent variable: " + extentTest.toString());
         logger = LogManager.getLogger(Demo1.class);
 
         System.out.println("Current Thread: " + Thread.currentThread().getId());
@@ -41,13 +41,13 @@ public class Demo1 {
     }
 
     @Test
-    void test(){
+    void test() {
         homePage.setTextToSearch("hello world");
         Assert.assertEquals(homePage.getPageTitle(), "Hasaki.vn | Mỹ Phẩm & Clinic");
     }
 
     @AfterTest
-    void afterTest(){
+    void afterTest() {
         driver.quit();
     }
 }

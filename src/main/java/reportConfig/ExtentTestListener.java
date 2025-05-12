@@ -14,23 +14,30 @@ import static reportConfig.ExtentTestManager.getTest;
 public class ExtentTestListener implements ITestListener {
     @Override
     public void onStart(ITestContext iTestContext) {
+        System.out.println("onStart: " + iTestContext.getClass().getName());
         getTest().log(Status.INFO, MarkupHelper.createLabel(iTestContext.getName() + " ------> START", ExtentColor.ORANGE));
     }
 
     @Override
     public void onFinish(ITestContext iTestContext) {
+        System.out.println("onFinish: " + iTestContext.getClass().getName());
         getTest().log(Status.INFO, MarkupHelper.createLabel(iTestContext.getName() + " ------> FINISH", ExtentColor.GREEN));
         ExtentManager.extentReports.flush();
     }
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        getTest().log(Status.INFO, MarkupHelper.createLabel("EXECUTION START " + iTestResult.getName().toUpperCase(), ExtentColor.ORANGE));
+        System.out.println("onTestStart: " + iTestResult.getTestClass().getName());
+        System.out.println("onTestStart: " + ExtentTestManager.testClass);
+//        getTest(iTestResult.getTestClass().getName()).log(Status.INFO, MarkupHelper.createLabel("EXECUTION START " + iTestResult.getName().toUpperCase(), ExtentColor.ORANGE));
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
+        System.out.println("onTestSuccess: " + iTestResult.getTestClass().getName());
+        System.out.println("onTestStart: " + ExtentTestManager.testClass);
         getTest().log(Status.PASS, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + "------ PASSED ------", ExtentColor.GREEN));
+
     }
 
     @Override
@@ -38,8 +45,9 @@ public class ExtentTestListener implements ITestListener {
         Object testClass = iTestResult.getInstance();
 //        WebDriver driver = ((BaseTest) testClass).getWebDriver().getDriver();
 
+        System.out.println("onTestFailure: " + iTestResult.getTestClass().getName());
         String base64Screenshot = "data:image/png;base64," + ((BaseTest) testClass).takeScreenshot();
-        getTest().log(Status.FAIL, "Screenshot and Exception", iTestResult.getThrowable(), new ExtentTestManager().getTest().addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
+        getTest().log(Status.FAIL, "Screenshot and Exception", iTestResult.getThrowable(), getTest().addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
         getTest().log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + "------ FAILED ------", ExtentColor.RED));
     }
 
@@ -48,8 +56,9 @@ public class ExtentTestListener implements ITestListener {
         Object testClass = iTestResult.getInstance();
 //        WebDriver driver = ((BaseTest) testClass).getWebDriver().getDriver();
 
+        System.out.println("onTestSkipped: " + iTestResult.getTestClass().getName());
         String base64Screenshot = "data:image/png;base64," + ((BaseTest) testClass).takeScreenshot();
-        getTest().log(Status.SKIP, "Screenshot and Exception", iTestResult.getThrowable(), new ExtentTestManager().getTest().addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
+        getTest().log(Status.SKIP, "Screenshot and Exception", iTestResult.getThrowable(), getTest().addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
         getTest().log(Status.SKIP, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + "------ SKIPPED ------", ExtentColor.ORANGE));
     }
 

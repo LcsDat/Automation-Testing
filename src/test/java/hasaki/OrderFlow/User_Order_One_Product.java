@@ -1,36 +1,33 @@
 package hasaki.OrderFlow;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
 import cores.*;
 import org.apache.logging.log4j.LogManager;
 import org.testng.annotations.*;
 
 public class User_Order_One_Product extends BaseTest {
 
-//    WebsiteDriver webDriver;
-
-    @BeforeSuite
-    void beforeSuite() {
-        startTestLog(User_Order_One_Product.class,"User order a product on the website.");
-        extentTest = getExtentTest();
-        logger = LogManager.getLogger(User_Order_One_Product.class);
+    static {
+        startTestLog(User_Order_One_Product.class, "User order a product on the website on Thread: " + (int) Thread.currentThread().getId(), (int) Thread.currentThread().getId());
     }
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
-    void beforeClass(Browser browser, String url, String username, String password){
+    void beforeClass(Browser browser, String url, String username, String password) {
+
+
+        logInfo("Browser: " + browser, ExtentColor.LIME);
+        webDriver = DriverFactory.initWebsiteDriver(browser);
+
         logInfo("------ Setup steps include ------");
         logInfo("- Initialize relevant pages");
-        webDriver = DriverFactory.initWebsiteDriver(browser);
         homepage = PageFactory.generateHomePage(webDriver);
         productPage = PageFactory.generateProductsPage(webDriver);
         productDetailsPage = PageFactory.generateProductDetailsPage(webDriver);
         cartPage = PageFactory.generateCartPage(webDriver);
         paymentPage = PageFactory.generatePaymentPage(webDriver);
 
-        System.out.println("Current thread: " + Thread.currentThread().getId());
-
         logInfo("- Navigate to " + url);
-//        logger.info("- Navigate to " + url);
         webDriver.navigate(url);
 
         logInfo("- Close popup");
@@ -65,11 +62,6 @@ public class User_Order_One_Product extends BaseTest {
         quitBrowser();
     }
 
-    @AfterTest(alwaysRun = true)
-    void afterTest() {
-        logInfo("- Clean background process (driver)");
-        cleanDriverProcess();
-    }
 
     @Test()
     void tc01() {

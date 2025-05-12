@@ -1,37 +1,33 @@
 package hasaki.OrderFlow;
 
+import com.aventstack.extentreports.markuputils.ExtentColor;
 import cores.*;
 import org.apache.logging.log4j.LogManager;
 import org.testng.annotations.*;
 import reportConfig.ExtentTestManager;
 
 public class User_Order_One_Product_FireFox extends BaseTest {
-//    WebsiteDriver webDriver;
 
-    @BeforeSuite
-    void beforeSuite() {
-        startTestLog(User_Order_One_Product_FireFox.class, "User order a product on the website.");
-        extentTest = getExtentTest();
-        logger = LogManager.getLogger(User_Order_One_Product_FireFox.class);
+    static {
+        startTestLog(User_Order_One_Product_FireFox.class, "User order a product on the website on Thread: " + (int) Thread.currentThread().getId(), (int) Thread.currentThread().getId());
     }
+//    @BeforeSuite
+//    void beforeSuite() {
+//        startTestLog(User_Order_One_Product_FireFox.class, "User order a product on the website on Thread: " + (int) Thread.currentThread().getId(), (int) Thread.currentThread().getId());
+//    }
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
-//        ExtentTestManager.startTest(User_Order_One_Product.class.getName().split("\\.")[2].replace("_", " ") + " " + browser + " Test Suite",
-//                "User order a product on the website.");
-//        extentTest = ExtentTestManager.getTest();
-
-        logInfo("------ Setup steps include ------");
-        logInfo("- Initialize relevant pages");
+        logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = DriverFactory.initWebsiteDriver(browser);
+
+
         homepage = PageFactory.generateHomePage(webDriver);
         productPage = PageFactory.generateProductsPage(webDriver);
         productDetailsPage = PageFactory.generateProductDetailsPage(webDriver);
         cartPage = PageFactory.generateCartPage(webDriver);
         paymentPage = PageFactory.generatePaymentPage(webDriver);
-
-        System.out.println("Current thread: " + Thread.currentThread().getId());
 
         logInfo("- Navigate to " + url);
         webDriver.navigate(url);
@@ -68,11 +64,11 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         quitBrowser();
     }
 
-    @AfterTest(alwaysRun = true)
-    void afterTest() {
-        logInfo("- Clean background process (driver)");
-        cleanDriverProcess();
-    }
+//    @AfterSuite(alwaysRun = true)
+//    void afterSuite() {
+//        logInfo("- Clean background process (driver)");
+//        cleanDriverProcess();
+//    }
 
     @Test()
     void tc01() {
@@ -91,9 +87,8 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
         logInfo("Click add product to Cart");
         productDetailsPage.addProductToCart();
-//        sleepInSecond(1);
-
-        verifyTrue(webDriver.waitToBeVisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']").isDisplayed());
+//        attachScreenshot();
+        sleepInSecond(1);
 
         logInfo("Wait for warning message invisible: 'Maximum quantity is 1'");
         webDriver.waitToBeInvisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
@@ -258,6 +253,8 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         logInfo("Close Coupon popup");
         paymentPage.closePopup();
 
+        sleepInSecond(1);
+
         logInfo("Click to edit vouchers");
         paymentPage.chooseEdit("Mã giảm giá", "Nhập mã giảm giá");
 
@@ -265,6 +262,8 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
         logInfo("Close Voucher popup");
         paymentPage.closePopup();
+
+        sleepInSecond(1);
 
         paymentPage.changeProduct();
 

@@ -2,9 +2,9 @@
 
 <suite name="Suite1">
     <listeners>
-<!--        <listener class-name="reportConfig.ExtentTestListener"></listener>-->
+        <listener class-name="reportConfig.ExtentTestListener"/>
     </listeners>
-    <test name="Hasaki on Headless Chrome" parallel="classes" thread-count="2">
+    <test name="Hasaki on Headless Demo" parallel="classes" thread-count="2">
         <classes>
             <class name="Demo1"/>
             <class name="Demo2"/>
