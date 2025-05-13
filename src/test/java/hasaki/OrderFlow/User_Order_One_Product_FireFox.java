@@ -8,20 +8,18 @@ import cores.PageFactory;
 import org.testng.annotations.*;
 
 public class User_Order_One_Product_FireFox extends BaseTest {
-    {
-        extentTest = startTestLog(User_Order_One_Product_FireFox.class.getName(), "User order a product on the website on Thread: " + (int) Thread.currentThread().getId());
-        System.out.println("extent test on Firefox :" + extentTest);
+
+
+    @BeforeSuite
+    void beforeSuite(){
+        extentTest = startTestLog(User_Order_One_Product_FireFox.class.getName().split("\\.")[2] + " Suite", "User order a product on the website on Thread: " + (int) Thread.currentThread().getId());
     }
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
-
         logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = DriverFactory.initWebsiteDriver(browser);
-
-        System.out.println("driver on " + browser + " :" + webDriver);
-
 
         homepage = PageFactory.generateHomePage(webDriver);
         productPage = PageFactory.generateProductsPage(webDriver);
@@ -31,8 +29,6 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
         logInfo("- Navigate to " + url);
         webDriver.navigate(url);
-
-
 
         logInfo("- Close popup");
         homepage.cancelPopup();

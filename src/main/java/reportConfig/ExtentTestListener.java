@@ -1,5 +1,6 @@
 package reportConfig;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
@@ -12,8 +13,14 @@ import org.testng.ITestResult;
 
 
 public class ExtentTestListener extends BaseTest implements ITestListener {
+
+    private ExtentTest extentLog(String testClass){
+        return ExtentTestManager.init().getTest(testClass);
+    }
+
     @Override
     public void onStart(ITestContext iTestContext) {
+
     }
 
     @Override
@@ -24,13 +31,13 @@ public class ExtentTestListener extends BaseTest implements ITestListener {
     @Override
     public void onTestStart(ITestResult iTestResult) {
         System.out.println("onTestStart: " + iTestResult.getTestClass().getName());
-        ExtentTestManager.init().getTest(iTestResult.getTestClass().getName()).log(Status.INFO, MarkupHelper.createLabel("EXECUTION START " + iTestResult.getName().toUpperCase(), ExtentColor.ORANGE));
+        extentLog(iTestResult.getTestClass().getName()).log(Status.INFO, MarkupHelper.createLabel("EXECUTION START " + iTestResult.getName().toUpperCase(), ExtentColor.ORANGE));
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
         System.out.println("onTestSuccess: " + iTestResult.getTestClass().getName());
-        ExtentTestManager.init().getTest(iTestResult.getTestClass().getName()).log(Status.PASS, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + "------ PASSED ------", ExtentColor.GREEN));
+        extentLog(iTestResult.getTestClass().getName()).log(Status.PASS, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + "------ PASSED ------", ExtentColor.GREEN));
 
     }
 
@@ -39,8 +46,8 @@ public class ExtentTestListener extends BaseTest implements ITestListener {
         Object testClass = iTestResult.getInstance();
 
         String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)((BaseTest) testClass).getWebDriver().getDriver()).getScreenshotAs(OutputType.BASE64);
-        ExtentTestManager.init().getTest(iTestResult.getTestClass().getName()).log(Status.FAIL, "Screenshot and Exception", iTestResult.getThrowable(), ExtentTestManager.init().getTest(iTestResult.getTestClass().getName()).addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
-        ExtentTestManager.init().getTest(iTestResult.getTestClass().getName()).log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + " of " + iTestResult.getTestClass().getName() + "------ FAILED ------", ExtentColor.RED));
+        extentLog(iTestResult.getTestClass().getName()).log(Status.FAIL, "Screenshot and Exception", iTestResult.getThrowable(), extentLog(iTestResult.getTestClass().getName()).addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
+        extentLog(iTestResult.getTestClass().getName()).log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + " of " + iTestResult.getTestClass().getName() + "------ FAILED ------", ExtentColor.RED));
     }
 
     @Override
@@ -49,12 +56,12 @@ public class ExtentTestListener extends BaseTest implements ITestListener {
 
         System.out.println("onTestSkipped: " + iTestResult.getTestClass().getName());
         String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)((BaseTest) testClass).getWebDriver().getDriver()).getScreenshotAs(OutputType.BASE64);
-        ExtentTestManager.init().getTest(iTestResult.getTestClass().getName()).log(Status.SKIP, "Screenshot and Exception", iTestResult.getThrowable(), ExtentTestManager.init().getTest(iTestResult.getTestClass().getName()).addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
-        ExtentTestManager.init().getTest(iTestResult.getTestClass().getName()).log(Status.SKIP, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + "------ SKIPPED ------", ExtentColor.ORANGE));
+        extentLog(iTestResult.getTestClass().getName()).log(Status.SKIP, "Screenshot and Exception", iTestResult.getThrowable(), extentLog(iTestResult.getTestClass().getName()).addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
+        extentLog(iTestResult.getTestClass().getName()).log(Status.SKIP, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + "------ SKIPPED ------", ExtentColor.ORANGE));
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-        ExtentTestManager.init().getTest(iTestResult.getTestClass().getName()).log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName() + "------ FAILED WITH PERCENTAGE ------", ExtentColor.RED));
+        extentLog(iTestResult.getTestClass().getName()).log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName() + "------ FAILED WITH PERCENTAGE ------", ExtentColor.RED));
     }
 }
