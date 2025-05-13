@@ -27,7 +27,7 @@
 
                     <encoding>UTF-8</encoding>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/main/resources/demo.xml</suiteXmlFile>
+                        <suiteXmlFile>src/main/resources/HasakiTestRunner.xml</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>

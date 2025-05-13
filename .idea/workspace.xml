@@ -5,15 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d4cae05b-282d-4fac-8d6d-0598dd447a8a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/test/java/DemoParent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extentV5/Hasaki.html" beforeDir="false" afterPath="$PROJECT_DIR$/extentV5/Hasaki.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/demo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/demo.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Demo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Demo1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/Demo2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Demo2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" afterDir="false" />
@@ -65,18 +63,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/HasakiTestRunner.xml.executor": "Run",
-    "TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/demo.xml.executor": "Run",
-    "TestNG.Demo.test01.executor": "Run",
-    "git-widget-placeholder": "framework1",
-    "last_opened_file_path": "D:/Work/Training",
-    "settings.editor.selected.configurable": "MavenSettings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/HasakiTestRunner.xml.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/demo.xml.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.Demo.test01.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;framework1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Work/Training&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="" />
@@ -117,8 +115,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/demo.xml" />
         <item itemvalue="TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/HasakiTestRunner.xml" />
+        <item itemvalue="TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/demo.xml" />
         <item itemvalue="TestNG.Demo1.test01" />
       </list>
     </recent_temporary>

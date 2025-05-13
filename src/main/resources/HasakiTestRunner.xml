@@ -6,8 +6,7 @@
         <listener class-name="reportConfig.ExtentTestListener"/>
     </listeners>
     <parameter name="url" value="https://hasaki.vn/"/>
-    <parameter name="username" value="0345864246"/>
-    <parameter name="password" value="#Onimusha00"/>
+
 
     <!--    <test name="Hasaki on Chrome" parallel="none">-->
     <!--        <parameter name="browser" value="CHROME"/>-->
@@ -20,12 +19,16 @@
         <classes>
             <class name="hasaki.OrderFlow.User_Order_One_Product" >
                 <parameter name="browser" value="HEADLESSCHROME"/>
+                <parameter name="username" value="0345864246"/>
+                <parameter name="password" value="#Onimusha00"/>
             </class>
 <!--            <class name="hasaki.OrderFlow.User_Order_One_Product">-->
 <!--                <parameter name="browser" value="HEADLESSEDGE"/>-->
 <!--            </class>-->
             <class name="hasaki.OrderFlow.User_Order_One_Product_FireFox">
                 <parameter name="browser" value="HEADLESSFIREFOX"/>
+                <parameter name="username" value="0796280280"/>
+                <parameter name="password" value="27051993@Phuong"/>
             </class>
         </classes>
     </test>

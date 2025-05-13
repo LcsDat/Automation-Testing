@@ -16,10 +16,10 @@ public class Demo2 extends DemoParent {
     HomePage homePage;
     static ExtentTest extentTest;
 
-    static {
-        extentTest = extentTest = ExtentTestManager.startTest(Demo2.class + " Test Suite",
-                "hello 2");
-    }
+//    static {
+//        extentTest = extentTest = ExtentTestManager.startTest(Demo2.class.getName() + " Test Suite",
+//                "hello 2");
+//    }
 
     @BeforeClass
     void beforeTest() {
@@ -28,7 +28,7 @@ public class Demo2 extends DemoParent {
 
         System.out.println("Current Thread: " + Thread.currentThread().getId());
 
-        extentTest.log(Status.INFO, MarkupHelper.createLabel("demo1 extent log", ExtentColor.GREY));
+        extentTest.log(Status.INFO, MarkupHelper.createLabel("demo2 extent log", ExtentColor.GREY));
         logger.info("demo2 extent log4j2 log");
         driver = DriverFactory.initWebsiteDriver(Browser.HEADLESSEDGE);
         driver.navigate("https://hasaki.vn/");

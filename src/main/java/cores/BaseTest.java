@@ -9,7 +9,6 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
 import pages.*;
 import reportConfig.ExtentTestManager;
 
@@ -17,8 +16,7 @@ import java.util.Random;
 
 public class BaseTest {
 
-
-    protected static WebsiteDriver webDriver;
+    protected WebsiteDriver webDriver;
     protected HomePage homepage;
     protected ProductsPage productPage;
     protected ProductDetailsPage productDetailsPage;
@@ -26,13 +24,9 @@ public class BaseTest {
     protected StoresLocationPage storesLocationPage;
     protected FAQPage faqPage;
     protected PaymentPage paymentPage;
-    protected static ExtentTest extentTest;
-    protected static Logger logger;
-
-    @BeforeSuite
-    void beforeSuite(Class className) {
-        startTestLog(className, "User order a product on the website on Thread: " + (int) Thread.currentThread().getId(), (int) Thread.currentThread().getId());
-    }
+    protected ExtentTestManager extentTestManager = ExtentTestManager.init();
+    protected ExtentTest extentTest;
+    protected Logger logger;
 
     @AfterSuite(alwaysRun = true)
     void afterSuite() {
@@ -40,21 +34,21 @@ public class BaseTest {
         cleanDriverProcess();
     }
 
-    public synchronized String takeScreenshot() {
+    public String takeScreenshot() {
         var driver = getWebDriver().getDriver();
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
     }
 
-    public synchronized WebsiteDriver getWebDriver() {
+    public WebsiteDriver getWebDriver() {
         return webDriver;
     }
 
-    protected static void logInfo(String description) {
+    protected void logInfo(String description) {
         extentTest.log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.GREY));
         logger.info(description);
     }
 
-    protected static void logInfo(String description, ExtentColor color) {
+    protected void logInfo(String description, ExtentColor color) {
         extentTest.log(Status.INFO, MarkupHelper.createLabel(description, color));
         logger.info(description);
     }
@@ -65,34 +59,22 @@ public class BaseTest {
      * @param testClass Test Class that attach to the Test Suite name
      * @param desc      Description of the test suite
      */
-    protected synchronized static void startTestLog(Class<?> testClass, String desc) {
-        extentTest = ExtentTestManager.startTest(testClass.getName().split("\\.")[2].replace("_", " ") + " Test Suite",
-                desc);
+    protected ExtentTest startTestLog(String testClass, String desc) {
         logger = LogManager.getLogger(testClass);
-        System.out.println("Current thread and current class: " + Thread.currentThread().getId() + " " + testClass.getName());
+        return extentTestManager.startTest(testClass, desc);
     }
 
-    protected synchronized static void startTestLog(Class<?> testClass, String desc, int currentThread) {
-        extentTest = ExtentTestManager.startTest(testClass.getName().split("\\.")[2].replace("_", " ") + " Test Suite",
-                desc, currentThread);
-        logger = LogManager.getLogger(testClass);
-    }
-
-    protected void attachScreenshot(){
+    protected void attachScreenshot(String message) {
+        logger.info(message);
         String base64Screenshot = takeScreenshot();
-        extentTest.addScreenCaptureFromBase64String(base64Screenshot);
+        extentTestManager.getTest().addScreenCaptureFromBase64String(base64Screenshot);
     }
 
-    /**
-     * Writing log for Extent Report
-     *
-     * @param testSuiteName Test Suite name
-     * @param desc          Description of the test suite
-     */
-    protected static void startTestLog(String testSuiteName, String desc) {
-        extentTest = ExtentTestManager.startTest(testSuiteName,
-                desc);
+    protected void attachScreenshot() {
+        String base64Screenshot = takeScreenshot();
+        extentTestManager.getTest().addScreenCaptureFromBase64String(base64Screenshot);
     }
+
 
     protected static int getCurrentThread() {
         var currentThread = (int) Thread.currentThread().getId();

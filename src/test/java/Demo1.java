@@ -19,10 +19,10 @@ public class Demo1 extends DemoParent {
     HomePage homePage;
     static ExtentTest extentTest;
 
-    static {
-        extentTest = extentTest = ExtentTestManager.startTest(Demo1.class + " Test Suite",
-                "hello 1");
-    }
+//    static {
+//        star(Demo1.class.getName() + " Test Suite",
+//                "hello 1");
+//    }
 
     @BeforeClass
     void beforeTest() {
