@@ -15,7 +15,7 @@ public class WebsiteDriver {
     private ExplicitWait webDriverWait;
     private JavascriptExecutor jsExecutor;
 
-    private Duration defaultTimeout = Duration.ofSeconds(10);
+    private Duration defaultTimeout = Duration.ofSeconds(GlobalVariables.LONG_TIMEOUT);
 
     public WebsiteDriver(Browser browser) {
         this.driver = DriverFactory.initWebdriver(browser);

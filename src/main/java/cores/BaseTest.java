@@ -5,14 +5,17 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import pages.*;
+import reportConfig.ExtentTestManager;
 
 import java.util.Random;
 
 public class BaseTest {
 
 
-    protected WebsiteDriver webDriver;
+    protected static WebsiteDriver webDriver;
     protected HomePage homepage;
     protected ProductsPage productPage;
     protected ProductDetailsPage productDetailsPage;
@@ -20,19 +23,47 @@ public class BaseTest {
     protected StoresLocationPage storesLocationPage;
     protected FAQPage faqPage;
     protected PaymentPage paymentPage;
-    protected ExtentTest extentTest;
+    protected static ExtentTest extentTest;
     protected static Logger logger;
 
-    private final static String HASAKI_KEYWORD = "hasaki";
 
 
-    public WebsiteDriver getWebDriver() {
+    public synchronized String takeScreenshot(){
+        var driver = getWebDriver().getDriver();
+        return  ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+    }
+
+    public synchronized WebsiteDriver getWebDriver() {
         return webDriver;
     }
 
-    protected void logInfo(String description) {
+    protected static void logInfo(String description) {
         extentTest.log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.GREY));
         logger.info(description);
+    }
+
+    /**
+     * Writing log for Extent Report
+     * @param testClass Test Class that attach to the Test Suite name
+     * @param desc Description of the test suite
+     */
+    protected synchronized static void startTestLog(Class<?> testClass, String desc){
+        new ExtentTestManager().startTest(testClass.getName().split("\\.")[2].replace("_", " ") + " Test Suite",
+                desc);
+    }
+
+    /**
+     * Writing log for Extent Report
+     * @param testSuiteName Test Suite name
+     * @param desc Description of the test suite
+     */
+    protected static void startTestLog(String testSuiteName, String desc){
+        new ExtentTestManager().startTest(testSuiteName,
+                desc);
+    }
+
+    protected static synchronized ExtentTest getExtentTest(){
+        return new ExtentTestManager().getTest();
     }
 
     protected static void sleepInSecond(long time) {
@@ -83,26 +114,26 @@ public class BaseTest {
     }
 
     protected boolean verifyTrue(boolean condition) {
-        return new CustomAssert(HASAKI_KEYWORD).verifyTrue(condition);
+        return new CustomAssert(GlobalVariables.HASAKI_KEYWORD).verifyTrue(condition);
     }
 
     protected boolean verifyTrue(boolean condition, String message) {
-        return new CustomAssert(HASAKI_KEYWORD).verifyTrue(condition, message);
+        return new CustomAssert(GlobalVariables.HASAKI_KEYWORD).verifyTrue(condition, message);
     }
 
     protected boolean verifyFalse(boolean condition) {
-        return new CustomAssert(HASAKI_KEYWORD).verifyFalse(condition);
+        return new CustomAssert(GlobalVariables.HASAKI_KEYWORD).verifyFalse(condition);
     }
 
     protected boolean verifyFalse(boolean condition, String message) {
-        return new CustomAssert(HASAKI_KEYWORD).verifyFalse(condition, message);
+        return new CustomAssert(GlobalVariables.HASAKI_KEYWORD).verifyFalse(condition, message);
     }
 
     protected void verifyEquals(Object actual, Object expected, String message) {
-        new CustomAssert(HASAKI_KEYWORD).verifyEquals(actual, expected, message);
+        new CustomAssert(GlobalVariables.HASAKI_KEYWORD).verifyEquals(actual, expected, message);
     }
 
     protected void verifyEquals(Object actual, Object expected) {
-        new CustomAssert(HASAKI_KEYWORD).verifyEquals(actual, expected);
+        new CustomAssert(GlobalVariables.HASAKI_KEYWORD).verifyEquals(actual, expected);
     }
 }

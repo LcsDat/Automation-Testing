@@ -105,7 +105,7 @@ public class HomePage extends ProductDetailAccessiblePages {
     }
 
     public void cancelPopup() {
-        driver.click(POPUP_CANCEL_BUTTON);
+        driver.waitToBeVisible(POPUP_CANCEL_BUTTON).click();
     }
 
     public void cancelCookie() {

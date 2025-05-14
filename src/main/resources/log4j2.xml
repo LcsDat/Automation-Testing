@@ -2,7 +2,7 @@
 <Configuration status="WARN">
     <Properties>
         <!-- ANSI color codes -->
-        <Property name="CONSOLE_LOG_PATTERN">⏱️ %style{%d{HH:mm:ss a}}{bright,cyan} [%t] %highlight{%level{FATAL=☠️, ERROR=❌, WARN=⚠️, INFO=ℹ️, DEBUG=🔍, TRACE=📋}} %logger{36} - %style{%msg%n}{yellow} </Property>
+        <Property name="CONSOLE_LOG_PATTERN">⏱️ %style{%-13d{HH:mm:ss a}}{bright,cyan} [%t] %highlight{%7level{FATAL=☠️, ERROR=❌, WARN=⚠️, INFO=ℹ️, DEBUG=🔍, TRACE=📋}} %43logger{36} | %style{%msg%n}{yellow} </Property>
     </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">

@@ -18,7 +18,7 @@ public class ExplicitWait {
 
     public ExplicitWait(WebsiteDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver.getDriver(), Duration.ofSeconds(10));
+        wait = new WebDriverWait(driver.getDriver(), Duration.ofSeconds(GlobalVariables.LONG_TIMEOUT));
     }
 
     public ExplicitWait(WebsiteDriver driver, Duration timeout) {
