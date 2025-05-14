@@ -1,26 +1,38 @@
 package reportConfig;
 
-import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import org.testng.ITestContext;
-import org.testng.TestRunner;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ExtentTestManager {
 
-    static  Map<Integer, ExtentTest> extentTestMap = new HashMap<Integer, ExtentTest>();
-     static ExtentReports extent = ExtentManager.init();
+    private static ExtentTestManager extentTestManager = null;
+    private final Map<String, ExtentTest> extentTestMap = new HashMap<>();
+    private String testClass;
 
-    public static synchronized ExtentTest getTest() {
-        return extentTestMap.get((int) Thread.currentThread().getId());
+    public static ExtentTestManager init(){
+        if(extentTestManager == null){
+            extentTestManager = new ExtentTestManager();
+        }
+        return extentTestManager;
+    }
+    public ExtentTest getTest() {
+        return extentTestMap.get(testClass);
     }
 
-    public static synchronized ExtentTest startTest(String testName, String desc) {
-        ExtentTest test = extent.createTest(testName, desc);
-        extentTestMap.put((int) Thread.currentThread().getId(), test);
-        System.out.println(Thread.currentThread().getId());
-        return test;
+    public ExtentTest getTest(String testClass) {
+        return extentTestMap.get(testClass);
+    }
+
+    public Map<String, ExtentTest> getMap(){
+        return extentTestMap;
+    }
+
+    public ExtentTest startTest(String testName, String desc) {
+        testClass = testName;
+        ExtentTest extentTest = ExtentManager.init().createTest(testName, desc);
+        extentTestMap.put(testName, extentTest);
+        return extentTest;
     }
 }

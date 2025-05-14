@@ -1,36 +1,36 @@
 package hasaki.OrderFlow;
 
-import cores.*;
-import org.apache.logging.log4j.LogManager;
+import com.aventstack.extentreports.markuputils.ExtentColor;
+import cores.BaseTest;
+import cores.Browser;
+import cores.DriverFactory;
+import cores.PageFactory;
 import org.testng.annotations.*;
 
 public class User_Order_One_Product extends BaseTest {
 
-//    WebsiteDriver webDriver;
-
     @BeforeSuite
-    void beforeSuite() {
-        startTestLog(User_Order_One_Product.class,"User order a product on the website.");
-        extentTest = getExtentTest();
-        logger = LogManager.getLogger(User_Order_One_Product.class);
+    void beforeSuite(){
+        extentTest = startTestLog(User_Order_One_Product.class.getName().split("\\.")[2] + " Suite",
+                "User order a product on the website on Thread: " + (int) Thread.currentThread().getId());
     }
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
-    void beforeClass(Browser browser, String url, String username, String password){
+    void beforeClass(Browser browser, String url, String username, String password) {
+
+        logInfo("Browser: " + browser, ExtentColor.LIME);
+        webDriver = DriverFactory.initWebsiteDriver(browser);
+
         logInfo("------ Setup steps include ------");
         logInfo("- Initialize relevant pages");
-        webDriver = DriverFactory.initWebsiteDriver(browser);
         homepage = PageFactory.generateHomePage(webDriver);
         productPage = PageFactory.generateProductsPage(webDriver);
         productDetailsPage = PageFactory.generateProductDetailsPage(webDriver);
         cartPage = PageFactory.generateCartPage(webDriver);
         paymentPage = PageFactory.generatePaymentPage(webDriver);
 
-        System.out.println("Current thread: " + Thread.currentThread().getId());
-
         logInfo("- Navigate to " + url);
-//        logger.info("- Navigate to " + url);
         webDriver.navigate(url);
 
         logInfo("- Close popup");
@@ -65,11 +65,6 @@ public class User_Order_One_Product extends BaseTest {
         quitBrowser();
     }
 
-    @AfterTest(alwaysRun = true)
-    void afterTest() {
-        logInfo("- Clean background process (driver)");
-        cleanDriverProcess();
-    }
 
     @Test()
     void tc01() {
@@ -81,6 +76,8 @@ public class User_Order_One_Product extends BaseTest {
         logInfo("Choose a specific product");
         productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
 
+        sleepInSecond(1);
+
         logInfo("Increase product quantity by 1");
         productDetailsPage.increaseProductQty();
 
@@ -89,10 +86,13 @@ public class User_Order_One_Product extends BaseTest {
         logInfo("Click add product to Cart");
         productDetailsPage.addProductToCart();
 
+        logInfo("Wait for warning message visible: 'Maximum quantity is 1'");
+        productDetailsPage.waitToBeVisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
+
         verifyTrue(webDriver.isDisplayed("//div[text()='Sản phẩm chỉ được mua tối đa là 1']"), "Verify warning message display: Maximum quantity can buy is 1");
 
         logInfo("Wait for warning message invisible: 'Maximum quantity is 1'");
-        webDriver.waitToBeInvisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
+        productDetailsPage.waitToBeInvisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
 
         logInfo("Decrease product quantity by 1");
         productDetailsPage.decreaseProductQty();
@@ -105,7 +105,7 @@ public class User_Order_One_Product extends BaseTest {
         logInfo("Wait for success message invisible: 'Successfully add product to the cart'");
         productDetailsPage.waitToBeInvisible("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']");
 
-        sleepInSecond(2);
+        sleepInSecond(1);
 
         String productQuantity = webDriver.getText("//span[text()='Cart Icon']/following-sibling::span");
         String productName = webDriver.getText("//h1");

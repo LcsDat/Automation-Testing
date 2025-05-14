@@ -108,7 +108,7 @@ public class WebsiteDriver {
             }
 
             if (element == null) {
-                throw new InvalidSelectorException("No strategy can be used with " + locator);
+                throw new InvalidSelectorException("No strategy can be used with: " + locator);
             }
         }
 

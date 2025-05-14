@@ -4,9 +4,11 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
+import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.testng.annotations.AfterSuite;
 import pages.*;
 import reportConfig.ExtentTestManager;
 
@@ -14,8 +16,7 @@ import java.util.Random;
 
 public class BaseTest {
 
-
-    protected static WebsiteDriver webDriver;
+    protected WebsiteDriver webDriver;
     protected HomePage homepage;
     protected ProductsPage productPage;
     protected ProductDetailsPage productDetailsPage;
@@ -23,47 +24,62 @@ public class BaseTest {
     protected StoresLocationPage storesLocationPage;
     protected FAQPage faqPage;
     protected PaymentPage paymentPage;
-    protected static ExtentTest extentTest;
-    protected static Logger logger;
+    protected ExtentTestManager extentTestManager = ExtentTestManager.init();
+    protected ExtentTest extentTest;
+    protected Logger logger;
 
-
-
-    public synchronized String takeScreenshot(){
-        var driver = getWebDriver().getDriver();
-        return  ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+    @AfterSuite(alwaysRun = true)
+    void afterSuite() {
+        logInfo("- Clean background process (driver)");
+        cleanDriverProcess();
     }
 
-    public synchronized WebsiteDriver getWebDriver() {
+    public String takeScreenshot() {
+        var driver = getWebDriver().getDriver();
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+    }
+
+    public WebsiteDriver getWebDriver() {
         return webDriver;
     }
 
-    protected static void logInfo(String description) {
+    protected void logInfo(String description) {
         extentTest.log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.GREY));
+        logger.info(description);
+    }
+
+    protected void logInfo(String description, ExtentColor color) {
+        extentTest.log(Status.INFO, MarkupHelper.createLabel(description, color));
         logger.info(description);
     }
 
     /**
      * Writing log for Extent Report
+     *
      * @param testClass Test Class that attach to the Test Suite name
-     * @param desc Description of the test suite
+     * @param desc      Description of the test suite
      */
-    protected synchronized static void startTestLog(Class<?> testClass, String desc){
-        new ExtentTestManager().startTest(testClass.getName().split("\\.")[2].replace("_", " ") + " Test Suite",
-                desc);
+    protected ExtentTest startTestLog(String testClass, String desc) {
+        logger = LogManager.getLogger(testClass);
+        return extentTestManager.startTest(testClass, desc);
     }
 
-    /**
-     * Writing log for Extent Report
-     * @param testSuiteName Test Suite name
-     * @param desc Description of the test suite
-     */
-    protected static void startTestLog(String testSuiteName, String desc){
-        new ExtentTestManager().startTest(testSuiteName,
-                desc);
+    protected void attachScreenshot(String message) {
+        logger.info(message);
+        String base64Screenshot = takeScreenshot();
+        extentTestManager.getTest().addScreenCaptureFromBase64String(base64Screenshot);
     }
 
-    protected static synchronized ExtentTest getExtentTest(){
-        return new ExtentTestManager().getTest();
+    protected void attachScreenshot() {
+        String base64Screenshot = takeScreenshot();
+        extentTestManager.getTest().addScreenCaptureFromBase64String(base64Screenshot);
+    }
+
+
+    protected static int getCurrentThread() {
+        var currentThread = (int) Thread.currentThread().getId();
+        System.out.println("Current thread of base test: " + currentThread);
+        return currentThread;
     }
 
     protected static void sleepInSecond(long time) {
