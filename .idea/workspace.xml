@@ -62,16 +62,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "TestNG.D:/Work/Training/Automation-Testing/src/main/resources/demo.xml.executor": "Run",
-    "git-widget-placeholder": "Merging framework1",
-    "last_opened_file_path": "D:/Work/Training",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;TestNG.D:/Work/Training/Automation-Testing/src/main/resources/demo.xml.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Merging framework1&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Work/Training&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="D:/Work/Training/Automation-Testing/src/main/resources/demo.xml" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Automation-Testing" />
