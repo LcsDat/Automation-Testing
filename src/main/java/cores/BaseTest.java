@@ -4,6 +4,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
+import com.aventstack.extentreports.model.Media;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
@@ -24,9 +25,15 @@ public class BaseTest {
     protected StoresLocationPage storesLocationPage;
     protected FAQPage faqPage;
     protected PaymentPage paymentPage;
-    protected ExtentTestManager extentTestManager = ExtentTestManager.init();
+    protected static ExtentTestManager extentTestManager;
     protected ExtentTest extentTest;
     protected Logger logger;
+
+    public static int getScreenNo() {
+        return screenNo;
+    }
+
+    private static int screenNo;
 
     @AfterSuite(alwaysRun = true)
     void afterSuite() {
@@ -34,7 +41,7 @@ public class BaseTest {
         cleanDriverProcess();
     }
 
-    public String takeScreenshot() {
+    private String getScreenshotBASE64() {
         var driver = getWebDriver().getDriver();
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
     }
@@ -44,12 +51,21 @@ public class BaseTest {
     }
 
     protected void logInfo(String description) {
-        extentTest.log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.GREY));
+        extentTestManager.logInfo(description);
         logger.info(description);
     }
 
-    protected void logInfo(String description, ExtentColor color) {
-        extentTest.log(Status.INFO, MarkupHelper.createLabel(description, color));
+    protected void logInfo(String description, boolean enableCapture) {
+        attachScreenshot();
+        var mediaList = extentTestManager.getExtentTest().getModel().getMedia();
+        if (enableCapture) extentTestManager.logInfo(description, enableCapture, mediaList.get(mediaList.size() - 1));
+        screenNo++;
+        logger.info(description);
+//         extentTestManager.getTest(testClass).log(Status.INFO, "Screenshot ", attachScreenshot(testClass));
+    }
+
+    protected void logInfo(String description, ExtentColor logColor) {
+        extentTestManager.logInfo(description, logColor);
         logger.info(description);
     }
 
@@ -59,27 +75,13 @@ public class BaseTest {
      * @param testClass Test Class that attach to the Test Suite name
      * @param desc      Description of the test suite
      */
-    protected ExtentTest startTestLog(String testClass, String desc) {
+    protected void startTestLog(String testClass, String desc) {
         logger = LogManager.getLogger(testClass);
-        return extentTestManager.startTest(testClass, desc);
+        extentTestManager.startTest(testClass, desc);
     }
 
-    protected void attachScreenshot(String message) {
-        logger.info(message);
-        String base64Screenshot = takeScreenshot();
-        extentTestManager.getTest().addScreenCaptureFromBase64String(base64Screenshot);
-    }
-
-    protected void attachScreenshot() {
-        String base64Screenshot = takeScreenshot();
-        extentTestManager.getTest().addScreenCaptureFromBase64String(base64Screenshot);
-    }
-
-
-    protected static int getCurrentThread() {
-        var currentThread = (int) Thread.currentThread().getId();
-        System.out.println("Current thread of base test: " + currentThread);
-        return currentThread;
+    private void attachScreenshot() {
+        extentTestManager.getExtentTest().addScreenCaptureFromBase64String(getScreenshotBASE64());
     }
 
     protected static void sleepInSecond(long time) {
@@ -103,6 +105,7 @@ public class BaseTest {
     }
 
     protected void navigateToHomePage() {
+        sleepInSecond(1);
         if (webDriver.getPageTitle().startsWith("Hasaki.vn")) webDriver.click("div.logo_site");
         else webDriver.click("a[aria-label='Homepage']");
     }
@@ -127,6 +130,36 @@ public class BaseTest {
 
     protected void switchToMainWebsite() {
         webDriver.switchWindow("Hasaki.vn | Mỹ Phẩm & Clinic");
+    }
+
+    protected void assertTrue(boolean condition) {
+        try {
+            CustomAssert.assertTrue(condition);
+            logger.info("-----  PASS -----");
+        } catch (Throwable e) {
+            logger.error("----- FAIL ----- : " + e.getMessage());
+        }
+
+    }
+
+    protected void assertFalse(boolean condition) {
+
+        try {
+            CustomAssert.assertFalse(condition);
+            logger.info("-----  PASS -----");
+        } catch (Throwable e) {
+            logger.error("----- FAIL ----- : " + e.getMessage());
+        }
+    }
+
+    protected void assertEquals(Object actual, Object expected) {
+        try {
+            CustomAssert.assertEquals(actual, expected);
+            logger.info("-----  PASS -----");
+        } catch (Throwable e) {
+            logger.error("----- FAIL ----- : " + e.getMessage());
+        }
+
     }
 
     protected boolean verifyTrue(boolean condition) {

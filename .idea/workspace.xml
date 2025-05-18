@@ -4,37 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4cae05b-282d-4fac-8d6d-0598dd447a8a" name="Changes" comment="">
-<<<<<<< HEAD
-      <change afterPath="$PROJECT_DIR$/src/main/java/cores/GlobalVariables.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/demo.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Demo1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/Demo2.java" afterDir="false" />
+    <list default="true" id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extentV5/Hasaki.html" beforeDir="false" afterPath="$PROJECT_DIR$/extentV5/Hasaki.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/baeldung.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/baeldung.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/BasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/Browser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/Browser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/CustomAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/CustomAssert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/DriverFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/DriverFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/ExplicitWait.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/ExplicitWait.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/Global.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/HomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/PaymentPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/PaymentPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductDetailAccessiblePages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/ProductDetailAccessiblePages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductDetailsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/ProductDetailsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/ProductsPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Demo.java" beforeDir="false" />
-=======
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extentV5/Hasaki.html" beforeDir="false" afterPath="$PROJECT_DIR$/extentV5/Hasaki.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" afterDir="false" />
->>>>>>> 0346bfbd40eb6b53afb81abfa55f6698c2da3dbf
+      <change beforePath="$PROJECT_DIR$/src/test/java/Demo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Demo1.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product_FireFox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product_FireFox.java" afterDir="false" />
     </list>
@@ -46,71 +31,43 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;LcsDat&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "LcsDat"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/LcsDat/Automation-Testing.git&quot;,
-    &quot;accountId&quot;: &quot;19fee62c-1638-47e4-9b14-275300d00475&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/LcsDat/Automation-Testing.git",
+    "accountId": "19fee62c-1638-47e4-9b14-275300d00475"
   }
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;customColor&quot;: &quot;&quot;,
-  &quot;associatedIndex&quot;: 6
-}</component>
-  <component name="ProjectId" id="2wgOLDK9hlsJaQGqg1eIk1I6GND" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2xFZzSPhS1uuxOEwinY76mTUyms" />
   <component name="ProjectViewState">
-    <option name="autoscrollFromSource" value="true" />
-    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="autoscrollToSource" value="true" />
+    <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
+    <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-<<<<<<< HEAD
-    &quot;TestNG.D:/Work/Training/Automation-Testing/src/main/resources/demo.xml.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Merging framework1&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Work/Training&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "framework1"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
-    <configuration name="D:/Work/Training/Automation-Testing/src/main/resources/demo.xml" type="TestNG" temporary="true" nameIsGenerated="true">
-=======
-    &quot;TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/HasakiTestRunner.xml.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/demo.xml.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.Demo.test01.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;framework1&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Work/Training&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;
-  }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="" />
-    </key>
-  </component>
-  <component name="RunManager" selected="TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/HasakiTestRunner.xml">
-    <configuration name="D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/HasakiTestRunner.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="Demo1.test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Automation-Testing" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" />
-      <option name="TEST_OBJECT" value="SUITE" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/demo.xml" type="TestNG" temporary="true" nameIsGenerated="true">
->>>>>>> 0346bfbd40eb6b53afb81abfa55f6698c2da3dbf
-      <module name="Automation-Testing" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/src/main/resources/demo.xml" />
-      <option name="TEST_OBJECT" value="SUITE" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Demo1" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -119,24 +76,17 @@
     </configuration>
     <recent_temporary>
       <list>
-<<<<<<< HEAD
-        <item itemvalue="TestNG.D:/Work/Training/Automation-Testing/src/main/resources/demo.xml" />
-=======
-        <item itemvalue="TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/HasakiTestRunner.xml" />
-        <item itemvalue="TestNG.D:/Work/Automation/IntelliJ/Automation-Testing/src/main/resources/demo.xml" />
-        <item itemvalue="TestNG.Demo1.test01" />
->>>>>>> 0346bfbd40eb6b53afb81abfa55f6698c2da3dbf
+        <item itemvalue="TestNG.Demo1.test" />
       </list>
     </recent_temporary>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d4cae05b-282d-4fac-8d6d-0598dd447a8a" name="Changes" comment="" />
-      <created>1746459975499</created>
+      <changelist id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="" />
+      <created>1747358853710</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1746459975499</updated>
+      <updated>1747358853710</updated>
     </task>
     <servers />
   </component>

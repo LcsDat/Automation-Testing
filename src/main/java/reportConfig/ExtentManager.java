@@ -10,7 +10,6 @@ public class ExtentManager {
 
     public synchronized static ExtentReports init() {
         ExtentSparkReporter reporter = new ExtentSparkReporter(GlobalVariables.PROJECTPATH + "/extentV5/Hasaki.html");
-        reporter.config().setDocumentTitle("HASAKI TESTING");
         reporter.config().setReportName("Hasaki Test Report");
         reporter.config().setTimelineEnabled(true);
         reporter.config().setEncoding("utf-8");

@@ -14,8 +14,8 @@ import org.testng.ITestResult;
 
 public class ExtentTestListener extends BaseTest implements ITestListener {
 
-    private ExtentTest extentLog(String testClass){
-        return ExtentTestManager.init().getTest(testClass);
+    private ExtentTest extentLog(String testClass) {
+        return extentTestManager.getExtentTest(testClass);
     }
 
     @Override
@@ -30,38 +30,36 @@ public class ExtentTestListener extends BaseTest implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        System.out.println("onTestStart: " + iTestResult.getTestClass().getName());
-        extentLog(iTestResult.getTestClass().getName()).log(Status.INFO, MarkupHelper.createLabel("EXECUTION START " + iTestResult.getName().toUpperCase(), ExtentColor.ORANGE));
+        var testClass = iTestResult.getTestClass().getName();
+        extentLog(testClass).log(Status.INFO, MarkupHelper.createLabel("EXECUTION START " + iTestResult.getName().toUpperCase(), ExtentColor.ORANGE));
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
-        System.out.println("onTestSuccess: " + iTestResult.getTestClass().getName());
-        extentLog(iTestResult.getTestClass().getName()).log(Status.PASS, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + "------ PASSED ------", ExtentColor.GREEN));
-
+        var testClass = iTestResult.getTestClass().getName();
+        extentTestManager.getExtentTest(testClass).log(Status.PASS, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + "------ PASSED ------", ExtentColor.GREEN));
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
+        var testClassName = iTestResult.getTestClass().getName();
         Object testClass = iTestResult.getInstance();
-
-        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)((BaseTest) testClass).getWebDriver().getDriver()).getScreenshotAs(OutputType.BASE64);
-        extentLog(iTestResult.getTestClass().getName()).log(Status.FAIL, "Screenshot and Exception", iTestResult.getThrowable(), extentLog(iTestResult.getTestClass().getName()).addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
-        extentLog(iTestResult.getTestClass().getName()).log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + " of " + iTestResult.getTestClass().getName() + "------ FAILED ------", ExtentColor.RED));
+        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) ((BaseTest) testClass).getWebDriver().getDriver()).getScreenshotAs(OutputType.BASE64);
+        extentLog(testClassName).log(Status.FAIL, "Screenshot and Exception", iTestResult.getThrowable(), extentLog(testClassName).addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(BaseTest.getScreenNo()));
+        extentLog(testClassName).log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + " of " + iTestResult.getTestClass().getName() + " ------ FAILED ------", ExtentColor.RED));
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
         Object testClass = iTestResult.getInstance();
-
-        System.out.println("onTestSkipped: " + iTestResult.getTestClass().getName());
-        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot)((BaseTest) testClass).getWebDriver().getDriver()).getScreenshotAs(OutputType.BASE64);
-        extentLog(iTestResult.getTestClass().getName()).log(Status.SKIP, "Screenshot and Exception", iTestResult.getThrowable(), extentLog(iTestResult.getTestClass().getName()).addScreenCaptureFromBase64String(base64Screenshot).getModel().getMedia().get(0));
-        extentLog(iTestResult.getTestClass().getName()).log(Status.SKIP, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + "------ SKIPPED ------", ExtentColor.ORANGE));
+        var testClassName = iTestResult.getTestClass().getName();
+        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) ((BaseTest) testClass).getWebDriver().getDriver()).getScreenshotAs(OutputType.BASE64);
+        extentLog(testClassName).log(Status.SKIP, MarkupHelper.createLabel(iTestResult.getName().toUpperCase() + " ------ SKIPPED ------", ExtentColor.ORANGE));
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
-        extentLog(iTestResult.getTestClass().getName()).log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName() + "------ FAILED WITH PERCENTAGE ------", ExtentColor.RED));
+        var testClass = iTestResult.getTestClass().getName();
+        extentLog(testClass).log(Status.FAIL, MarkupHelper.createLabel(iTestResult.getName() + " ------ FAILED WITH PERCENTAGE ------", ExtentColor.RED));
     }
 }

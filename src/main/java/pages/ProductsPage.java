@@ -15,4 +15,8 @@ public class ProductsPage extends ProductDetailAccessiblePages {
         driver.click(ProductsPage.PRODUCT_NAME, productName);
     }
 
+    public void chooseProductOnFirefox(String productName){
+        driver.doubleClickByActions(ProductsPage.PRODUCT_NAME, productName);
+    }
+
 }

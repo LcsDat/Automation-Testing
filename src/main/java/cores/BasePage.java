@@ -52,4 +52,16 @@ public class BasePage {
             throw new RuntimeException(e);
         }
     }
+
+    public boolean isDisplayed(String locator){
+        return driver.isDisplayed(locator);
+    }
+
+    public boolean isDisplayed(String locator, String... varargs){
+        return driver.isDisplayed(locator, varargs);
+    }
+
+    public void waitForPageLoad(){
+        driver.waitForPageLoad();
+    }
 }

@@ -5,13 +5,17 @@ import cores.BaseTest;
 import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
+import org.testng.Assert;
 import org.testng.annotations.*;
+import reportConfig.ExtentTestManager;
 
 public class User_Order_One_Product extends BaseTest {
 
     @BeforeSuite
-    void beforeSuite(){
-        extentTest = startTestLog(User_Order_One_Product.class.getName().split("\\.")[2] + " Suite",
+    void beforeSuite() {
+        extentTestManager = ExtentTestManager.init();
+        System.out.println("ETM in Chrome: " + extentTestManager);
+        startTestLog(User_Order_One_Product.class.getName(),
                 "User order a product on the website on Thread: " + (int) Thread.currentThread().getId());
     }
 
@@ -70,6 +74,9 @@ public class User_Order_One_Product extends BaseTest {
     void tc01() {
 //        Choose product
 
+        System.out.println("ETM in Chrome: " + extentTestManager);
+        System.out.println("ET in Chrome: " + extentTestManager.getExtentTest());
+
         logInfo("Choose 'Skin Care' in Category Menu, then choose Cleansing product type");
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
 
@@ -81,7 +88,7 @@ public class User_Order_One_Product extends BaseTest {
         logInfo("Increase product quantity by 1");
         productDetailsPage.increaseProductQty();
 
-        verifyEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2", "Verify product quantity is 2");
+        assertEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2");
 
         logInfo("Click add product to Cart");
         productDetailsPage.addProductToCart();
@@ -89,7 +96,7 @@ public class User_Order_One_Product extends BaseTest {
         logInfo("Wait for warning message visible: 'Maximum quantity is 1'");
         productDetailsPage.waitToBeVisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
 
-        verifyTrue(webDriver.isDisplayed("//div[text()='Sản phẩm chỉ được mua tối đa là 1']"), "Verify warning message display: Maximum quantity can buy is 1");
+        assertTrue(productDetailsPage.isDisplayed("//div[text()='Sản phẩm chỉ được mua tối đa là 1']"));
 
         logInfo("Wait for warning message invisible: 'Maximum quantity is 1'");
         productDetailsPage.waitToBeInvisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
@@ -100,7 +107,7 @@ public class User_Order_One_Product extends BaseTest {
         logInfo("Click add product to cart");
         productDetailsPage.addProductToCart();
 
-        verifyTrue(webDriver.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"), "Verify success message: Product is added to cart.");
+        assertTrue(productDetailsPage.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"));
 
         logInfo("Wait for success message invisible: 'Successfully add product to the cart'");
         productDetailsPage.waitToBeInvisible("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']");
@@ -111,12 +118,12 @@ public class User_Order_One_Product extends BaseTest {
         String productName = webDriver.getText("//h1");
         String productPrice = webDriver.getText("span.text-orange.text-lg.font-bold").replaceAll("[^0-9]", "");
 
-        verifyEquals(productQuantity, "1", "Verify product quantity is 1");
+        assertEquals(productQuantity, "1");
 
         logInfo("Click to view Cart info");
         productDetailsPage.clickToCart();
 
-        verifyEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName, "Verify the product name");
+        assertEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName);
 
         Integer calculatedPrice = (Integer.parseInt(productQuantity) * Integer.parseInt(productPrice));
 
@@ -125,14 +132,14 @@ public class User_Order_One_Product extends BaseTest {
         String totalPriceeAt = webDriver.getText("//tbody//tr[1]/td[4]/div").replaceAll("[^0-9]", "");
         Integer totalPrice = Integer.parseInt(totalPriceeAt);
 
-        verifyEquals(calculatedPrice, totalPrice, "Verify the price");
+        assertEquals(calculatedPrice, totalPrice);
 
         logInfo("Click proceed to Cart");
         cartPage.clickProceedToCart();
 
         sleepInSecond(2);
 
-        verifyTrue(webDriver.getPageTitle().contains("Thanh toán"), "Verify the page title");
+        assertTrue(webDriver.getPageTitle().contains("Thanh toán"));
 
         //Temp verification of user delivery address
         String[] userInfos = webDriver.getText("//h2[text()='Địa chỉ nhận hàng']/following-sibling::div/child::div")
@@ -142,9 +149,9 @@ public class User_Order_One_Product extends BaseTest {
         String userNameAndPhone = userInfos[1];
         String userAddress = userInfos[2];
 
-        verifyEquals(addressType, "Nhà riêng", "Verify the address type");
-        verifyEquals(userNameAndPhone, "Le Dat - 0345864246", "Verify delivery name and delivery phone number");
-        verifyEquals(userAddress, "687/5 Lạc Long Quân, Phường 10, Quận Tân Bình, Hồ Chí Minh", "Verify the delivery address");
+        assertEquals(addressType, "Nhà riêng");
+        assertEquals(userNameAndPhone, "Le Dat - 0345864246");
+        assertEquals(userAddress, "687/5 Lạc Long Quân, Phường 10, Quận Tân Bình, Hồ Chí Minh");
 
         logInfo("Click to edit Delivery address");
         paymentPage.chooseEdit("Địa chỉ nhận hàng", "Thay đổi");
@@ -155,11 +162,11 @@ public class User_Order_One_Product extends BaseTest {
         logInfo("Click Continue to create a new address");
         paymentPage.clickContinue("Thêm địa chỉ mới");
 
-        verifyEquals(paymentPage.getCommonValidationMessageInput("Số điện thoại"), "Vui lòng điền số điện thoại", "Verify phone number is required");
-        verifyEquals(webDriver.getText("//input[@placeholder='Họ và tên']/following-sibling::p"), "Vui lòng điền Họ và Tên", "Verify delivery name is required");
-        verifyEquals(paymentPage.getCommonValidationMessageDropdown("Chọn Tỉnh/ TP, Quận/ Huyện"), "Vui lòng chọn Tỉnh/ TP, Quận/ Huyện", "Verify delivery city name is required");
-        verifyEquals(paymentPage.getCommonValidationMessageDropdown("Chọn Phường/ Xã"), "Vui lòng chọn Phường/ Xã", "Verify delivery ward is required");
-        verifyEquals(webDriver.getText("//input[@placeholder='Số nhà + Tên đường']/following-sibling::p"), "Vui lòng điền địa chỉ", "Verify deliver address is required");
+        assertEquals(paymentPage.getCommonValidationMessageInput("Số điện thoại"), "Vui lòng điền số điện thoại");
+        assertEquals(webDriver.getText("//input[@placeholder='Họ và tên']/following-sibling::p"), "Vui lòng điền Họ và Tên");
+        assertEquals(paymentPage.getCommonValidationMessageDropdown("Chọn Tỉnh/ TP, Quận/ Huyện"), "Vui lòng chọn Tỉnh/ TP, Quận/ Huyện");
+        assertEquals(paymentPage.getCommonValidationMessageDropdown("Chọn Phường/ Xã"), "Vui lòng chọn Phường/ Xã");
+        assertEquals(webDriver.getText("//input[@placeholder='Số nhà + Tên đường']/following-sibling::p"), "Vui lòng điền địa chỉ");
 
         String phoneNo = "0345864246";
         String userName = "Dat Le Mot" + randomAlphabetic(4);
@@ -183,20 +190,20 @@ public class User_Order_One_Product extends BaseTest {
         paymentPage.clickStreetField();
 
         //Continue button is disable if user doesn't input street number
-        verifyFalse(webDriver.isEnabled("//span[text()='Sửa vị trí trên bản đồ']/parent::div//following-sibling::div//button[text()='Tiếp tục']"), "Verify Continue is disabled if user doesn't input the address");
+        assertFalse(webDriver.isEnabled("//span[text()='Sửa vị trí trên bản đồ']/parent::div//following-sibling::div//button[text()='Tiếp tục']"));
 
         logInfo("Input street for new address, which does not meet minimum length of characters");
         paymentPage.setTextStreetField("687");
 
         sleepInSecond(2);
 
-        verifyEquals(webDriver.getText("(//input[@placeholder='Nhập vị trí của bạn']/following-sibling::span)[1]"), "Địa chỉ phải trên 5 ký tự", "Verify minimum length to find address is 5 characters");
+        assertEquals(webDriver.getText("(//input[@placeholder='Nhập vị trí của bạn']/following-sibling::span)[1]"), "Địa chỉ phải trên 5 ký tự");
 
         logInfo("Input street for new address, which is a valid length");
         paymentPage.setTextStreetField(streetNumberName);
 
         //Continue input is enable
-        verifyTrue(webDriver.isEnabled("//span[text()='Sửa vị trí trên bản đồ']/parent::div//following-sibling::div//button[text()='Tiếp tục']"), "Verify Continue is enable after input valid address");
+        assertTrue(webDriver.isEnabled("//span[text()='Sửa vị trí trên bản đồ']/parent::div//following-sibling::div//button[text()='Tiếp tục']"));
 
         String newStreetNo = paymentPage.getStreetNumberInputValue("value");
 
@@ -213,9 +220,9 @@ public class User_Order_One_Product extends BaseTest {
                 .replaceAll("\n", "#")
                 .split("#");
 
-        verifyEquals(newUserInfosArr[0], userName + " - " + phoneNo, "Verify deliver name and phone number display correctly");
-        verifyEquals(newUserInfosArr[3], newStreetNo + ", "
-                + wardName + ", " + cityName + ", " + "Hồ Chí Minh", "Verify deliver address display correctly");
+        assertEquals(newUserInfosArr[0], userName + " - " + phoneNo);
+        assertEquals(newUserInfosArr[3], newStreetNo + ", "
+                + wardName + ", " + cityName + ", " + "Hồ Chí Minh");
 
         logInfo("Click to delete an address");
         paymentPage.deleteAddress(newUserInfosArr[0]);
@@ -245,7 +252,7 @@ public class User_Order_One_Product extends BaseTest {
         logInfo("Click to edit coupons");
         paymentPage.chooseEdit("Phiếu mua hàng", "Chọn phiếu mua hàng");
 
-        verifyTrue(webDriver.isDisplayed("//h2[text()='Bạn có phiếu mua hàng']"), "Verify coupon popup is displayed");
+        assertTrue(paymentPage.isDisplayed("//h2[text()='Bạn có phiếu mua hàng']"));
 
         logInfo("Close Coupon popup");
         paymentPage.closePopup();
@@ -253,8 +260,10 @@ public class User_Order_One_Product extends BaseTest {
         logInfo("Click to edit vouchers");
         paymentPage.chooseEdit("Mã giảm giá", "Nhập mã giảm giá");
 
-//        Assert.assertTrue(webDriver.isDisplayed("//h2[text()='Bạn có mã giảm giá']"));
-        verifyTrue(webDriver.isDisplayed("//h2[text()='Bạn có mã giảm giá']"), "Verify voucher popup is displayed");
+        sleepInSecond(1);
+
+        Assert.assertTrue(paymentPage.isDisplayed("//h2[text()='Bạn có mã giảm giá']"));
+        assertTrue(paymentPage.isDisplayed("//h2[text()='Bạn có mã giảm giá']"));
 
         logInfo("Close Voucher popup");
         paymentPage.closePopup();
@@ -265,6 +274,6 @@ public class User_Order_One_Product extends BaseTest {
         sleepInSecond(2);
 
 //        Assert.assertTrue(paymentPage.getPageTitle().contains("Giỏ hàng"));
-        verifyTrue(paymentPage.getPageTitle().contains("Giỏ hàng"));
+        assertTrue(paymentPage.getPageTitle().contains("Giỏ hàng"));
     }
 }

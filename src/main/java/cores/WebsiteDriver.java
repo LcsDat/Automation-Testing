@@ -186,6 +186,10 @@ public class WebsiteDriver {
         return findElement(locator).isDisplayed();
     }
 
+    public boolean isDisplayed(String locator, String... varargs) {
+        return findElement(locator, varargs).isDisplayed();
+    }
+
     public WebsiteElement findElement(String locator) {
         return new WebsiteElement(this, locator);
     }
@@ -194,13 +198,6 @@ public class WebsiteDriver {
         return new WebsiteElement(this, locator, varargs);
     }
 
-    public void doubleClick(String locator) {
-        actions.doubleClick(locator);
-    }
-
-    public void doubleClick(String locator, String... varargs) {
-        actions.doubleClick(locator, varargs);
-    }
 
     /**
      * Find all elements using same locator
@@ -393,8 +390,16 @@ public class WebsiteDriver {
         actions.click(locator);
     }
 
-    public void clickByActions(String locator, String varargs) {
+    public void clickByActions(String locator, String... varargs) {
         actions.click(locator, varargs);
+    }
+
+    public void doubleClickByActions(String locator, String... varargs) {
+        actions.doubleClick(locator, varargs);
+    }
+
+    public void doubleClickByActions(String locator) {
+        actions.doubleClick(locator);
     }
 
     public void sendKeys(String locator, Keys keys) {

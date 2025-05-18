@@ -1,11 +1,12 @@
+import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.gherkin.model.Feature;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
-import cores.Browser;
-import cores.DriverFactory;
-import cores.PageFactory;
-import cores.WebsiteDriver;
+import com.aventstack.extentreports.reporter.ExtentSparkReporter;
+import cores.*;
 import org.apache.logging.log4j.LogManager;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -24,30 +25,37 @@ public class Demo1 extends DemoParent {
 //                "hello 1");
 //    }
 
-    @BeforeClass
-    void beforeTest() {
-        System.out.println("extent variable: " + extentTest.toString());
-        logger = LogManager.getLogger(Demo1.class);
-
-        System.out.println("Current Thread: " + Thread.currentThread().getId());
-
-        extentTest.log(Status.INFO, MarkupHelper.createLabel("demo1 extent log", ExtentColor.GREY));
-        logger.info("demo1 extent log4j2 log");
-        driver = DriverFactory.initWebsiteDriver(Browser.HEADLESSCHROME);
-        driver.navigate("https://hasaki.vn/");
-        homePage = PageFactory.generateHomePage(driver);
-        homePage.cancelPopup();
-        homePage.cancelCookie();
-    }
+//    @BeforeClass
+//    void beforeTest() {
+//        System.out.println("extent variable: " + extentTest.toString());
+//        logger = LogManager.getLogger(Demo1.class);
+//
+//        System.out.println("Current Thread: " + Thread.currentThread().getId());
+//
+//        extentTest.log(Status.INFO, MarkupHelper.createLabel("demo1 extent log", ExtentColor.GREY));
+//        logger.info("demo1 extent log4j2 log");
+//        driver = DriverFactory.initWebsiteDriver(Browser.HEADLESSCHROME);
+//        driver.navigate("https://hasaki.vn/");
+//        homePage = PageFactory.generateHomePage(driver);
+//        homePage.cancelPopup();
+//        homePage.cancelCookie();
+//    }
 
     @Test
     void test() {
-        homePage.setTextToSearch("hello world");
-        Assert.assertEquals(homePage.getPageTitle(), "Hasaki.vn | Mỹ Phẩm & Clinic");
+        ExtentReports extent = new ExtentReports();
+        ExtentSparkReporter spark = new ExtentSparkReporter(GlobalVariables.PROJECTPATH + "/extentV5/Hasaki2.html");
+        extent.attachReporter(spark);
+        ExtentTest test = extent.createTest(Feature.class,"hello")
+                .log(Status.PASS, "This is a logging event for MyFirstTest, and it passed!");
+        System.out.println(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
+        test.fail(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
+        extent.flush();
+
     }
 
-    @AfterTest
-    void afterTest() {
-        driver.quit();
-    }
+//    @AfterTest
+//    void afterTest() {
+//        driver.quit();
+//    }
 }

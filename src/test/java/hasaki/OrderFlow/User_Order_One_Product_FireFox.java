@@ -6,13 +6,17 @@ import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
 import org.testng.annotations.*;
+import reportConfig.ExtentTestManager;
+
 
 public class User_Order_One_Product_FireFox extends BaseTest {
 
 
     @BeforeSuite
-    void beforeSuite(){
-        extentTest = startTestLog(User_Order_One_Product_FireFox.class.getName().split("\\.")[2] + " Suite", "User order a product on the website on Thread: " + (int) Thread.currentThread().getId());
+    void beforeSuite() {
+        extentTestManager = ExtentTestManager.init();
+        System.out.println("ETM in FF: " + extentTestManager);
+        startTestLog(User_Order_One_Product_FireFox.class.getName(), "User order a product on the website on Thread: " + (int) Thread.currentThread().getId());
     }
 
     @Parameters({"browser", "url", "username", "password"})
@@ -65,19 +69,33 @@ public class User_Order_One_Product_FireFox extends BaseTest {
     @Test()
     void tc01() {
 
+        System.out.println("ETM in FF: " + extentTestManager);
+        System.out.println("ET in FF: " + extentTestManager.getExtentTest());
 //        Choose product
         logInfo("Choose 'Skin Care' in Category Menu, then choose Cleansing product type");
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
 
+        webDriver.waitToBeClickable("div.top-bar-wrap");
+
         logInfo("Choose a specific product");
-        productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
+        productPage.chooseProductOnFirefox("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
+
+        sleepInSecond(2);
+
+        logInfo("capture after choose product", true);
+//        productDetailsPage.waitForPageLoad();
+
+        logInfo("Increase product quantity by 1");
+        productDetailsPage.increaseProductQty("2");
+
+        logInfo("capture after increate quantity", true);
+
+
+        logInfo("After choosing");
 
         sleepInSecond(1);
 
-        logInfo("Increase product quantity by 1");
-        productDetailsPage.increaseProductQty();
-
-        verifyEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2");
+        assertEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2");
 
         logInfo("Click add product to Cart");
         productDetailsPage.addProductToCart();
@@ -85,10 +103,10 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         logInfo("Wait for warning message visible: 'Maximum quantity is 1'");
         productDetailsPage.waitToBeVisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
 
-        verifyTrue(webDriver.isDisplayed("//div[text()='Sản phẩm chỉ được mua tối đa là 1']"), "Verify warning message display: Maximum quantity can buy is 1");
+        assertTrue(webDriver.isDisplayed("//div[text()='Sản phẩm chỉ được mua tối đa là 1']"));
 
         logInfo("Wait for warning message invisible: 'Maximum quantity is 1'");
-        webDriver.waitToBeInvisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
+        productDetailsPage.waitToBeInvisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
 
         logInfo("Decrease product quantity by 1");
         productDetailsPage.decreaseProductQty();
@@ -96,7 +114,10 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         logInfo("Click add product to cart");
         productDetailsPage.addProductToCart();
 
-        verifyTrue(webDriver.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"), "A label display product is added to cart.");
+        logInfo("Wait for success message visible: 'Successfully add product to the cart'");
+        productDetailsPage.waitToBeVisible("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']");
+
+        assertTrue(productDetailsPage.isDisplayed("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']"));
 
         logInfo("Wait for success message invisible: 'Successfully add product to the cart'");
         productDetailsPage.waitToBeInvisible("//div[text()='Sản Phẩm đã được thêm vào giỏ hàng thành công']");
@@ -107,12 +128,14 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         String productName = webDriver.getText("//h1");
         String productPrice = webDriver.getText("span.text-orange.text-lg.font-bold").replaceAll("[^0-9]", "");
 
-        verifyEquals(productQuantity, "1");
+        assertEquals(productQuantity, "1");
 
         logInfo("Click to view Cart info");
         productDetailsPage.clickToCart();
 
-        verifyEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName);
+        webDriver.waitForPageLoad();
+
+        assertEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName);
 
         Integer calculatedPrice = (Integer.parseInt(productQuantity) * Integer.parseInt(productPrice));
 
@@ -121,14 +144,14 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         String totalPriceeAt = webDriver.getText("//tbody//tr[1]/td[4]/div").replaceAll("[^0-9]", "");
         Integer totalPrice = Integer.parseInt(totalPriceeAt);
 
-        verifyEquals(calculatedPrice, totalPrice);
+        assertEquals(calculatedPrice, totalPrice);
 
         logInfo("Click proceed to Cart");
         cartPage.clickProceedToCart();
 
         sleepInSecond(2);
 
-        verifyTrue(webDriver.getPageTitle().contains("Thanh toán"));
+        assertTrue(webDriver.getPageTitle().contains("Thanh toán"));
 
         //Temp verification of user delivery address
         String[] userInfos = webDriver.getText("//h2[text()='Địa chỉ nhận hàng']/following-sibling::div/child::div")
@@ -138,9 +161,9 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         String userNameAndPhone = userInfos[1];
         String userAddress = userInfos[2];
 
-        verifyEquals(addressType, "Nhà riêng");
-        verifyEquals(userNameAndPhone, "Vũ Trường Thiên Phương - 0796280280");
-        verifyEquals(userAddress, "687/5 Lạc Long Quân, Phường 10, Quận Tân Bình, Hồ Chí Minh");
+        assertEquals(addressType, "Nhà riêng");
+        assertEquals(userNameAndPhone, "Vũ Trường Thiên Phương - 0796280280");
+        assertEquals(userAddress, "687/5 Lạc Long Quân, Phường 10, Quận Tân Bình, Hồ Chí Minh");
 
         logInfo("Click to Edit the payment method");
         paymentPage.chooseEdit("Hình thức thanh toán", "Thay đổi");
@@ -158,7 +181,7 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         logInfo("Click to edit coupons");
         paymentPage.chooseEdit("Phiếu mua hàng", "Chọn phiếu mua hàng");
 
-        verifyTrue(webDriver.isDisplayed("//h2[text()='Bạn có phiếu mua hàng']"));
+        assertTrue(paymentPage.isDisplayed("//h2[text()='Bạn có phiếu mua hàng']"));
 
         logInfo("Close Coupon popup");
         paymentPage.closePopup();
@@ -168,7 +191,7 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         logInfo("Click to edit vouchers");
         paymentPage.chooseEdit("Mã giảm giá", "Nhập mã giảm giá");
 
-        verifyTrue(webDriver.isDisplayed("//h2[text()='Bạn có mã giảm giá']"));
+        assertTrue(paymentPage.isDisplayed("//h2[text()='Bạn có mã giảm giá']"));
 
         logInfo("Close Voucher popup");
         paymentPage.closePopup();
@@ -179,6 +202,6 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
         sleepInSecond(2);
 
-        verifyTrue(paymentPage.getPageTitle().contains("Giỏ hàng"));
+        assertTrue(paymentPage.getPageTitle().contains("Giỏ hàng"));
     }
 }

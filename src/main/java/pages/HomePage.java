@@ -71,7 +71,7 @@ public class HomePage extends ProductDetailAccessiblePages {
         if (!getCartQuantity().equals("0")) {
             clickToCart();
             driver.waitForPageLoad();
-            driver.waitToBeVisible("//div[contains(text(),'Giỏ hàng')]");
+//            driver.waitToBeVisible("//div[contains(text(),'Giỏ hàng')]");
             int size = driver.findElements("//tbody/tr").size();
             int i = 1;
             if (size != 0) {
@@ -89,7 +89,7 @@ public class HomePage extends ProductDetailAccessiblePages {
 
 
     public void navigateToHomepage() {
-        driver.click(HOMEPAGE_LINK);
+        driver.waitToBeClickable(HOMEPAGE_LINK).click();
     }
 
     public String getCartQuantity() {
