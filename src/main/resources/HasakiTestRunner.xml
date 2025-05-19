@@ -2,9 +2,9 @@
 
 <suite name="Suite1" >
     <!--    <parameter name="browser" value="CHROME"/>-->
-<!--    <listeners>-->
-<!--        <listener class-name="reportConfig.ExtentTestListener"/>-->
-<!--    </listeners>-->
+    <listeners>
+        <listener class-name="reportConfig.ExtentTestListener"/>
+    </listeners>
     <parameter name="url" value="https://hasaki.vn/"/>
 
 

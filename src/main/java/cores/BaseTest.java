@@ -117,7 +117,7 @@ public class BaseTest {
     protected void navigateToHomePage() {
         sleepInSecond(1);
         if (webDriver.getPageTitle().startsWith("Hasaki.vn")) webDriver.click("div.logo_site");
-        else webDriver.click("a[aria-label='Homepage']");
+        else webDriver.waitToBeClickable("a[aria-label='Homepage']").click();
     }
 
     /**
