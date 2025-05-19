@@ -70,15 +70,17 @@ public class HomePage extends ProductDetailAccessiblePages {
     public void removeProductFromCart() {
         if (!getCartQuantity().equals("0")) {
             clickToCart();
-            driver.waitForPageLoad();
+//            driver.waitForPageLoad();
 //            driver.waitToBeVisible("//div[contains(text(),'Giỏ hàng')]");
+            sleepInSecond(2);
+
             int size = driver.findElements("//tbody/tr").size();
             int i = 1;
             if (size != 0) {
                 while (i < size) {
-
+                    sleepInSecond(2);
                     driver.waitToBeClickable("(//tbody/tr//button[text()='Xóa'])[1]").click();
-                    sleepInSecond(1);
+//                    sleepInSecond(1);
 //                    driver.waitToBeInvisible("div.animate-spin");
                     i++;
                 }

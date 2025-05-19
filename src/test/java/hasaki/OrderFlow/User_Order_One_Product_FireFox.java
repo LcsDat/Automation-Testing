@@ -14,14 +14,15 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
     @BeforeSuite
     void beforeSuite() {
-        extentTestManager = ExtentTestManager.init();
-        System.out.println("ETM in FF: " + extentTestManager);
-        startTestLog(User_Order_One_Product_FireFox.class.getName(), "User order a product on the website on Thread: " + (int) Thread.currentThread().getId());
+        testClass = User_Order_One_Product.class.getName();
+        extentTest = startTestLog(
+                "User order a product on the website on Thread: " + (int) Thread.currentThread().getId());
     }
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
+
         logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = DriverFactory.initWebsiteDriver(browser);
 
@@ -69,8 +70,7 @@ public class User_Order_One_Product_FireFox extends BaseTest {
     @Test()
     void tc01() {
 
-        System.out.println("ETM in FF: " + extentTestManager);
-        System.out.println("ET in FF: " + extentTestManager.getExtentTest());
+        System.out.println("extent test Firefox: " + extentTest);
 //        Choose product
         logInfo("Choose 'Skin Care' in Category Menu, then choose Cleansing product type");
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
@@ -82,13 +82,13 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
         sleepInSecond(2);
 
-        logInfo("capture after choose product", true);
+//        logInfo(User_Order_One_Product_FireFox.class.getName() ,"capture after choose product", true);
 //        productDetailsPage.waitForPageLoad();
 
         logInfo("Increase product quantity by 1");
         productDetailsPage.increaseProductQty("2");
 
-        logInfo("capture after increate quantity", true);
+//        logInfo(User_Order_One_Product_FireFox.class.getName(), "capture after increate quantity", true);
 
 
         logInfo("After choosing");

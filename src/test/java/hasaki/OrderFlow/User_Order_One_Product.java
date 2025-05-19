@@ -13,9 +13,8 @@ public class User_Order_One_Product extends BaseTest {
 
     @BeforeSuite
     void beforeSuite() {
-        extentTestManager = ExtentTestManager.init();
-        System.out.println("ETM in Chrome: " + extentTestManager);
-        startTestLog(User_Order_One_Product.class.getName(),
+        testClass = User_Order_One_Product.class.getName();
+        extentTest = startTestLog(
                 "User order a product on the website on Thread: " + (int) Thread.currentThread().getId());
     }
 
@@ -74,9 +73,7 @@ public class User_Order_One_Product extends BaseTest {
     void tc01() {
 //        Choose product
 
-        System.out.println("ETM in Chrome: " + extentTestManager);
-        System.out.println("ET in Chrome: " + extentTestManager.getExtentTest());
-
+        System.out.println("extent test Chrome: " + extentTest);
         logInfo("Choose 'Skin Care' in Category Menu, then choose Cleansing product type");
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
 

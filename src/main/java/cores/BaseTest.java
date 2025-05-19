@@ -9,6 +9,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterSuite;
 import pages.*;
 import reportConfig.ExtentTestManager;
@@ -25,9 +26,11 @@ public class BaseTest {
     protected StoresLocationPage storesLocationPage;
     protected FAQPage faqPage;
     protected PaymentPage paymentPage;
-    protected static ExtentTestManager extentTestManager;
+    protected static ExtentTestManager extentTestManager = ExtentTestManager.init();
     protected ExtentTest extentTest;
     protected Logger logger;
+
+    protected String testClass;
 
     public static int getScreenNo() {
         return screenNo;
@@ -41,8 +44,7 @@ public class BaseTest {
         cleanDriverProcess();
     }
 
-    private String getScreenshotBASE64() {
-        var driver = getWebDriver().getDriver();
+    private String getScreenshotBASE64(WebDriver driver) {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
     }
 
@@ -51,21 +53,22 @@ public class BaseTest {
     }
 
     protected void logInfo(String description) {
-        extentTestManager.logInfo(description);
+        extentTestManager.getExtentTest(testClass).info(MarkupHelper.createLabel(description, ExtentColor.GREY));
         logger.info(description);
     }
 
-    protected void logInfo(String description, boolean enableCapture) {
-        attachScreenshot();
-        var mediaList = extentTestManager.getExtentTest().getModel().getMedia();
-        if (enableCapture) extentTestManager.logInfo(description, enableCapture, mediaList.get(mediaList.size() - 1));
-        screenNo++;
+    protected void logInfo(String description, boolean enableCapture, WebDriver driver) {
+//        var mediaList = extentTest.getModel().getMedia();
+//        screenNo = mediaList.size() - 1;
+        if (enableCapture)
+            extentTestManager.getExtentTest(testClass).log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.TEAL), attachScreenshot(driver));
+
         logger.info(description);
 //         extentTestManager.getTest(testClass).log(Status.INFO, "Screenshot ", attachScreenshot(testClass));
     }
 
     protected void logInfo(String description, ExtentColor logColor) {
-        extentTestManager.logInfo(description, logColor);
+        extentTestManager.getExtentTest(testClass).info(MarkupHelper.createLabel(description, logColor));
         logger.info(description);
     }
 
@@ -75,13 +78,20 @@ public class BaseTest {
      * @param testClass Test Class that attach to the Test Suite name
      * @param desc      Description of the test suite
      */
-    protected void startTestLog(String testClass, String desc) {
+    protected ExtentTest startTestLog(String desc) {
         logger = LogManager.getLogger(testClass);
-        extentTestManager.startTest(testClass, desc);
+        return extentTestManager.startTest(testClass, desc);
     }
 
-    private void attachScreenshot() {
-        extentTestManager.getExtentTest().addScreenCaptureFromBase64String(getScreenshotBASE64());
+    private ExtentTest getExtentTest() {
+        return extentTestManager.getMap().get(testClass);
+    }
+
+    protected Media attachScreenshot(WebDriver driver) {
+        getExtentTest().addScreenCaptureFromBase64String(getScreenshotBASE64(driver));
+        var mediaList = extentTestManager.getExtentTest().getModel().getMedia();
+        screenNo = extentTestManager.getExtentTest().getModel().getMedia().size() -1;
+        return mediaList.get(screenNo);
     }
 
     protected static void sleepInSecond(long time) {

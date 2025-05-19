@@ -13,12 +13,17 @@ public class ExtentTestManager {
 
     private static ExtentTestManager extentTestManager;
     private static final Map<String, ExtentTest> extentTestMap = new HashMap<>();
-    ExtentTest extentTest;
+
+    public String getTestClass() {
+        return testClass;
+    }
+
     private String testClass;
 
-    public static ExtentTestManager init(){
-            extentTestManager = new ExtentTestManager();
+    public static ExtentTestManager init() {
+        extentTestManager = new ExtentTestManager();
         return extentTestManager;
+
     }
 
     public ExtentTest getExtentTest() {
@@ -29,29 +34,16 @@ public class ExtentTestManager {
         return extentTestMap.get(testClass);
     }
 
-    public Map<String, ExtentTest> getMap(){
+    public Map<String, ExtentTest> getMap() {
         return extentTestMap;
     }
 
-    public void startTest(String testName, String desc) {
+    public synchronized ExtentTest startTest(String testName, String desc) {
+        var extentTest = ExtentManager.init().createTest(testName, desc);
         testClass = testName;
-        extentTest = ExtentManager.init().createTest(testName, desc);
-        System.out.println("ET object: " + extentTest);
-        extentTestMap.put(testName, extentTest);
+        extentTestMap.put(testClass, extentTest);
         System.out.println("map value: " + extentTestMap);
-//        return extentTest;
-    }
-
-    public void logInfo(String description){
-        extentTest.info(MarkupHelper.createLabel(description, ExtentColor.GREY));
-    }
-
-    public void logInfo(String description, ExtentColor logColor){
-        extentTest.info(MarkupHelper.createLabel(description, logColor));
-    }
-
-    public void logInfo(String description, boolean enableCapture, Media media){
-        if (enableCapture) extentTest.log(Status.INFO ,MarkupHelper.createLabel(description, ExtentColor.TEAL), media);
+        return extentTest;
     }
 
 

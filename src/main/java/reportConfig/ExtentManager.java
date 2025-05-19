@@ -5,6 +5,8 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 import cores.GlobalVariables;
 
+import java.util.Optional;
+
 public class ExtentManager {
     public static final ExtentReports extentReports = new ExtentReports();
 
