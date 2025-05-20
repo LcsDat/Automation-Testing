@@ -33,7 +33,6 @@ public enum Browser {
     public WebDriver initHeadlessFirefoxDriver() {
         FirefoxOptions options = new FirefoxOptions();
         options.addArguments("--headless",
-//                "--start-maximized",
                 "--width=1920",
                 "--height=1080");
         return new FirefoxDriver(options);

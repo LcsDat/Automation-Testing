@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Parameters;
 import pages.*;
 import reportConfig.ExtentManager;
 
@@ -37,9 +38,16 @@ public class BaseTest {
     protected static final ThreadLocal<WebsiteDriver> webdriverThread = new ThreadLocal<>();
     protected static final ConcurrentHashMap<String, ExtentTest> extentTestMap = new ConcurrentHashMap<>();
 
+    //Driver method ***********************************************************
+    public WebsiteDriver getWebDriver(Browser browser){
+        webDriver = DriverFactory.initWebsiteDriver(browser);
+        webdriverThread.set(webDriver);
+        return webDriver;
+    }
+
     //Setup method ***********************************************************
     @BeforeSuite
-    public void setupReport(ITestContext context) {
+    public void setupReport() {
         extentReports = ExtentManager.getInstance();
     }
 
@@ -81,39 +89,39 @@ public class BaseTest {
     }
 
     //Logging methods ***********************************************************
-    protected ExtentTest createLog(String suiteName){
+    protected ExtentTest createExtentLog(String suiteName) {
         logger = LogManager.getLogger(suiteName);
         extentTest = extentReports.createTest(suiteName);
         extentTestMap.put(suiteName, extentTest);
         extentTestThread.set(extentTest);
-        log4j2Thread.set(logger);
+        sleepInSecond(1);
         return extentTest;
     }
+
     protected void logInfo(String description) {
         if (extentTestThread.get() != null) {
             extentTestThread.get().info(MarkupHelper.createLabel(description, ExtentColor.GREY));
         }
-        log4j2Thread.get().info(description);
+        logger.info(description);
     }
 
     protected void logInfo(String description, boolean enableCapture) {
         if (enableCapture)
             extentTestThread.get().log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.TEAL), attachScreenshot());
 
-        log4j2Thread.get().info(description);
+        logger.info(description);
     }
 
     protected void logInfo(String description, ExtentColor logColor) {
         if (extentTestThread.get() != null) {
             extentTestThread.get().info(MarkupHelper.createLabel(description, logColor));
         }
-        log4j2Thread.get().info(description);
+        logger.info(description);
     }
 
     protected Media attachScreenshot() {
         extentTestThread.get().addScreenCaptureFromBase64String(webdriverThread.get().takeScreenshotBASE64());
         var mediaList = extentTestThread.get().getModel().getMedia();
-//        screenNo = testThread.get().getModel().getMedia().size() - 1;
         return mediaList.get(extentTestThread.get().getModel().getMedia().size() - 1);
     }
 

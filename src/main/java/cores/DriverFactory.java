@@ -27,7 +27,6 @@ public class DriverFactory {
 
             case HEADLESSFIREFOX -> {
                 driver = browser.initHeadlessFirefoxDriver();
-                System.out.println(driver.manage().window().getSize());
             }
 
             case HEADLESSCHROME -> driver = browser.initHeadlessChromeDriver();

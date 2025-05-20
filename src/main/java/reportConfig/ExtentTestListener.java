@@ -28,7 +28,7 @@ public class ExtentTestListener extends BaseTest implements ITestListener {
 
     @Override
     public void onTestStart(ITestResult iTestResult) {
-        extentLog(iTestResult).info(MarkupHelper.createLabel("ON TEST START", ExtentColor.YELLOW));
+        extentLog(iTestResult).info(MarkupHelper.createLabel("ON TEST START", ExtentColor.BLUE));
     }
 
     @Override
@@ -45,10 +45,12 @@ public class ExtentTestListener extends BaseTest implements ITestListener {
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
         extentLog(iTestResult).skip(MarkupHelper.createLabel("ON TEST SKIPPED", ExtentColor.ORANGE));
+        extentLog(iTestResult).skip(iTestResult.getThrowable(),attachScreenshot());
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
         extentLog(iTestResult).skip(MarkupHelper.createLabel("ON TEST SKIPPED", ExtentColor.ORANGE));
+        extentLog(iTestResult).skip(iTestResult.getThrowable(),attachScreenshot());
     }
 }

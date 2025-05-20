@@ -7,14 +7,12 @@
     <list default="true" id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extentV5/Hasaki.html" beforeDir="false" afterPath="$PROJECT_DIR$/extentV5/Hasaki.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extentV5/Hasaki2.html" beforeDir="false" afterPath="$PROJECT_DIR$/extentV5/Hasaki2.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/Browser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/Browser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/DriverFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/DriverFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/HomePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Demo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Demo1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/log4j2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/log4j2.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product_FireFox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product_FireFox.java" afterDir="false" />
     </list>
@@ -46,23 +44,22 @@
   &quot;associatedIndex&quot;: 6
 }</component>
   <component name="ProjectId" id="2xFZzSPhS1uuxOEwinY76mTUyms" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="autoscrollToSource" value="true" />
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "TestNG.Demo1.test.executor": "Run",
-    "TestNG.User_Order_One_Product.executor": "Run",
-    "git-widget-placeholder": "framework1",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;TestNG.Demo1.test.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.User_Order_One_Product.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;framework1&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Java&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="TestNG.User_Order_One_Product">
     <configuration name="Demo1.test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Automation-Testing" />

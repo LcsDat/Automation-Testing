@@ -1,6 +1,5 @@
 package hasaki.OrderFlow;
 
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import cores.BaseTest;
 import cores.Browser;
@@ -17,19 +16,14 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
-    void beforeClass(Browser browser, String url, String username, String password, ITestResult iTestResult) {
-//        extentTest = extentReports.createTest("bbb");
-//        extentTestMap.put(User_Order_One_Product_FireFox.class.getName(), extentTest);
-//        testThread.set(extentTest);
-//        logger = LogManager.getLogger(User_Order_One_Product_FireFox.class);
-
-        extentTest = createLog(User_Order_One_Product_FireFox.class.getName());
+    void beforeClass(Browser browser, String url, String username, String password) {
+        extentTest = createExtentLog(User_Order_One_Product_FireFox.class.getName());
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
-        logInfo("------ Setup steps include ------");
-        webDriver = DriverFactory.initWebsiteDriver(browser);
-        webdriverThread.set(webDriver);
+        webDriver = getWebDriver(browser);
 
+        logInfo("------ Setup steps include ------");
+        logInfo("- Initialize relevant pages");
         homepage = PageFactory.generateHomePage(webDriver);
         productPage = PageFactory.generateProductsPage(webDriver);
         productDetailsPage = PageFactory.generateProductDetailsPage(webDriver);
@@ -84,16 +78,8 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
         sleepInSecond(2);
 
-        logInfo("capture after choose product");
-//        productDetailsPage.waitForPageLoad();
-
         logInfo("Increase product quantity by 1");
         productDetailsPage.increaseProductQty("2");
-
-//        logInfo(User_Order_One_Product_FireFox.class.getName(), "capture after increate quantity", true);
-
-
-        logInfo("After choosing");
 
         sleepInSecond(1);
 

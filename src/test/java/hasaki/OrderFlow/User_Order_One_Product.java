@@ -1,6 +1,5 @@
 package hasaki.OrderFlow;
 
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import cores.BaseTest;
 import cores.Browser;
@@ -10,26 +9,18 @@ import org.apache.logging.log4j.LogManager;
 import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
-import reportConfig.ExtentManager;
-
-import java.util.Arrays;
 
 public class User_Order_One_Product extends BaseTest {
-
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
-//        extentTest = extentReports.createTest("aaa");
-//        extentTestMap.put(User_Order_One_Product.class.getName(), extentTest);
-//        testThread.set(extentTest);
-//        logger = LogManager.getLogger(User_Order_One_Product.class);
 
-        extentTest = createLog(User_Order_One_Product.class.getName());
+        extentTest = createExtentLog(User_Order_One_Product.class.getName());
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
-        webDriver = DriverFactory.initWebsiteDriver(browser);
-        webdriverThread.set(webDriver);
+        webDriver = getWebDriver(browser);
+
         logInfo("------ Setup steps include ------");
         logInfo("- Initialize relevant pages");
         homepage = PageFactory.generateHomePage(webDriver);
