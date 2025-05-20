@@ -1,30 +1,34 @@
 package hasaki.OrderFlow;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import cores.BaseTest;
 import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
+import org.apache.logging.log4j.LogManager;
+import org.testng.ITestContext;
+import org.testng.ITestResult;
 import org.testng.annotations.*;
-import reportConfig.ExtentTestManager;
+import reportConfig.ExtentManager;
 
 
 public class User_Order_One_Product_FireFox extends BaseTest {
 
-
-    @BeforeSuite
-    void beforeSuite() {
-        testClass = User_Order_One_Product.class.getName();
-        extentTest = startTestLog(
-                "User order a product on the website on Thread: " + (int) Thread.currentThread().getId());
-    }
-
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
-    void beforeClass(Browser browser, String url, String username, String password) {
+    void beforeClass(Browser browser, String url, String username, String password, ITestResult iTestResult) {
+//        extentTest = extentReports.createTest("bbb");
+//        extentTestMap.put(User_Order_One_Product_FireFox.class.getName(), extentTest);
+//        testThread.set(extentTest);
+//        logger = LogManager.getLogger(User_Order_One_Product_FireFox.class);
+
+        extentTest = createLog(User_Order_One_Product_FireFox.class.getName());
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
+        logInfo("------ Setup steps include ------");
         webDriver = DriverFactory.initWebsiteDriver(browser);
+        webdriverThread.set(webDriver);
 
         homepage = PageFactory.generateHomePage(webDriver);
         productPage = PageFactory.generateProductsPage(webDriver);
@@ -69,8 +73,6 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
     @Test()
     void tc01() {
-
-        System.out.println("extent test Firefox: " + extentTest);
 //        Choose product
         logInfo("Choose 'Skin Care' in Category Menu, then choose Cleansing product type");
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
@@ -82,7 +84,7 @@ public class User_Order_One_Product_FireFox extends BaseTest {
 
         sleepInSecond(2);
 
-//        logInfo(User_Order_One_Product_FireFox.class.getName() ,"capture after choose product", true);
+        logInfo("capture after choose product");
 //        productDetailsPage.waitForPageLoad();
 
         logInfo("Increase product quantity by 1");
@@ -134,6 +136,8 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         productDetailsPage.clickToCart();
 
         webDriver.waitForPageLoad();
+
+        sleepInSecond(3);
 
         assertEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName);
 

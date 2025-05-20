@@ -1,30 +1,35 @@
 package hasaki.OrderFlow;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import cores.BaseTest;
 import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
+import org.apache.logging.log4j.LogManager;
 import org.testng.Assert;
+import org.testng.ITestContext;
 import org.testng.annotations.*;
-import reportConfig.ExtentTestManager;
+import reportConfig.ExtentManager;
+
+import java.util.Arrays;
 
 public class User_Order_One_Product extends BaseTest {
 
-    @BeforeSuite
-    void beforeSuite() {
-        testClass = User_Order_One_Product.class.getName();
-        extentTest = startTestLog(
-                "User order a product on the website on Thread: " + (int) Thread.currentThread().getId());
-    }
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
+//        extentTest = extentReports.createTest("aaa");
+//        extentTestMap.put(User_Order_One_Product.class.getName(), extentTest);
+//        testThread.set(extentTest);
+//        logger = LogManager.getLogger(User_Order_One_Product.class);
+
+        extentTest = createLog(User_Order_One_Product.class.getName());
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = DriverFactory.initWebsiteDriver(browser);
-
+        webdriverThread.set(webDriver);
         logInfo("------ Setup steps include ------");
         logInfo("- Initialize relevant pages");
         homepage = PageFactory.generateHomePage(webDriver);
@@ -73,7 +78,7 @@ public class User_Order_One_Product extends BaseTest {
     void tc01() {
 //        Choose product
 
-        System.out.println("extent test Chrome: " + extentTest);
+//        System.out.println("extent test Chrome: " + extentTest);
         logInfo("Choose 'Skin Care' in Category Menu, then choose Cleansing product type");
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
 
@@ -97,6 +102,7 @@ public class User_Order_One_Product extends BaseTest {
 
         logInfo("Wait for warning message invisible: 'Maximum quantity is 1'");
         productDetailsPage.waitToBeInvisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
+
 
         logInfo("Decrease product quantity by 1");
         productDetailsPage.decreaseProductQty();

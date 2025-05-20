@@ -115,6 +115,10 @@ public class WebsiteDriver {
         return element;
     }
 
+    public  String takeScreenshotBASE64(){
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
+    }
+
     public String getPageTitle() {
         return driver.getTitle();
     }

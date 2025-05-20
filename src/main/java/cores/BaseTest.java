@@ -1,5 +1,6 @@
 package cores;
 
+import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
@@ -7,14 +8,14 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.model.Media;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
+import org.testng.annotations.BeforeSuite;
 import pages.*;
-import reportConfig.ExtentTestManager;
+import reportConfig.ExtentManager;
 
 import java.util.Random;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class BaseTest {
 
@@ -26,92 +27,29 @@ public class BaseTest {
     protected StoresLocationPage storesLocationPage;
     protected FAQPage faqPage;
     protected PaymentPage paymentPage;
-    protected static ExtentTestManager extentTestManager = ExtentTestManager.init();
     protected ExtentTest extentTest;
     protected Logger logger;
 
-    protected String testClass;
+    protected static ExtentReports extentReports;
 
-    public static int getScreenNo() {
-        return screenNo;
+    protected static final ThreadLocal<ExtentTest> extentTestThread = new ThreadLocal<>();
+    protected static final ThreadLocal<Logger> log4j2Thread = new ThreadLocal<>();
+    protected static final ThreadLocal<WebsiteDriver> webdriverThread = new ThreadLocal<>();
+    protected static final ConcurrentHashMap<String, ExtentTest> extentTestMap = new ConcurrentHashMap<>();
+
+    //Setup method ***********************************************************
+    @BeforeSuite
+    public void setupReport(ITestContext context) {
+        extentReports = ExtentManager.getInstance();
     }
-
-    private static int screenNo;
 
     @AfterSuite(alwaysRun = true)
     void afterSuite() {
         logInfo("- Clean background process (driver)");
         cleanDriverProcess();
-    }
-
-    private String getScreenshotBASE64(WebDriver driver) {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
-    }
-
-    public WebsiteDriver getWebDriver() {
-        return webDriver;
-    }
-
-    protected void logInfo(String description) {
-        extentTestManager.getExtentTest(testClass).info(MarkupHelper.createLabel(description, ExtentColor.GREY));
-        logger.info(description);
-    }
-
-    protected void logInfo(String description, boolean enableCapture, WebDriver driver) {
-//        var mediaList = extentTest.getModel().getMedia();
-//        screenNo = mediaList.size() - 1;
-        if (enableCapture)
-            extentTestManager.getExtentTest(testClass).log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.TEAL), attachScreenshot(driver));
-
-        logger.info(description);
-//         extentTestManager.getTest(testClass).log(Status.INFO, "Screenshot ", attachScreenshot(testClass));
-    }
-
-    protected void logInfo(String description, ExtentColor logColor) {
-        extentTestManager.getExtentTest(testClass).info(MarkupHelper.createLabel(description, logColor));
-        logger.info(description);
-    }
-
-    /**
-     * Writing log for Extent Report
-     *
-     * @param testClass Test Class that attach to the Test Suite name
-     * @param desc      Description of the test suite
-     */
-    protected ExtentTest startTestLog(String desc) {
-        logger = LogManager.getLogger(testClass);
-        return extentTestManager.startTest(testClass, desc);
-    }
-
-    private ExtentTest getExtentTest() {
-        return extentTestManager.getMap().get(testClass);
-    }
-
-    protected Media attachScreenshot(WebDriver driver) {
-        getExtentTest().addScreenCaptureFromBase64String(getScreenshotBASE64(driver));
-        var mediaList = extentTestManager.getExtentTest().getModel().getMedia();
-        screenNo = extentTestManager.getExtentTest().getModel().getMedia().size() -1;
-        return mediaList.get(screenNo);
-    }
-
-    protected static void sleepInSecond(long time) {
-        try {
-            Thread.sleep(time * 1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    protected String randomAlphabetic(int targetLength) {
-        int leftLimit = 97; // letter 'a'
-        int rightLimit = 122; // letter 'z'
-
-        Random random = new Random();
-
-        return random.ints(leftLimit, rightLimit + 1)
-                .limit(targetLength)
-                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-                .toString();
+        extentTestThread.remove();
+        log4j2Thread.remove();
+        webdriverThread.remove();
     }
 
     protected void navigateToHomePage() {
@@ -142,12 +80,71 @@ public class BaseTest {
         webDriver.switchWindow("Hasaki.vn | Mỹ Phẩm & Clinic");
     }
 
+    //Logging methods ***********************************************************
+    protected ExtentTest createLog(String suiteName){
+        logger = LogManager.getLogger(suiteName);
+        extentTest = extentReports.createTest(suiteName);
+        extentTestMap.put(suiteName, extentTest);
+        extentTestThread.set(extentTest);
+        log4j2Thread.set(logger);
+        return extentTest;
+    }
+    protected void logInfo(String description) {
+        if (extentTestThread.get() != null) {
+            extentTestThread.get().info(MarkupHelper.createLabel(description, ExtentColor.GREY));
+        }
+        log4j2Thread.get().info(description);
+    }
+
+    protected void logInfo(String description, boolean enableCapture) {
+        if (enableCapture)
+            extentTestThread.get().log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.TEAL), attachScreenshot());
+
+        log4j2Thread.get().info(description);
+    }
+
+    protected void logInfo(String description, ExtentColor logColor) {
+        if (extentTestThread.get() != null) {
+            extentTestThread.get().info(MarkupHelper.createLabel(description, logColor));
+        }
+        log4j2Thread.get().info(description);
+    }
+
+    protected Media attachScreenshot() {
+        extentTestThread.get().addScreenCaptureFromBase64String(webdriverThread.get().takeScreenshotBASE64());
+        var mediaList = extentTestThread.get().getModel().getMedia();
+//        screenNo = testThread.get().getModel().getMedia().size() - 1;
+        return mediaList.get(extentTestThread.get().getModel().getMedia().size() - 1);
+    }
+
+    //Util methods ***********************************************************
+    protected static void sleepInSecond(long time) {
+        try {
+            Thread.sleep(time * 1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    protected String randomAlphabetic(int targetLength) {
+        int leftLimit = 97; // letter 'a'
+        int rightLimit = 122; // letter 'z'
+
+        Random random = new Random();
+
+        return random.ints(leftLimit, rightLimit + 1)
+                .limit(targetLength)
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString();
+    }
+
+    //Assertion methods ***********************************************************
     protected void assertTrue(boolean condition) {
         try {
             CustomAssert.assertTrue(condition);
-            logger.info("-----  PASS -----");
+//            logger.info("-----  PASS -----");
         } catch (Throwable e) {
-            logger.error("----- FAIL ----- : " + e.getMessage());
+//            logger.error("----- FAIL ----- : " + e.getMessage());
         }
 
     }
@@ -156,18 +153,18 @@ public class BaseTest {
 
         try {
             CustomAssert.assertFalse(condition);
-            logger.info("-----  PASS -----");
+//            logger.info("-----  PASS -----");
         } catch (Throwable e) {
-            logger.error("----- FAIL ----- : " + e.getMessage());
+//            logger.error("----- FAIL ----- : " + e.getMessage());
         }
     }
 
     protected void assertEquals(Object actual, Object expected) {
         try {
             CustomAssert.assertEquals(actual, expected);
-            logger.info("-----  PASS -----");
+//            logger.info("-----  PASS -----");
         } catch (Throwable e) {
-            logger.error("----- FAIL ----- : " + e.getMessage());
+//            logger.error("----- FAIL ----- : " + e.getMessage());
         }
 
     }

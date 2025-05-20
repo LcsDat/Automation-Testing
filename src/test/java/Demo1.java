@@ -46,8 +46,13 @@ public class Demo1 extends DemoParent {
         ExtentReports extent = new ExtentReports();
         ExtentSparkReporter spark = new ExtentSparkReporter(GlobalVariables.PROJECTPATH + "/extentV5/Hasaki2.html");
         extent.attachReporter(spark);
-        ExtentTest test = extent.createTest(Feature.class,"hello")
+        ExtentTest test = extent.createTest(Feature.class, "hello")
                 .log(Status.PASS, "This is a logging event for MyFirstTest, and it passed!");
+        test.createNode("hello 1").pass("pass");
+        test.createNode("hello 2")
+                .fail("fail");
+        test.createNode("hello 3")
+                .info("info");
         System.out.println(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
         test.fail(MediaEntityBuilder.createScreenCaptureFromBase64String("base64").build());
         extent.flush();

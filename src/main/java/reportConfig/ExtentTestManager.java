@@ -38,13 +38,13 @@ public class ExtentTestManager {
         return extentTestMap;
     }
 
-    public synchronized ExtentTest startTest(String testName, String desc) {
-        var extentTest = ExtentManager.init().createTest(testName, desc);
-        testClass = testName;
-        extentTestMap.put(testClass, extentTest);
-        System.out.println("map value: " + extentTestMap);
-        return extentTest;
-    }
+//    public synchronized ExtentTest startTest(String testName, String desc) {
+//        var extentTest = ExtentManager.init().createTest(testName, desc);
+//        testClass = testName;
+//        extentTestMap.put(testClass, extentTest);
+//        System.out.println("map value: " + extentTestMap);
+//        return extentTest;
+//    }
 
 
 }
