@@ -11,13 +11,13 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import reportConfig.ExtentManager;
 
-
+@Test(invocationCount = 3)
 public class User_Order_One_Product_FireFox extends BaseTest {
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
-        extentTest = createExtentLog(User_Order_One_Product_FireFox.class.getName());
+        extentTest = createExtentLog(User_Order_One_Product_FireFox.class);
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = getWebDriver(browser);

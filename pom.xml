@@ -28,7 +28,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
-
+                    <systemPropertyVariables>
+                        <!-- Attempt to force plain console -->
+                        <org.fusesource.jansi.Ansi.disable>true</org.fusesource.jansi.Ansi.disable>
+                    </systemPropertyVariables>
                     <encoding>UTF-8</encoding>
                     <suiteXmlFiles>
                         <suiteXmlFile>src/main/resources/HasakiTestRunner.xml</suiteXmlFile>

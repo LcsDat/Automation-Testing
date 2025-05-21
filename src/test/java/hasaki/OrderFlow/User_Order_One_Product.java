@@ -10,13 +10,14 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 
+@Test(invocationCount = 3)
 public class User_Order_One_Product extends BaseTest {
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
 
-        extentTest = createExtentLog(User_Order_One_Product.class.getName());
+        extentTest = createExtentLog(User_Order_One_Product.class);
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = getWebDriver(browser);

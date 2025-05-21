@@ -59,6 +59,12 @@ public class Demo1 extends DemoParent {
 
     }
 
+    public static void main(String[] args) {
+        String icon = "  /\\_/\\\n" +
+                " ( o.o )\n" +
+                "  > ^ <";
+        System.out.println((char) 14);
+    }
 //    @AfterTest
 //    void afterTest() {
 //        driver.quit();

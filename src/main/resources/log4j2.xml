@@ -2,14 +2,24 @@
 <Configuration status="WARN">
     <Properties>
         <!-- ANSI color codes -->
-        <Property name="CONSOLE_LOG_PATTERN">⏱️ %style{%-13d{HH:mm:ss a}}{bright,cyan} [%t] %highlight{%6level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=blue, DEBUG=cyan, TRACE=green}     %-50logger{50} |   %style{%msg%n}{bright,yellow} </Property>
+        <Property name="CONSOLE_LOG_INFO_PATTERN">🎦  %style{%-13d{HH:mm:ss a}}{bright,cyan} [%t]   %highlight{%level}{FATAL=bg_red, ERROR=red, WARN=yellow, INFO=bright blue, DEBUG=cyan, TRACE=green}     %-42logger{50} |   %style{%msg%n}{bright,yellow} </Property>
+        <Property name="CONSOLE_LOG_ASSERT_PATTERN">🎦  %style{%-13d{HH:mm:ss a}}{bright,cyan} [%t]    ✅       %-42logger{50} |   %style{%msg%n}{bright,green}</Property>
+
     </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="${CONSOLE_LOG_PATTERN}" disableAnsi="false"/>
+            <PatternLayout pattern="${CONSOLE_LOG_INFO_PATTERN}" disableAnsi="false"/>
+        </Console>
+
+        <Console name="Assertion" target="SYSTEM_OUT">
+            <PatternLayout pattern="${CONSOLE_LOG_ASSERT_PATTERN}" disableAnsi="false"/>
         </Console>
     </Appenders>
     <Loggers>
+        <Logger name="assertions" level="INFO" additivity="false">
+            <AppenderRef ref="Assertion"/>
+        </Logger>
+
         <Root level="info">
             <AppenderRef ref="Console"/>
         </Root>

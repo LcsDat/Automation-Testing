@@ -8,6 +8,8 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.model.Media;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.Marker;
+import org.apache.logging.log4j.MarkerManager;
 import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
@@ -20,6 +22,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class BaseTest {
 
+    //Test instances
     protected WebsiteDriver webDriver;
     protected HomePage homepage;
     protected ProductsPage productPage;
@@ -29,17 +32,21 @@ public class BaseTest {
     protected FAQPage faqPage;
     protected PaymentPage paymentPage;
     protected ExtentTest extentTest;
-    protected Logger logger;
 
+    //Log instances
+    protected Logger logger;
+    protected Logger assertionLogger;
+    private static final Marker TIME_MARKER = MarkerManager.getMarker("⏰");
     protected static ExtentReports extentReports;
 
+    //Thread instances
     protected static final ThreadLocal<ExtentTest> extentTestThread = new ThreadLocal<>();
     protected static final ThreadLocal<Logger> log4j2Thread = new ThreadLocal<>();
     protected static final ThreadLocal<WebsiteDriver> webdriverThread = new ThreadLocal<>();
     protected static final ConcurrentHashMap<String, ExtentTest> extentTestMap = new ConcurrentHashMap<>();
 
     //Driver method ***********************************************************
-    public WebsiteDriver getWebDriver(Browser browser){
+    public WebsiteDriver getWebDriver(Browser browser) {
         webDriver = DriverFactory.initWebsiteDriver(browser);
         webdriverThread.set(webDriver);
         return webDriver;
@@ -94,7 +101,15 @@ public class BaseTest {
         extentTest = extentReports.createTest(suiteName);
         extentTestMap.put(suiteName, extentTest);
         extentTestThread.set(extentTest);
-        sleepInSecond(1);
+        return extentTest;
+    }
+
+    protected ExtentTest createExtentLog(Class<?> clazz) {
+        logger = LogManager.getLogger(clazz.getSimpleName());
+        assertionLogger = LogManager.getLogger("assertions." + clazz.getSimpleName());
+        extentTest = extentReports.createTest(clazz.getSimpleName());
+        extentTestMap.put(clazz.getName(), extentTest);
+        extentTestThread.set(extentTest);
         return extentTest;
     }
 
@@ -102,7 +117,7 @@ public class BaseTest {
         if (extentTestThread.get() != null) {
             extentTestThread.get().info(MarkupHelper.createLabel(description, ExtentColor.GREY));
         }
-        logger.info(description);
+        logger.info(TIME_MARKER, description);
     }
 
     protected void logInfo(String description, boolean enableCapture) {
@@ -147,32 +162,62 @@ public class BaseTest {
     }
 
     //Assertion methods ***********************************************************
+    protected void assertTrue(boolean condition, String message) {
+        try {
+            CustomAssert.assertTrue(condition);
+            assertionLogger.info("{} ====> PASS", message);
+        } catch (Throwable e) {
+            assertionLogger.error("Assert True is FAILED: {}", e.getMessage());
+        }
+
+    }
+
     protected void assertTrue(boolean condition) {
         try {
             CustomAssert.assertTrue(condition);
-//            logger.info("-----  PASS -----");
+            assertionLogger.info("Assert True is PASS");
         } catch (Throwable e) {
-//            logger.error("----- FAIL ----- : " + e.getMessage());
+            assertionLogger.error("Assert True is FAILED: {}", e.getMessage());
         }
 
+    }
+
+    protected void assertFalse(boolean condition, String message) {
+
+        try {
+            CustomAssert.assertFalse(condition);
+            assertionLogger.info("{} ====> PASS", message);
+        } catch (Throwable e) {
+            assertionLogger.error("Assert False is FAILED: {}", e.getMessage());
+        }
     }
 
     protected void assertFalse(boolean condition) {
 
         try {
             CustomAssert.assertFalse(condition);
-//            logger.info("-----  PASS -----");
+            assertionLogger.info("Assert False is PASS");
         } catch (Throwable e) {
-//            logger.error("----- FAIL ----- : " + e.getMessage());
+            assertionLogger.error("Assert False is FAILED: {}", e.getMessage());
         }
+    }
+
+    protected void assertEquals(Object actual, Object expected, String message) {
+        try {
+            CustomAssert.assertEquals(actual, expected);
+            assertionLogger.info("{}: [Actual {}] and [Expected {}] ====> PASS", message, actual, expected);
+        } catch (Throwable e) {
+            assertionLogger.error("Actual: {} but Expected: {} {}", actual, expected,  e.getMessage());
+        }
+
     }
 
     protected void assertEquals(Object actual, Object expected) {
         try {
             CustomAssert.assertEquals(actual, expected);
-//            logger.info("-----  PASS -----");
+            assertionLogger.info("[Actual {}] and [Expected {}] ====> PASS" , actual, expected);
         } catch (Throwable e) {
-//            logger.error("----- FAIL ----- : " + e.getMessage());
+            assertionLogger.error("Actual: {} but Expected: {} {}", actual, expected,  e.getMessage());
         }
 
     }
