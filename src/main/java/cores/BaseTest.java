@@ -6,6 +6,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.model.Media;
+import logConfig.Log4j2Manager;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.Marker;
@@ -34,14 +35,11 @@ public class BaseTest {
     protected ExtentTest extentTest;
 
     //Log instances
-    protected Logger logger;
-    protected Logger assertionLogger;
-    private static final Marker TIME_MARKER = MarkerManager.getMarker("⏰");
+    private static Log4j2Manager log4j2Manager;
     protected static ExtentReports extentReports;
 
     //Thread instances
     protected static final ThreadLocal<ExtentTest> extentTestThread = new ThreadLocal<>();
-    protected static final ThreadLocal<Logger> log4j2Thread = new ThreadLocal<>();
     protected static final ThreadLocal<WebsiteDriver> webdriverThread = new ThreadLocal<>();
     protected static final ConcurrentHashMap<String, ExtentTest> extentTestMap = new ConcurrentHashMap<>();
 
@@ -63,7 +61,6 @@ public class BaseTest {
         logInfo("- Clean background process (driver)");
         cleanDriverProcess();
         extentTestThread.remove();
-        log4j2Thread.remove();
         webdriverThread.remove();
     }
 
@@ -97,7 +94,8 @@ public class BaseTest {
 
     //Logging methods ***********************************************************
     protected ExtentTest createExtentLog(String suiteName) {
-        logger = LogManager.getLogger(suiteName);
+
+//        logger = LogManager.getLogger(suiteName);
         extentTest = extentReports.createTest(suiteName);
         extentTestMap.put(suiteName, extentTest);
         extentTestThread.set(extentTest);
@@ -105,8 +103,9 @@ public class BaseTest {
     }
 
     protected ExtentTest createExtentLog(Class<?> clazz) {
-        logger = LogManager.getLogger(clazz.getSimpleName());
-        assertionLogger = LogManager.getLogger("assertions." + clazz.getSimpleName());
+        log4j2Manager = Log4j2Manager.getLogger(clazz);
+//        logger = LogManager.getLogger(clazz.getSimpleName());
+//        assertionLogger = LogManager.getLogger("assertions." + clazz.getSimpleName());
         extentTest = extentReports.createTest(clazz.getSimpleName());
         extentTestMap.put(clazz.getName(), extentTest);
         extentTestThread.set(extentTest);
@@ -117,21 +116,24 @@ public class BaseTest {
         if (extentTestThread.get() != null) {
             extentTestThread.get().info(MarkupHelper.createLabel(description, ExtentColor.GREY));
         }
-        logger.info(TIME_MARKER, description);
+//        logger.info(description);
+        log4j2Manager.logInfo(description);
     }
 
     protected void logInfo(String description, boolean enableCapture) {
         if (enableCapture)
             extentTestThread.get().log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.TEAL), attachScreenshot());
 
-        logger.info(description);
+//        logger.info(description);
+        log4j2Manager.logInfo(description);
     }
 
     protected void logInfo(String description, ExtentColor logColor) {
         if (extentTestThread.get() != null) {
             extentTestThread.get().info(MarkupHelper.createLabel(description, logColor));
         }
-        logger.info(description);
+//        logger.info(description);
+        log4j2Manager.logInfo(description);
     }
 
     protected Media attachScreenshot() {
@@ -165,9 +167,9 @@ public class BaseTest {
     protected void assertTrue(boolean condition, String message) {
         try {
             CustomAssert.assertTrue(condition);
-            assertionLogger.info("{} ====> PASS", message);
+            log4j2Manager.getAssertionPassLogger().info("{} ====> PASS", message);
         } catch (Throwable e) {
-            assertionLogger.error("Assert True is FAILED: {}", e.getMessage());
+            log4j2Manager.getAssertionFailLogger().error("Assert True is FAILED: {}", e.getMessage());
         }
 
     }
@@ -175,9 +177,9 @@ public class BaseTest {
     protected void assertTrue(boolean condition) {
         try {
             CustomAssert.assertTrue(condition);
-            assertionLogger.info("Assert True is PASS");
+            log4j2Manager.getAssertionPassLogger().info("Assert True is PASS");
         } catch (Throwable e) {
-            assertionLogger.error("Assert True is FAILED: {}", e.getMessage());
+            log4j2Manager.getAssertionFailLogger().error("Assert True is FAILED: {}", e.getMessage());
         }
 
     }
@@ -186,9 +188,9 @@ public class BaseTest {
 
         try {
             CustomAssert.assertFalse(condition);
-            assertionLogger.info("{} ====> PASS", message);
+            log4j2Manager.getAssertionPassLogger().info("{} ====> PASS", message);
         } catch (Throwable e) {
-            assertionLogger.error("Assert False is FAILED: {}", e.getMessage());
+            log4j2Manager.getAssertionFailLogger().error("Assert False is FAILED: {}", e.getMessage());
         }
     }
 
@@ -196,18 +198,19 @@ public class BaseTest {
 
         try {
             CustomAssert.assertFalse(condition);
-            assertionLogger.info("Assert False is PASS");
+            log4j2Manager.getAssertionPassLogger().info("Assert False is PASS");
         } catch (Throwable e) {
-            assertionLogger.error("Assert False is FAILED: {}", e.getMessage());
+            log4j2Manager.getAssertionFailLogger().error("Assert False is FAILED: {}", e.getMessage());
         }
     }
 
     protected void assertEquals(Object actual, Object expected, String message) {
         try {
             CustomAssert.assertEquals(actual, expected);
-            assertionLogger.info("{}: [Actual {}] and [Expected {}] ====> PASS", message, actual, expected);
+//            assertionLogger.info("",actual,expected);
+            log4j2Manager.getAssertionPassLogger().info("{}: [Actual: {}] and [Expected: {}] ====> PASS", message, actual, expected);
         } catch (Throwable e) {
-            assertionLogger.error("Actual: {} but Expected: {} {}", actual, expected,  e.getMessage());
+            log4j2Manager.getAssertionFailLogger().error("[Actual: {}] [but Expected: {}]", actual, expected);
         }
 
     }
@@ -215,13 +218,14 @@ public class BaseTest {
     protected void assertEquals(Object actual, Object expected) {
         try {
             CustomAssert.assertEquals(actual, expected);
-            assertionLogger.info("[Actual {}] and [Expected {}] ====> PASS" , actual, expected);
+            log4j2Manager.getAssertionPassLogger().info("[Actual: {}] and [Expected: {}] ====> PASS" , actual, expected);
         } catch (Throwable e) {
-            assertionLogger.error("Actual: {} but Expected: {} {}", actual, expected,  e.getMessage());
+            log4j2Manager.getAssertionFailLogger().error("[Actual: {}] but [Expected: {}]", actual, expected);
         }
 
     }
 
+    //Simple verify
     protected boolean verifyTrue(boolean condition) {
         return new CustomAssert(GlobalVariables.HASAKI_KEYWORD).verifyTrue(condition);
     }

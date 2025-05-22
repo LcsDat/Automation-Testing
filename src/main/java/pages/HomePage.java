@@ -68,7 +68,7 @@ public class HomePage extends ProductDetailAccessiblePages {
      * - If the quantity is bigger than 0, remove all products in the cart
      */
     public void removeProductFromCart() {
-        sleepInSecond(1);
+        sleepInSecond(2);
         if (!getCartQuantity().equals("0")) {
             clickToCart();
 //            driver.waitForPageLoad();

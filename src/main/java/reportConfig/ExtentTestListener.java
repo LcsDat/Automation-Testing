@@ -5,6 +5,7 @@ import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import cores.BaseTest;
+import logConfig.Log4j2Manager;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -60,30 +61,37 @@ public class ExtentTestListener extends BaseTest implements ITestListener, IExec
     @Override
     public void onTestStart(ITestResult iTestResult) {
         extentLog(iTestResult).info(MarkupHelper.createLabel("TEST CASE START: " + iTestResult.getTestClass() + "---" + iTestResult.getName(), ExtentColor.BLUE));
-        logger = LogManager.getLogger(iTestResult.getTestClass());
+//        logger = Log4j2Manager.getLogger(iTestResult.getTestClass()).getAssertionPassLogger();
     }
 
     @Override
     public void onTestSuccess(ITestResult iTestResult) {
+        var logger = Log4j2Manager.getLogger(iTestResult.getTestClass()).getAssertionPassLogger();
         extentLog(iTestResult).pass(MarkupHelper.createLabel(iTestResult.getTestClass() + "---" + iTestResult.getName() + " ====> PASSED", ExtentColor.GREEN));
-        logger.info("{}--{} ====> PASSED", iTestResult.getTestClass().getName(), iTestResult.getName());
+        logger.info("{}.{} ====> PASSED", iTestResult.getTestClass().getName(), iTestResult.getName());
     }
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
+        var logger = Log4j2Manager.getLogger(iTestResult.getTestClass()).getAssertionFailLogger();
         extentLog(iTestResult).fail(MarkupHelper.createLabel(iTestResult.getTestClass() + "---" + iTestResult.getName() + " ====> FAILED", ExtentColor.RED));
         extentLog(iTestResult).fail(iTestResult.getThrowable(), attachScreenshot());
+        logger.error("{}.{} ====> FAILED", iTestResult.getTestClass().getName(), iTestResult.getName());
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
+        var logger = Log4j2Manager.getLogger(iTestResult.getTestClass()).getAssertionFailLogger();
         extentLog(iTestResult).skip(MarkupHelper.createLabel(iTestResult.getTestClass() + "---" + iTestResult.getName() + " ====> SKIPPED", ExtentColor.ORANGE));
         extentLog(iTestResult).skip(iTestResult.getThrowable(), attachScreenshot());
+        logger.error("{}.{} ====> SKIPPED", iTestResult.getTestClass().getName(), iTestResult.getName());
     }
 
     @Override
     public void onTestFailedButWithinSuccessPercentage(ITestResult iTestResult) {
+        var logger = Log4j2Manager.getLogger(iTestResult.getTestClass()).getAssertionFailLogger();
         extentLog(iTestResult).skip(MarkupHelper.createLabel(iTestResult.getTestClass() + "---" + iTestResult.getName() + " ====> SKIPPED WITH PERCENT", ExtentColor.ORANGE));
         extentLog(iTestResult).skip(iTestResult.getThrowable(), attachScreenshot());
+        logger.error("{}.{} ====> SKIPPED WITH PERCENT", iTestResult.getTestClass().getName(), iTestResult.getName());
     }
 }
