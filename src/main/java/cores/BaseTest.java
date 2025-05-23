@@ -32,16 +32,13 @@ public class BaseTest {
     protected StoresLocationPage storesLocationPage;
     protected FAQPage faqPage;
     protected PaymentPage paymentPage;
-    protected ExtentTest extentTest;
 
     //Log instances
     private static Log4j2Manager log4j2Manager;
-    protected static ExtentReports extentReports;
+    protected static ExtentManager extentManager;
 
     //Thread instances
-    protected static final ThreadLocal<ExtentTest> extentTestThread = new ThreadLocal<>();
     protected static final ThreadLocal<WebsiteDriver> webdriverThread = new ThreadLocal<>();
-    protected static final ConcurrentHashMap<String, ExtentTest> extentTestMap = new ConcurrentHashMap<>();
 
     //Driver method ***********************************************************
     public WebsiteDriver getWebDriver(Browser browser) {
@@ -53,14 +50,13 @@ public class BaseTest {
     //Setup method ***********************************************************
     @BeforeSuite
     public void setupReport() {
-        extentReports = ExtentManager.getInstance();
+        extentManager = ExtentManager.getInstance();
     }
 
     @AfterSuite(alwaysRun = true)
     void afterSuite() {
         logInfo("- Clean background process (driver)");
         cleanDriverProcess();
-        extentTestThread.remove();
         webdriverThread.remove();
     }
 
@@ -93,53 +89,45 @@ public class BaseTest {
     }
 
     //Logging methods ***********************************************************
-    protected ExtentTest createExtentLog(String suiteName) {
-
-//        logger = LogManager.getLogger(suiteName);
-        extentTest = extentReports.createTest(suiteName);
-        extentTestMap.put(suiteName, extentTest);
-        extentTestThread.set(extentTest);
-        return extentTest;
+    protected void createExtentLog(String suiteName) {
+        log4j2Manager = Log4j2Manager.getLogger(suiteName);
+        extentManager.createExtentTest(suiteName);
     }
 
-    protected ExtentTest createExtentLog(Class<?> clazz) {
+    protected void createExtentLog(Class<?> clazz) {
         log4j2Manager = Log4j2Manager.getLogger(clazz);
-//        logger = LogManager.getLogger(clazz.getSimpleName());
-//        assertionLogger = LogManager.getLogger("assertions." + clazz.getSimpleName());
-        extentTest = extentReports.createTest(clazz.getSimpleName());
-        extentTestMap.put(clazz.getName(), extentTest);
-        extentTestThread.set(extentTest);
-        return extentTest;
+        extentManager.createExtentTest(clazz.getName());
     }
 
     protected void logInfo(String description) {
-        if (extentTestThread.get() != null) {
-            extentTestThread.get().info(MarkupHelper.createLabel(description, ExtentColor.GREY));
-        }
-//        logger.info(description);
-        log4j2Manager.logInfo(description);
+        var className = this.getClass().getName();
+
+        extentManager.getExtentTestMap().get(className).info(MarkupHelper.createLabel(description, ExtentColor.GREY));
+        log4j2Manager.getInfoLogger(className).info(description);
     }
 
     protected void logInfo(String description, boolean enableCapture) {
-        if (enableCapture)
-            extentTestThread.get().log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.TEAL), attachScreenshot());
+        var className = this.getClass().getName();
 
-//        logger.info(description);
-        log4j2Manager.logInfo(description);
+        if (enableCapture)
+            extentManager.getExtentTestMap().get(className).log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.TEAL), attachScreenshot());
+        log4j2Manager.getInfoLogger(className).info(description);
     }
 
     protected void logInfo(String description, ExtentColor logColor) {
-        if (extentTestThread.get() != null) {
-            extentTestThread.get().info(MarkupHelper.createLabel(description, logColor));
-        }
-//        logger.info(description);
-        log4j2Manager.logInfo(description);
+        var className = this.getClass().getName();
+
+        extentManager.getExtentTestMap().get(className).info(MarkupHelper.createLabel(description, logColor));
+        log4j2Manager.getInfoLogger(className).info(description);
     }
 
     protected Media attachScreenshot() {
-        extentTestThread.get().addScreenCaptureFromBase64String(webdriverThread.get().takeScreenshotBASE64());
-        var mediaList = extentTestThread.get().getModel().getMedia();
-        return mediaList.get(extentTestThread.get().getModel().getMedia().size() - 1);
+        var className = this.getClass().getName();
+        var mediaList = extentManager.getExtentTestMap().get(className).getModel().getMedia();
+
+        extentManager.getExtentTestMap().get(className).addScreenCaptureFromBase64String(webdriverThread.get().takeScreenshotBASE64());
+
+        return mediaList.get(extentManager.getExtentTestMap().get(className).getModel().getMedia().size() - 1);
     }
 
     //Util methods ***********************************************************
@@ -165,62 +153,77 @@ public class BaseTest {
 
     //Assertion methods ***********************************************************
     protected void assertTrue(boolean condition, String message) {
+        var className = this.getClass().getName();
+
         try {
             CustomAssert.assertTrue(condition);
-            log4j2Manager.getAssertionPassLogger().info("{} ====> PASS", message);
+            log4j2Manager.getAssertionPassLogger(className).info("{} ====> PASS", message);
         } catch (Throwable e) {
-            log4j2Manager.getAssertionFailLogger().error("Assert True is FAILED: {}", e.getMessage());
+            log4j2Manager.getAssertionFailLogger(className).error("Assert True is FAILED: {}", e.getMessage());
+            throw e;
         }
 
     }
 
     protected void assertTrue(boolean condition) {
+        var className = this.getClass().getName();
+
         try {
             CustomAssert.assertTrue(condition);
-            log4j2Manager.getAssertionPassLogger().info("Assert True is PASS");
+            log4j2Manager.getAssertionPassLogger(className).info("Assert True is PASS");
         } catch (Throwable e) {
-            log4j2Manager.getAssertionFailLogger().error("Assert True is FAILED: {}", e.getMessage());
+            log4j2Manager.getAssertionFailLogger(className).error("Assert True is FAILED: {}", e.getMessage());
+            throw e;
         }
 
     }
 
     protected void assertFalse(boolean condition, String message) {
+        var className = this.getClass().getName();
 
         try {
             CustomAssert.assertFalse(condition);
-            log4j2Manager.getAssertionPassLogger().info("{} ====> PASS", message);
+            log4j2Manager.getAssertionPassLogger(className).info("{} ====> PASS", message);
         } catch (Throwable e) {
-            log4j2Manager.getAssertionFailLogger().error("Assert False is FAILED: {}", e.getMessage());
+            log4j2Manager.getAssertionFailLogger(className).error("Assert False is FAILED: {}", e.getMessage());
+            throw e;
         }
     }
 
     protected void assertFalse(boolean condition) {
+        var className = this.getClass().getName();
 
         try {
             CustomAssert.assertFalse(condition);
-            log4j2Manager.getAssertionPassLogger().info("Assert False is PASS");
+            log4j2Manager.getAssertionPassLogger(className).info("Assert False is PASS");
         } catch (Throwable e) {
-            log4j2Manager.getAssertionFailLogger().error("Assert False is FAILED: {}", e.getMessage());
+            log4j2Manager.getAssertionFailLogger(className).error("Assert False is FAILED: {}", e.getMessage());
+            throw e;
         }
     }
 
     protected void assertEquals(Object actual, Object expected, String message) {
+        var className = this.getClass().getName();
+
         try {
             CustomAssert.assertEquals(actual, expected);
-//            assertionLogger.info("",actual,expected);
-            log4j2Manager.getAssertionPassLogger().info("{}: [Actual: {}] and [Expected: {}] ====> PASS", message, actual, expected);
+            log4j2Manager.getAssertionPassLogger(className).info("{}: [Actual: {}] and [Expected: {}] ====> PASS", message, actual, expected);
         } catch (Throwable e) {
-            log4j2Manager.getAssertionFailLogger().error("[Actual: {}] [but Expected: {}]", actual, expected);
+            log4j2Manager.getAssertionFailLogger(className).error("[Actual: {}] [but Expected: {}]", actual, expected);
+            throw e;
         }
 
     }
 
     protected void assertEquals(Object actual, Object expected) {
+        var className = this.getClass().getName();
+
         try {
             CustomAssert.assertEquals(actual, expected);
-            log4j2Manager.getAssertionPassLogger().info("[Actual: {}] and [Expected: {}] ====> PASS" , actual, expected);
+            log4j2Manager.getAssertionPassLogger(className).info("[Actual: {}] and [Expected: {}] ====> PASS", actual, expected);
         } catch (Throwable e) {
-            log4j2Manager.getAssertionFailLogger().error("[Actual: {}] but [Expected: {}]", actual, expected);
+            log4j2Manager.getAssertionFailLogger(className).error("[Actual: {}] but [Expected: {}]", actual, expected);
+            throw e;
         }
 
     }

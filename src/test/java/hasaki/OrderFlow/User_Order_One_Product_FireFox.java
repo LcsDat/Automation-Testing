@@ -17,7 +17,7 @@ public class User_Order_One_Product_FireFox extends BaseTest {
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
-        extentTest = createExtentLog(User_Order_One_Product_FireFox.class);
+        createExtentLog(User_Order_One_Product_FireFox.class);
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = getWebDriver(browser);
@@ -72,13 +72,14 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
 
         webDriver.waitToBeClickable("div.top-bar-wrap");
+        sleepInSecond(2);
 
         logInfo("Choose a specific product");
         productPage.chooseProductOnFirefox("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
 
-        sleepInSecond(2);
+//        sleepInSecond(2);
 
-        logInfo("Increase product quantity by 1");
+        logInfo("Increase product quantity to 2");
         productDetailsPage.increaseProductQty("2");
 
         sleepInSecond(1);

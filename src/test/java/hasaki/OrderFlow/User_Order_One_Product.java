@@ -17,7 +17,7 @@ public class User_Order_One_Product extends BaseTest {
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
 
-        extentTest = createExtentLog(User_Order_One_Product.class);
+        createExtentLog(User_Order_One_Product.class);
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = getWebDriver(browser);
@@ -70,7 +70,6 @@ public class User_Order_One_Product extends BaseTest {
     void tc01() {
 //        Choose product
 
-//        System.out.println("extent test Chrome: " + extentTest);
         logInfo("Choose 'Skin Care' in Category Menu, then choose Cleansing product type");
         homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
 
@@ -79,7 +78,7 @@ public class User_Order_One_Product extends BaseTest {
 
         sleepInSecond(1);
 
-        logInfo("Increase product quantity by 1");
+        logInfo("Increase product quantity to 2");
         productDetailsPage.increaseProductQty();
 
         assertEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2");
@@ -118,11 +117,11 @@ public class User_Order_One_Product extends BaseTest {
         logInfo("Click to view Cart info");
         productDetailsPage.clickToCart();
 
+        sleepInSecond(2);
+
         assertEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName);
 
         Integer calculatedPrice = (Integer.parseInt(productQuantity) * Integer.parseInt(productPrice));
-
-        sleepInSecond(2);
 
         String totalPriceeAt = webDriver.getText("//tbody//tr[1]/td[4]/div").replaceAll("[^0-9]", "");
         Integer totalPrice = Integer.parseInt(totalPriceeAt);
@@ -268,7 +267,6 @@ public class User_Order_One_Product extends BaseTest {
 
         sleepInSecond(2);
 
-//        Assert.assertTrue(paymentPage.getPageTitle().contains("Giỏ hàng"));
         assertTrue(paymentPage.getPageTitle().contains("Giỏ hàng"));
     }
 }
