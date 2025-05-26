@@ -43,7 +43,7 @@ public class HomePageTCs extends BaseTest {
         cleanDriverProcess();
     }
 
-    @Test(groups = "Negative Test Cases")
+    @Test(groups = {"Negative Test Cases"})
     void tc01() {
         homepage.chooseProductFromSearchDropdown("Cerave");
         productDetailsPage.addProductToCart();

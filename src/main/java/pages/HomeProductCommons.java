@@ -2,47 +2,51 @@ package pages;
 
 import cores.BasePage;
 import cores.WebsiteDriver;
-import org.jetbrains.annotations.NotNull;
 
-public class ProductDetailAccessiblePages extends BasePage {
-    public ProductDetailAccessiblePages(WebsiteDriver driver) {
+/**
+ * A class which keep common elements in Homepage and ProductPage
+ */
+public class HomeProductCommons extends BasePage {
+    public HomeProductCommons(WebsiteDriver driver) {
         super(driver);
     }
 
-    private static final String COMMON_ITEM_HEADER = "//parent::div[contains(@class,'item_header')]//a[normalize-space()='%s']";
-    private static final String USERNAME_INPUT = "#username";
-    private static final String PASSWORD_INPUT = "#password";
-    private static final String LOGIN_BUTTON = "//button[text()='Đăng nhập']";
+    private static final String HOME_LOGIN_BY_FACEBOOK_BUTTON = "div#lg_login a.login-facebook";
+    private static final String HOME_LOGIN_USERNAME_INPUT = "#username";
+    private static final String HOME_LOGIN_PASSWORD_INPUT = "#password";
+    private static final String HOME_LOGIN_LOGIN_BUTTON = "div#lg_login button.btn.btn_site_1";
+
+    private static final String WELCOME_USER_LABEL = "a[class='text_1_header']";
+    private static final String WARNING_LOGIN_MESSAGE = "div.alert.alert-danger";
     private static final String CATEGORY_HAMBER_MENU = "hamber_menu";
     private static final String LIST_CATEGORY_ITEM = "//a[@class='parent_menu' and normalize-space()='%s']";
     private static final String PRODUCT_TYPE = "//div[@class='col_hover_submenu ']//a[normalize-space()='%s']";
 
-    public void moveToHeaderItem(@NotNull String headerName) {
-        driver.moveToElement(COMMON_ITEM_HEADER, headerName);
+    public String getWarningMessage() {
+        return driver.getText(WARNING_LOGIN_MESSAGE);
     }
 
-    public void clickToHeaderItem(@NotNull String headerName) {
-        if (headerName.equals("Hệ thống cửa hàng")) headerName = "Hệ thống cửa hàng";
-        driver.waitToBeClickable(COMMON_ITEM_HEADER, headerName).click();
-//        driver.click(COMMON_ITEM_HEADER, headerName);
+    public String getWelcomeText() {
+        return driver.getText(WELCOME_USER_LABEL);
     }
 
     public void setTextToUsernameInput(String value) {
-        driver.setText(USERNAME_INPUT, value);
+        driver.setText(HOME_LOGIN_USERNAME_INPUT, value);
     }
 
     public void setTextToPasswordInput(String value) {
-        driver.setText(PASSWORD_INPUT, value);
+        driver.setText(HOME_LOGIN_PASSWORD_INPUT, value);
     }
 
+    //This is from ProducDetailsPage, will refactor later
+    private static final String LOGIN_BUTTON = "//button[text()='Đăng nhập']";
+
     public void clickToLoginButton() {
-        driver.click(LOGIN_BUTTON);
+        driver.click(HOME_LOGIN_LOGIN_BUTTON);
     }
 
     public void login(String username, String password) {
-//        clickToHeaderItem("Đăng nhập");
         driver.waitToBeClickable("a#btn-login").click();
-//        driver.click("a#btn-login");
         setTextToUsernameInput(username);
         setTextToPasswordInput(password);
         clickToLoginButton();
@@ -62,8 +66,9 @@ public class ProductDetailAccessiblePages extends BasePage {
 
     /**
      * Method to find a specific product type
+     *
      * @param categoryName option in Category (parent) menu
-     * @param productType option in sub-menu
+     * @param productType  option in sub-menu
      */
     public void chooseProductType(String categoryName, String productType) {
         moveToCategoryMenu();
@@ -73,6 +78,7 @@ public class ProductDetailAccessiblePages extends BasePage {
 
     /**
      * Method to navigate a specific category, which will show product types of a category
+     *
      * @param categoryName option in Category (parent) menu
      */
     public void chooseCategory(String categoryName) {

@@ -1,9 +1,8 @@
 package pages;
 
-import cores.BasePage;
 import cores.WebsiteDriver;
 
-public class ProductsPage extends ProductDetailAccessiblePages {
+public class ProductsPage extends HomeProductCommons {
 
     public ProductsPage(WebsiteDriver driver) {
         super(driver);

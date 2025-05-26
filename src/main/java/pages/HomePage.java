@@ -6,7 +6,7 @@ import org.openqa.selenium.NoSuchElementException;
 
 import java.util.List;
 
-public class HomePage extends ProductDetailAccessiblePages {
+public class HomePage extends HomeProductCommons {
 
     public HomePage(WebsiteDriver driver) {
         super(driver);
