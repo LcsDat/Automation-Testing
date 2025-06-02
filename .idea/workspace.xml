@@ -5,15 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pages/LoginPopup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/hasaki/authentication/Login.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extentV5/Hasaki.html" beforeDir="false" afterPath="$PROJECT_DIR$/extentV5/Hasaki.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/HomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductDetailAccessiblePages.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/HomeProductCommons.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/ProductsPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/HomePage/HomePageTCs.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/HomePage/HomePageTCs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Demo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Demo1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/authentication/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/authentication/Login.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,24 +54,24 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.Demo1.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "TestNG.Demo1.test.executor": "Run",
-    "TestNG.User_Order_One_Product.executor": "Run",
-    "git-widget-placeholder": "framework1",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Java"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.Demo1.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;TestNG.Demo1.test.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.User_Order_One_Product.executor&quot;: &quot;Run&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;framework1&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Java&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Work\Automation\IntelliJ\Automation-Testing\src\main\resources" />
       <recent name="D:\Work\Automation\IntelliJ\Automation-Testing\src\main\java\logConfig" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Demo1">
+  <component name="RunManager" selected="TestNG.Demo1.test">
     <configuration name="Demo1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Demo1" />
       <module name="Automation-Testing" />
@@ -114,9 +110,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.Demo1.test" />
         <item itemvalue="Application.Demo1" />
         <item itemvalue="TestNG.User_Order_One_Product" />
-        <item itemvalue="TestNG.Demo1.test" />
       </list>
     </recent_temporary>
   </component>

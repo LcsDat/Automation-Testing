@@ -16,6 +16,7 @@ public class Login extends BaseTest {
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = getWebDriver(browser);
+        sleepInSecond(3);
 
         logInfo("------ Setup steps include ------");
         logInfo("- Initialize relevant pages");
@@ -76,9 +77,10 @@ public class Login extends BaseTest {
 //        logInfo("wait");
 //        webDriver.waitToBeInvisible("#btn-login");
         logInfo("log out");
-        logInfo("wait 5s");
-        sleepInSecond(5);
+//        logInfo("wait 5s");
+//        sleepInSecond(5);
         webDriver.moveToElement("div.item_header.item_login.user_login");
+
         webDriver.click("//a[contains(text(),'Thoát')]");
     }
 
@@ -97,7 +99,7 @@ public class Login extends BaseTest {
         logInfo("log in with blank username");
         homepage.login("", "#Onimusha00");
         webDriver.clear("#password");
-        sleepInSecond(5);
+//        sleepInSecond(5);
         assertEquals(homepage.getWarningMessage(), "Vui lòng nhập tên đăng nhập", "validation message require username");
         webDriver.click("div#popup-login button.mfp-close");
     }
@@ -105,7 +107,7 @@ public class Login extends BaseTest {
     @Test
     void userLoginWithBlankPassword() {
         logInfo("log in with blank password");
-        sleepInSecond(5);
+//        sleepInSecond(5);
         homepage.login("0345864246", "");
         webDriver.clear("#username");
         assertEquals(homepage.getWarningMessage(), "Vui lòng nhập mật khẩu", "validation message require password");
@@ -123,18 +125,30 @@ public class Login extends BaseTest {
     @Test
     void userLoginWithFacebook() {
         webDriver.click("#btn-login");
+        sleepInSecond(3);
         webDriver.click("#lg_login a.login-facebook");
+        sleepInSecond(3);
         webDriver.switchWindow("Log in to Facebook");
+        sleepInSecond(3);
         webDriver.setText("#email", "hideyashy11@gmail.com");
+        sleepInSecond(3);
         webDriver.setText("#pass", "#Onimusha00");
+        sleepInSecond(3);
         webDriver.click("#loginbutton");
+        sleepInSecond(3);
 
         webDriver.click("//span[contains(text(),'Tiếp tục dưới')]");
+        sleepInSecond(3);
         webDriver.switchWindow("Hasaki.vn | Mỹ Phẩm & Clinic");
+        sleepInSecond(3);
         assertEquals(homepage.getWelcomeText(), "Chào Đạt");
-        webDriver.waitToBeInvisible("#btn-login");
+//        sleepInSecond(3);
+//        webDriver.waitToBeInvisible("#btn-login");
+        sleepInSecond(3);
         webDriver.moveToElement("div.item_header.item_login.user_login");
+        sleepInSecond(3);
         webDriver.findElement("//a[contains(text(),'Thoát')]").click();
+        sleepInSecond(3);
     }
 
     @Test
