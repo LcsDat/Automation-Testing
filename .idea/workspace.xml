@@ -7,8 +7,10 @@
     <list default="true" id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/extentV5/Hasaki.html" beforeDir="false" afterPath="$PROJECT_DIR$/extentV5/Hasaki.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/Demo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Demo1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/Browser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/Browser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/DriverFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/DriverFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/authentication/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/authentication/Login.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

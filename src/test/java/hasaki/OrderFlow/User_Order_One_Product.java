@@ -21,7 +21,6 @@ public class User_Order_One_Product extends BaseTest {
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = getWebDriver(browser);
-
         logInfo("------ Setup steps include ------");
         logInfo("- Initialize relevant pages");
         homepage = PageFactory.generateHomePage(webDriver);

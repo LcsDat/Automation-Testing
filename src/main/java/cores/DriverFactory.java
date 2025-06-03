@@ -1,5 +1,6 @@
 package cores;
 
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 
 import java.time.Duration;
@@ -35,6 +36,7 @@ public class DriverFactory {
         }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalVariables.LONG_TIMEOUT));
+        System.out.println(driver.manage().window().getSize());
         return driver;
     }
 

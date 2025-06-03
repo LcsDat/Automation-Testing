@@ -26,7 +26,8 @@ public enum Browser {
 
     public WebDriver initHeadlessChromeDriver() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless","--start-maximized", "--window-size=1920x1080");
+        options.addArguments("--headless"
+                ,"--window-size=1920,1080");
         return new ChromeDriver(options);
     }
 
@@ -40,7 +41,7 @@ public enum Browser {
 
     public WebDriver initHeadlessEdgeDriver() {
         EdgeOptions options = new EdgeOptions();
-        options.addArguments("--headless","--start-maximized", "--window-size=1920x1080");
+        options.addArguments("--headless", "--start-maximized", "--window-size=1920x1080");
         return new EdgeDriver(options);
     }
 }
