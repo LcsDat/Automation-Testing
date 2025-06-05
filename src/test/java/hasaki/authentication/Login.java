@@ -3,6 +3,7 @@ package hasaki.authentication;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import cores.BaseTest;
 import cores.Browser;
+import cores.DriverFactory;
 import cores.PageFactory;
 import hasaki.OrderFlow.User_Order_One_Product_FireFox;
 import org.openqa.selenium.Dimension;
@@ -227,29 +228,56 @@ public class Login extends BaseTest {
 //        //Verify the cart is updated
 //        assertEquals(webDriver.getText("span.counter_number.counter"), String.valueOf(initialQty+1));
 //    }
-
-    @Test
-    void userLoginWithDifferentAccountsInDifferentBrowsers() {
-        //Start first browser
-
-        //Log in first account
-        //Verify it's logged
-        //Open 2nd browser
-        //Log in second account
-        //Verify it's logged
-        //Verify it is used parallel by order product
-    }
+//    @Test
+//    void userLoginWithDifferentAccountsInDifferentBrowsers() {
+//        //Start first browser
+//        System.out.println("first driver: " + webDriver.getDriver());
+//
+//        //Log in first account
+//        homepage.login("0345864246", "#Onimusha00");
+//
+//        //Verify it's logged
+//        assertEquals(homepage.getWelcomeText(), "Chào Dat", "A welcome message is displayed to the user");
+//
+//        //Open 2nd browser
+//        var secondDriver = DriverFactory.initWebsiteDriver(Browser.FIREFOX);
+//        System.out.println("second driver: " + secondDriver.getDriver());
+//        secondDriver.navigate("https://hasaki.vn/");
+//
+//        //Log in second account
+//        var secondHomepage = PageFactory.generateHomePage(secondDriver);
+//        secondHomepage.cancelPopup();
+//        secondHomepage.cancelCookie();
+//        secondHomepage.login("0796280280", "27051993@Phuong");
+//
+//        //Verify it's logged
+//        assertEquals(secondHomepage.getWelcomeText(), "Chào Phương", "A welcome message is displayed to the user");
+//    }
 
     @Test
     void userLoginWithSameAccountsInDifferentBrowsers() {
         //Start first browser
+        System.out.println("first driver: " + webDriver.getDriver());
+
         //Log in first account
+        homepage.login("0345864246", "#Onimusha00");
+
         //Verify it's logged
+        assertEquals(homepage.getWelcomeText(), "Chào Dat", "A welcome message is displayed to the user");
+
         //Open 2nd browser
+        var secondDriver = DriverFactory.initWebsiteDriver(Browser.FIREFOX);
+        System.out.println("second driver: " + secondDriver.getDriver());
+        secondDriver.navigate("https://hasaki.vn/");
+
         //Log in first account
+        var secondHomepage = PageFactory.generateHomePage(secondDriver);
+        secondHomepage.cancelPopup();
+        secondHomepage.cancelCookie();
+        secondHomepage.login("0345864246", "#Onimusha00");
+
         //Verify it's logged in 2nd browser
-        //Add product in browser 2
-        //Verify cart is updated in browser 1
+        assertEquals(secondHomepage.getWelcomeText(), "Chào Dat", "A welcome message is displayed to the user");
     }
 
 

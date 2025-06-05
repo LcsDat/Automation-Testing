@@ -18,7 +18,7 @@
     <test name="Hasaki on Headless Chrome" parallel="classes" thread-count="2">
         <classes>
             <class name="hasaki.authentication.Login">
-                <parameter name="browser" value="HEADLESSCHROME"/>
+                <parameter name="browser" value="CHROME"/>
                 <parameter name="username" value="0345864246"/>
                 <parameter name="password" value="#Onimusha00"/>
             </class>
