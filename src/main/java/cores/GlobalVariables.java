@@ -7,7 +7,7 @@ import java.util.Locale;
 public class GlobalVariables {
     public static final String PROJECTPATH = System.getProperty("user.dir");
     public static final String JAVA_VERSION = System.getProperty("java.version");
-    public static final long LONG_TIMEOUT = 20;
+    public static final long LONG_TIMEOUT = 40;
     public static final long SHORT_TIMEOUT = 2;
 
     public static final char CHECK_ICON = (char) 10004;

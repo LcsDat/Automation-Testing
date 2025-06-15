@@ -31,6 +31,7 @@
                     <systemPropertyVariables>
                         <!-- Attempt to force plain console -->
                         <org.fusesource.jansi.Ansi.disable>true</org.fusesource.jansi.Ansi.disable>
+                        <testng.repeat.count>3</testng.repeat.count>
                     </systemPropertyVariables>
                     <encoding>UTF-8</encoding>
                     <suiteXmlFiles>

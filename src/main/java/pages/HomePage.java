@@ -68,11 +68,9 @@ public class HomePage extends HomeProductCommons {
      * - If the quantity is bigger than 0, remove all products in the cart
      */
     public void removeProductFromCart() {
-        sleepInSecond(2);
+        refreshPage();
         if (!getCartQuantity().equals("0")) {
             clickToCart();
-//            driver.waitForPageLoad();
-//            driver.waitToBeVisible("//div[contains(text(),'Giỏ hàng')]");
             sleepInSecond(2);
 
             int size = driver.findElements("//tbody/tr").size();
@@ -81,8 +79,6 @@ public class HomePage extends HomeProductCommons {
                 while (i < size) {
                     sleepInSecond(2);
                     driver.waitToBeClickable("(//tbody/tr//button[text()='Xóa'])[1]").click();
-//                    sleepInSecond(1);
-//                    driver.waitToBeInvisible("div.animate-spin");
                     i++;
                 }
             }

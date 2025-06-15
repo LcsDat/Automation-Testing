@@ -1,25 +1,16 @@
 package cores;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.model.Media;
 import logConfig.Log4j2Manager;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.Marker;
-import org.apache.logging.log4j.MarkerManager;
-import org.testng.ITestContext;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.Parameters;
 import pages.*;
 import reportConfig.ExtentManager;
 
 import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
 
 public class BaseTest {
 
@@ -85,7 +76,7 @@ public class BaseTest {
     }
 
     protected void switchToMainWebsite() {
-        webDriver.switchWindow("Hasaki.vn | Mỹ Phẩm & Clinic");
+        webDriver.switchWindowByTitle("Hasaki.vn | Mỹ Phẩm & Clinic");
     }
 
     //Logging methods ***********************************************************

@@ -11,7 +11,6 @@ import org.testng.ITestResult;
 import org.testng.annotations.*;
 import reportConfig.ExtentManager;
 
-@Test(invocationCount = 3)
 public class User_Order_One_Product_FireFox extends BaseTest {
 
     @Parameters({"browser", "url", "username", "password"})

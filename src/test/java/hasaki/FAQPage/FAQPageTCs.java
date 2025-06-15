@@ -45,7 +45,7 @@ public class FAQPageTCs extends BaseTest {
     @Test
     void tc01() {
         homepage.navigateFAQPage();
-        homepage.switchWindow("Hỗ trợ khách hàng");
+        homepage.switchWindowByTitle("Hỗ trợ khách hàng");
 
         verifyEquals(faqPage.getSloganHeader(), "Xin chào! Chúng tôi có thể giúp gì cho bạn?");
 
@@ -53,7 +53,7 @@ public class FAQPageTCs extends BaseTest {
 
     @Test
     void tc02() {
-        homepage.switchWindow("Hỗ trợ khách hàng");
+        homepage.switchWindowByTitle("Hỗ trợ khách hàng");
         faqPage.navigateStoresLocationPage();
 
         verifyEquals(storesLocationPage.getBreadcrumbText(), "Hệ Thống Cửa Hàng Hasaki Trên Toàn Quốc | Hasaki.vn");

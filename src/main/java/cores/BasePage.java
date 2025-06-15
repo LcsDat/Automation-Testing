@@ -30,18 +30,22 @@ public class BasePage {
     }
 
     public WebsiteElement waitToBeVisible(String locator, String... varargs) {
-        return driver.waitToBeVisible(locator,varargs);
+        return driver.waitToBeVisible(locator, varargs);
     }
 
     public void closeLoginDialog() {
         driver.click(LOGIN_DIALOG_CLOSE_BUTTON);
     }
 
-    public void switchWindow(String titleContains) {
-        driver.switchWindow(titleContains);
+    public void switchWindowByTitle(String titleContains) {
+        driver.switchWindowByTitle(titleContains);
     }
 
-    public String getPageTitle(){
+    public void refreshPage(){
+        driver.refreshPage();
+    }
+
+    public String getPageTitle() {
         return driver.getPageTitle();
     }
 
@@ -53,15 +57,15 @@ public class BasePage {
         }
     }
 
-    public boolean isDisplayed(String locator){
+    public boolean isDisplayed(String locator) {
         return driver.isDisplayed(locator);
     }
 
-    public boolean isDisplayed(String locator, String... varargs){
+    public boolean isDisplayed(String locator, String... varargs) {
         return driver.isDisplayed(locator, varargs);
     }
 
-    public void waitForPageLoad(){
+    public void waitForPageLoad() {
         driver.waitForPageLoad();
     }
 }

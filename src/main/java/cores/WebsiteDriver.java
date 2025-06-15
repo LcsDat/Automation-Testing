@@ -32,6 +32,16 @@ public class WebsiteDriver {
         return defaultTimeout;
     }
 
+    public WebDriver openNewTab(){
+        return driver.switchTo().newWindow(WindowType.TAB);
+    }
+
+    public void closeTab(){
+        driver.close();
+    }
+    public void refreshPage(){
+        driver.navigate().refresh();
+    }
 
     /**
      * <b> ONLY</b>  use for Xpath
@@ -127,13 +137,17 @@ public class WebsiteDriver {
         driver.manage().timeouts().implicitlyWait(duration);
     }
 
-    public void switchWindow(String titleContains) {
+    public void switchWindowByTitle(String titleContains) {
 
         driver.getWindowHandles().stream()
                 .anyMatch(handle -> {
                     driver.switchTo().window(handle);
                     return driver.getTitle().contains(titleContains);
                 });
+    }
+
+    public void switchWindowByID(String windowID) {
+        driver.switchTo().window(windowID);
     }
 
     protected String getBrowserDriverName() {

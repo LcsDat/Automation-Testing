@@ -11,7 +11,8 @@ public class HomeProductCommons extends BasePage {
         super(driver);
     }
 
-    private static final String HOME_LOGIN_BY_FACEBOOK_BUTTON = "div#lg_login a.login-facebook";
+    private static final String HOME_LOGIN_BUTTON = "a#btn-login";
+    private static final String HOME_LOGIN_BY_FACEBOOK_BUTTON = "#lg_login a.login-facebook";
     private static final String HOME_LOGIN_USERNAME_INPUT = "#username";
     private static final String HOME_LOGIN_PASSWORD_INPUT = "#password";
     private static final String HOME_LOGIN_LOGIN_BUTTON = "div#lg_login button.btn.btn_site_1";
@@ -21,6 +22,7 @@ public class HomeProductCommons extends BasePage {
     private static final String CATEGORY_HAMBER_MENU = "hamber_menu";
     private static final String LIST_CATEGORY_ITEM = "//a[@class='parent_menu' and normalize-space()='%s']";
     private static final String PRODUCT_TYPE = "//div[@class='col_hover_submenu ']//a[normalize-space()='%s']";
+
 
     public String getWarningMessage() {
         return driver.getText(WARNING_LOGIN_MESSAGE);
@@ -38,15 +40,33 @@ public class HomeProductCommons extends BasePage {
         driver.setText(HOME_LOGIN_PASSWORD_INPUT, value);
     }
 
-    //This is from ProducDetailsPage, will refactor later
-    private static final String LOGIN_BUTTON = "//button[text()='Đăng nhập']";
-
     public void clickToLoginButton() {
         driver.click(HOME_LOGIN_LOGIN_BUTTON);
     }
 
+    public void loginByFacebook(){
+
+        driver.click(HOME_LOGIN_BUTTON);
+        sleepInSecond(3);
+        driver.click(HOME_LOGIN_BY_FACEBOOK_BUTTON);
+        sleepInSecond(3);
+        driver.switchWindowByTitle("Log in to Facebook");
+        sleepInSecond(3);
+        driver.setText("#email", "hideyashy11@gmail.com");
+        sleepInSecond(3);
+        driver.setText("#pass", "#Onimusha00");
+        sleepInSecond(3);
+        driver.click("#loginbutton");
+        sleepInSecond(3);
+
+        driver.click("//span[contains(text(),'Tiếp tục dưới')]");
+        sleepInSecond(3);
+        driver.switchWindowByTitle("Hasaki.vn | Mỹ Phẩm & Clinic");
+        sleepInSecond(3);
+    }
+
     public void login(String username, String password) {
-        driver.waitToBeClickable("a#btn-login").click();
+        driver.waitToBeClickable(HOME_LOGIN_BUTTON).click();
         setTextToUsernameInput(username);
         setTextToPasswordInput(password);
         clickToLoginButton();

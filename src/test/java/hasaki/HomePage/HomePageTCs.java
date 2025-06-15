@@ -101,7 +101,7 @@ public class HomePageTCs extends BaseTest {
     @Test
     void tc03() {
         homepage.navigateToStoresLocationPage();
-        homepage.switchWindow("Hệ Thống Cửa Hàng");
+        homepage.switchWindowByTitle("Hệ Thống Cửa Hàng");
 
         verifyEquals(storesLocationPage.getBreadcrumbText(), "Hệ Thống Cửa Hàng Hasaki Trên Toàn Quốc | Hasaki.vn");
         verifyTrue(storesLocationPage.isStoresDisplayed());
