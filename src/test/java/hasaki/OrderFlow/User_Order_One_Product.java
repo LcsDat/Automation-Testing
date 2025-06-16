@@ -3,14 +3,13 @@ package hasaki.OrderFlow;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import cores.BaseTest;
 import cores.Browser;
-import cores.DriverFactory;
 import cores.PageFactory;
-import org.apache.logging.log4j.LogManager;
 import org.testng.Assert;
-import org.testng.ITestContext;
 import org.testng.annotations.*;
+import utilities.TestData;
 
-@Test(invocationCount = 3)
+import java.util.Arrays;
+
 public class User_Order_One_Product extends BaseTest {
 
     @Parameters({"browser", "url", "username", "password"})
@@ -65,15 +64,18 @@ public class User_Order_One_Product extends BaseTest {
     }
 
 
-    @Test()
-    void tc01() {
+
+//    @Test(dataProvider = "orderProductTestData", dataProviderClass = TestData.class)
+    void tc01(String categoryName, String productType, String productName) {
 //        Choose product
 
+//        System.out.println(Arrays.deepToString(TestData.getDataTest()));
+
         logInfo("Choose 'Skin Care' in Category Menu, then choose Cleansing product type");
-        homepage.chooseProductType("Chăm Sóc Da Mặt", "Tẩy Trang Mặt");
+        homepage.chooseProductType(categoryName, productType);
 
         logInfo("Choose a specific product");
-        productPage.chooseProduct("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
+        productPage.chooseProduct(productName);
 
         sleepInSecond(1);
 
@@ -108,7 +110,7 @@ public class User_Order_One_Product extends BaseTest {
         sleepInSecond(1);
 
         String productQuantity = webDriver.getText("//span[text()='Cart Icon']/following-sibling::span");
-        String productName = webDriver.getText("//h1");
+//        String expectedProductName = webDriver.getText("//h1");
         String productPrice = webDriver.getText("span.text-orange.text-lg.font-bold").replaceAll("[^0-9]", "");
 
         assertEquals(productQuantity, "1");

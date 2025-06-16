@@ -7,8 +7,10 @@ import com.aventstack.extentreports.model.Media;
 import logConfig.Log4j2Manager;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.DataProvider;
 import pages.*;
 import reportConfig.ExtentManager;
+import utilities.ExcelManager;
 
 import java.util.Random;
 
@@ -68,7 +70,7 @@ public class BaseTest {
     }
 
     protected void quitBrowser() {
-        webDriver.quit();
+        if (webDriver != null) webDriver.quit();
     }
 
     protected void cleanDriverProcess() {
@@ -243,4 +245,6 @@ public class BaseTest {
     protected void verifyEquals(Object actual, Object expected) {
         new CustomAssert(GlobalVariables.HASAKI_KEYWORD).verifyEquals(actual, expected);
     }
+
+
 }
