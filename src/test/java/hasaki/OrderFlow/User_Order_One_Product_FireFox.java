@@ -16,6 +16,7 @@ public class User_Order_One_Product_FireFox extends BaseTest {
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
+        System.out.println("bien log4j2manager: " + log4j2Manager);
         createExtentLog(User_Order_One_Product_FireFox.class);
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
@@ -76,7 +77,7 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         logInfo("Choose a specific product");
         productPage.chooseProductOnFirefox("Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml");
 
-//        sleepInSecond(2);
+        sleepInSecond(2);
 
         logInfo("Increase product quantity to 2");
         productDetailsPage.increaseProductQty("2");

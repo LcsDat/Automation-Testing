@@ -26,7 +26,7 @@ public enum Browser {
 
     public WebDriver initHeadlessChromeDriver() {
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless"
+        options.addArguments("--headless=new"
                 ,"--window-size=1920,1080");
         return new ChromeDriver(options);
     }

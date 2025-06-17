@@ -36,6 +36,10 @@ public class WebsiteDriver {
         return driver.switchTo().newWindow(WindowType.TAB);
     }
 
+    public String getWindowHandle(){
+        return driver.getWindowHandle();
+    }
+
     public void closeTab(){
         driver.close();
     }

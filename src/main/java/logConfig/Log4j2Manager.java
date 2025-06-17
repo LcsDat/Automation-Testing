@@ -89,13 +89,13 @@ public class Log4j2Manager {
 
 
     public static Log4j2Manager getLogger(Class<?> clazz) {
-        if (log4jManager == null) log4jManager = new Log4j2Manager(clazz);
+            log4jManager = new Log4j2Manager(clazz);
         return log4jManager;
     }
 
 
     public static Log4j2Manager getLogger(Object object) {
-        if (log4jManager == null) log4jManager = new Log4j2Manager(object);
+            log4jManager = new Log4j2Manager(object);
         return log4jManager;
     }
 

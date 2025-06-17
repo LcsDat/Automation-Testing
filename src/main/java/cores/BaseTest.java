@@ -27,7 +27,7 @@ public class BaseTest {
     protected PaymentPage paymentPage;
 
     //Log instances
-    private static Log4j2Manager log4j2Manager;
+    protected static Log4j2Manager log4j2Manager;
     protected static ExtentManager extentManager;
 
     //Thread instances
@@ -37,7 +37,7 @@ public class BaseTest {
     public WebsiteDriver getWebDriver(Browser browser) {
         webDriver = DriverFactory.initWebsiteDriver(browser);
         webdriverThread.set(webDriver);
-        return webDriver;
+        return webdriverThread.get();
     }
 
     //Setup method ***********************************************************
@@ -87,7 +87,7 @@ public class BaseTest {
         extentManager.createExtentTest(suiteName);
     }
 
-    protected void createExtentLog(Class<?> clazz) {
+    protected void  createExtentLog(Class<?> clazz) {
         log4j2Manager = Log4j2Manager.getLogger(clazz);
         extentManager.createExtentTest(clazz.getName());
     }

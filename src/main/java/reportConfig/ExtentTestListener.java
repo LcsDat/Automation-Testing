@@ -1,16 +1,10 @@
 package reportConfig;
 
-import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import cores.BaseTest;
 import logConfig.Log4j2Manager;
-import org.apache.logging.log4j.Level;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.LoggerContext;
-import org.apache.logging.log4j.status.StatusLogger;
 import org.testng.IExecutionListener;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
@@ -44,6 +38,7 @@ public class ExtentTestListener extends BaseTest implements ITestListener, IExec
     public void onTestFailure(ITestResult iTestResult) {
         var logger = Log4j2Manager.getLogger(iTestResult.getTestClass()).getAssertionFailLogger();
         var mediaList = extentLog(iTestResult).getModel().getMedia();
+
         extentLog(iTestResult).addScreenCaptureFromBase64String(webdriverThread.get().takeScreenshotBASE64());
         extentLog(iTestResult).fail(iTestResult.getTestClass() + "." + iTestResult.getName() + " FAILED \n ====> " + iTestResult.getThrowable().getMessage(), mediaList.get(mediaList.size()-1));
 

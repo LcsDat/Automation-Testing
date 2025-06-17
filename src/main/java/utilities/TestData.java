@@ -6,17 +6,18 @@ import java.lang.reflect.Method;
 
 public class TestData {
 
-    @DataProvider(name = "loginTestData")
-    public static Object[][] successData(Method method) {
+    @DataProvider(name = "Login-tc01")
+    public static Object[][] logicTC01(Method method) {
         String filePath = "D:\\Work\\Automation\\IntelliJ\\Automation-Testing\\src\\main\\resources";
         String fileName = "TestCaseReference.xlsx";
-        String sheetName = "Login Success Data";
+        String sheetName = "Login-tc01";
         var excelManager = new ExcelManager(filePath, fileName, sheetName);
+
+        System.out.println("sheet name " + excelManager.getSheet().toString());
 
         int rows = excelManager.getSheet().getLastRowNum();
         int columns = excelManager.getSheet().getRow(0).getLastCellNum();
 
-        System.out.println("test case: " + method.getName());
         Object[][] data = new Object[rows][columns];
 
         for (int row = 0; row < rows; row++) {
@@ -28,11 +29,11 @@ public class TestData {
         return data;
     }
 
-    @DataProvider(name = "loginTestData1")
-    public static Object[][] failData(Method method) {
+    @DataProvider(name = "Login-tc02")
+    public static Object[][] loginTC02(Method method) {
         String filePath = "D:\\Work\\Automation\\IntelliJ\\Automation-Testing\\src\\main\\resources";
         String fileName = "TestCaseReference.xlsx";
-        String sheetName = "Login Unsuccess Data";
+        String sheetName = "Login-tc02";
         var excelManager = new ExcelManager(filePath, fileName, sheetName);
 
         int rows = excelManager.getSheet().getLastRowNum();
@@ -40,7 +41,26 @@ public class TestData {
 
         Object[][] data = new Object[rows][columns];
 
-        System.out.println("test case: " + method.getName());
+        for (int row = 0; row < rows; row++) {
+            for (int column = 0; column < columns; column++) {
+                data[row][column] = excelManager.getCell(row + 1,column).toString();
+            }
+        }
+
+        return data;
+    }
+
+    @DataProvider(name = "OrderProductInChrome-tc01")
+    public static Object[][] orderProductInChromeTC01(Method method) {
+        String filePath = "D:\\Work\\Automation\\IntelliJ\\Automation-Testing\\src\\main\\resources";
+        String fileName = "TestCaseReference.xlsx";
+        String sheetName = "OrderProductInChrome-tc01";
+        var excelManager = new ExcelManager(filePath, fileName, sheetName);
+
+        int rows = excelManager.getSheet().getLastRowNum();
+        int columns = excelManager.getSheet().getRow(0).getLastCellNum();
+
+        Object[][] data = new Object[rows][columns];
 
         for (int row = 0; row < rows; row++) {
             for (int column = 0; column < columns; column++) {

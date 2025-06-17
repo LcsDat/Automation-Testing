@@ -36,7 +36,6 @@ public class DriverFactory {
         }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(GlobalVariables.LONG_TIMEOUT));
-        System.out.println(driver.manage().window().getSize());
         return driver;
     }
 

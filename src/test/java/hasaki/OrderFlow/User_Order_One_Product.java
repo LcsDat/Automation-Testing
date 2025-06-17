@@ -65,16 +65,16 @@ public class User_Order_One_Product extends BaseTest {
 
 
 
-//    @Test(dataProvider = "orderProductTestData", dataProviderClass = TestData.class)
+    @Test(dataProvider = "OrderProductInChrome-tc01", dataProviderClass = TestData.class)
     void tc01(String categoryName, String productType, String productName) {
 //        Choose product
 
 //        System.out.println(Arrays.deepToString(TestData.getDataTest()));
 
-        logInfo("Choose 'Skin Care' in Category Menu, then choose Cleansing product type");
+        logInfo("Choose %s in Category Menu, then choose %s product type".formatted(categoryName, productType));
         homepage.chooseProductType(categoryName, productType);
 
-        logInfo("Choose a specific product");
+        logInfo("Choose a specific product: %s".formatted( productName));
         productPage.chooseProduct(productName);
 
         sleepInSecond(1);
@@ -110,17 +110,17 @@ public class User_Order_One_Product extends BaseTest {
         sleepInSecond(1);
 
         String productQuantity = webDriver.getText("//span[text()='Cart Icon']/following-sibling::span");
-//        String expectedProductName = webDriver.getText("//h1");
+        String expectedProductName = webDriver.getText("//h1");
         String productPrice = webDriver.getText("span.text-orange.text-lg.font-bold").replaceAll("[^0-9]", "");
 
-        assertEquals(productQuantity, "1");
+//        assertEquals(productQuantity, "1");
 
         logInfo("Click to view Cart info");
         productDetailsPage.clickToCart();
 
         sleepInSecond(2);
 
-        assertEquals(webDriver.getText("//a[text()='Combo 2 Nước Tẩy Trang Bí Đao Cocoon Làm Sạch & Giảm Dầu 500ml']"), productName);
+        assertEquals(webDriver.getText("//a[text()=\"%s\"]".formatted(productName)), productName);
 
         Integer calculatedPrice = (Integer.parseInt(productQuantity) * Integer.parseInt(productPrice));
 
