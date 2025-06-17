@@ -13,11 +13,17 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+        <!--        library version         -->
         <testng.version>7.8.0</testng.version>
         <selenium.version>4.30.0</selenium.version>
         <extentreport.version>5.1.2</extentreport.version>
         <suiteXmlFile>src/main/resources/HasakiTestRunner.xml</suiteXmlFile>
-
+        <maven.surefire.version>3.1.2</maven.surefire.version>
+        <slf4j.api.version>2.0.16</slf4j.api.version>
+        <slf4j.simple.version>2.0.16</slf4j.simple.version>
+        <log4j.version>2.24.3</log4j.version>
+        <apache.poi.version>5.4.0</apache.poi.version>
     </properties>
 
     <build>
@@ -26,7 +32,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${maven.surefire.version}</version>
                 <configuration>
                     <systemPropertyVariables>
                         <!-- Attempt to force plain console -->
@@ -35,7 +41,7 @@
                     </systemPropertyVariables>
                     <encoding>UTF-8</encoding>
                     <suiteXmlFiles>
-                        <suiteXmlFile>src/main/resources/HasakiTestRunner.xml</suiteXmlFile>
+                        <suiteXmlFile>${suiteXmlFile}</suiteXmlFile>
                     </suiteXmlFiles>
                 </configuration>
             </plugin>
@@ -44,24 +50,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>io.github.deathbycaptcha</groupId>
-            <artifactId>deathbycaptcha-java-library</artifactId>
-            <version>0.43</version>
-        </dependency>
-        <dependency>
-            <groupId>com.github.2captcha</groupId>
-            <artifactId>2captcha-java</artifactId>
-            <version>1.3.1</version>
-        </dependency>
-        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>2.0.16</version>
+            <version>${slf4j.api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>2.0.16</version>
+            <version>${slf4j.simple.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>
@@ -92,19 +88,19 @@
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.24.3</version>
+            <version>${log4j.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.24.3</version>
+            <version>${log4j.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-layout-template-json -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-layout-template-json</artifactId>
-            <version>2.24.3</version>
+            <version>${log4j.version}</version>
             <scope>runtime</scope>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
@@ -130,14 +126,14 @@
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
-            <version>5.4.0</version>
+            <version>${apache.poi.version}</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
-            <version>5.4.0</version>
+            <version>${apache.poi.version}</version>
         </dependency>
     </dependencies>
 </project>

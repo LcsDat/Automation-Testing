@@ -6,20 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/extentV5/Hasaki.html" beforeDir="false" afterPath="$PROJECT_DIR$/extentV5/Hasaki.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/Browser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/Browser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/DriverFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/DriverFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/logConfig/Log4j2Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/logConfig/Log4j2Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/TestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/TestData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/.~lock.TestCaseReference.xlsx#" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/TestCaseReference.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TestCaseReference.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product_FireFox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product_FireFox.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/authentication/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/authentication/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,20 +51,20 @@
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Demo1.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ExcelManager.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;TestNG.D:/Work/Training/Automation-Testing/src/main/resources/HasakiTestRunner.xml.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.Demo1.test.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.ExcelManager.test.executor&quot;: &quot;Run&quot;,
-    &quot;TestNG.User_Order_One_Product.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;framework1&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.IDE.editor.colors.Java&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Demo1.executor": "Run",
+    "Application.ExcelManager.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "TestNG.D:/Work/Training/Automation-Testing/src/main/resources/HasakiTestRunner.xml.executor": "Run",
+    "TestNG.Demo1.test.executor": "Run",
+    "TestNG.ExcelManager.test.executor": "Run",
+    "TestNG.User_Order_One_Product.executor": "Run",
+    "git-widget-placeholder": "framework1",
+    "settings.editor.selected.configurable": "MavenSettings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Work\Automation\IntelliJ\Automation-Testing\src\main\resources" />
