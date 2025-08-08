@@ -1,5 +1,6 @@
 package utilities;
 
+import cores.GlobalVariables;
 import org.testng.annotations.DataProvider;
 
 import java.lang.reflect.Method;
@@ -52,7 +53,7 @@ public class TestData {
 
     @DataProvider(name = "OrderProductInChrome-tc01")
     public static Object[][] orderProductInChromeTC01(Method method) {
-        String filePath = "D:\\Work\\Automation\\IntelliJ\\Automation-Testing\\src\\main\\resources";
+        String filePath = GlobalVariables.PROJECTPATH + "\\src\\main\\resources";
         String fileName = "TestCaseReference.xlsx";
         String sheetName = "OrderProductInChrome-tc01";
         var excelManager = new ExcelManager(filePath, fileName, sheetName);
