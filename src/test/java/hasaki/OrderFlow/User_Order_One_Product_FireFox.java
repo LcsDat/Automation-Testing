@@ -3,13 +3,8 @@ package hasaki.OrderFlow;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import cores.BaseTest;
 import cores.Browser;
-import cores.DriverFactory;
 import cores.PageFactory;
-import org.apache.logging.log4j.LogManager;
-import org.testng.ITestContext;
-import org.testng.ITestResult;
 import org.testng.annotations.*;
-import reportConfig.ExtentManager;
 
 public class User_Order_One_Product_FireFox extends BaseTest {
 
@@ -17,7 +12,7 @@ public class User_Order_One_Product_FireFox extends BaseTest {
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
         System.out.println("bien log4j2manager: " + log4j2Manager);
-        createExtentLog(User_Order_One_Product_FireFox.class);
+        createLog(User_Order_One_Product_FireFox.class);
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = getWebDriver(browser);

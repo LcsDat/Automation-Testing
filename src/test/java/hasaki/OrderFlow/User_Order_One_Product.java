@@ -8,15 +8,13 @@ import org.testng.Assert;
 import org.testng.annotations.*;
 import utilities.TestData;
 
-import java.util.Arrays;
-
 public class User_Order_One_Product extends BaseTest {
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeClass
     void beforeClass(Browser browser, String url, String username, String password) {
 
-        createExtentLog(User_Order_One_Product.class);
+        createLog(User_Order_One_Product.class);
 
         logInfo("Browser: " + browser, ExtentColor.LIME);
         webDriver = getWebDriver(browser);
