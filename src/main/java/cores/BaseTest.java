@@ -6,6 +6,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.model.Media;
 import logConfig.Log4j2Manager;
+import org.openqa.selenium.InvalidSelectorException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
 import pages.*;
@@ -64,7 +65,12 @@ public class BaseTest {
      */
     protected void logout() {
         if (webDriver.isUnDisplayed("#btn-login")) {
-            webDriver.moveToElement("div.item_header.item_login.user_login");
+            try {
+                webDriver.moveToElement("div.item_header.item_login.user_login");
+            } catch (InvalidSelectorException e) {
+                webDriver.moveToElement("//a[text()='Tài khoản ']");
+            }
+
             webDriver.findElement("//a[contains(text(),'Thoát')]").click();
         }
     }

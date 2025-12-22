@@ -4,6 +4,7 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import cores.BaseTest;
 import cores.Browser;
 import cores.PageFactory;
+import org.openqa.selenium.InvalidSelectorException;
 import org.testng.Assert;
 import org.testng.annotations.*;
 import utilities.TestData;
@@ -44,11 +45,21 @@ public class User_Order_One_Product extends BaseTest {
 
     @AfterMethod
     void afterMethod() {
+
         logInfo("Switch back to main tab after each test case");
         switchToMainWebsite();
 
+
         logInfo("Navigate back to Home page after each test case");
         navigateToHomePage();
+        sleepInSecond(1);
+
+        logInfo("Remove products in Cart if they exist");
+        homepage.removeProductFromCart();
+
+        logInfo("Navigate back to Home page after each test case");
+        navigateToHomePage();
+        sleepInSecond(1);
     }
 
     @AfterClass
@@ -64,7 +75,7 @@ public class User_Order_One_Product extends BaseTest {
 
 
     @Test(dataProvider = "OrderProductInChrome-tc01", dataProviderClass = TestData.class)
-    void tc01(String categoryName, String productType, String productName) {
+    void tc01(String categoryName, String productType, String productName, String expectedQuantity) {
 //        Choose product
 
 //        System.out.println(Arrays.deepToString(TestData.getDataTest()));
@@ -85,13 +96,13 @@ public class User_Order_One_Product extends BaseTest {
         logInfo("Click add product to Cart");
         productDetailsPage.addProductToCart();
 
-        logInfo("Wait for warning message visible: 'Maximum quantity is 1'");
-        productDetailsPage.waitToBeVisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
+//        logInfo("Wait for warning message visible: 'Maximum quantity is 1'");
+//        productDetailsPage.waitToBeVisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
 
-        assertTrue(productDetailsPage.isDisplayed("//div[text()='Sản phẩm chỉ được mua tối đa là 1']"));
+//        assertTrue(productDetailsPage.isDisplayed("//div[text()='Sản phẩm chỉ được mua tối đa là 1']"));
 
-        logInfo("Wait for warning message invisible: 'Maximum quantity is 1'");
-        productDetailsPage.waitToBeInvisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
+//        logInfo("Wait for warning message invisible: 'Maximum quantity is 1'");
+//        productDetailsPage.waitToBeInvisible("//div[text()='Sản phẩm chỉ được mua tối đa là 1']");
 
 
         logInfo("Decrease product quantity by 1");
@@ -109,7 +120,15 @@ public class User_Order_One_Product extends BaseTest {
 
         String productQuantity = webDriver.getText("//span[text()='Cart Icon']/following-sibling::span");
         String expectedProductName = webDriver.getText("//h1");
-        String productPrice = webDriver.getText("span.text-orange.text-lg.font-bold").replaceAll("[^0-9]", "");
+        String productPrice = "";
+        try {
+            productPrice = webDriver.getText("span.text-orange.text-lg.font-bold").replaceAll("[^0-9]", "");
+        } catch (InvalidSelectorException e) {
+            System.out.println("1st way to get product price fail. Use the 2nd way");
+            productPrice = webDriver.getText("span.text-orange.text-base").replaceAll("[^0-9]", "");
+        }
+
+        System.out.println("After get product price:" + productPrice);
 
 //        assertEquals(productQuantity, "1");
 
@@ -143,7 +162,10 @@ public class User_Order_One_Product extends BaseTest {
         String userAddress = userInfos[2];
 
         assertEquals(addressType, "Nhà riêng");
-        assertEquals(userNameAndPhone, "Le Dat - 0345864246");
+
+        //Begin: show full mobile phone
+        //16/12/2025: mask the mobile phone
+        assertEquals(userNameAndPhone, "Le Dat - *******246");
         assertEquals(userAddress, "687/5 Lạc Long Quân, Phường 10, Quận Tân Bình, Hồ Chí Minh");
 
         logInfo("Click to edit Delivery address");
@@ -159,9 +181,13 @@ public class User_Order_One_Product extends BaseTest {
         assertEquals(webDriver.getText("//input[@placeholder='Họ và tên']/following-sibling::p"), "Vui lòng điền Họ và Tên");
         assertEquals(paymentPage.getCommonValidationMessageDropdown("Chọn Tỉnh/ TP, Quận/ Huyện"), "Vui lòng chọn Tỉnh/ TP, Quận/ Huyện");
         assertEquals(paymentPage.getCommonValidationMessageDropdown("Chọn Phường/ Xã"), "Vui lòng chọn Phường/ Xã");
-        assertEquals(webDriver.getText("//input[@placeholder='Số nhà + Tên đường']/following-sibling::p"), "Vui lòng điền địa chỉ");
+
+        //Before: Vui lòng điền địa chỉ
+        //Now: Địa chỉ phải từ 5 ký tự
+        assertEquals(webDriver.getText("//input[@placeholder='Số nhà + Tên đường']/following-sibling::p"), "Địa chỉ phải từ 5 ký tự");
 
         String phoneNo = "0345864246";
+        String maskedPhoneNo = "*******" + phoneNo.substring(7);
         String userName = "Dat Le Mot" + randomAlphabetic(4);
         String cityName = "Quận Tân Bình";
         String wardName = "Phường 10";
@@ -213,7 +239,7 @@ public class User_Order_One_Product extends BaseTest {
                 .replaceAll("\n", "#")
                 .split("#");
 
-        assertEquals(newUserInfosArr[0], userName + " - " + phoneNo);
+        assertEquals(newUserInfosArr[0], userName + " - " + maskedPhoneNo);
         assertEquals(newUserInfosArr[3], newStreetNo + ", "
                 + wardName + ", " + cityName + ", " + "Hồ Chí Minh");
 

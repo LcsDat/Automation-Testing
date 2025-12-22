@@ -81,7 +81,7 @@ public class HomeProductCommons extends BasePage {
     }
 
     public void clickToProductType(String productType) {
-        driver.click(PRODUCT_TYPE, productType);
+        driver.waitToBeClickable(PRODUCT_TYPE, productType).click();
     }
 
     /**
