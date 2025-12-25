@@ -23,6 +23,59 @@ public class ProductDetailsPage extends BasePage {
         driver.waitToBeClickable(INCREASE_QTY_BUTTON).click();
     }
 
+    /**
+     * Dynamic method
+     */
+    public void increaseProductQty(int quantity) {
+        /* Mặc định số lượng 1
+         * Khi đổi số lượng vd 2 -> điền 2 sau số 1 -> xoá số 1
+         * Với số lượng hàng chục, thêm số 0 ở phía sau
+         * Khi muốn thay đổi lượng hàng chục, vd lúc đầu 10 và muốn đổi thành 20 -> điền 2 trước 1 -> xoá 1
+         * Không đặt hàng số lượng quá 100 (3 con số)
+         */
+
+        String quantityS = String.valueOf(quantity);
+
+        //Check quantity >= 100
+        if(quantity >= 100 || quantity <= 0) throw new IllegalArgumentException("User input an un-acceptable amount");
+        else {
+            if(quantity % 10 == 0) {
+                if (quantity == 10)  {
+                    driver.click(QUANTITY_INPUT);
+                    driver.sendKeys(QUANTITY_INPUT, Keys.CONTROL, Keys.END);
+                    driver.setText(QUANTITY_INPUT,"0");
+                } else {
+                    int tensPlaceNumber = quantity/10;
+
+                    driver.click(QUANTITY_INPUT);
+                    driver.sendKeys(QUANTITY_INPUT, Keys.CONTROL, Keys.END);
+                    driver.setText(QUANTITY_INPUT,String.valueOf(quantityS.charAt(0)));
+                    driver.sendKeys(QUANTITY_INPUT, Keys.LEFT);
+                    driver.sendKeys(QUANTITY_INPUT, Keys.BACK_SPACE);
+                    driver.sendKeys(QUANTITY_INPUT, Keys.RIGHT);
+                    driver.setText(QUANTITY_INPUT,"0");
+                }
+            } else {
+                if (quantity == 1) System.out.println("Default quantity, no need to modify quantity");
+                else if (quantity <10) {
+                    driver.click(QUANTITY_INPUT);
+                    driver.sendKeys(QUANTITY_INPUT, Keys.CONTROL, Keys.END);
+                    driver.setText(QUANTITY_INPUT,String.valueOf(quantity));
+                    driver.sendKeys(QUANTITY_INPUT, Keys.LEFT);
+                    driver.sendKeys(QUANTITY_INPUT, Keys.BACK_SPACE);
+                } else {
+                    driver.click(QUANTITY_INPUT);
+                    driver.sendKeys(QUANTITY_INPUT, Keys.CONTROL, Keys.END);
+                    driver.setText(QUANTITY_INPUT,String.valueOf(quantityS.charAt(0)));
+                    driver.sendKeys(QUANTITY_INPUT, Keys.LEFT);
+                    driver.sendKeys(QUANTITY_INPUT, Keys.BACK_SPACE);
+                    driver.sendKeys(QUANTITY_INPUT, Keys.CONTROL, Keys.END);
+                    driver.setText(QUANTITY_INPUT,String.valueOf(quantityS.charAt(1)));
+                }
+            }
+        }
+    }
+
     //Set quantity by demand
     public void increaseProductQty(String quantity){
         // Quantity < 10

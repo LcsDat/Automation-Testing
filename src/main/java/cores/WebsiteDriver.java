@@ -427,6 +427,11 @@ public class WebsiteDriver {
     public void sendKeys(String locator, Keys keys) {
         findDefaultWebElement(locator).sendKeys(keys);
     }
+
+    public void sendKeys(String locator, Keys... keys) {
+        findDefaultWebElement(locator).sendKeys(keys);
+    }
+
     public void sendKeys(String locator, Keys keys, String... varargs) {
         findDefaultWebElement(locator, varargs).sendKeys(keys);
     }

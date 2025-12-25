@@ -89,7 +89,9 @@ public class User_Order_One_Product extends BaseTest {
         sleepInSecond(1);
 
         logInfo("Increase product quantity to 2");
-        productDetailsPage.increaseProductQty();
+        productDetailsPage.increaseProductQty(12);
+
+        sleepInSecond(3);
 
         assertEquals(webDriver.getDomAttribute("input[name='qty']", "value"), "2");
 
