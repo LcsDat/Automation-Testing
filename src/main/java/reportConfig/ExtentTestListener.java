@@ -14,7 +14,7 @@ import org.testng.ITestResult;
 public class ExtentTestListener extends BaseTest implements ITestListener, IExecutionListener {
 
     private ExtentTest extentLog(ITestResult iTestResult) {
-        return extentManager.getExtentTestSuiteMap().get(iTestResult.getTestClass().getName());
+        return extentManager.getExtentTestCaseMap().get(iTestResult.getMethod().getMethodName().replace("_", " "));
     }
 
     @Override

@@ -75,7 +75,7 @@ public class User_Order_One_Product_FireFox extends BaseTest {
         sleepInSecond(2);
 
         logInfo("Increase product quantity to 2");
-        productDetailsPage.increaseProductQty("2");
+        productDetailsPage.setProductQty(2);
 
         sleepInSecond(1);
 

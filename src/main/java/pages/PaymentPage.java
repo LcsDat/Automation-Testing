@@ -62,13 +62,14 @@ public class PaymentPage extends BasePage {
     }
 
     public void clickContinue(String popupName) {
-        try {
-            driver.waitToBeClickable(CONTINUE_BUTTON, popupName).click();
-        } catch (NoSuchElementException e){
-            System.out.printf("\n First locator fail: " + CONTINUE_BUTTON + " Try second locator\n", popupName);
-            driver.waitToBeClickable(CONTINUE_BUTTON_2nd, popupName).click();
-        }
+//        try {
+//            driver.waitToBeClickable(CONTINUE_BUTTON, popupName).click();
+//        } catch (NoSuchElementException e){
+//            System.out.printf("\n First locator fail: " + CONTINUE_BUTTON + " Try second locator\n", popupName);
+//            driver.waitToBeClickable(CONTINUE_BUTTON_2nd, popupName).click();
+//        }
 
+        tryClickLocators(new String[]{CONTINUE_BUTTON, CONTINUE_BUTTON_2nd}, popupName);
     }
 
     public String getCommonValidationMessageInput(String inputName) {

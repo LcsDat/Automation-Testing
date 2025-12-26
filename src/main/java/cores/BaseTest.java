@@ -9,6 +9,7 @@ import logConfig.Log4j2Manager;
 import org.openqa.selenium.InvalidSelectorException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Test;
 import pages.*;
 import reportConfig.ExtentManager;
 
@@ -98,9 +99,16 @@ public class BaseTest {
         extentManager.createExtentTestSuite(clazz.getName());
     }
 
-    protected void createTestCase(String testCaseName) {
+    protected void createTestCase(Method method) {
         var className = this.getClass().getName();
-        extentManager.createExtentTestCase(className, testCaseName);
+        Test testAnnotation = method.getAnnotation(Test.class);
+
+        // Check Test annotation if it is existed
+        if (testAnnotation != null) extentManager.createExtentTestCase(className, getTestName(method));
+    }
+
+    protected String getTestName(Method method){
+        return method.getName().replace("_", " ");
     }
 
     /**
@@ -117,12 +125,12 @@ public class BaseTest {
 
     /**
      * Write log at Test Case level
-     * @param testCaseName
+     * @param method
      * @param description
      */
-    protected void logInfo(String testCaseName, String description) {
+    protected void logInfo(Method method, String description) {
         var className = this.getClass().getName();
-        var testCase = extentManager.getExtentTestCaseMap().get(testCaseName);
+        var testCase = extentManager.getExtentTestCaseMap().get(getTestName(method));
 
         testCase.info(MarkupHelper.createLabel(description, ExtentColor.GREY));
         log4j2Manager.getInfoLogger(className).info(description);
@@ -171,12 +179,12 @@ public class BaseTest {
     /**
      * Write log at Test Case level
      *
-     * @param testCaseName
+     * @param method
      * @param description
      */
-    protected void logInfo(String testCaseName, String description, ExtentColor logColor) {
+    protected void logInfo(Method method, String description, ExtentColor logColor) {
         var className = this.getClass().getName();
-        var testCase = extentManager.getExtentTestCaseMap().get(testCaseName);
+        var testCase = extentManager.getExtentTestCaseMap().get(getTestName(method));
 
         testCase.info(MarkupHelper.createLabel(description, logColor));
         log4j2Manager.getInfoLogger(className).info(description);

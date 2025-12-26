@@ -137,7 +137,7 @@ public class WebsiteDriver {
         return driver.getTitle();
     }
 
-    private void setImplicitWait(Duration duration) {
+    public void setImplicitWait(Duration duration) {
         driver.manage().timeouts().implicitlyWait(duration);
     }
 
