@@ -6,10 +6,7 @@ import cores.Browser;
 import cores.PageFactory;
 import org.openqa.selenium.InvalidSelectorException;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 import utilities.TestData;
 
 import java.lang.reflect.Method;
@@ -58,31 +55,31 @@ public class User_Order_One_Product extends BaseTest {
         homepage.removeProductFromCart();
     }
 
-//    @AfterMethod
-//    void afterMethod(Method method) {
-//
-//        logInfo(method, "Switch back to main tab after each test case");
-//        switchToMainWebsite();
-//
-//
-//        logInfo(method, "Navigate back to Home page after each test case");
-//        navigateToHomePage();
-//        sleepInSecond(1);
-//
-//        logInfo(method, "Remove products in Cart if they exist");
-//        homepage.removeProductFromCart();
-//
-//        logInfo(method, "Navigate back to Home page after each test case");
-//        navigateToHomePage();
-//
-//
-//        logInfo(method, "------ Tear down steps include ------");
-//        logInfo(method, "- Log out");
-//        logout();
-//
-//        logInfo(method, "- Close the browser");
-//        quitBrowser();
-//    }
+    @AfterMethod
+    void afterMethod(Method method) {
+
+        logInfo(method, "Switch back to main tab after each test case");
+        switchToMainWebsite();
+
+
+        logInfo(method, "Navigate back to Home page after each test case");
+        navigateToHomePage();
+        sleepInSecond(1);
+
+        logInfo(method, "Remove products in Cart if they exist");
+        homepage.removeProductFromCart();
+
+        logInfo(method, "Navigate back to Home page after each test case");
+        navigateToHomePage();
+
+
+        logInfo(method, "------ Tear down steps include ------");
+        logInfo(method, "- Log out");
+        logout();
+
+        logInfo(method, "- Close the browser");
+        quitBrowser();
+    }
 
 //    @AfterClass
 //    void afterClass(Method method) {
