@@ -3,11 +3,15 @@ package utilities;
 import cores.GlobalVariables;
 import org.testng.annotations.DataProvider;
 
+import java.io.File;
 import java.lang.reflect.Method;
 
 public class TestData {
 
-    private static String resoucePath = GlobalVariables.PROJECTPATH + "\\src\\main\\resources";
+    private static String resoucePath = GlobalVariables.PROJECTPATH
+            + File.separator +"src"
+            + File.separator + "main"
+            + File.separator +"resources";
     @DataProvider(name = "Login-tc01")
     public static Object[][] logicTC01(Method method) {
 //        String filePath = "D:\\Work\\Automation\\IntelliJ\\Automation-Testing\\src\\main\\resources";

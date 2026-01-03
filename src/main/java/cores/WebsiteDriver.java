@@ -428,6 +428,10 @@ public class WebsiteDriver {
         findDefaultWebElement(locator).sendKeys(keys);
     }
 
+    public void sendKeys(String locator, String... chord) {
+        findDefaultWebElement(locator).sendKeys(chord);
+    }
+
     public void sendKeys(String locator, Keys... keys) {
         findDefaultWebElement(locator).sendKeys(keys);
     }
