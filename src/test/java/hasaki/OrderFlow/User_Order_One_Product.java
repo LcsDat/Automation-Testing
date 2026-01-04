@@ -4,7 +4,6 @@ import com.aventstack.extentreports.markuputils.ExtentColor;
 import cores.BaseTest;
 import cores.Browser;
 import cores.PageFactory;
-import hasaki.authentication.Login;
 import org.openqa.selenium.InvalidSelectorException;
 import org.testng.Assert;
 import org.testng.annotations.*;
@@ -107,6 +106,8 @@ public class User_Order_One_Product extends BaseTest {
         logInfo(method, "Increase product quantity to %s".formatted(expectedQuantity));
         productDetailsPage.setProductQty(Integer.parseInt(expectedQuantity));
 
+        sleepInSecond(5);
+
         assertEquals(webDriver.getDomAttribute("input[name='qty']", "value"), expectedQuantity);
 
         logInfo(method, "Click add product to Cart");
@@ -149,9 +150,7 @@ public class User_Order_One_Product extends BaseTest {
         assertTrue(webDriver.getPageTitle().contains("Thanh toán"));
 
         //Temp verification of user delivery address
-        String[] userInfos = webDriver.getText("//h2[text()='Địa chỉ nhận hàng']/following-sibling::div/child::div")
-                .replace("\n", "#")
-                .split("#");
+        String[] userInfos = webDriver.getText("//h2[text()='Địa chỉ nhận hàng']/following-sibling::div/child::div").replace("\n", "#").split("#");
         String addressType = userInfos[0];
         String userNameAndPhone = userInfos[1];
         String userAddress = userInfos[2];
@@ -230,13 +229,10 @@ public class User_Order_One_Product extends BaseTest {
         logInfo(method, "Wait for success message invisible: 'Successfully update a new delivery address'");
         paymentPage.waitForMessageInvisible("Cập nhật địa chỉ thành công");
 
-        String[] newUserInfosArr = webDriver.getText("//p[contains(string(),'Dat Le Mot')]/ancestor::label")
-                .replaceAll("\n", "#")
-                .split("#");
+        String[] newUserInfosArr = webDriver.getText("//p[contains(string(),'Dat Le Mot')]/ancestor::label").replaceAll("\n", "#").split("#");
 
         assertEquals(newUserInfosArr[0], userName + " - " + maskedPhoneNo);
-        assertEquals(newUserInfosArr[3], newStreetNo + ", "
-                + wardName + ", " + cityName + ", " + "Hồ Chí Minh");
+        assertEquals(newUserInfosArr[3], newStreetNo + ", " + wardName + ", " + cityName + ", " + "Hồ Chí Minh");
 
         logInfo(method, "Click to delete an address");
         paymentPage.deleteAddress(newUserInfosArr[0]);

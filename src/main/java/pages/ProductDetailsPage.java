@@ -39,9 +39,16 @@ public class ProductDetailsPage extends BasePage {
             return;
         }
 
+        String os = System.getProperty("os.name").toLowerCase();
+
         // Click and position cursor at end
         driver.click(QUANTITY_INPUT);
-        driver.sendKeys(QUANTITY_INPUT, Keys.CONTROL, Keys.END);
+        if (os.contains("mac")) {
+            //Note that when using Mac, need to use different key to modify the quantity
+            driver.sendKeys(QUANTITY_INPUT, Keys.END);
+        } else {
+            driver.sendKeys(QUANTITY_INPUT, Keys.CONTROL, Keys.RIGHT);
+        }
 
         if (quantity < 10) {
             // Single digit (2-9): append digit, delete the '1'

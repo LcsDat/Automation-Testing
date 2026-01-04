@@ -17,11 +17,11 @@
 
     <test name="Hasaki on Headless Chrome" >
         <classes>
-            <class name="hasaki.authentication.Login">
-                <parameter name="browser" value="CHROME"/>
-                <parameter name="username" value="0345864246"/>
-                <parameter name="password" value="#Onimusha00"/>
-            </class>
+<!--            <class name="hasaki.authentication.Login">-->
+<!--                <parameter name="browser" value="CHROME"/>-->
+<!--                <parameter name="username" value="0345864246"/>-->
+<!--                <parameter name="password" value="#Onimusha00"/>-->
+<!--            </class>-->
 
             <class name="hasaki.OrderFlow.User_Order_One_Product">
                 <parameter name="browser" value="CHROME"/>

@@ -165,23 +165,28 @@ public class WebsiteDriver {
     }
 
     public void killDriverProcess() {
-        String cmd = null;
+        String cmdChrome = null;
+        String cmdFirefox = null;
         try {
             String osName = System.getProperty("os.name").toLowerCase();
             String browserDriverName = getBrowserDriverName();
 
             if (osName.contains("window")) {
-                cmd = "taskkill /F /IM " + browserDriverName;
+                cmdChrome = "taskkill /F /IM chromedriver.exe /T";
+                cmdFirefox = "taskkill /F /IM geckodriver.exe /T";
             } else {
-                cmd = "pkill " + browserDriverName;
+                cmdChrome = "pkill -f chromedriver";
+                cmdFirefox = "pkill -f geckodriver";
             }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
             try {
-                Process process = Runtime.getRuntime().exec(cmd);
-                process.waitFor();
+                Process process1 = Runtime.getRuntime().exec(cmdChrome);
+                process1.waitFor();
+                Process process2 = Runtime.getRuntime().exec(cmdFirefox);
+                process2.waitFor();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -426,6 +431,10 @@ public class WebsiteDriver {
 
     public void sendKeys(String locator, Keys keys) {
         findDefaultWebElement(locator).sendKeys(keys);
+    }
+
+    public void sendKeys(String locator, String... chord) {
+        findDefaultWebElement(locator).sendKeys(chord);
     }
 
     public void sendKeys(String locator, Keys... keys) {
