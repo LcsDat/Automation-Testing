@@ -157,9 +157,9 @@ public class WebsiteDriver {
     protected String getBrowserDriverName() {
         String driverName = driver.toString().toLowerCase();
         String browserDriverName = null;
-        if (driverName.contains("chrome")) browserDriverName = "chromedriver";
-        else if (driverName.contains("firefox")) browserDriverName = "geckodriver";
-        else if (driverName.contains("edge")) browserDriverName = "msedgedriver";
+        if (driverName.contains("chrome")) browserDriverName = "chromedriver.exe";
+        else if (driverName.contains("firefox")) browserDriverName = "geckodriver.exe";
+        else if (driverName.contains("edge")) browserDriverName = "msedgedriver.exe";
 
         return browserDriverName;
     }
@@ -171,7 +171,7 @@ public class WebsiteDriver {
             String browserDriverName = getBrowserDriverName();
 
             if (osName.contains("window")) {
-                cmd = "taskkill /F /FI \"IMAGENAME eq " + browserDriverName + "*\"";
+                cmd = "taskkill /F /IM " + browserDriverName;
             } else {
                 cmd = "pkill " + browserDriverName;
             }
