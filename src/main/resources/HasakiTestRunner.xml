@@ -24,7 +24,7 @@
 <!--            </class>-->
 
             <class name="hasaki.OrderFlow.User_Order_One_Product">
-                <parameter name="browser" value="CHROME"/>
+                <parameter name="browser" value="HEADLESSCHROME"/>
                 <parameter name="username" value="0345864246"/>
                 <parameter name="password" value="#Onimusha00"/>
             </class>
