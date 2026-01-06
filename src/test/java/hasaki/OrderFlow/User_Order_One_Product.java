@@ -25,12 +25,12 @@ public class User_Order_One_Product extends BaseTest {
 
     @Parameters({"browser", "url", "username", "password"})
     @BeforeMethod
-    void beforeMethod(Browser browser, String url, String username, String password, Method method) {
-
+    void beforeMethod(String browser, String url, String username, String password, Method method) {
+        Browser browserEnum = Browser.valueOf(browser.toUpperCase());
         createTestCase(method);
 
         logInfo(method, "Browser: " + browser, ExtentColor.LIME);
-        webDriver = getWebDriver(browser);
+        webDriver = getWebDriver(browserEnum);
         logInfo(method, "------ Setup steps include ------");
         logInfo(method, "- Initialize relevant pages");
         homepage = PageFactory.generateHomePage(webDriver);
