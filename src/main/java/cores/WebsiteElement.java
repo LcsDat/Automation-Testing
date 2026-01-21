@@ -41,6 +41,10 @@ public class WebsiteElement {
         return element.getDomAttribute(attributeValue);
     }
 
+    public String getAttribute(String attributeValue) {
+        return element.getAttribute(attributeValue);
+    }
+
     public boolean isDisplayed() {
         return element.isDisplayed();
     }
