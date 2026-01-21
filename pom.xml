@@ -17,6 +17,7 @@
         <!--        library version         -->
         <testng.version>7.8.0</testng.version>
         <selenium.version>4.30.0</selenium.version>
+        <seleniumGrid.version>4.30.0</seleniumGrid.version>
         <extentreport.version>5.1.2</extentreport.version>
         <suiteXmlFile>src/main/resources/HasakiTestRunner.xml</suiteXmlFile>
         <maven.surefire.version>3.1.2</maven.surefire.version>
@@ -58,6 +59,11 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
             <version>${slf4j.simple.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-grid</artifactId>
+            <version>${seleniumGrid.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
         <dependency>

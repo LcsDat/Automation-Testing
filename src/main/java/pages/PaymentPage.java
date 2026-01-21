@@ -17,6 +17,7 @@ public class PaymentPage extends BasePage {
     private static final String COMMON_VALIDATION_MESSAGE_DROPDOWN = COMMON_ADD_NEW_ADDRESS_DROPDOWN + "/following-sibling::p";
     private static final String CHANGE_ADDRESS_BUTTON = "//span[text()='Thêm địa chỉ mới']";
     private static final String CONTINUE_BUTTON = "//h2[text()='%s']/following-sibling::form//button[text()='Tiếp tục']";
+    private static final String CONTINUE_BUTTON_2nd = "//h2[text()='Thêm địa chỉ mới']/parent::div/following-sibling::form//descendant::button[text()='Tiếp tục']";
     private static final String PAYMENT_METHOD_RADIO_OPTION = "//h2[text()='Hình thức thanh toán']/following-sibling::form//p[text()='%s']";
     private static final String DROPDOWN_SEARCH_INPUT = "//input[contains(@placeholder, 'Tìm kiếm')]";
     private static final String DROPDOWN_SEARCH_INPUT_OPTION = "//div[contains(text(), '%s')]";
@@ -61,7 +62,14 @@ public class PaymentPage extends BasePage {
     }
 
     public void clickContinue(String popupName) {
-        driver.waitToBeClickable(CONTINUE_BUTTON, popupName).click();
+//        try {
+//            driver.waitToBeClickable(CONTINUE_BUTTON, popupName).click();
+//        } catch (NoSuchElementException e){
+//            System.out.printf("\n First locator fail: " + CONTINUE_BUTTON + " Try second locator\n", popupName);
+//            driver.waitToBeClickable(CONTINUE_BUTTON_2nd, popupName).click();
+//        }
+
+        tryClickLocators(new String[]{CONTINUE_BUTTON, CONTINUE_BUTTON_2nd}, popupName);
     }
 
     public String getCommonValidationMessageInput(String inputName) {

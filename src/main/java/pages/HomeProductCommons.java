@@ -11,7 +11,7 @@ public class HomeProductCommons extends BasePage {
         super(driver);
     }
 
-    private static final String HOME_LOGIN_BUTTON = "a#btn-login";
+    private static final String HOME_LOGIN_BUTTON = "btn-login";  //css strategy a#btn-login
     private static final String HOME_LOGIN_BY_FACEBOOK_BUTTON = "#lg_login a.login-facebook";
     private static final String HOME_LOGIN_USERNAME_INPUT = "#username";
     private static final String HOME_LOGIN_PASSWORD_INPUT = "#password";
@@ -81,7 +81,7 @@ public class HomeProductCommons extends BasePage {
     }
 
     public void clickToProductType(String productType) {
-        driver.click(PRODUCT_TYPE, productType);
+        driver.waitToBeClickable(PRODUCT_TYPE, productType).click();
     }
 
     /**

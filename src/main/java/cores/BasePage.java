@@ -1,5 +1,9 @@
 package cores;
 
+import org.openqa.selenium.NoSuchElementException;
+
+import java.time.Duration;
+
 public class BasePage {
     protected WebsiteDriver driver;
 
@@ -8,6 +12,20 @@ public class BasePage {
     }
 
     private static final String LOGIN_DIALOG_CLOSE_BUTTON = "button[aria-label='Close notify form']";
+
+    public void tryClickLocators(String[] locators, String productName){
+        for (String locator : locators){
+            try {
+                driver.setImplicitWait(Duration.ofSeconds(GlobalVariables.SHORT_TIMEOUT));
+                driver.click(locator, productName);
+            } catch (NoSuchElementException e){
+                System.out.println("Use locator " + locator + " for product " + productName + " is fail.");
+            } finally {
+                driver.setImplicitWait(Duration.ofSeconds(GlobalVariables.LONG_TIMEOUT));
+            }
+        }
+
+    }
 
     public Boolean waitToBeInvisible(String locator) {
         return driver.waitToBeInvisible(locator);

@@ -1,17 +1,19 @@
 package cores;
 
+import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
 import com.aventstack.extentreports.model.Media;
 import logConfig.Log4j2Manager;
+import org.openqa.selenium.InvalidSelectorException;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.Test;
 import pages.*;
 import reportConfig.ExtentManager;
-import utilities.ExcelManager;
 
+import java.lang.reflect.Method;
 import java.util.Random;
 
 public class BaseTest {
@@ -64,7 +66,12 @@ public class BaseTest {
      */
     protected void logout() {
         if (webDriver.isUnDisplayed("#btn-login")) {
-            webDriver.moveToElement("div.item_header.item_login.user_login");
+            try {
+                webDriver.moveToElement("div.item_header.item_login.user_login");
+            } catch (InvalidSelectorException e) {
+                webDriver.moveToElement("//a[text()='Tài khoản ']");
+            }
+
             webDriver.findElement("//a[contains(text(),'Thoát')]").click();
         }
     }
@@ -82,45 +89,124 @@ public class BaseTest {
     }
 
     //Logging methods ***********************************************************
-    protected void createExtentLog(String suiteName) {
+    protected void createLog(String suiteName) {
         log4j2Manager = Log4j2Manager.getLogger(suiteName);
-        extentManager.createExtentTest(suiteName);
+        extentManager.createExtentTestSuite(suiteName);
     }
 
-    protected void  createExtentLog(Class<?> clazz) {
+    protected void createLog(Class<?> clazz) {
         log4j2Manager = Log4j2Manager.getLogger(clazz);
-        extentManager.createExtentTest(clazz.getName());
+        extentManager.createExtentTestSuite(clazz.getName());
     }
 
+    protected void createTestCase(Method method) {
+        var className = this.getClass().getName();
+        Test testAnnotation = method.getAnnotation(Test.class);
+
+        // Check Test annotation if it is existed
+        if (testAnnotation != null) extentManager.createExtentTestCase(className, getTestName(method));
+    }
+
+    protected String getTestName(Method method){
+        return method.getName().replace("_", " ");
+    }
+
+    /**
+     * Write log at Suite level
+     *
+     * @param description
+     */
     protected void logInfo(String description) {
         var className = this.getClass().getName();
 
-        extentManager.getExtentTestMap().get(className).info(MarkupHelper.createLabel(description, ExtentColor.GREY));
+        extentManager.getExtentTestSuiteMap().get(className).info(MarkupHelper.createLabel(description, ExtentColor.GREY));
         log4j2Manager.getInfoLogger(className).info(description);
     }
 
+    /**
+     * Write log at Test Case level
+     * @param method
+     * @param description
+     */
+    protected void logInfo(Method method, String description) {
+        var className = this.getClass().getName();
+        var testCase = extentManager.getExtentTestCaseMap().get(getTestName(method));
+
+        testCase.info(MarkupHelper.createLabel(description, ExtentColor.GREY));
+        log4j2Manager.getInfoLogger(className).info(description);
+    }
+
+    /**
+     * Write log at Suite level
+     *
+     * @param description
+     */
     protected void logInfo(String description, boolean enableCapture) {
         var className = this.getClass().getName();
 
         if (enableCapture)
-            extentManager.getExtentTestMap().get(className).log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.TEAL), attachScreenshot());
+            extentManager.getExtentTestSuiteMap().get(className).log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.TEAL), attachScreenshot());
         log4j2Manager.getInfoLogger(className).info(description);
     }
 
+    /**
+     * Write log at Test Case level
+     *
+     * @param testCaseName
+     * @param description
+     */
+    protected void logInfo(String testCaseName, String description, boolean enableCapture) {
+        var className = this.getClass().getName();
+        var testCase = extentManager.getExtentTestCaseMap().get(testCaseName);
+
+        if (enableCapture)
+            testCase.log(Status.INFO, MarkupHelper.createLabel(description, ExtentColor.TEAL), attachScreenshot());
+        log4j2Manager.getInfoLogger(className).info(description);
+    }
+
+    /**
+     * Write log at Suite level
+     *
+     * @param description
+     */
     protected void logInfo(String description, ExtentColor logColor) {
         var className = this.getClass().getName();
 
-        extentManager.getExtentTestMap().get(className).info(MarkupHelper.createLabel(description, logColor));
+        extentManager.getExtentTestSuiteMap().get(className).info(MarkupHelper.createLabel(description, logColor));
+        log4j2Manager.getInfoLogger(className).info(description);
+    }
+
+    /**
+     * Write log at Test Case level
+     *
+     * @param method
+     * @param description
+     */
+    protected void logInfo(Method method, String description, ExtentColor logColor) {
+        var className = this.getClass().getName();
+        var testCase = extentManager.getExtentTestCaseMap().get(getTestName(method));
+
+        testCase.info(MarkupHelper.createLabel(description, logColor));
         log4j2Manager.getInfoLogger(className).info(description);
     }
 
     protected Media attachScreenshot() {
         var className = this.getClass().getName();
-        var mediaList = extentManager.getExtentTestMap().get(className).getModel().getMedia();
+        var mediaList = extentManager.getExtentTestSuiteMap().get(className).getModel().getMedia();
 
-        extentManager.getExtentTestMap().get(className).addScreenCaptureFromBase64String(webdriverThread.get().takeScreenshotBASE64());
+        extentManager.getExtentTestSuiteMap().get(className).addScreenCaptureFromBase64String(webdriverThread.get().takeScreenshotBASE64());
 
-        return mediaList.get(extentManager.getExtentTestMap().get(className).getModel().getMedia().size() - 1);
+        return mediaList.get(extentManager.getExtentTestSuiteMap().get(className).getModel().getMedia().size() - 1);
+    }
+
+    protected Media attachScreenshot(String testCaseName) {
+        var className = this.getClass().getName();
+        var testCase = extentManager.getExtentTestCaseMap().get(testCaseName);
+        var mediaList = testCase.getModel().getMedia();
+
+        testCase.addScreenCaptureFromBase64String(webdriverThread.get().takeScreenshotBASE64());
+
+        return mediaList.get(testCase.getModel().getMedia().size() - 1);
     }
 
     //Util methods ***********************************************************

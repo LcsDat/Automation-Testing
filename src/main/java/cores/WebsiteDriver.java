@@ -137,7 +137,7 @@ public class WebsiteDriver {
         return driver.getTitle();
     }
 
-    private void setImplicitWait(Duration duration) {
+    public void setImplicitWait(Duration duration) {
         driver.manage().timeouts().implicitlyWait(duration);
     }
 
@@ -157,31 +157,36 @@ public class WebsiteDriver {
     protected String getBrowserDriverName() {
         String driverName = driver.toString().toLowerCase();
         String browserDriverName = null;
-        if (driverName.contains("chrome")) browserDriverName = "chromedriver";
-        else if (driverName.contains("firefox")) browserDriverName = "geckodriver";
-        else if (driverName.contains("edge")) browserDriverName = "msedgedriver";
+        if (driverName.contains("chrome")) browserDriverName = "chromedriver.exe";
+        else if (driverName.contains("firefox")) browserDriverName = "geckodriver.exe";
+        else if (driverName.contains("edge")) browserDriverName = "msedgedriver.exe";
 
         return browserDriverName;
     }
 
     public void killDriverProcess() {
-        String cmd = null;
+        String cmdChrome = null;
+        String cmdFirefox = null;
         try {
             String osName = System.getProperty("os.name").toLowerCase();
             String browserDriverName = getBrowserDriverName();
 
             if (osName.contains("window")) {
-                cmd = "taskkill /F /FI \"IMAGENAME eq " + browserDriverName + "*\"";
+                cmdChrome = "taskkill /F /IM chromedriver.exe /T";
+                cmdFirefox = "taskkill /F /IM geckodriver.exe /T";
             } else {
-                cmd = "pkill " + browserDriverName;
+                cmdChrome = "pkill -f chromedriver";
+                cmdFirefox = "pkill -f geckodriver";
             }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         } finally {
             try {
-                Process process = Runtime.getRuntime().exec(cmd);
-                process.waitFor();
+                Process process1 = Runtime.getRuntime().exec(cmdChrome);
+                process1.waitFor();
+                Process process2 = Runtime.getRuntime().exec(cmdFirefox);
+                process2.waitFor();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (InterruptedException e) {
@@ -427,6 +432,15 @@ public class WebsiteDriver {
     public void sendKeys(String locator, Keys keys) {
         findDefaultWebElement(locator).sendKeys(keys);
     }
+
+    public void sendKeys(String locator, String... chord) {
+        findDefaultWebElement(locator).sendKeys(chord);
+    }
+
+    public void sendKeys(String locator, Keys... keys) {
+        findDefaultWebElement(locator).sendKeys(keys);
+    }
+
     public void sendKeys(String locator, Keys keys, String... varargs) {
         findDefaultWebElement(locator, varargs).sendKeys(keys);
     }

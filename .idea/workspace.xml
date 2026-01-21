@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="" />
+    <list default="true" id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/extentV5/Hasaki-Demo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_More_Than_One_Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/extentV5/Hasaki.html" beforeDir="false" afterPath="$PROJECT_DIR$/extentV5/Hasaki.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/BasePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/Browser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/Browser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/GlobalVariables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/GlobalVariables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/HomeProductCommons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/HomeProductCommons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/PaymentPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/PaymentPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductDetailsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/ProductDetailsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/ProductsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/TestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/TestData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TestCaseReference.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TestCaseReference.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/demo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/demo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Demo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Demo1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Demo2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Demo2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product_FireFox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product_FireFox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/authentication/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/authentication/Login.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +62,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$MAVEN_REPOSITORY$/com/aventstack/extentreports/5.1.2/extentreports-5.1.2-sources.jar!/com/aventstack/extentreports/ExtentReports.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3-sources.jar!/org/apache/logging/log4j/LogManager.java" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/seleniumhq/selenium/selenium-grid/4.30.0/selenium-grid-4.30.0-sources.jar!/org/openqa/selenium/grid/Main.java" root0="SKIP_INSPECTION" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -43,7 +70,6 @@
 }</component>
   <component name="ProjectId" id="2xFZzSPhS1uuxOEwinY76mTUyms" />
   <component name="ProjectViewState">
-    <option name="autoscrollToSource" value="true" />
     <option name="showExcludedFiles" value="false" />
     <option name="showLibraryContents" value="true" />
     <option name="showScratchesAndConsoles" value="false" />
@@ -55,11 +81,17 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "TestNG.D:/Work/Training/Automation-Testing/src/main/resources/HasakiTestRunner.xml.executor": "Run",
+    "TestNG.D:/Work/Training/Automation-Testing/src/main/resources/demo.xml.executor": "Run",
     "TestNG.Demo1.test.executor": "Run",
+    "TestNG.Demo2.executor": "Run",
+    "TestNG.Demo2.testGoogleSearch.executor": "Run",
     "TestNG.ExcelManager.test.executor": "Run",
     "TestNG.User_Order_One_Product.executor": "Run",
-    "git-widget-placeholder": "main",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+    "git-widget-placeholder": "Merging main",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.32669684",
+    "settings.editor.selected.configurable": "preferences.keymap"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -67,24 +99,14 @@
       <recent name="D:\Work\Automation\IntelliJ\Automation-Testing\src\main\resources" />
       <recent name="D:\Work\Automation\IntelliJ\Automation-Testing\src\main\java\logConfig" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="hasaki.OrderFlow" />
+    </key>
   </component>
-  <component name="RunManager" selected="Application.Demo1">
+  <component name="RunManager" selected="TestNG.D:/Work/Training/Automation-Testing/src/main/resources/HasakiTestRunner.xml">
     <configuration name="Demo1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Demo1" />
       <module name="Automation-Testing" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ExcelManager" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="utilities.ExcelManager" />
-      <module name="Automation-Testing" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="utilities.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -99,29 +121,32 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Demo1.test" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="D:/Work/Training/Automation-Testing/src/main/resources/demo.xml" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Automation-Testing" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="Demo1" />
-      <option name="METHOD_NAME" value="test" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/src/main/resources/demo.xml" />
+      <option name="TEST_OBJECT" value="SUITE" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ExcelManager.test" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="Demo2" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="Automation-Testing" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="utilities.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="utilities" />
-      <option name="MAIN_CLASS_NAME" value="utilities.ExcelManager" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Demo2" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Demo2.testGoogleSearch" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="Automation-Testing" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="Demo2" />
+      <option name="METHOD_NAME" value="testGoogleSearch" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -131,10 +156,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.ExcelManager.test" />
-        <item itemvalue="TestNG.Demo1.test" />
         <item itemvalue="TestNG.D:/Work/Training/Automation-Testing/src/main/resources/HasakiTestRunner.xml" />
-        <item itemvalue="Application.ExcelManager" />
+        <item itemvalue="TestNG.D:/Work/Training/Automation-Testing/src/main/resources/demo.xml" />
+        <item itemvalue="TestNG.Demo2" />
+        <item itemvalue="TestNG.Demo2.testGoogleSearch" />
         <item itemvalue="Application.Demo1" />
       </list>
     </recent_temporary>
@@ -160,29 +185,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/test/java/Demo1.java</url>
-          <line>36</line>
-          <properties class="Demo1">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java</url>
-          <line>15</line>
-          <properties class="reportConfig.ExtentTestListener" method="extentLog">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

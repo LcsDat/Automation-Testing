@@ -1,12 +1,12 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="Suite1">
+<suite name="Suite1" verbose="2">
     <!--    <parameter name="browser" value="CHROME"/>-->
     <listeners>
         <listener class-name="reportConfig.ExtentTestListener"/>
     </listeners>
     <parameter name="url" value="https://hasaki.vn/"/>
-<!--    <parameter name="browser" value="HEADLESSCHROME"/>-->
+<!--    <parameter name="browser" value="CHROME"/>-->
 
     <!--    <test name="Hasaki on Chrome" parallel="none">-->
     <!--        <parameter name="browser" value="CHROME"/>-->
@@ -15,8 +15,14 @@
     <!--        </classes>-->
     <!--    </test>-->
 
-    <test name="Hasaki on Headless Chrome" parallel="classes" thread-count="2">
+    <test name="Hasaki on Headless Chrome" >
         <classes>
+<!--            <class name="hasaki.authentication.Login">-->
+<!--                <parameter name="browser" value="CHROME"/>-->
+<!--                <parameter name="username" value="0345864246"/>-->
+<!--                <parameter name="password" value="#Onimusha00"/>-->
+<!--            </class>-->
+
             <class name="hasaki.OrderFlow.User_Order_One_Product">
                 <parameter name="browser" value="HEADLESSCHROME"/>
                 <parameter name="username" value="0345864246"/>
