@@ -42,8 +42,8 @@ public class User_Order_One_Product extends BaseTest {
         logInfo(method, "- Navigate to " + url);
         webDriver.navigate(url);
 
-        logInfo(method, "- Close popup");
-        homepage.cancelPopup();
+//        logInfo(method, "- Close popup");
+//        homepage.cancelPopup();
 
         logInfo(method, "- Reject cookie");
         homepage.cancelCookie();
