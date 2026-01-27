@@ -2,13 +2,6 @@ pipeline {
     agent any
     
     stages {
-
-        stage('Build') {
-            steps {
-                echo 'Building the project...'
-                bat 'mvn clean compile'  // Use 'bat' for Windows Jenkins
-            }
-        }
         
         stage('Run Tests') {
             steps {
