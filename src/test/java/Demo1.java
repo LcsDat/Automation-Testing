@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> jenkinsBranch
 import com.aventstack.extentreports.AnalysisStrategy;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -15,30 +11,6 @@ import cores.WebsiteDriver;
 import org.openqa.selenium.Keys;
 
 import java.util.Arrays;
-
-public class Demo1 {
-
-    public static void main(String[] args) {
-
-        String searchLocator = "//textarea[@title='Tìm kiếm']";
-
-        System.out.println(System.getProperty("os.name"));
-        WebsiteDriver driver = DriverFactory.initWebsiteDriver(Browser.CHROME);
-        driver.navigate("http://www.google.com");
-        driver.setText(searchLocator, "hello world");
-        driver.sendKeys(searchLocator, Keys.chord(Keys.COMMAND, Keys.LEFT));
-
-    }
-    public void hel(){}
-<<<<<<< HEAD
-=======
-=======
-import cores.Browser;
-import cores.DriverFactory;
-import cores.WebsiteDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-
-import java.util.stream.Collectors;
 
 public class Demo1 {
 
@@ -69,6 +41,4 @@ public class Demo1 {
 
     }
 
->>>>>>> 398368d04d730a41ca10e6ecddc5a81a6fb7d977
->>>>>>> jenkinsBranch
 }
