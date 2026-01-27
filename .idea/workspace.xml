@@ -5,13 +5,44 @@
   </component>
   <component name="ChangeListManager">
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> jenkinsBranch
     <list default="true" id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/extentV5/Hasaki-Demo.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_More_Than_One_Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/extentV5/Hasaki.html" beforeDir="false" afterPath="$PROJECT_DIR$/extentV5/Hasaki.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/BasePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/BaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/Browser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/Browser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/GlobalVariables.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/GlobalVariables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cores/WebsiteDriver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/HomeProductCommons.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/HomeProductCommons.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/PaymentPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/PaymentPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductDetailsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/ProductDetailsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductsPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/ProductsPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/reportConfig/ExtentTestListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utilities/TestData.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utilities/TestData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/HasakiTestRunner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/TestCaseReference.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/TestCaseReference.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/demo.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/demo.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Demo1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Demo1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/Demo2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/Demo2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product_FireFox.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/OrderFlow/User_Order_One_Product_FireFox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/authentication/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/authentication/Login.java" afterDir="false" />
+    </list>
+=======
       <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
     </list>
 =======
     <list default="true" id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="" />
 >>>>>>> 398368d04d730a41ca10e6ecddc5a81a6fb7d977
+>>>>>>> jenkinsBranch
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,6 +87,8 @@
     <option name="showScratchesAndConsoles" value="false" />
   </component>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;Application.Demo1.executor&quot;: &quot;Run&quot;,
@@ -75,6 +108,7 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.32669684&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
 =======
+>>>>>>> jenkinsBranch
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.Demo1.executor": "Run",
@@ -82,14 +116,25 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "TestNG.D:/Work/Training/Automation-Testing/src/main/resources/HasakiTestRunner.xml.executor": "Run",
+    "TestNG.D:/Work/Training/Automation-Testing/src/main/resources/demo.xml.executor": "Run",
     "TestNG.Demo1.test.executor": "Run",
+    "TestNG.Demo2.executor": "Run",
+    "TestNG.Demo2.testGoogleSearch.executor": "Run",
     "TestNG.ExcelManager.test.executor": "Run",
     "TestNG.User_Order_One_Product.executor": "Run",
+<<<<<<< HEAD
+    "git-widget-placeholder": "Merging main",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.32669684",
+    "settings.editor.selected.configurable": "preferences.keymap"
+=======
     "git-widget-placeholder": "main",
     "settings.editor.selected.configurable": "preferences.pluginManager"
 >>>>>>> 398368d04d730a41ca10e6ecddc5a81a6fb7d977
+>>>>>>> jenkinsBranch
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Work\Automation\IntelliJ\Automation-Testing\src\main\resources" />
@@ -99,7 +144,7 @@
       <recent name="hasaki.OrderFlow" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Demo1">
+  <component name="RunManager" selected="TestNG.D:/Work/Training/Automation-Testing/src/main/resources/HasakiTestRunner.xml">
     <configuration name="Demo1" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Demo1" />
       <module name="Automation-Testing" />
@@ -153,16 +198,22 @@
     <recent_temporary>
       <list>
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> jenkinsBranch
         <item itemvalue="TestNG.D:/Work/Training/Automation-Testing/src/main/resources/HasakiTestRunner.xml" />
         <item itemvalue="TestNG.D:/Work/Training/Automation-Testing/src/main/resources/demo.xml" />
         <item itemvalue="TestNG.Demo2" />
         <item itemvalue="TestNG.Demo2.testGoogleSearch" />
+<<<<<<< HEAD
+=======
 =======
         <item itemvalue="TestNG.ExcelManager.test" />
         <item itemvalue="TestNG.Demo1.test" />
         <item itemvalue="TestNG.D:/Work/Training/Automation-Testing/src/main/resources/HasakiTestRunner.xml" />
         <item itemvalue="Application.ExcelManager" />
 >>>>>>> 398368d04d730a41ca10e6ecddc5a81a6fb7d977
+>>>>>>> jenkinsBranch
         <item itemvalue="Application.Demo1" />
       </list>
     </recent_temporary>
@@ -194,6 +245,8 @@
   </component>
 <<<<<<< HEAD
 =======
+<<<<<<< HEAD
+=======
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
@@ -219,4 +272,5 @@
     </breakpoint-manager>
   </component>
 >>>>>>> 398368d04d730a41ca10e6ecddc5a81a6fb7d977
+>>>>>>> jenkinsBranch
 </project>
