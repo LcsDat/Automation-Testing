@@ -1,5 +1,4 @@
 pipeline {
-    agent   {label "window"}
     stages  {
         stage('Hello') {
                     steps {
