@@ -18,7 +18,7 @@ pipeline {
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
                     reportDir: 'extentV5',  // Just use the relative path, not variable concatenation
-                    reportFiles: 'ExtentReport.html',
+                    reportFiles: 'hideyashy.html',
                     reportName: 'Extent Test Report',
                     reportTitles: 'Automation Test Report'
                 ])
