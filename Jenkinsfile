@@ -25,7 +25,7 @@ pipeline {
                 ])
             }
         }
-    }
+    
     post {
         success {
             echo 'Tests completed successfully! ✅'
