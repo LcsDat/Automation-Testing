@@ -1,22 +1,38 @@
 pipeline {
     agent any
     
-    tools {
-        maven 'Maven-3.9'
-        jdk 'JDK-17'
-    }
-    
     stages {
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                sh 'mvn clean compile'
+                checkout scm
             }
         }
         
-        stage('Test') {
+        stage('Build') {
             steps {
-                sh 'mvn test'
+                echo 'Building the project...'
+                bat 'mvn clean compile'  // Use 'bat' for Windows Jenkins
             }
+        }
+        
+        stage('Run Tests') {
+            steps {
+                echo 'Running automated tests...'
+                bat 'mvn test'
+            }
+        }
+    }
+    
+    post {
+        success {
+            echo 'Tests completed successfully! ✅'
+        }
+        failure {
+            echo 'Tests failed! ❌'
+        }
+        always {
+            echo 'Cleaning up workspace...'
+            cleanWs()
         }
     }
 }
