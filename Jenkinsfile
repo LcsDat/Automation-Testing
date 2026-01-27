@@ -1,9 +1,21 @@
 pipeline {
-    agent {label 'omg'}
+    agent any
+    
+    tools {
+        maven 'Maven-3.9'
+        jdk 'JDK-17'
+    }
+    
     stages {
-        stage('Hello') {
+        stage('Build') {
             steps {
-                echo "hello from Jenkinsfile"
+                sh 'mvn clean compile'
+            }
+        }
+        
+        stage('Test') {
+            steps {
+                sh 'mvn test'
             }
         }
     }
