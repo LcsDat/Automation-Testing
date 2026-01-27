@@ -9,22 +9,22 @@ pipeline {
                 bat 'mvn test'
             }
         }
-    }
-
-    stage('Generate Report') {
+        
+        stage('Generate Report') {  // This should be inside 'stages' block
             steps {
                 echo 'Publishing Extent Report...'
                 publishHTML([
                     allowMissing: false,
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
-                    reportDir: "GlobalVariables.PROJECTPATH" + "/extentV5",  // Change this to your report directory
-                    reportFiles: 'ExtentReport.html',         // Change this to your report filename
+                    reportDir: 'extentV5',  // Just use the relative path, not variable concatenation
+                    reportFiles: 'ExtentReport.html',
                     reportName: 'Extent Test Report',
                     reportTitles: 'Automation Test Report'
                 ])
             }
         }
+    }
     
     post {
         success {
@@ -36,10 +36,11 @@ pipeline {
         always {
             echo 'Archiving test reports...'
             // Archive the reports as artifacts
-            archiveArtifacts artifacts: 'test-output/**/*', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'extentV5/**/*', allowEmptyArchive: true
             
             // Publish JUnit results if you have them
             junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
+            
             echo 'Cleaning up workspace...'
             cleanWs()
         }
