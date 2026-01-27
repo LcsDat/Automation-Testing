@@ -61,8 +61,12 @@ public class TestData {
 <<<<<<< HEAD
 //        String filePath = "D:\\Work\\Automation\\IntelliJ\\Automation-Testing\\src\\main\\resources";
 =======
+<<<<<<< HEAD
+//        String filePath = "D:\\Work\\Automation\\IntelliJ\\Automation-Testing\\src\\main\\resources";
+=======
         String filePath = GlobalVariables.PROJECTPATH + "\\src\\main\\resources";
 >>>>>>> 398368d04d730a41ca10e6ecddc5a81a6fb7d977
+>>>>>>> jenkinsBranch
         String fileName = "TestCaseReference.xlsx";
         String sheetName = "OrderProductInChrome-tc01";
         var excelManager = new ExcelManager(resoucePath, fileName, sheetName);

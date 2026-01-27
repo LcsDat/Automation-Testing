@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> jenkinsBranch
 import com.aventstack.extentreports.AnalysisStrategy;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
@@ -27,6 +30,8 @@ public class Demo1 {
 
     }
     public void hel(){}
+<<<<<<< HEAD
+=======
 =======
 import cores.Browser;
 import cores.DriverFactory;
@@ -65,4 +70,5 @@ public class Demo1 {
     }
 
 >>>>>>> 398368d04d730a41ca10e6ecddc5a81a6fb7d977
+>>>>>>> jenkinsBranch
 }
