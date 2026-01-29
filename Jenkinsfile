@@ -23,6 +23,7 @@ pipeline {
         always {
             echo 'Archiving test reports...'
             echo 'Archiving test reports...!!!'
+            echo 'Archiving test reports...!!!!!'
             //Archive the reports as artifacts
             archiveArtifacts artifacts: 'extentV5/**/*', allowEmptyArchive: true
             
