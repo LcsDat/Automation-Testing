@@ -17,6 +17,14 @@ pipeline {
             }
         }
 
+        stage('Debug - Find Report Files') {
+            steps {
+                echo 'Searching for Extent Reports...'
+                bat 'dir /s /b *.html'  // Find all HTML files
+                bat 'dir extentV5'      // List files in extentV5 folder
+            }
+        }
+
         stage('Generate Report') {  // This should be inside 'stages' block
             steps {
                 echo 'Publishing Extent Report...'
@@ -25,7 +33,7 @@ pipeline {
                     alwaysLinkToLastBuild: true,
                     keepAll: true,
                     reportDir: 'extentV5',  // Just use the relative path, not variable concatenation
-                    reportFiles: 'ExtentReport.html',
+                    reportFiles: 'Hideyashy.html',
                     reportName: 'Extent Test Report',
                     reportTitles: 'Automation Test Report'
                 ])
