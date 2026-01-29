@@ -3,6 +3,12 @@ pipeline {
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
         stage('Run Tests') {
             steps {
                 echo 'Running automated tests...'
@@ -23,7 +29,6 @@ pipeline {
         always {
             echo 'Archiving test reports...'
             echo 'Archiving test reports...!!!'
-            echo 'Archiving test reports...!!!!!'
             //Archive the reports as artifacts
             archiveArtifacts artifacts: 'extentV5/**/*', allowEmptyArchive: true
             

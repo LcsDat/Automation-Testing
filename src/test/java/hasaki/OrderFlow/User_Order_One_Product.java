@@ -29,6 +29,9 @@ public class User_Order_One_Product extends BaseTest {
         Browser browserEnum = Browser.valueOf(browser.toUpperCase());
         createTestCase(method);
 
+        System.out.println("Test Jenkins trigger");
+        System.out.println("Test Jenkins trigger 2");
+
         logInfo(method, "Browser: " + browser, ExtentColor.LIME);
         webDriver = getWebDriver(browserEnum);
         logInfo(method, "------ Setup steps include ------");
