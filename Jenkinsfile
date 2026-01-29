@@ -3,12 +3,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Run Tests') {
             steps {
                 echo 'Running automated tests...'
@@ -32,7 +26,7 @@ pipeline {
             archiveArtifacts artifacts: 'extentV5/**/*', allowEmptyArchive: true
             
             // Publish JUnit results if you have them
-            //junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
+            junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
             
             echo 'Cleaning up workspace...'
             cleanWs()
