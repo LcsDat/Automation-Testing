@@ -26,9 +26,9 @@ pipeline {
             echo 'Tests failed! ❌'
         }
         always {
-            //echo 'Archiving test reports...'
-            // Archive the reports as artifacts
-            //archiveArtifacts artifacts: 'extentV5/**/*', allowEmptyArchive: true
+            echo 'Archiving test reports...'
+            //Archive the reports as artifacts
+            archiveArtifacts artifacts: 'extentV5/**/*', allowEmptyArchive: true
             
             // Publish JUnit results if you have them
             //junit allowEmptyResults: true, testResults: '**/target/surefire-reports/*.xml'
