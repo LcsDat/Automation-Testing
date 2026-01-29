@@ -10,6 +10,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 echo 'Running automated tests...'
+                echo 'Running automated tests1...'
                 bat 'mvn test'
             }
         }
