@@ -20,6 +20,7 @@ pipeline {
     post {
         success {
             echo 'Tests completed successfully! ✅'
+            echo 'Tests completed successfully!!! ✅'
         }
         failure {
             echo 'Tests failed! ❌'
