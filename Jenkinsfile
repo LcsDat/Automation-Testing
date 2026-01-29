@@ -16,23 +16,24 @@ pipeline {
                 bat 'mvn test'
             }
         }
-        
-    }
 
-    stage('Generate Report') {  // This should be inside 'stages' block
-        steps {
-            echo 'Publishing Extent Report...'
-            publishHTML([
-                allowMissing: false,
-                alwaysLinkToLastBuild: true,
-                keepAll: true,
-                reportDir: 'extentV5',  // Just use the relative path, not variable concatenation
-                reportFiles: 'hideyashy.html',
-                reportName: 'Extent Test Report',
-                reportTitles: 'Automation Test Report'
-            ])
+        stage('Generate Report') {  // This should be inside 'stages' block
+            steps {
+                echo 'Publishing Extent Report...'
+                publishHTML([
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: true,
+                    keepAll: true,
+                    reportDir: 'extentV5',  // Just use the relative path, not variable concatenation
+                    reportFiles: 'hideyashy.html',
+                    reportName: 'Extent Test Report',
+                    reportTitles: 'Automation Test Report'
+                ])
+            }
         }
     }
+
+
 
     post {
         success {
