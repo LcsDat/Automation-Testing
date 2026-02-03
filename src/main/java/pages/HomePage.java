@@ -15,10 +15,8 @@ public class HomePage extends HomeProductCommons {
 
     private static final String LOGIN_LINK = "//a[text()='Đăng nhập' and @id='hskLoginButton']";
 
-
     private static final String POPUP_CANCEL_BUTTON = "onesignal-slidedown-cancel-button";
     private static final String COOKIES_CANCEL_BUTTON = "rejectCookies";
-
 
     private static final String IN_CART_QUANTITY = "span.counter_number";
     private static final String CART_BUTTON = "span.counter_number";
@@ -28,6 +26,8 @@ public class HomePage extends HomeProductCommons {
     private static final String SIGNIN_LABEL = "#btn-login";
     private static final String FAQ_LINK = "//div[@class='item_header']";
     private static final String STORES_LOCATION_LINK = "div.item_header.item_header_hethong";
+    private static final String ACCOUNT_LINK = "//a[normalize-space()='Tài khoản']";
+    private static final String YOUR_ACCOUNT_ITEM = "//a[normalize-space()='Tài khoản của bạn']";
 
 
     public void navigateFAQPage() {
