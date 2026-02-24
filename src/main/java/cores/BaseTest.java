@@ -27,6 +27,7 @@ public class BaseTest {
     protected StoresLocationPage storesLocationPage;
     protected FAQPage faqPage;
     protected PaymentPage paymentPage;
+    protected AccountPage accountPage;
 
     //Log instances
     protected static Log4j2Manager log4j2Manager;
@@ -107,7 +108,7 @@ public class BaseTest {
         if (testAnnotation != null) extentManager.createExtentTestCase(className, getTestName(method));
     }
 
-    protected String getTestName(Method method){
+    protected String getTestName(Method method) {
         return method.getName().replace("_", " ");
     }
 
@@ -125,6 +126,7 @@ public class BaseTest {
 
     /**
      * Write log at Test Case level
+     *
      * @param method
      * @param description
      */

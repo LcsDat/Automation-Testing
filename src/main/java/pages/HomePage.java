@@ -29,6 +29,10 @@ public class HomePage extends HomeProductCommons {
     private static final String ACCOUNT_LINK = "//a[normalize-space()='Tài khoản']";
     private static final String YOUR_ACCOUNT_ITEM = "//a[normalize-space()='Tài khoản của bạn']";
 
+    public void navigateToMyAccount() {
+        driver.moveToElement(ACCOUNT_LINK);
+        driver.click(YOUR_ACCOUNT_ITEM);
+    }
 
     public void navigateFAQPage() {
         driver.click(FAQ_LINK);

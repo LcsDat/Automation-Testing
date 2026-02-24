@@ -1,6 +1,7 @@
 package cores;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 import java.util.Arrays;
@@ -45,16 +46,20 @@ public class WebsiteElement {
         return element.isDisplayed();
     }
 
+    public void defaultSelectByVisibleText(String text) {
+        Select select = new Select(element);
+        select.selectByContainsVisibleText(text);
+    }
 
     public String getCssValue(String value) {
         return element.getCssValue(value);
     }
 
-    public boolean isEnabled(){
+    public boolean isEnabled() {
         return element.isEnabled();
     }
 
-    public void clear(){
+    public void clear() {
         element.clear();
     }
 }

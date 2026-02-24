@@ -32,18 +32,19 @@ public class WebsiteDriver {
         return defaultTimeout;
     }
 
-    public WebDriver openNewTab(){
+    public WebDriver openNewTab() {
         return driver.switchTo().newWindow(WindowType.TAB);
     }
 
-    public String getWindowHandle(){
+    public String getWindowHandle() {
         return driver.getWindowHandle();
     }
 
-    public void closeTab(){
+    public void closeTab() {
         driver.close();
     }
-    public void refreshPage(){
+
+    public void refreshPage() {
         driver.navigate().refresh();
     }
 
@@ -129,7 +130,7 @@ public class WebsiteDriver {
         return element;
     }
 
-    public  String takeScreenshotBASE64(){
+    public String takeScreenshotBASE64() {
         return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BASE64);
     }
 
@@ -275,6 +276,10 @@ public class WebsiteDriver {
         webDriverWait.getWait().until(d -> jsExecutor.executeScript("return document.readyState").equals("complete"));
     }
 
+    public void defaultSelectByVisibleText(String locator, String text) {
+        findElement(locator).defaultSelectByVisibleText(text);
+    }
+
     public String getText(String locator) {
         return findElement(locator).getText();
     }
@@ -310,15 +315,16 @@ public class WebsiteDriver {
     public void setText(String locator, String value) {
         findElement(locator).setText(value);
     }
+
     public void setText(String locator, String value, String... varargs) {
         findElement(locator, varargs).setText(value);
     }
 
-    public void clear(String locator){
+    public void clear(String locator) {
         findElement(locator).clear();
     }
 
-    public void clear(String locator, String... varargs){
+    public void clear(String locator, String... varargs) {
         findElement(locator, varargs).clear();
     }
 
@@ -445,7 +451,7 @@ public class WebsiteDriver {
         findDefaultWebElement(locator, varargs).sendKeys(keys);
     }
 
-    public boolean isEnabled(String locator){
+    public boolean isEnabled(String locator) {
         return findElement(locator).isEnabled();
     }
 

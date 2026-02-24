@@ -51,4 +51,5 @@ public class WebsiteActions {
     public void doubleClick(String locator, String... varargs){
         actions.doubleClick(getWebsiteElement(locator, varargs).getElement()).perform();
     }
+
 }

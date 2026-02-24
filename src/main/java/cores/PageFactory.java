@@ -16,18 +16,23 @@ public class PageFactory {
         return new ProductsPage(driver);
     }
 
-    public static ProductDetailsPage generateProductDetailsPage(WebsiteDriver  driver){
+    public static ProductDetailsPage generateProductDetailsPage(WebsiteDriver driver) {
         return new ProductDetailsPage(driver);
     }
 
-    public static StoresLocationPage generateStoresLocationPage(WebsiteDriver  driver){
+    public static StoresLocationPage generateStoresLocationPage(WebsiteDriver driver) {
         return new StoresLocationPage(driver);
     }
-    public static FAQPage generateFAQPage(WebsiteDriver  driver){
+
+    public static FAQPage generateFAQPage(WebsiteDriver driver) {
         return new FAQPage(driver);
     }
 
     public static PaymentPage generatePaymentPage(WebsiteDriver driver) {
         return new PaymentPage(driver);
+    }
+
+    public static AccountPage generateAccountPage(WebsiteDriver driver) {
+        return new AccountPage(driver);
     }
 }

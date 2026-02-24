@@ -5,10 +5,7 @@ import cores.BaseTest;
 import cores.Browser;
 import cores.PageFactory;
 import hasaki.OrderFlow.User_Order_One_Product;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.lang.reflect.Method;
 
@@ -27,6 +24,7 @@ public class Profile_Information_Update extends BaseTest {
 
         logInfo(method, "Browser: " + browser, ExtentColor.LIME);
         webDriver = getWebDriver(browser);
+
         logInfo(method, "------ Setup steps include ------");
         logInfo(method, "- Initialize relevant pages");
         homepage = PageFactory.generateHomePage(webDriver);
@@ -34,6 +32,7 @@ public class Profile_Information_Update extends BaseTest {
         productDetailsPage = PageFactory.generateProductDetailsPage(webDriver);
         cartPage = PageFactory.generateCartPage(webDriver);
         paymentPage = PageFactory.generatePaymentPage(webDriver);
+        accountPage = PageFactory.generateAccountPage(webDriver);
 
         logInfo(method, "- Navigate to " + url);
         webDriver.navigate(url);
@@ -51,36 +50,89 @@ public class Profile_Information_Update extends BaseTest {
         homepage.removeProductFromCart();
     }
 
-    @Test
-    void EditProfileUnderUserAvatar() {
-        //Hover in Account
-        //Select My Account
-        //Select Edit Your Account, under the avatar
-        //Verify Account Information Page (decide verify points later)
-        //Edit Account (change Male to Female)
-        //Click on Update
-        //Verify message 'Update account information successfully'
+    @AfterMethod
+    void afterMethod(Method method) {
+        logInfo(method, "------ Tear down steps include ------");
+        logInfo(method, "- Log out");
+        logout();
+
+        logInfo(method, "- Close the browser");
+        quitBrowser();
     }
 
     @Test
-    void EditProfileInAccountManagement() {
-        //Hover in Account
-        //Select My Account
-        //Click on Edit button
-        //Verify Account Information Page (decide verify points later)
-        //Edit Account (change Male to Female)
-        //Click on Update
-        //Verify message 'Update account information successfully'
+    void EditProfileUnderUserAvatar(Method method) {
+        logInfo(method, "Navigate to My Account");
+        homepage.navigateToMyAccount();
+
+        logInfo(method, "Select Edit Your Account, under the avatar");
+        accountPage.clickToEditAccount();
+
+        assertEquals(webDriver.getText("div.title_profile_page"), "Thông tin tài khoản");
+
+        logInfo(method, "Update YOB to 1990");
+        accountPage.selectYearOfBirth("1990");
+
+        logInfo(method, "Update information");
+        accountPage.updateInformation();
+
+        assertEquals(webDriver.getText("div.alert-success"), "Cập nhật thông tin tài khoản thành công.");
+
+        logInfo(method, "Update initial YOB");
+        accountPage.selectYearOfBirth("1993");
+
+        logInfo(method, "Update information");
+        accountPage.updateInformation();
+
     }
 
     @Test
-    void EditProfileInAccountInformation() {
-        //Hover in Account
-        //Select My Account
-        //Click on Account Information menu
-        //Verify Account Information Page (decide verify points later)
-        //Edit Account (change Male to Female)
-        //Click on Update
-        //Verify message 'Update account information successfully'
+    void EditProfileInAccountManagement(Method method) {
+        logInfo(method, "Navigate to My Account");
+        homepage.navigateToMyAccount();
+
+        logInfo(method, "Select Edit");
+        accountPage.clickToEdit();
+
+        assertEquals(webDriver.getText("div.title_profile_page"), "Thông tin tài khoản");
+
+        logInfo(method, "Update YOB to 1990");
+        accountPage.selectYearOfBirth("1990");
+
+        logInfo(method, "Update information");
+        accountPage.updateInformation();
+
+        assertEquals(webDriver.getText("div.alert-success"), "Cập nhật thông tin tài khoản thành công.");
+
+        logInfo(method, "Update initial YOB");
+        accountPage.selectYearOfBirth("1993");
+
+        logInfo(method, "Update information");
+        accountPage.updateInformation();
+    }
+
+    @Test
+    void EditProfileInAccountInformation(Method method) {
+        logInfo(method, "Navigate to My Account");
+        homepage.navigateToMyAccount();
+
+        logInfo(method, "Select Account Information");
+        accountPage.clickToAccountInformation();
+
+        assertEquals(webDriver.getText("div.title_profile_page"), "Thông tin tài khoản");
+
+        logInfo(method, "Update YOB to 1990");
+        accountPage.selectYearOfBirth("1990");
+
+        logInfo(method, "Update information");
+        accountPage.updateInformation();
+
+        assertEquals(webDriver.getText("div.alert-success"), "Cập nhật thông tin tài khoản thành công.");
+
+        logInfo(method, "Update initial YOB");
+        accountPage.selectYearOfBirth("1993");
+
+        logInfo(method, "Update information");
+        accountPage.updateInformation();
     }
 }
