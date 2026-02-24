@@ -62,6 +62,7 @@ public class Profile_Information_Update extends BaseTest {
 
     @Test
     void EditProfileUnderUserAvatar(Method method) {
+        System.out.println("test");
         logInfo(method, "Navigate to My Account");
         homepage.navigateToMyAccount();
 
