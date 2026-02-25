@@ -5,7 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/accountManagement/Profile_Information_Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/accountManagement/Profile_Information_Update.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
+>>>>>>> jenkinsBranch
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +70,11 @@
     &quot;TestNG.ExcelManager.test.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.User_Order_One_Product.TC01_Order_A_Product_Successfully.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.User_Order_One_Product.executor&quot;: &quot;Run&quot;,
+<<<<<<< HEAD
     &quot;git-widget-placeholder&quot;: &quot;localPC&quot;,
+=======
+    &quot;git-widget-placeholder&quot;: &quot;jenkinsBranch&quot;,
+>>>>>>> jenkinsBranch
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
