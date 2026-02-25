@@ -62,7 +62,7 @@ public class Profile_Information_Update extends BaseTest {
 
     @Test
     void EditProfileUnderUserAvatar(Method method) {
-        System.out.println("Test merge");
+        System.out.println("test again p22");
         logInfo(method, "Navigate to My Account");
         homepage.navigateToMyAccount();
 
