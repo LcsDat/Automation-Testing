@@ -5,11 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f55db7b7-bacc-489b-8c7c-9c62208d3fe3" name="Changes" comment="">
-<<<<<<< HEAD
-      <change beforePath="$PROJECT_DIR$/src/test/java/hasaki/accountManagement/Profile_Information_Update.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/hasaki/accountManagement/Profile_Information_Update.java" afterDir="false" />
-=======
       <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
->>>>>>> jenkinsBranch
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,17 +24,17 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
+    &quot;lastFilter&quot;: {
     &quot;state&quot;: &quot;OPEN&quot;,
     &quot;assignee&quot;: &quot;LcsDat&quot;
-  }
-}</component>
+    }
+    }</component>
   <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/LcsDat/Automation-Testing.git&quot;,
     &quot;accountId&quot;: &quot;19fee62c-1638-47e4-9b14-275300d00475&quot;
-  }
-}</component>
+    }
+    }</component>
   <component name="HighlightingSettingsPerFile">
     <setting file="jar://$MAVEN_REPOSITORY$/com/aventstack/extentreports/5.1.2/extentreports-5.1.2-sources.jar!/com/aventstack/extentreports/ExtentReports.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-api/2.24.3/log4j-api-2.24.3-sources.jar!/org/apache/logging/log4j/LogManager.java" root0="SKIP_INSPECTION" />
@@ -55,7 +51,7 @@
     <option name="showScratchesAndConsoles" value="false" />
   </component>
   <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
+    &quot;keyToString&quot;: {
     &quot;Application.Demo1.executor&quot;: &quot;Run&quot;,
     &quot;Application.ExcelManager.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
@@ -70,19 +66,15 @@
     &quot;TestNG.ExcelManager.test.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.User_Order_One_Product.TC01_Order_A_Product_Successfully.executor&quot;: &quot;Run&quot;,
     &quot;TestNG.User_Order_One_Product.executor&quot;: &quot;Run&quot;,
-<<<<<<< HEAD
-    &quot;git-widget-placeholder&quot;: &quot;localPC&quot;,
-=======
     &quot;git-widget-placeholder&quot;: &quot;jenkinsBranch&quot;,
->>>>>>> jenkinsBranch
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.32669684&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;
-  }
-}</component>
+    }
+    }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Work\Automation\IntelliJ\Automation-Testing\src\main\resources" />
