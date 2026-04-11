@@ -6,6 +6,8 @@ import cores.Browser;
 import cores.DriverFactory;
 import cores.PageFactory;
 import org.testng.annotations.*;
+import utilities.ExcelData;
+import utilities.SheetNames;
 import utilities.TestData;
 
 import java.lang.reflect.Method;
@@ -54,7 +56,8 @@ public class Login extends BaseTest {
         quitBrowser();
     }
 
-    @Test(dataProvider = "Login-tc01", dataProviderClass = TestData.class)
+    @Test(dataProvider = "excel", dataProviderClass = TestData.class)
+    @ExcelData(sheet = SheetNames.Login.TC01)
     void TC01_User_Login_With_Valid_Data(String username, String password, Method method) {
 
         logInfo(method, "Access application and login with valid credentials");
@@ -65,6 +68,7 @@ public class Login extends BaseTest {
     }
 
     @Test(dataProvider = "Login-tc02", dataProviderClass = TestData.class)
+    @ExcelData(sheet = "Login-tc02")
     void TC02_User_Login_With_Incorrect_Data(String username, String password, Method method) {
 
         logInfo(method, "Access application and login with invalid credentials");

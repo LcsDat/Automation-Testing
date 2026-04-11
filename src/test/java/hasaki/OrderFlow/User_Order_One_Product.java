@@ -7,6 +7,7 @@ import cores.PageFactory;
 import org.openqa.selenium.InvalidSelectorException;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import utilities.ExcelData;
 import utilities.TestData;
 
 import java.lang.reflect.Method;
@@ -87,7 +88,8 @@ public class User_Order_One_Product extends BaseTest {
 //    }
 
 
-    @Test(dataProvider = "OrderProductInChrome-tc01", dataProviderClass = TestData.class)
+    @Test(dataProvider = "excel", dataProviderClass = TestData.class)
+    @ExcelData(sheet = "OrderProductInChrome-tc01")
     void TC01_Order_A_Product_Successfully(String categoryName, String productType, String productName, String expectedQuantity, Method method) {
 
         logInfo(method, "Choose %s in Category Menu, then choose %s product type".formatted(categoryName, productType));
